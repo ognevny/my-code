@@ -1,3 +1,6 @@
+# a list of useful functions, like it did in dad-is-great-in-C
+
+
 def rev(n):
     rev = 0
     while n:

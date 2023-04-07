@@ -1,3 +1,5 @@
+// a programm to test speed of each language (C implementation)
+
 #include <stdio.h>
 
 int main() {

@@ -1,3 +1,5 @@
+# a programm to test speed of each language (Python implementation with numba module)
+
 from numba import njit
 
 

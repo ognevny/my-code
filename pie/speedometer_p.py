@@ -1,3 +1,5 @@
+# programm to test speed of each language (Python implementation with mlp)
+
 import multiprocessing as mlp
 
 

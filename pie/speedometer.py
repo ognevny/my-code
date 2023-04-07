@@ -1,3 +1,6 @@
+# a programm to test speed of each language (Python implementation)
+
+
 def s() -> int:
     n = 1
     while n < 1_000_000_000:
