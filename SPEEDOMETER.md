@@ -93,6 +93,6 @@ Executed in  147,43 millis    fish           external
    sys time    0,00 micros    0,00 micros    0,00 micros
 ```
 ### Reference
-**RU**: данные коды влохновлены видео на ютуб от Top Schelf Technology  
-**ENG**: these codes are inspired by Top Schelf Technology's video on YouTube  
+**RU**: данные коды влохновлены видео на ютуб от The Builder 
+**ENG**: these codes are inspired by The Builder's video on YouTube  
 [ссылка/link](https://www.youtube.com/watch?v=VioxsWYzoJk)
