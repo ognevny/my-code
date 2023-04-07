@@ -10,7 +10,7 @@
 OS - Windows 11 последней версии;  
 [дистрибутив MSYS2](msys2.org), который предоставляет мне:  
 clang 16.0.0 - компилятор C и C++  
-Python 3.10.10 с numba 0.40.0dev  
+Python 3.10.10 с numba 0.57.0dev0.r1074.gc12bbf4bb-1  
 Rust 1.68.2  
 Командная оболчочка ```fish``` 3.6.1, и её команда ```time```.  
 Ниже (под ENG) будет представлен лог команд, которые я вписывал в терминал  
@@ -19,7 +19,7 @@ Tools:
 OS - Windows 11 latest version;  
 [MSYS2 distribution](msys2.org) which provides me:  
 clang 16.0.0 - C and C++ compiler;  
-Python 3.10.10 with numba 0.40.0dev;  
+Python 3.10.10 with numba 0.57.0dev0.r1074.gc12bbf4bb-1;  
 Rust 1.68.2;  
 Command shell ```fish``` 3.6.1 and its command ```time```.  
 Below will be a log of the commands I typed into the terminal
