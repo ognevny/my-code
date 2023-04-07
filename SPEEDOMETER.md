@@ -6,19 +6,23 @@
 **ENG**: creates a function ```s()``` that takes nothing as input, but returns strictly the same value - a billion. It does this as follows: It creates a variable ```n``` equal to 1, and while ```n``` is less than a billion, it adds 1.
 ## Manual testing
 **RU**: Вы можете самостоятельно протестировать эти программы. Я покажу Вам, как это делаю я:  
+Оборудование:  
+ноутбук на базе AMD Radeon 5 5600H, 16 Гб ОЗУ, программы хранятся на ссд 512 ГБ *(напишите, если видеокарта влияет тоже)*.  
 Инструменты:  
 OS - Windows 11 последней версии;  
 [дистрибутив MSYS2](msys2.org), который предоставляет мне:  
-clang 16.0.0 - компилятор C и C++  
+clang 16.0.1 - компилятор C и C++  
 Python 3.10.10 с numba 0.57.0dev0.r1074.gc12bbf4bb-1  
 Rust 1.68.2  
 Командная оболчочка ```fish``` 3.6.1, и её команда ```time```.  
 Ниже (под ENG) будет представлен лог команд, которые я вписывал в терминал  
 **ENG**: You can test these programs yourself. I will show you how I do it:  
+Hardware:  
+AMD Radeon 5 5600H based laptop, 16GB RAM, programs stored on 512GB SSD *(write if video card affects too)*.  
 Tools:  
 OS - Windows 11 latest version;  
 [MSYS2 distribution](msys2.org) which provides me:  
-clang 16.0.0 - C and C++ compiler;  
+clang 16.0.1 - C and C++ compiler;  
 Python 3.10.10 with numba 0.57.0dev0.r1074.gc12bbf4bb-1;  
 Rust 1.68.2;  
 Command shell ```fish``` 3.6.1 and its command ```time```.  
@@ -30,9 +34,9 @@ dad-is-great-in-C> time ./a
 1000000000
 
 ________________________________________________________
-Executed in  557,65 millis    fish           external
-   usr time    0,00 millis    0,00 micros    0,00 millis
-   sys time   15,00 millis    0,00 micros   15,00 millis 
+Executed in  525,98 millis    fish           external
+   usr time    0,00 micros    0,00 micros    0,00 micros
+   sys time    0,00 micros    0,00 micros    0,00 micros 
 ```
 #### C++
 ```
@@ -41,9 +45,9 @@ dad-is-great-in-C> time ./a
 1000000000
 
 ________________________________________________________
-Executed in  533,74 millis    fish           external
-   usr time    0,00 micros    0,00 micros    0,00 micros
-   sys time    0,00 micros    0,00 micros    0,00 micros
+Executed in  530,44 millis    fish           external
+   usr time    0,00 millis    0,00 micros    0,00 millis
+   sys time   15,00 millis    0,00 micros   15,00 millis
 ```
 #### Python
 speedometer.py
@@ -52,9 +56,9 @@ pie> time python speedometer.py
 1000000000
 
 ________________________________________________________
-Executed in   29,21 secs      fish           external
-   usr time    0,00 micros    0,00 micros    0,00 micros
-   sys time    0,00 micros    0,00 micros    0,00 micros
+Executed in   26,48 secs      fish           external
+   usr time   15,00 millis    0,00 micros   15,00 millis
+   sys time    0,00 millis    0,00 micros    0,00 millis
 ```
 speedometer_p.py
 ```
@@ -62,9 +66,9 @@ pie> time python speedometer_p.py
 1000000000
 
 ________________________________________________________
-Executed in   27,22 secs      fish           external
-   usr time    0,00 micros    0,00 micros    0,00 micros
-   sys time    0,00 micros    0,00 micros    0,00 micros
+Executed in   27,66 secs      fish           external
+   usr time    0,00 millis    0,00 micros    0,00 millis
+   sys time   15,00 millis    0,00 micros   15,00 millis
 ```
 numbed.py
 ```
@@ -72,7 +76,7 @@ pie> time python numbed.py
 1000000000
 
 ________________________________________________________
-Executed in    3,09 secs      fish           external
+Executed in    3,51 secs      fish           external
    usr time    0,00 micros    0,00 micros    0,00 micros
    sys time    0,00 micros    0,00 micros    0,00 micros
 ```
@@ -86,9 +90,9 @@ r/speedometer> time cargo run --release
      Running `target\release\speedometer.exe`
 1000000000
 ________________________________________________________
-Executed in   62,77 millis    fish           external
-   usr time    0,00 millis    0,00 micros    0,00 millis
-   sys time   15,00 millis    0,00 micros   15,00 millis
+Executed in  147,43 millis    fish           external
+   usr time    0,00 micros    0,00 micros    0,00 micros
+   sys time    0,00 micros    0,00 micros    0,00 micros
 ```
 ### Reference
 **RU**: данные коды влохновлены видео на ютуб от Top Schelf Technology  
