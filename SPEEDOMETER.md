@@ -18,7 +18,7 @@ Rust 1.68.2
 Ниже (под ENG) будет представлен лог команд, которые я вписывал в терминал  
 **ENG**: You can test these programs yourself. I will show you how I do it:  
 Hardware:  
-AMD Radeon 5 5600H based laptop, 16GB RAM, programs stored on 512GB SSD *(write if video card affects too)*.  
+AMD Radeon 5 5600H based laptop, 16GB RAM, programs stored on 512GB SSD *(write me if video card affects too)*.  
 Tools:  
 OS - Windows 11 latest version;  
 [MSYS2 distribution](msys2.org) which provides me:  
