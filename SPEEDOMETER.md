@@ -32,22 +32,20 @@ Below will be a log of the commands I typed into the terminal
 dad-is-great-in-C> clang speedometer.c
 dad-is-great-in-C> time ./a
 1000000000
-
 ________________________________________________________
-Executed in  525,98 millis    fish           external
+Executed in  525,38 millis    fish           external
    usr time    0,00 micros    0,00 micros    0,00 micros
-   sys time    0,00 micros    0,00 micros    0,00 micros 
+   sys time    0,00 micros    0,00 micros    0,00 micros
 ```
 #### C++
 ```
 dad-is-great-in-C> clang++ speedometer.cpp
 dad-is-great-in-C> time ./a
 1000000000
-
 ________________________________________________________
-Executed in  530,44 millis    fish           external
-   usr time    0,00 millis    0,00 micros    0,00 millis
-   sys time   15,00 millis    0,00 micros   15,00 millis
+Executed in  525,07 millis    fish           external
+   usr time    0,00 micros    0,00 micros    0,00 micros
+   sys time    0,00 micros    0,00 micros    0,00 micros
 ```
 #### Python
 speedometer.py
