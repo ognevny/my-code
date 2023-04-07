@@ -1,5 +1,6 @@
-from math import log2, ceil, sqrt, factorial
+from math import ceil, factorial, log2, sqrt
 from random import sample
+
 
 def Miller_Rabin(number):
     if number < 2:
@@ -23,13 +24,14 @@ def Miller_Rabin(number):
             x = pow(a[i], t, number)
             if x == 1 or x == number - 1:
                 continue
-            for _ in range (s - 1):
+            for _ in range(s - 1):
                 x = pow(x, 2, number)
                 if x == 1:
                     return "NO"
                 if x == number - 1:
                     break
         return "PROBABLY"
+
 
 def sqrtest(number):
     if number < 2:
@@ -45,6 +47,7 @@ def sqrtest(number):
             return "YES"
         else:
             return "NO"
+
 
 def Wilson(number):
     if number < 2:

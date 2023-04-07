@@ -1,4 +1,5 @@
-from math import sqrt, acos
+from math import acos, sqrt
+
 
 class Rn:
     def __init__(self, body):
@@ -9,14 +10,14 @@ class Rn:
         if self.dlina == vec.dlina:
             return Rn(list(map(lambda x, y: x + y, self.body, vec.body)))
         else:
-            return 'ошибка размерности'
+            return "ошибка размерности"
 
     def __mul__(self, vec):
         if isinstance(vec, Rn):
             if self.dlina == vec.dlina:
                 return sum(list(map(lambda x: x[0] * x[1], zip(self.body, vec.body))))
             else:
-                return 'ошибка размерности'
+                return "ошибка размерности"
         else:
             return Rn(list(map(lambda x: x * vec, self.body)))
 
@@ -25,7 +26,7 @@ class Rn:
             if self.dlina == vec.dlina:
                 return sum(list(map(lambda x: x[0] * x[1], zip(self.body, vec.body))))
             else:
-                return 'ошибка размерности'
+                return "ошибка размерности"
         else:
             return Rn(list(map(lambda x: x * vec, self.body)))
 
@@ -40,6 +41,7 @@ class Rn:
 
     def __str__(self):
         return str(self.body)
+
 
 a = Rn([3, 5, 4])
 b = Rn([4, 2, 1])

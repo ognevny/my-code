@@ -8,9 +8,13 @@ class Polynomials:
     def __add__(self, m):
         if isinstance(m, Polynomials):
             res = Polynomials(
-                list(map(lambda x, y: x + y, self.plnm, m.plnm)))  # type: ignore
-            res.plnm.extend(self.plnm[len(m.plnm):] if len(
-                self.plnm) > len(m.plnm) else m.plnm[len(self.plnm):])
+                list(map(lambda x, y: x + y, self.plnm, m.plnm))
+            )  # type: ignore
+            res.plnm.extend(
+                self.plnm[len(m.plnm) :]
+                if len(self.plnm) > len(m.plnm)
+                else m.plnm[len(self.plnm) :]
+            )
             return res
         else:
             self.plnm[0] += m
@@ -21,8 +25,7 @@ class Polynomials:
             return Polynomials(list(map(lambda x: x * arg, self.plnm)))
 
         else:
-            res = Polynomials(
-                [0 for i in range(len(self.plnm) + len(arg.plnm) - 1)])
+            res = Polynomials([0 for i in range(len(self.plnm) + len(arg.plnm) - 1)])
             for i in range(len(self.plnm)):
                 for j in range(len(arg.plnm)):
                     res.plnm[i + j] += self.plnm[i] * arg.plnm[j]
@@ -40,21 +43,19 @@ class Polynomials:
         return self + (-1) * m
 
     def __floordiv__(self, arg):
-
         if len(self.plnm) < len(arg.plnm):
             return Polynomials([0])
 
-        res = Polynomials(
-            [0 for i in range(len(self.plnm) - len(arg.plnm) + 1)])
+        res = Polynomials([0 for i in range(len(self.plnm) - len(arg.plnm) + 1)])
         buf = Polynomials(self.plnm)
 
         for i in range(len(res.plnm) - 1, -1, -1):
             res.plnm[i] = buf.plnm[-1] / arg.plnm[-1]
-            s = Polynomials([0 for j in range(i+1)])
+            s = Polynomials([0 for j in range(i + 1)])
 
             s.plnm[-1] = res.plnm[i]
             buf = buf - s * arg
-            buf.plnm = buf.plnm[:len(buf.plnm) - 1]
+            buf.plnm = buf.plnm[: len(buf.plnm) - 1]
 
         res.simplify()
         return res
@@ -75,7 +76,7 @@ class Polynomials:
         res = Polynomials([0 for i in range(len(self.plnm) - 1)])
 
         for i in range(len(self.plnm) - 1):
-            res.plnm[i] = self.plnm[i+1] * (i+1)
+            res.plnm[i] = self.plnm[i + 1] * (i + 1)
 
         return res
 
@@ -129,10 +130,10 @@ class Polynomials:
         return self.UpperBorder()
 
     def __str__(self):
-        res = ''
+        res = ""
         for i in range(len(self.plnm) - 1, 1, -1):
-            res += str(self.plnm[i]) + 'x^' + str(i) + ' + '
-        res += str(self.plnm[1]) + 'x' + ' + ' + str(self.plnm[0])
+            res += str(self.plnm[i]) + "x^" + str(i) + " + "
+        res += str(self.plnm[1]) + "x" + " + " + str(self.plnm[0])
         return res
 
 
@@ -143,7 +144,6 @@ def FindSturm(polynom):
     SturmSys.append(polynom.derivative())
 
     while True:
-
         k = -1 * (SturmSys[-2] % SturmSys[-1])
 
         SturmSys.append(k)

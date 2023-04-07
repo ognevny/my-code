@@ -3,7 +3,6 @@
 #include <iomanip>
 using namespace std;
 
-
 long double f(long double n) {
     return n * n + sqrtl(n); }
 

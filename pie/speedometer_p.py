@@ -8,7 +8,7 @@ def s() -> int:
     return n
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     with mlp.Pool(processes=mlp.cpu_count()):
         pass
     n = s()
