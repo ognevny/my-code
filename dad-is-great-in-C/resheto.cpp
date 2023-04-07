@@ -1,3 +1,5 @@
+// a programm using something like Eratosthenes' sieve 
+
 #include <iostream>
 using namespace std;
 

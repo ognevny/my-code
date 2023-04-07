@@ -1,3 +1,5 @@
+// oint algorithms (Rust)
+
 use std::io::stdin;
 use scan_fmt::scan_fmt;
 

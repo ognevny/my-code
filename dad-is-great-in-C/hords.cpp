@@ -1,4 +1,5 @@
-// c = a - f(a)(a - b)/(f(a) - f(b))
+/* solving equations with "hord" method
+c = a - f(a)(a - b)/(f(a) - f(b)) */
 
 #include <iostream>
 #include <cmath>

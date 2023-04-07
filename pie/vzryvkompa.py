@@ -1,3 +1,6 @@
+# translate: computer blow
+# makes your computer work hard on useless thing
+
 from random import randint
 from time import perf_counter
 

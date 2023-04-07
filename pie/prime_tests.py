@@ -1,3 +1,5 @@
+# task: if number is prime?
+
 from math import ceil, factorial, log2, sqrt
 from random import sample
 

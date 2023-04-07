@@ -1,7 +1,10 @@
+// bubble sort with swap() function
+
 #include <iostream>
 #include <random>
 #include <ctime>
 using namespace std;
+
 int main() {
     int n;
     cin >> n;

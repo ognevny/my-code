@@ -1,3 +1,5 @@
+// bubble sort
+
 use std::io::stdin;
 
 fn bubble_sort(arr: &mut Vec<i32>) {
@@ -13,5 +15,4 @@ fn main() {
         .map(|x| x.parse().unwrap())
         .collect();     
     bubble_sort(&mut nums);
-    println!("{:?}", nums);
-}
+    println!("{:?}", nums); }

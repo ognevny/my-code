@@ -1,3 +1,5 @@
+// something like binary search for solving equations
+
 #include <iostream>
 #include <cmath>
 #include <iomanip>
@@ -8,7 +10,7 @@ long double f(long double n) {
 
 
 int main() {
-    long double epsilon = 0.0000000001;
+    long double epsilon = 0.0000000001; // could be in input
     long double C; cin >> C;
     long double a = 0.0, b = C;
     long double c = (a + b) / 2;

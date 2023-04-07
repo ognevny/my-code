@@ -1,3 +1,5 @@
+# merge sort (using mlp)
+
 import copy
 import multiprocessing as mlp
 from random import randint

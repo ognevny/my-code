@@ -1,3 +1,5 @@
+// same as lastword.cpp, but with Rust syntax
+
 use std::io::stdin;
 
 fn main() {

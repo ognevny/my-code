@@ -1,3 +1,5 @@
+// same as "integral", but for f(x) = sin(x) / x
+
 use std::io::stdin;
 use std::f64::consts::PI;
 

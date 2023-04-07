@@ -1,6 +1,8 @@
+// merge sort
+
 #include <iostream>
-//#include <ctime>
-//#include <random>
+#include <ctime>
+#include <random>
 using namespace std;
 
 void merge(int arr[], int left, int mid, int right) {
@@ -45,12 +47,12 @@ void merge_sort(int arr[], int begin, int end) {
 int main() {
     int n;
     cin >> n;
-    //clock_t st = clock();
+    clock_t st = clock();
     int a[n];
-    //srand(time(NULL));
-    for (int i = 0; i < n; i++) cin >> a[i]; //a[i] = rand(); 
+    srand(time(NULL));
+    for (int i = 0; i < n; i++) a[i] = rand(); 
     merge_sort(a, 0, n - 1);
-    for (int i : a) cout << i << " ";
-    //clock_t end = clock();
-    //cout << endl << (double)(end - st) / CLOCKS_PER_SEC; 
+    // for (int i : a) cout << i << " ";
+    clock_t end = clock();
+    cout << endl << (double)(end - st) / CLOCKS_PER_SEC; 
     return 0; }

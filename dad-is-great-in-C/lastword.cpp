@@ -1,3 +1,5 @@
+// task: print last word of input
+
 #include <iostream>
 #include <string>
 using namespace std;
