@@ -12,9 +12,8 @@ int main() {
 
     for (int i = 0; i < n; i++) {
         int j = i - 1;
-        int k = a[i];
-        while (a[j] > k and j >= 0) { a[j + 1] = a[j]; j--; }
-        a[j + 1] = k; }
+        while (a[j] > a[i] and j >= 0) { a[j + 1] = a[j]; j--; }
+        a[j + 1] = a[i]; }
 
     //for (int i : a) cout << i << " ";
     clock_t end = clock();
