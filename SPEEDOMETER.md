@@ -1,4 +1,4 @@
-# About speedometers
+# About speedometer
 **RU**: speedometer - это программы, которые тестируют ЯП на скоррость. В моём репозитории представлены коды на C, C++, Rust и Python. Данная программа не имеет практической пользы, да и не выполняет какое-либо полезное действие.  
 **ENG**: speedometer is a program that tests the speed of the programming languages. My repo contains code in C, C++, Rust, and Python. This program has no practical use, and does not perform any useful action.
 ## What it does?
