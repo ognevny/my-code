@@ -1,16 +1,18 @@
+// a list of useful functions written by me
+
 #include <iostream>
 #include <string>
 #include <map>
 using namespace std;
 
-uint16_t numsum(uint64_t n) {
+uint16_t numsum(uint64_t n) { // sum of number digits
     uint16_t res = 0;
     while (n) {
         res += n % 10;
         n /= 10; }
     return res; }
 
-uint64_t rev(uint64_t n) {
+uint64_t rev(uint64_t n) { // reverse number
    uint64_t rev = 0; 
    while (n) {
        rev = rev * 10 + (n % 10);
@@ -24,7 +26,7 @@ uint64_t numsys(uint64_t n, uint8_t k) {
         n /= k; }
     return (rev(ns) - 1) / 10; }
 
-uint16_t numcount(uint64_t n) {
+uint16_t numcount(uint64_t n) { // counts number digits
     uint16_t count = 0;
     while (n) {
         n /= 10;
@@ -41,7 +43,7 @@ string numsys16(uint64_t n, uint8_t k) {
     string rev(res.rbegin(), res.rend());
     return rev; }
 
-long double binpow(double b, uint16_t e) {
+long double binpow(double b, uint16_t e) { // binary power
     long double v = 1.0;
     while (e != 0) {
         if ((e & 1) != 0) v *= b;
