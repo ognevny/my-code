@@ -18,3 +18,9 @@ pub fn rev(mut n: u64) -> u64 {
         rev = rev * 10 + (n % 10);
         n /= 10; }
 rev }
+
+pub fn has_digit(mut n: u64, k: u8) -> bool {
+    while n != 0 {
+        if n % 10 == k.into() { return true; }
+        n /= 10}
+    false }
