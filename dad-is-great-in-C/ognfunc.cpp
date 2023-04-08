@@ -2,7 +2,6 @@
 
 #include <iostream>
 #include <string>
-#include <map>
 using namespace std;
 
 uint16_t numsum(uint64_t n) { // sum of number digits
