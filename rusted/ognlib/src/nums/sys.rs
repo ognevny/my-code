@@ -1,6 +1,6 @@
 const SYS: [char; 16] = [
     '0', '1', '2', '3', '4', '5', '6', '7',
-    '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' ];
+    '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'];
 
 pub fn num_sys(mut n: u64, k: u8) -> u64 {
     let mut res = String::new();
