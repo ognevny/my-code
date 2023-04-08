@@ -1,4 +1,4 @@
-// bubble sort with my own swap algorithm
+// bubble sort in C++
 
 #include <iostream>
 #include <random>
