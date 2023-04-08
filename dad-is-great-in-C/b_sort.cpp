@@ -17,6 +17,7 @@ int main() {
         int count = 0;
         for (int j = 0; j < i; j++) {
             if (a[j] > a[j + 1]) {
+                // swap(a[j], a[j + 1]); // alt variant
                 a[j] = 2 * a[j + 1] - a[j];
                 a[j + 1] = 2 * a[j + 1] - a[j];
                 a[j] = (a[j] + a[j + 1]) / 2;
