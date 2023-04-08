@@ -17,7 +17,7 @@ pub mod num_operation {
         pub fn num_sys_hex(mut n: u64, k: u8) -> String {
             let mut res = String::new();
             while n != 0 {
-                res.push(SYS[((n % (k as u64)) as usize)]);
+                res.push(SYS[(n % (k as u64)) as usize]);
                 n /= k as u64; }
             res.chars().rev().collect::<String>() } }
 
