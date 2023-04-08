@@ -12,5 +12,4 @@ def s() -> int:
 
 
 if __name__ == "__main__":
-    n = s()
-    print(n)
+    print(s())

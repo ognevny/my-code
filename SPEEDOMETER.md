@@ -33,9 +33,9 @@ dad-is-great-in-C> clang speedometer.c
 dad-is-great-in-C> time ./a
 1000000000
 ________________________________________________________
-Executed in  525,38 millis    fish           external
-   usr time    0,00 micros    0,00 micros    0,00 micros
-   sys time    0,00 micros    0,00 micros    0,00 micros
+Executed in  526,75 millis    fish           external
+   usr time    0,00 millis    0,00 micros    0,00 millis
+   sys time   15,00 millis    0,00 micros   15,00 millis
 ```
 #### C++
 ```
@@ -43,7 +43,7 @@ dad-is-great-in-C> clang++ speedometer.cpp
 dad-is-great-in-C> time ./a
 1000000000
 ________________________________________________________
-Executed in  525,07 millis    fish           external
+Executed in  559,86 millis    fish           external
    usr time    0,00 micros    0,00 micros    0,00 micros
    sys time    0,00 micros    0,00 micros    0,00 micros
 ```
@@ -54,19 +54,9 @@ pie> time python speedometer.py
 1000000000
 
 ________________________________________________________
-Executed in   26,48 secs      fish           external
-   usr time   15,00 millis    0,00 micros   15,00 millis
-   sys time    0,00 millis    0,00 micros    0,00 millis
-```
-speedometer_p.py
-```
-pie> time python speedometer_p.py
-1000000000
-
-________________________________________________________
-Executed in   27,66 secs      fish           external
-   usr time    0,00 millis    0,00 micros    0,00 millis
-   sys time   15,00 millis    0,00 micros   15,00 millis
+Executed in   26,65 secs      fish           external
+   usr time    0,00 micros    0,00 micros    0,00 micros
+   sys time    0,00 micros    0,00 micros    0,00 micros
 ```
 numbed.py
 ```
@@ -74,7 +64,7 @@ pie> time python numbed.py
 1000000000
 
 ________________________________________________________
-Executed in    3,51 secs      fish           external
+Executed in    3,01 secs      fish           external
    usr time    0,00 micros    0,00 micros    0,00 micros
    sys time    0,00 micros    0,00 micros    0,00 micros
 ```
@@ -88,9 +78,9 @@ r/speedometer> time cargo run --release
      Running `target\release\speedometer.exe`
 1000000000
 ________________________________________________________
-Executed in  147,43 millis    fish           external
-   usr time    0,00 micros    0,00 micros    0,00 micros
-   sys time    0,00 micros    0,00 micros    0,00 micros
+Executed in   57,09 millis    fish           external
+   usr time    0,00 millis    0,00 micros    0,00 millis
+   sys time   15,00 millis    0,00 micros   15,00 millis
 ```
 ### Reference
 **RU**: данные коды влохновлены видео на ютуб от The Builder 

@@ -6,5 +6,4 @@ fn s() -> u32 {
     n }
 
 fn main() {
-    let n: u32 = s();
-    print!("{n}"); }
+    print!("{}", s()); }

@@ -9,6 +9,5 @@ int s() {
     return n; }
 
 int main() {
-    int n = s();
-    cout << n;
+    cout << s();
     return 0; }

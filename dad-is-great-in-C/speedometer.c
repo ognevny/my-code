@@ -8,6 +8,5 @@ int s() {
     return n; }
 
 int main() {
-    int n = s();
-    printf("%d", n);
+    printf("%d", s());
     return 0; }
