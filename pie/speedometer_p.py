@@ -11,7 +11,7 @@ def s() -> int:
 
 
 if __name__ == "__main__":
-    with mlp.Pool(processes=mlp.cpu_count()):
-        pass
-    n = s()
+    with mlp.Pool(processes=mlp.cpu_count()) as pool:
+        result = pool.apply_async(s)
+        n = result.get()
     print(n)
