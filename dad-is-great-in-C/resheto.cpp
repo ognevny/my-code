@@ -1,4 +1,4 @@
-// a programm using something like Eratosthenes' sieve 
+// task: represent N as p1^a1*p2^a2*...*pn^an
 
 #include <iostream>
 using namespace std;
