@@ -3,8 +3,12 @@
 #include <iostream>
 using namespace std;
 
-int main() {
+int s() {
     int n = 1;
     while (n < 1'000'000'000) n++;
+    return n; }
+
+int main() {
+    int n = s();
     cout << n;
     return 0; }
