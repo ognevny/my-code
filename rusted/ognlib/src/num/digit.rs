@@ -1,4 +1,4 @@
-/// calculate sum of digits in number
+/// Calculate sum of digits in number
 ///
 /// # Examples
 ///
@@ -16,7 +16,7 @@ pub fn digit_sum(mut n: u64) -> u32 {
     sum }
 
 
-/// calculate size of number (how many digits it contains)
+/// Calculate size of number (how many digits it contains)
 ///
 /// # Examples
 ///

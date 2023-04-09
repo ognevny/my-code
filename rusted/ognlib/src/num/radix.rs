@@ -3,7 +3,7 @@ const RADIX: [char; 16] = [
     '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'];
 
 
-/// translate int number from DEC to radix (2 <= k <= 10)
+/// Translate int number from DEC to radix (2 <= k <= 10)
 ///
 /// # Examples
 ///
@@ -21,7 +21,7 @@ pub fn from_int_to_radix(mut n: u64, k: u8) -> u64 {
     res.chars().rev().collect::<String>().parse().unwrap() }
 
 
-/// translate int number from DEC to radix string (2 <= k <= 16)
+/// Translate int number from DEC to radix string (2 <= k <= 16)
 ///
 /// # Examples
 ///
@@ -39,7 +39,7 @@ pub fn from_int_to_radix_string(mut n: u64, k: u8) -> String {
     res.chars().rev().collect::<String>() }
 
 
-/// translate int number from radix to int DEC number (2 <= k <= 10)
+/// Translate int number from radix to int DEC number (2 <= k <= 10)
 ///
 /// # Examples
 ///

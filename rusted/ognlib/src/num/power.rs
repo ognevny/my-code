@@ -1,4 +1,4 @@
-/// algorithm for binary power
+/// Algorithm for binary power
 ///
 /// # Examples
 ///
