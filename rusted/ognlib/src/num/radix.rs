@@ -4,9 +4,8 @@ const RADIX: [char; 16] = [
 
 
 /// Translate int number from DEC to radix (2 <= k <= 10)
-///
 /// # Examples
-///
+/// 
 /// ```
 /// use ognlib::num::radix::from_int_to_radix;
 ///
@@ -22,9 +21,8 @@ pub fn from_int_to_radix(mut n: u64, k: u8) -> u64 {
 
 
 /// Translate int number from DEC to radix string (2 <= k <= 16)
-///
 /// # Examples
-///
+/// 
 /// ```
 /// use ognlib::num::radix::from_int_to_radix_string;
 ///
@@ -40,9 +38,8 @@ pub fn from_int_to_radix_string(mut n: u64, k: u8) -> String {
 
 
 /// Translate int number from radix to int DEC number (2 <= k <= 10)
-///
 /// # Examples
-///
+/// 
 /// ```
 /// use ognlib::num::radix::from_radix_to_dec;
 ///

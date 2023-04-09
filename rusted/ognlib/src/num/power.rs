@@ -1,7 +1,6 @@
 /// Algorithm for binary power
-///
 /// # Examples
-///
+/// 
 /// ```
 /// use ognlib::num::power::bin_pow;
 ///
