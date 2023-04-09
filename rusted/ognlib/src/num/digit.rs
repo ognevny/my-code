@@ -1,3 +1,13 @@
+/// calculate sum of digits in number
+///
+/// # Examples
+///
+/// ```
+/// use ognlib::num::digit::digit_sum;
+///
+/// assert_eq!(digit_sum(123), 6);
+/// assert_eq!(digit_sum(444), 12);
+/// ```
 pub fn digit_sum(mut n: u64) -> u32 {
     let mut sum: u32 = 0;
     while n != 0 {
@@ -5,6 +15,17 @@ pub fn digit_sum(mut n: u64) -> u32 {
         n /= 10; }
     sum }
 
+
+/// calculate size of number (how many digits it contains)
+///
+/// # Examples
+///
+/// ```
+/// use ognlib::num::digit::digit_count;
+///
+/// assert_eq!(digit_count(123), 3);
+/// assert_eq!(digit_count(1337228), 7);
+/// ```
 pub fn digit_count(mut n: u64) -> u16 {
     let mut count: u16 = 0;
     while n != 0 {

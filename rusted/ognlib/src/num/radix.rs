@@ -8,7 +8,7 @@ const RADIX: [char; 16] = [
 /// # Examples
 ///
 /// ```
-/// use ognlib::nums::radix::from_int_to_radix;
+/// use ognlib::num::radix::from_int_to_radix;
 ///
 /// assert_eq!(from_int_to_radix(123, 8), 173);
 /// assert_eq!(from_int_to_radix(176, 2), 10110000)
@@ -26,7 +26,7 @@ pub fn from_int_to_radix(mut n: u64, k: u8) -> u64 {
 /// # Examples
 ///
 /// ```
-/// use ognlib::nums::radix::from_int_to_radix_string;
+/// use ognlib::num::radix::from_int_to_radix_string;
 ///
 /// assert_eq!(from_int_to_radix_string(123, 16), "7B");
 /// assert_eq!(from_int_to_radix_string(176, 2), "10110000")
@@ -44,7 +44,7 @@ pub fn from_int_to_radix_string(mut n: u64, k: u8) -> String {
 /// # Examples
 ///
 /// ```
-/// use ognlib::nums::radix::from_radix_to_dec;
+/// use ognlib::num::radix::from_radix_to_dec;
 ///
 /// assert_eq!(from_radix_to_dec(10110000, 2), 176);
 /// assert_eq!(from_radix_to_dec(444, 10), 444)
