@@ -10,7 +10,7 @@
 ноутбук на базе AMD Radeon 5 5600H, 16 Гб ОЗУ, программы хранятся на ссд 512 ГБ *(напишите, если видеокарта влияет тоже)*.  
 Инструменты:  
 OS - Windows 11 последней версии;  
-[дистрибутив MSYS2](msys2.org), который предоставляет мне:  
+[дистрибутив MSYS2](https://msys2.org), который предоставляет мне:  
 clang 16.0.1 - компилятор C и C++  
 Python 3.10.11 с numba 0.57.0dev0.r1074.gc12bbf4bb-1  
 Rust 1.68.2  
@@ -21,7 +21,7 @@ Hardware:
 AMD Radeon 5 5600H based laptop, 16GB RAM, programs stored on 512GB SSD *(write me if video card affects too)*.  
 Tools:  
 OS - Windows 11 latest version;  
-[MSYS2 distribution](msys2.org) which provides me:  
+[MSYS2 distribution](https://msys2.org) which provides me:  
 clang 16.0.1 - C and C++ compiler;  
 Python 3.10.11 with numba 0.57.0dev0.r1074.gc12bbf4bb-1;  
 Rust 1.68.2;  
