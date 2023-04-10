@@ -3,7 +3,6 @@ reference to "Long, long, maaaaaaaan" (Japanese ad) */
 
 #include <iostream>
 #include <string>
-#include <vector>
 #include <sstream>
 using namespace std;
 
