@@ -1,4 +1,4 @@
-// TODO: write a code for insertion sort
+// TODO: write a code for insertion sort, merge sort and some more
 
 /// Bubble sort algorithm
 /// # Examples
