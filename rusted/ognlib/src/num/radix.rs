@@ -38,10 +38,9 @@ impl Radix {
         while self.number != 0 {
             res.push(RADIX[(self.number % (k as usize)) as usize]);
             self.number /= k as usize; }
-        let res = Radix {
+        Radix {
             number: res.chars().rev().collect::<String>().parse().unwrap(),
-            radix: k, };
-        res }
+            radix: k, } }
 
 
     /// Translate int number from DEC to radix string (2 <= k <= 16)

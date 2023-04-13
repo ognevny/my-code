@@ -18,7 +18,6 @@ pub fn bubble(arr: &mut Vec<i64>) {
             if arr[j] > arr[j + 1] { arr.swap(j + 1, j) } } } }
 
 
-
 /// Search sort algorithm
 /// # Examples
 ///
