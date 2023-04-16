@@ -6,4 +6,5 @@ pub mod num {
     pub mod power; }
 
 pub mod algorithm {
+    pub mod extra;
     pub mod sort; }
