@@ -309,7 +309,7 @@ impl StringRadix {
             radix: k, } }
 
 
-    /*/// Translate int number from radix to int DEC number (2 <= k <= 10)
+    /*/// Translate int number from string radix to int DEC number (2 <= k <= 10)
     /// # Examples
     /// 
     /// ```
@@ -332,15 +332,22 @@ impl StringRadix {
     /// assert_eq!(new2.radix, 10);
     /// ```
 
-    pub fn from_radix_to_dec(&mut self) -> Radix {
+    pub fn from_string_radix_to_dec(&mut self) -> Radix {
         let mut dec = Radix {
             number: 0,
             radix: 10, };
         let mut count = 0;
-        while self.number != 0 {
-            dec.number += (self.number % 10) * super::power::bin_pow(self.radix as f64, count) as usize;
-            self.number /= 10; 
-            count += 1; }
+        for letter in self.number.chars() {
+            if letter >= '0' && letter <= '9' { 
+            dec.number += (letter.to_string().parse::<usize>().unwrap()) as usize * super::power::bin_pow(self.radix as f64, count) as usize;
+            count += 1; } }
+            else if letter >= 'A' && letter <= 'Z' {
+                match letter {
+                    'A' => { dec.number += 10 * super::power::bin_pow(self.radix as f64, count) as usize;
+                        count += 1 }
+                }
+            }
+            else {}
         dec }
     
 
