@@ -1,8 +1,10 @@
 // TODO: write ariphmetic functions and make existing functions more useful. add string radix struct.
 
-pub const RADIX: [char; 16] = [
-    '0', '1', '2', '3', '4', '5', '6', '7',
-    '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'];
+pub const RADIX: [char; 36] = [
+    '0', '1', '2', '3', '4', '5', '6', '7', '8', 
+    '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
+    'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 
+    'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 
 pub struct Radix {
     pub number: usize,
@@ -43,7 +45,7 @@ impl Radix {
             radix: k, } }
 
 
-    /// Translate int number from DEC to radix string (2 <= k <= 16)
+    /// Translate int number from DEC to radix string (2 <= k <= 36)
     /// # Examples
     /// 
     /// ```
@@ -130,7 +132,7 @@ impl Radix {
         dec.from_int_to_radix(k) }
 
 
-    /// Sum 2 radix numbers to string radix (2 <= k <= 16)
+    /// Sum 2 radix numbers to string radix (2 <= k <= 36)
     /// # Examples
     ///
     /// ```
@@ -181,7 +183,7 @@ impl Radix {
         dec.from_int_to_radix(k) }
 
 
-    /// Dif 2 radix numbers to string radix (2 <= k <= 16)
+    /// Dif 2 radix numbers to string radix (2 <= k <= 36)
     /// # Examples
     ///
     /// ```
@@ -232,7 +234,7 @@ impl Radix {
         dec.from_int_to_radix(k) } 
     
     
-    /// Multiply 2 radix numbers to string radix (2 <= k <= 16)
+    /// Multiply 2 radix numbers to string radix (2 <= k <= 36)
     /// # Examples
     ///
     /// ```
