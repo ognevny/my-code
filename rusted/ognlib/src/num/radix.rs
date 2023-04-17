@@ -1,4 +1,4 @@
-// TODO: write ariphmetic functions and make existing functions more useful. add string radix struct.
+// TODO: write ariphmetic functions and make existing functions more useful.
 
 pub const RADIX: [char; 36] = [
     '0', '1', '2', '3', '4', '5', '6', '7', '8', 
@@ -333,22 +333,9 @@ impl StringRadix {
     /// ```
 
     pub fn from_string_radix_to_dec(&mut self) -> Radix {
-        let mut dec = Radix {
-            number: 0,
-            radix: 10, };
-        let mut count = 0;
-        for letter in self.number.chars() {
-            if letter >= '0' && letter <= '9' { 
-            dec.number += (letter.to_string().parse::<usize>().unwrap()) as usize * super::power::bin_pow(self.radix as f64, count) as usize;
-            count += 1; } }
-            else if letter >= 'A' && letter <= 'Z' {
-                match letter {
-                    'A' => { dec.number += 10 * super::power::bin_pow(self.radix as f64, count) as usize;
-                        count += 1 }
-                }
-            }
-            else {}
-        dec }
+        Radix {
+            number: usize::from_str_radix(self.number, self.radix),
+            radix: 10 }
     
 
     /// Sum 2 radix numbers (2 <= k <= 10)
