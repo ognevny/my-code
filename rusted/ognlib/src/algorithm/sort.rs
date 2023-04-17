@@ -10,7 +10,7 @@
 /// bubble(&mut arr);
 /// assert_eq!(arr, [1, 2, 3, 4, 5]);
 /// ```
-/// 
+
 pub fn bubble(arr: &mut Vec<i64>) {
     let n = arr.len();
     for i in 0..n {
@@ -28,7 +28,7 @@ pub fn bubble(arr: &mut Vec<i64>) {
 /// search(&mut arr);
 /// assert_eq!(arr, [1, 2, 3, 4, 5]);
 /// ```
-/// 
+
 pub fn search(arr: &mut Vec<i64>) {
     let n = arr.len();
     for i in 0..n - 1 {

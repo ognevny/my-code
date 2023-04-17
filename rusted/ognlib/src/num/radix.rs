@@ -32,7 +32,7 @@ impl Radix {
     /// assert_eq!(new2.number, 10110000);
     /// assert_eq!(new2.radix, 2)
     /// ```
-    /// 
+ 
     pub fn from_int_to_radix(&mut self, k: u8) -> Radix {
         let mut res = String::new();
         while self.number != 0 {
@@ -60,7 +60,7 @@ impl Radix {
     /// assert_eq!(n1.from_int_to_string_radix(16), "7B");
     /// assert_eq!(n2.from_int_to_string_radix(2), "10110000")
     /// ```
-    /// 
+
     pub fn from_int_to_string_radix(&mut self, k: u8) -> String {
         let mut res = String::new();
         while self.number != 0 {
@@ -91,7 +91,7 @@ impl Radix {
     /// assert_eq!(new2.number, 444);
     /// assert_eq!(new2.radix, 10);
     /// ```
-    /// 
+
     pub fn from_radix_to_dec(&mut self) -> Radix {
         let mut dec = Radix {
             number: 0,
@@ -122,7 +122,7 @@ impl Radix {
     /// assert_eq!(result.number, 227);
     /// assert_eq!(result.radix, 8);
     /// ```
-    /// 
+
     pub fn add(&mut self, b: &mut Radix, k: u8) -> Radix {
         let mut dec = Radix {
             number: self.from_radix_to_dec().number + b.from_radix_to_dec().number,
@@ -147,7 +147,7 @@ impl Radix {
     /// let result = Radix::add_to_string(&mut n1, &mut n2, 16);
     /// assert_eq!(result, "97")
     /// ```
-    /// 
+
     pub fn add_to_string(&mut self, a: &mut Radix, k: u8) -> String {
         let mut dec = Radix {
             number: self.from_radix_to_dec().number + a.from_radix_to_dec().number,
@@ -173,7 +173,7 @@ impl Radix {
     /// assert_eq!(result.number, 141);
     /// assert_eq!(result.radix, 8);
     /// ```
-    /// 
+
     pub fn dif(&mut self, a: &mut Radix, k: u8) -> Radix {
         let mut dec = Radix {
             number: self.from_radix_to_dec().number - a.from_radix_to_dec().number,
@@ -198,7 +198,7 @@ impl Radix {
     /// let result = Radix::dif_to_string(&mut n2, &mut n1, 16);
     /// assert_eq!(result, "61");
     /// ```
-    /// 
+
     pub fn dif_to_string(&mut self, a: &mut Radix, k: u8) -> String {
         let mut dec = Radix {
             number: self.from_radix_to_dec().number - a.from_radix_to_dec().number,
@@ -224,7 +224,7 @@ impl Radix {
     /// assert_eq!(result.number, 6424);
     /// assert_eq!(result.radix, 8);
     /// ```
-    /// 
+
     pub fn mul(&mut self, a: &mut Radix, k: u8) -> Radix {
         let mut dec = Radix {
             number: self.from_radix_to_dec().number * a.from_radix_to_dec().number,
@@ -249,7 +249,7 @@ impl Radix {
     /// let result = Radix::mul_to_string(&mut n1, &mut n2, 16);
     /// assert_eq!(result, "D14");
     /// ```
-    /// 
+
     pub fn mul_to_string(&mut self, a: &mut Radix, k: u8) -> String {
         let mut dec = Radix {
             number: self.from_radix_to_dec().number * a.from_radix_to_dec().number,
