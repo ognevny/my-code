@@ -1,2 +1,4 @@
-a.exe
+*.exe
+mytest.*
+for_lesson.*
 .vscode
