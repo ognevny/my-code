@@ -309,7 +309,7 @@ impl StringRadix {
             radix: k, } }
 
 
-    /*/// Translate int number from string radix to int DEC number (2 <= k <= 10)
+    /// Translate int number from string radix to int DEC number (2 <= k <= 10)
     /// # Examples
     /// 
     /// ```
@@ -335,10 +335,10 @@ impl StringRadix {
     pub fn from_string_radix_to_dec(&mut self) -> Radix {
         Radix {
             number: usize::from_str_radix(self.number, self.radix),
-            radix: 10 }
+            radix: 10, }
     
 
-    /// Sum 2 radix numbers (2 <= k <= 10)
+    /*/// Sum 2 radix numbers (2 <= k <= 10)
     /// # Examples
     ///
     /// ```
