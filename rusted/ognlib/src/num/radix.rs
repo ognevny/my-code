@@ -38,7 +38,7 @@ impl Radix {
     pub fn from_int_to_radix(&mut self, k: u8) -> Radix {
         let mut res = String::new();
         while self.number != 0 {
-            res.push(RADIX[(self.number % (k as usize)) as usize]);
+            res.push(RADIX[self.number % (k as usize)]);
             self.number /= k as usize; }
         Radix {
             number: res.chars().rev().collect::<String>().parse().unwrap(),
@@ -66,7 +66,7 @@ impl Radix {
     pub fn from_int_to_string_radix(&mut self, k: u8) -> String {
         let mut res = String::new();
         while self.number != 0 {
-            res.push(RADIX[(self.number % (k as usize)) as usize]);
+            res.push(RADIX[self.number % (k as usize)]);
             self.number /= k as usize; }
         res.chars().rev().collect::<String>() }
 
