@@ -62,7 +62,7 @@ impl Radix {
         Radix { number: n, radix: k } }
 
 
-    /// Translate [`Radix`] to another [`Radix`]
+    /// Translate [`Radix`] to another [`Radix`] (2 <= k <= 10)
     /// # Panics
     ///
     /// Panics if k > 10
@@ -107,20 +107,49 @@ impl Radix {
         
         if self.radix == 10 { return from_dec(self, k) }
         if k == 10 { return to_dec(self) }
-        else { return from_dec(&mut to_dec(self), k) } }
+        else { from_dec(&mut to_dec(self), k) } }
 
     
-    /*pub fn from_dec_to_string_radix(&mut self, k: u8) -> StringRadix {
-        let mut res = String::new();
-        while self.number != 0 {
-            res.push(RADIX[self.number % (k as usize)]);
-            self.number /= k as usize; }
-        StringRadix { 
-            number: res.chars().rev().collect::<String>(),
-            radix: k } }
-    
+    /// Translate [`Radix`] to [`StringRadix`] (2 <= k <= 36)
+    /// # Examples
+    ///
+    /// ```
+    /// use ognlib::num::radix::Radix;
+    ///
+    /// let mut n = Radix::from_radix(11010000, 2);
+    /// let res = n.to_string_radix(16);
+    /// assert_eq!(res.number, "D0");
+    /// assert_eq!(res.radix, 16);
+    /// ```
 
-    /// Sum 2 radix numbers (2 <= k <= 10)
+    pub fn to_string_radix(&mut self, k: u8) -> StringRadix {
+
+        fn to_dec(n: &mut Radix) -> Radix {
+            let mut dec = Radix::new(10);
+            let mut count = 0;
+            while n.number != 0 {
+                dec.number += (n.number % 10) * super::power::bin_pow(n.radix as f64, count) as usize;
+                n.number /= 10;
+                count += 1; }
+            dec }
+
+        fn from_dec(n: &mut Radix, k: u8) -> StringRadix {
+            let mut res = String::new();
+            while n.number != 0 {
+                res.push(RADIX[n.number % (k as usize)]);
+                n.number /= k as usize; }
+            StringRadix { 
+                number: res.chars().rev().collect::<String>(), 
+                radix: k } }
+
+        if self.radix == 0 { return from_dec(self, k) }
+        if k == 10 {
+            let t = to_dec(self);
+            return StringRadix { number: t.number.to_string(), radix: 10 } }
+        else { from_dec(&mut to_dec(self), k) } }
+
+
+    /*/// Sum 2 radix numbers (2 <= k <= 10)
     /// # Examples
     ///
     /// ```
