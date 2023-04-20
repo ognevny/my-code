@@ -87,7 +87,7 @@ impl Radix {
 
     pub fn to_radix(&mut self, k: u8) -> Radix {
 
-        fn to_dec(n: &mut Radix)  -> Radix {
+        fn to_dec(n: &mut Radix) -> Radix {
             let mut dec = Radix::new(10);
             let mut count = 0;
             while n.number != 0 {
@@ -118,6 +118,7 @@ impl Radix {
     ///
     /// let mut n = Radix::from_radix(11010000, 2);
     /// let res = n.to_string_radix(16);
+    /// 
     /// assert_eq!(res.number, "D0");
     /// assert_eq!(res.radix, 16);
     /// ```
@@ -162,9 +163,7 @@ impl Radix {
     /// ```
 
     pub fn add(&mut self, b: &mut Radix, k: u8) -> Radix {
-        let mut dec = Radix {
-            number: self.to_radix(10).number + b.to_radix(10).number,
-            radix: 10, };
+        let mut dec = Radix::from(self.to_radix(10).number + b.to_radix(10).number);
         dec.to_radix(k) }
 
 
@@ -183,9 +182,7 @@ impl Radix {
     /// ```
 
     pub fn add_to_string(&mut self, a: &mut Radix, k: u8) -> StringRadix {
-        let mut dec = Radix {
-            number: self.to_radix(10).number + a.to_radix(10).number,
-            radix: 10, };
+        let mut dec = Radix::from(self.to_radix(10).number + a.to_radix(10).number);
         dec.to_string_radix(k) }
 
 
@@ -204,9 +201,7 @@ impl Radix {
     /// ```
 
     pub fn dif(&mut self, a: &mut Radix, k: u8) -> Radix {
-        let mut dec = Radix {
-            number: self.to_radix(10).number - a.to_radix(10).number,
-            radix: 10, };
+        let mut dec = Radix::from(self.to_radix(10).number - a.to_radix(10).number);
         dec.to_radix(k) }
 
 
@@ -225,9 +220,7 @@ impl Radix {
     /// ```
 
     pub fn dif_to_string(&mut self, a: &mut Radix, k: u8) -> StringRadix {
-        let mut dec = Radix {
-            number: self.to_radix(10).number - a.to_radix(10).number,
-            radix: 10, };
+        let mut dec = Radix::from(self.to_radix(10).number - a.to_radix(10).number);
         dec.to_string_radix(k) }
 
 
@@ -246,9 +239,7 @@ impl Radix {
     /// ```
 
     pub fn mul(&mut self, a: &mut Radix, k: u8) -> Radix {
-        let mut dec = Radix {
-            number: self.to_radix(10).number * a.to_radix(10).number,
-            radix: 10, };
+        let mut dec = Radix::from(self.to_radix(10).number * a.to_radix(10).number);
         dec.to_radix(k) } 
     
     
@@ -267,9 +258,7 @@ impl Radix {
     /// ```
 
     pub fn mul_to_string(&mut self, a: &mut Radix, k: u8) -> StringRadix {
-        let mut dec = Radix {
-            number: self.to_radix(10).number * a.to_radix(10).number,
-            radix: 10, };
+        let mut dec = Radix::from(self.to_radix(10).number * a.to_radix(10).number);
         dec.to_string_radix(k) } }
 
 
