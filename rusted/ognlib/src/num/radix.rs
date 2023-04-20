@@ -389,7 +389,7 @@ impl StringRadix {
         if k == 10 { return to_dec(self) }
         else { from_dec(&mut to_dec(self), k) } }
     
-    /*
+
     /// Sum 2 [`StringRadix`] (2 <= k <= 36)
     /// # Examples
     ///
@@ -405,25 +405,18 @@ impl StringRadix {
     /// ```
 
     pub fn add(&mut self, b: &mut StringRadix, k: u8) -> StringRadix {
-        let mut dec = Radix {
-            number: self.from_string_radix_to_dec().number + b.from_string_radix_to_dec().number,
-            radix: 10, };
-        dec.from_dec_to_string_radix(k) }
+        let mut dec = StringRadix::from(&(self.to_int_radix(10).number + b.to_int_radix(10).number).to_string());
+        dec.to_radix(k) }
 
 
-    /// Sum 2 string radix numbers to int (2 <= k <= 10)
+    /// Sum 2 [`StringRadix`] to [`Radix`] (2 <= k <= 10)
     /// # Examples
     ///
     /// ```
     /// use ognlib::num::radix::StringRadix;
     ///
-    /// let mut n1 = StringRadix {
-    ///     number: String::from("123"),
-    ///     radix: 4, };
-    /// 
-    /// let mut n2 = StringRadix {
-    ///     number: String::from("444"),
-    ///     radix: 5, };
+    /// let mut n1 = StringRadix::from_radix("123", 4);
+    /// let mut n2 = StringRadix::from_radix("444", 5);
     /// 
     /// let result = StringRadix::add_to_int(&mut n1, &mut n2, 8);
     /// assert_eq!(result.number, 227);
@@ -431,25 +424,18 @@ impl StringRadix {
     /// ```
 
     pub fn add_to_int(&mut self, a: &mut StringRadix, k: u8) -> Radix {
-        let mut dec = Radix {
-            number: self.from_string_radix_to_dec().number + a.from_string_radix_to_dec().number,
-            radix: 10, };
-        dec.from_dec_to_radix(k) }
+        let mut dec = Radix::from(self.to_int_radix(10).number + a.to_int_radix(10).number);
+        dec.to_radix(k) }
 
 
-    /// Dif 2 string radix numbers (2 <= k <= 36)
+    /// Dif 2 [`StringRadix`] (2 <= k <= 36)
     /// # Examples
     ///
     /// ```
     /// use ognlib::num::radix::StringRadix;
     ///
-    /// let mut n1 = StringRadix {
-    ///     number: String::from("123"),
-    ///     radix: 4, };
-    /// 
-    /// let mut n2 = StringRadix {
-    ///     number: String::from("444"),
-    ///     radix: 5, };
+    /// let mut n1 = StringRadix::from_radix("123", 4);
+    /// let mut n2 = StringRadix::from_radix("444", 5);
     /// 
     /// let result = StringRadix::dif(&mut n2, &mut n1, 16);
     /// assert_eq!(result.number, "61");
@@ -457,25 +443,18 @@ impl StringRadix {
     /// ```
 
     pub fn dif(&mut self, a: &mut StringRadix, k: u8) -> StringRadix {
-        let mut dec = Radix {
-            number: self.from_string_radix_to_dec().number - a.from_string_radix_to_dec().number,
-            radix: 10, };
-        dec.from_dec_to_string_radix(k) }
+        let mut dec = StringRadix::from(&(self.to_int_radix(10).number - a.to_int_radix(10).number).to_string());
+        dec.to_radix(k) }
 
 
-    /// Dif 2 string radix numbers to int radix (2 <= k <= 10)
+    /// Dif 2 [`StringRadix`] to [`Radix`] (2 <= k <= 10)
     /// # Examples
     ///
     /// ```
     /// use ognlib::num::radix::StringRadix;
     ///
-    /// let mut n1 = StringRadix {
-    ///     number: String::from("123"),
-    ///     radix: 4, };
-    /// 
-    /// let mut n2 = StringRadix {
-    ///     number: String::from("444"),
-    ///     radix: 5, };
+    /// let mut n1 = StringRadix::from_radix("123", 4);
+    /// let mut n2 = StringRadix::from_radix("444", 5);
     /// 
     /// let result = StringRadix::dif_to_int(&mut n2, &mut n1, 8);
     /// assert_eq!(result.number, 141);
@@ -483,25 +462,18 @@ impl StringRadix {
     /// ```
 
     pub fn dif_to_int(&mut self, a: &mut StringRadix, k: u8) -> Radix {
-        let mut dec = Radix {
-            number: self.from_string_radix_to_dec().number - a.from_string_radix_to_dec().number,
-            radix: 10, };
-        dec.from_dec_to_radix(k) }
+        let mut dec = Radix::from(self.to_int_radix(10).number - a.to_int_radix(10).number);
+        dec.to_radix(k) }
 
 
-    /// Multiply 2 string radix numbers (2 <= k <= 36)
+    /// Multiply 2 [`StringRadix`] (2 <= k <= 36)
     /// # Examples
     ///
     /// ```
     /// use ognlib::num::radix::StringRadix;
     ///
-    /// let mut n1 = StringRadix {
-    ///     number: String::from("123"),
-    ///     radix: 4, };
-    /// 
-    /// let mut n2 = StringRadix {
-    ///     number: String::from("444"),
-    ///     radix: 5, };
+    /// let mut n1 = StringRadix::from_radix("123", 4);
+    /// let mut n2 = StringRadix::from_radix("444", 5);
     /// 
     /// let result = StringRadix::mul(&mut n1, &mut n2, 16);
     /// assert_eq!(result.number, "D14");
@@ -509,25 +481,18 @@ impl StringRadix {
     /// ```
 
     pub fn mul(&mut self, a: &mut StringRadix, k: u8) -> StringRadix {
-        let mut dec = Radix {
-            number: self.from_string_radix_to_dec().number * a.from_string_radix_to_dec().number,
-            radix: 10, };
-        dec.from_dec_to_string_radix(k) } 
+        let mut dec = StringRadix::from(&(self.to_int_radix(10).number * a.to_int_radix(10).number).to_string());
+        dec.to_radix(k) }
     
     
-    /// Multiply 2 string radix numbers to int radix (2 <= k <= 10)
+    /// Multiply 2 [`StringRadix`] to [`Radix`] (2 <= k <= 10)
     /// # Examples
     ///
     /// ```
     /// use ognlib::num::radix::StringRadix;
     ///
-    /// let mut n1 = StringRadix {
-    ///     number: String::from("123"),
-    ///     radix: 4, };
-    /// 
-    /// let mut n2 = StringRadix {
-    ///     number: String::from("444"),
-    ///     radix: 5, };
+    /// let mut n1 = StringRadix::from_radix("123", 4);
+    /// let mut n2 = StringRadix::from_radix("444", 5);
     /// 
     /// let result = StringRadix::mul_to_int(&mut n1, &mut n2, 8);
     /// assert_eq!(result.number, 6424);
@@ -535,7 +500,5 @@ impl StringRadix {
     /// ```
 
     pub fn mul_to_int(&mut self, a: &mut StringRadix, k: u8) -> Radix {
-        let mut dec = Radix {
-            number: self.from_string_radix_to_dec().number * a.from_string_radix_to_dec().number,
-            radix: 10, };
-        dec.from_dec_to_radix(k) } */}
+        let mut dec = Radix::from(self.to_int_radix(10).number * a.to_int_radix(10).number);
+        dec.to_radix(k) } }
