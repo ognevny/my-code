@@ -101,9 +101,7 @@ impl Radix {
             while n.number != 0 {
                 res.push(RADIX[n.number % (k as usize)]);
                 n.number /= k as usize; }
-            Radix {
-                number: res.chars().rev().collect::<String>().parse().unwrap(),
-                radix: k, } }
+            Radix::from_radix(res.chars().rev().collect::<String>().parse().unwrap(), k) }
         
         if self.radix == 10 { return from_dec(self, k) }
         if k == 10 { return to_dec(self) }
@@ -139,9 +137,7 @@ impl Radix {
             while n.number != 0 {
                 res.push(RADIX[n.number % (k as usize)]);
                 n.number /= k as usize; }
-            StringRadix { 
-                number: res.chars().rev().collect::<String>(), 
-                radix: k } }
+            StringRadix::from_radix(&res.chars().rev().collect::<String>(), k) }
 
         if self.radix == 0 { return from_dec(self, k) }
         if k == 10 { return StringRadix::from(&to_dec(self).number.to_string()) }
@@ -334,9 +330,7 @@ impl StringRadix {
             while n.number != 0 {
                 res.push(RADIX[n.number % (k as usize)]);
                 n.number /= k as usize; }
-            StringRadix {
-                number: res.chars().rev().collect::<String>(),
-                radix: k, } }
+            StringRadix::from_radix(&res.chars().rev().collect::<String>(), k) }
 
         if k == 10 { return StringRadix::from(&to_dec(self).number.to_string()) }
         if self.radix == 10 { return from_dec(&mut Radix::from(self.number.parse().unwrap()), k) }
@@ -370,9 +364,7 @@ impl StringRadix {
             while n.number != 0 {
                 res.push(RADIX[n.number % (k as usize)]);
                 n.number /= k as usize; }
-            Radix {
-                number: res.chars().rev().collect::<String>().parse().unwrap(),
-                radix: k, } }
+            Radix::from_radix(res.chars().rev().collect::<String>().parse().unwrap(), k) }
             
         if self.radix == 10 { return from_dec(&mut Radix::from(self.number.parse().unwrap()), k) }
         if k == 10 { return to_dec(self) }
