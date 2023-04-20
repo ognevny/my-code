@@ -319,82 +319,85 @@ impl StringRadix {
         StringRadix { number: n.to_string(), radix: k } }
 
 
-    /*/// Translate from string DEC to string radix (2 <= k <= 36)
-    /// # Examples
-    /// 
-    /// ```
-    /// use ognlib::num::radix::StringRadix;
-    /// 
-    /// let mut n1 = StringRadix {
-    ///     number: String::from("123"),
-    ///     radix: 10, };
-    /// let new1 = n1.from_string_dec_to_string_radix(8);
-    /// 
-    /// let mut n2 = StringRadix {
-    ///     number: String::from("176"),
-    ///     radix: 10, };
-    /// let new2 = n2.from_string_dec_to_string_radix(2);
-    /// 
-    /// assert_eq!(new1.number, "173");
-    /// assert_eq!(new1.radix, 8);
-    /// 
-    /// assert_eq!(new2.number, "10110000");
-    /// assert_eq!(new2.radix, 2)
-    /// ```
- 
-    pub fn from_string_dec_to_string_radix(&mut self, k: u8) -> StringRadix {
-        let mut res = String::new();
-        let mut dec: usize = self.number.parse().unwrap();
-        while dec != 0 {
-            res.push(RADIX[dec % (k as usize)]);
-            dec /= k as usize; }
-        StringRadix {
-            number: res.chars().rev().collect::<String>(),
-            radix: k, } }
-
-
-    /// Translate from string radix to DEC number (2 <= k <= 36)
-    /// # Examples
-    /// 
-    /// ```
-    /// use ognlib::num::radix::StringRadix;
-    /// 
-    /// let mut n1 = StringRadix {
-    ///     number: String::from("10110000"),
-    ///     radix: 2, };
-    /// let new1 = n1.from_string_radix_to_dec();
-    /// 
-    /// let mut n2 = StringRadix {
-    ///     number: String::from("444"),
-    ///     radix: 10, };
-    /// let new2 = n2.from_string_radix_to_dec();
+    /// Translate [`StringRadix`] to [`StringRadix`]
+    /// # Panics
     ///
-    /// assert_eq!(new1.number, 176);
-    /// assert_eq!(new1.radix, 10);
-    /// 
-    /// assert_eq!(new2.number, 444);
-    /// assert_eq!(new2.radix, 10);
+    /// Panics if k > 36
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// use ognlib::num::radix::StringRadix;
+    ///
+    /// let mut n = StringRadix::from_radix("11010000", 2);
+    /// let res = n.to_radix(16);
+    /// assert_eq!(res.number, "D0");
+    /// assert_eq!(res.radix, 16);
     /// ```
 
-    pub fn from_string_radix_to_dec(&mut self) -> Radix {
-        Radix {
-            number: usize::from_str_radix(&self.number, self.radix.into()).unwrap(),
-            radix: 10, } }
+    pub fn to_radix(&mut self, k: u8) -> StringRadix {
+
+        fn to_dec(n: &mut StringRadix) -> Radix {
+            Radix::from(usize::from_str_radix(&n.number, n.radix.into()).unwrap()) }
+
+        fn from_dec(n: &mut Radix, k: u8) -> StringRadix {
+            let mut res = String::new();
+            while n.number != 0 {
+                res.push(RADIX[n.number % (k as usize)]);
+                n.number /= k as usize; }
+            StringRadix {
+                number: res.chars().rev().collect::<String>(),
+                radix: k, } }
+
+        if k == 10 { return StringRadix::from(&to_dec(self).number.to_string()) }
+        if self.radix == 10 { return from_dec(&mut Radix::from(self.number.parse().unwrap()), k) }
+        else { from_dec(&mut to_dec(self), k) } }
+
+
+    /// Translate [`StringRadix`] to [`Radix`]
+    /// # Panics
+    ///
+    /// Panics if k > 36
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// use ognlib::num::radix::StringRadix;
+    ///
+    /// let mut n = StringRadix::from_radix("D14", 16);
+    /// let mut new = n.to_int_radix(2);
+    /// 
+    /// assert_eq!(new.number, 110100010100);
+    /// assert_eq!(new.radix, 2);
+    /// ```
+
+    pub fn to_int_radix(&mut self, k: u8) -> Radix {
+
+        fn to_dec(n: &mut StringRadix) -> Radix {
+            Radix::from(usize::from_str_radix(&n.number, n.radix.into()).unwrap()) }
     
-
-    /// Sum 2 string radix numbers (2 <= k <= 36)
+        fn from_dec(n: &mut Radix, k: u8) -> Radix {
+            let mut res = String::new();
+            while n.number != 0 {
+                res.push(RADIX[n.number % (k as usize)]);
+                n.number /= k as usize; }
+            Radix {
+                number: res.chars().rev().collect::<String>().parse().unwrap(),
+                radix: k, } }
+            
+        if self.radix == 10 { return from_dec(&mut Radix::from(self.number.parse().unwrap()), k) }
+        if k == 10 { return to_dec(self) }
+        else { from_dec(&mut to_dec(self), k) } }
+    
+    /*
+    /// Sum 2 [`StringRadix`] (2 <= k <= 36)
     /// # Examples
     ///
     /// ```
     /// use ognlib::num::radix::StringRadix;
     ///
-    /// let mut n1 = StringRadix {
-    ///     number: String::from("123"),
-    ///     radix: 4, };
-    /// 
-    /// let mut n2 = StringRadix {
-    ///     number: String::from("444"),
-    ///     radix: 5, };
+    /// let mut n1 = StringRadix::from_radix("123", 4);
+    /// let mut n2 = StringRadix::from_radix("444", 5);
     /// 
     /// let result = StringRadix::add(&mut n1, &mut n2, 16);
     /// assert_eq!(result.number, "97");
