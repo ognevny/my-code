@@ -1,4 +1,4 @@
 mytest
-Cargo.lock
+*.lock
 target
 .vscode
