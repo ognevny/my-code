@@ -2,8 +2,8 @@
 **RU**: speedometer - это программы, которые тестируют ЯП на скоррость. В моём репозитории представлены коды на C, C++, Rust и Python. Данная программа не имеет практической пользы, да и не выполняет какое-либо полезное действие.  
 **ENG**: speedometer is a program that tests the speed of the programming languages. My repo contains code in C, C++, Rust, and Python. This program has no practical use, and does not perform any useful action.
 ## What it does?
-**RU**: создаётся функция ```s()```, ничего не принимающая на вход, но возвращающая строго одну и ту же величину - миллиард. Она это делает следущим образом: создаётся переменная ```n```, равная 1, и пока ```n``` меньше миллиарда, прибавляется 1.  
-**ENG**: creates a function ```s()``` that takes nothing as input, but returns strictly the same value - a billion. It does this as follows: It creates a variable ```n``` equal to 1, and while ```n``` is less than a billion, it adds 1.
+**RU**: создаётся функция `s()`, ничего не принимающая на вход, но возвращающая строго одну и ту же величину - миллиард. Она это делает следущим образом: создаётся переменная `n`, равная 1, и пока `n` меньше миллиарда, прибавляется 1.  
+**ENG**: creates a function `s()` that takes nothing as input, but returns strictly the same value - a billion. It does this as follows: It creates a variable `n` equal to 1, and while `n` is less than a billion, it adds 1.
 ## Manual testing
 **RU**: Вы можете самостоятельно протестировать эти программы. Я покажу Вам, как это делаю я:  
 Оборудование:  
@@ -14,7 +14,7 @@ OS - Windows 11 последней версии;
 clang 16.0.1 - компилятор C и C++  
 Python 3.10.11 с numba 0.57.0dev0.r1074.gc12bbf4bb-1  
 Rust 1.68.2  
-Командная оболчочка ```fish``` 3.6.1, и её команда ```time```.  
+Командная оболчочка `fish` 3.6.1, и её команда `time`.  
 Ниже (под ENG) будет представлен лог команд, которые я вписывал в терминал  
 **ENG**: You can test these programs yourself. I will show you how I do it:  
 Hardware:  
@@ -25,10 +25,10 @@ OS - Windows 11 latest version;
 clang 16.0.1 - C and C++ compiler;  
 Python 3.10.11 with numba 0.57.0dev0.r1074.gc12bbf4bb-1;  
 Rust 1.68.2;  
-Command shell ```fish``` 3.6.1 and its command ```time```.  
+Command shell `fish` 3.6.1 and its command `time`.  
 Below will be a log of the commands I typed into the terminal
 #### C
-```
+```fish
 dad-is-great-in-C> clang speedometer.c
 dad-is-great-in-C> time ./a
 1000000000
@@ -38,7 +38,7 @@ Executed in  526,75 millis    fish           external
    sys time   15,00 millis    0,00 micros   15,00 millis
 ```
 #### C++
-```
+```fish
 dad-is-great-in-C> clang++ speedometer.cpp
 dad-is-great-in-C> time ./a
 1000000000
@@ -49,7 +49,7 @@ Executed in  559,86 millis    fish           external
 ```
 #### Python
 speedometer.py
-```
+```fish
 pie> time python speedometer.py
 1000000000
 
@@ -59,7 +59,7 @@ Executed in   26,65 secs      fish           external
    sys time    0,00 micros    0,00 micros    0,00 micros
 ```
 numbed.py
-```
+```fish
 pie> time python numbed.py
 1000000000
 
@@ -69,7 +69,7 @@ Executed in    3,01 secs      fish           external
    sys time    0,00 micros    0,00 micros    0,00 micros
 ```
 #### Rust
-```
+```fish
 r/speedometer> cargo build --release
    Compiling speedometer v0.1.0 (C:\...\rusted\speedometer)
     Finished release [optimized] target(s) in 0.96s
