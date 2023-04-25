@@ -29,21 +29,21 @@ Command shell `fish` 3.6.1 and its command `time`.
 Below will be a log of the commands I typed into the terminal
 #### C
 ```fish
-dad-is-great-in-C> clang speedometer.c
-dad-is-great-in-C> time ./a
+/m/dad-is-great-in-C> clang -O3 speedometer.c
+/m/dad-is-great-in-C> time ./a
 1000000000
 ________________________________________________________
-Executed in  526,75 millis    fish           external
+Executed in   64,89 millis    fish           external
    usr time    0,00 millis    0,00 micros    0,00 millis
    sys time   15,00 millis    0,00 micros   15,00 millis
 ```
 #### C++
 ```fish
-dad-is-great-in-C> clang++ speedometer.cpp
-dad-is-great-in-C> time ./a
+/m/dad-is-great-in-C> clang++ -O3 speedometer.cpp
+/m/dad-is-great-in-C (master)> time ./a
 1000000000
 ________________________________________________________
-Executed in  559,86 millis    fish           external
+Executed in   55,05 millis    fish           external
    usr time    0,00 micros    0,00 micros    0,00 micros
    sys time    0,00 micros    0,00 micros    0,00 micros
 ```
