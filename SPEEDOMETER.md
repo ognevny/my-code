@@ -83,6 +83,6 @@ Executed in   57,09 millis    fish           external
    sys time   15,00 millis    0,00 micros   15,00 millis
 ```
 ### Reference
-**RU**: данные коды влохновлены видео на ютуб от The Builder 
+**RU**: данные коды вдохновлены видео на ютуб от The Builder 
 **ENG**: these codes are inspired by The Builder's video on YouTube  
 [ссылка/link](https://www.youtube.com/watch?v=VioxsWYzoJk)
