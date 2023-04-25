@@ -40,7 +40,7 @@ Executed in   64,89 millis    fish           external
 #### C++
 ```fish
 /m/dad-is-great-in-C> clang++ -O3 speedometer.cpp
-/m/dad-is-great-in-C (master)> time ./a
+/m/dad-is-great-in-C> time ./a
 1000000000
 ________________________________________________________
 Executed in   55,05 millis    fish           external
