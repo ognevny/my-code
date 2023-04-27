@@ -1,7 +1,5 @@
 // TODO: write a code for insertion sort, merge sort and some more
 
-use std::cmp::PartialOrd;
-
 /// Bubble sort algorithm
 /// # Examples
 ///
