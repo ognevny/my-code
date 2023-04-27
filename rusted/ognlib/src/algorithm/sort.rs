@@ -1,5 +1,7 @@
 // TODO: write a code for insertion sort, merge sort and some more
 
+use std::cmp::PartialOrd;
+
 /// Bubble sort algorithm
 /// # Examples
 ///
@@ -11,7 +13,7 @@
 /// assert_eq!(arr, [1, 2, 3, 4, 5]);
 /// ```
 
-pub fn bubble(arr: &mut [i64]) {
+pub fn bubble<T: PartialOrd>(arr: &mut [T]) {
     let n = arr.len();
     for i in 0..n {
         for j in 0..n - i - 1 {
@@ -29,7 +31,7 @@ pub fn bubble(arr: &mut [i64]) {
 /// assert_eq!(arr, [1, 2, 3, 4, 5]);
 /// ```
 
-pub fn search(arr: &mut [i64]) {
+pub fn search<T: PartialOrd>(arr: &mut [T]) {
     let n = arr.len();
     for i in 0..n - 1 {
         let mut i_min = i;

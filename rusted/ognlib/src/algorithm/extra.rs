@@ -9,7 +9,7 @@
 /// assert_eq!(bin_search(&arr, 6), None);
 /// ```
 
-pub fn bin_search(arr: &Vec<i64>, targ: i64) -> Option<usize> {
+pub fn bin_search<T: Ord>(arr: &[T], targ: T) -> Option<usize> {
     use std::cmp::Ordering;
 
     let (mut left, mut right) = (0, arr.len() - 1);
