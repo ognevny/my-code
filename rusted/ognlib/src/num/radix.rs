@@ -1,6 +1,6 @@
 // TODO: write more ariphmetic functions.
 
-pub const RADIX: [char; 36] = [
+pub const RADIX: &[char] = &[
     '0', '1', '2', '3', '4', '5', '6', '7', '8', 
     '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
     'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 
@@ -28,8 +28,8 @@ impl Radix {
     /// assert_eq!(n1.radix, 2);
     /// ```
 
-    pub fn new(k: u8) -> Radix {
-        Radix { number: 0, radix: k } }
+    pub fn new(k: u8) -> Self {
+        Self { number: 0, radix: k } }
 
 
     /// Creates a new [`Radix`] with radix 10 and given number
@@ -43,8 +43,8 @@ impl Radix {
     /// assert_eq!(n1.radix, 10);
     /// ```
 
-    pub fn from(n: usize) -> Radix {
-        Radix { number: n, radix: 10 } }
+    pub fn from(n: usize) -> Self {
+        Self { number: n, radix: 10 } }
 
 
     /// Creates a new [`Radix`] with given number and radix
@@ -58,8 +58,8 @@ impl Radix {
     /// assert_eq!(n1.radix, 2);
     /// ```
 
-    pub fn from_radix(n: usize, k: u8) -> Radix {
-        Radix { number: n, radix: k } }
+    pub fn from_radix(n: usize, k: u8) -> Self {
+        Self { number: n, radix: k } }
 
 
     /// Translate [`Radix`] to another [`Radix`] (2 <= k <= 10)
@@ -270,8 +270,8 @@ impl StringRadix {
     /// assert_eq!(n1.radix, 2);
     /// ```
 
-    pub fn new(k: u8) -> StringRadix {
-        StringRadix { number: String::from("0"), radix: k } }
+    pub fn new(k: u8) -> Self {
+        Self { number: String::from("0"), radix: k } }
 
 
     /// Creates a new [`StringRadix`] with radix 10 and given str number
@@ -285,8 +285,8 @@ impl StringRadix {
     /// assert_eq!(n1.radix, 10);
     /// ```
 
-    pub fn from(n: &str) -> StringRadix {
-        StringRadix { number: n.to_string(), radix: 10 } }
+    pub fn from(n: &str) -> Self {
+        Self { number: n.to_string(), radix: 10 } }
 
 
     /// Creates a new [`StringRadix`] with given number and radix
@@ -300,8 +300,8 @@ impl StringRadix {
     /// assert_eq!(n1.radix, 2);
     /// ```
 
-    pub fn from_radix(n: &str, k: u8) -> StringRadix {
-        StringRadix { number: n.to_string(), radix: k } }
+    pub fn from_radix(n: &str, k: u8) -> Self {
+        Self { number: n.to_string(), radix: k } }
 
 
     /// Translate [`StringRadix`] to [`StringRadix`]

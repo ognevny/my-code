@@ -19,4 +19,4 @@ pub fn bin_search(arr: &Vec<i64>, targ: i64) -> Option<usize> {
             Ordering::Equal => return Some(mid),
             Ordering::Greater => right = mid - 1,
             Ordering::Less => left = mid + 1 } }
-        None }
+    None }
