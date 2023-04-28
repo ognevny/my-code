@@ -11,7 +11,7 @@
 /// assert_eq!(arr, [1, 2, 3, 4, 5]);
 /// ```
 
-pub fn bubble<T: PartialOrd>(arr: &mut [T]) {
+pub fn bubble<T: Ord>(arr: &mut [T]) {
     let n = arr.len();
     for i in 0..n {
         for j in 0..n - i - 1 {
@@ -29,7 +29,7 @@ pub fn bubble<T: PartialOrd>(arr: &mut [T]) {
 /// assert_eq!(arr, [1, 2, 3, 4, 5]);
 /// ```
 
-pub fn search<T: PartialOrd>(arr: &mut [T]) {
+pub fn search<T: Ord>(arr: &mut [T]) {
     let n = arr.len();
     for i in 0..n - 1 {
         let mut i_min = i;
