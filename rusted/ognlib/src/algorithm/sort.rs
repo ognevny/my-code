@@ -1,4 +1,4 @@
-// TODO: write a code for merge sort and some more
+// TODO: write a code for more sorts
 
 /// Bubble sort algorithm
 /// # Examples
@@ -57,3 +57,39 @@ pub fn insertion<T: Ord>(arr: &mut [T]) {
         while j > pos {
             arr.swap(j - 1, j);
             j -= 1; } } }
+
+
+/// Merge sort algorithm
+/// # Examples
+///
+/// ```
+/// use ognlib::algorithm::sort::merge;
+/// 
+/// let mut arr = vec![5, 3, 4, 1, 2];
+/// arr = merge(&arr);
+/// assert_eq!(arr, [1, 2, 3, 4, 5]);
+/// ```
+
+pub fn merge<T: Ord + Clone + Copy>(arr: &Vec<T>) -> Vec<T> {
+    if arr.len() >= 2 {
+        let mid = arr.len() / 2;
+        let left = merge(&arr[..mid].to_vec());
+        let right = merge(&arr[mid..].to_vec());
+        return merging(&left, &right) }
+    else { arr.to_vec() } }
+            
+fn merging<T: Ord + Clone + Copy>(left: &Vec<T>, right: &Vec<T>) -> Vec<T> {
+    let (mut i, mut j) = (0, 0);
+    let mut merged: Vec<T> = Vec::new();
+    while i < left.len() && j < right.len() {
+        if left[i] < right[j] {
+            merged.push(left[i]);
+            i += 1; } 
+        else {
+            merged.push(right[j]);
+            j += 1; } }
+    if i < left.len() {
+        merged.extend_from_slice(&left[i..]); }
+    if j < right.len() {
+        merged.extend_from_slice(&right[j..]); }
+    merged } 
