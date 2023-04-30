@@ -104,7 +104,7 @@ impl Radix {
             Radix::from_radix(res.chars().rev().collect::<String>().parse().unwrap(), k) }
         
         if self.radix == 10 { return from_dec(self, k) }
-        if k == 10 { return to_dec(self) }
+        if k == 10 { to_dec(self) }
         else { from_dec(&mut to_dec(self), k) } }
 
     
@@ -140,7 +140,7 @@ impl Radix {
             StringRadix::from_radix(&res.chars().rev().collect::<String>(), k) }
 
         if self.radix == 0 { return from_dec(self, k) }
-        if k == 10 { return StringRadix::from(&to_dec(self).number.to_string()) }
+        if k == 10 { StringRadix::from(&to_dec(self).number.to_string()) }
         else { from_dec(&mut to_dec(self), k) } }
 
 
@@ -333,7 +333,7 @@ impl StringRadix {
             StringRadix::from_radix(&res.chars().rev().collect::<String>(), k) }
 
         if k == 10 { return StringRadix::from(&to_dec(self).number.to_string()) }
-        if self.radix == 10 { return from_dec(&mut Radix::from(self.number.parse().unwrap()), k) }
+        if self.radix == 10 { from_dec(&mut Radix::from(self.number.parse().unwrap()), k) }
         else { from_dec(&mut to_dec(self), k) } }
 
 
@@ -367,7 +367,7 @@ impl StringRadix {
             Radix::from_radix(res.chars().rev().collect::<String>().parse().unwrap(), k) }
             
         if self.radix == 10 { return from_dec(&mut Radix::from(self.number.parse().unwrap()), k) }
-        if k == 10 { return to_dec(self) }
+        if k == 10 { to_dec(self) }
         else { from_dec(&mut to_dec(self), k) } }
     
 

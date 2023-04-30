@@ -53,7 +53,7 @@ pub fn insertion<T: Ord>(arr: &mut [T]) {
     for i in 1..arr.len() {
         let key = &arr[i];
         let mut j = i;
-        let pos = arr[..i].binary_search(&key).unwrap_or_else(|pos| pos);
+        let pos = arr[..i].binary_search(key).unwrap_or_else(|pos| pos);
         while j > pos {
             arr.swap(j - 1, j);
             j -= 1; } } }
@@ -75,7 +75,7 @@ pub fn merge<T: Ord + Clone + Copy>(arr: &Vec<T>) -> Vec<T> {
         let mid = arr.len() / 2;
         let left = merge(&arr[..mid].to_vec());
         let right = merge(&arr[mid..].to_vec());
-        return merging(&left, &right) }
+        merging(&left, &right) }
     else { arr.to_vec() } }
             
 fn merging<T: Ord + Clone + Copy>(left: &Vec<T>, right: &Vec<T>) -> Vec<T> {
