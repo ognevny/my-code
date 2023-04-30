@@ -18,5 +18,8 @@ pub fn bin_search<T: Ord>(arr: &[T], targ: T) -> Option<usize> {
         match arr[mid].cmp(&targ) {
             Ordering::Equal => return Some(mid),
             Ordering::Greater => right = mid - 1,
-            Ordering::Less => left = mid + 1 } }
-    None }
+            Ordering::Less => left = mid + 1,
+        }
+    }
+    None
+}
