@@ -1,5 +1,5 @@
-// task: generate all string combinations using inputed (?) alphabet with length
-// k
+/* task: generate all string combinations using inputed (?) alphabet with length
+k */
 
 #include <iostream>
 #include <string>
