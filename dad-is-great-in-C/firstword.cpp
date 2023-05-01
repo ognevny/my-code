@@ -5,7 +5,8 @@
 using namespace std;
 
 int main() {
-    string first;
-    cin >> first;
-    cout << first; // C++ moment lol
-    return 0; }
+  string first;
+  cin >> first;
+  cout << first; // C++ moment lol
+  return 0;
+}

@@ -4,10 +4,13 @@
 using namespace std;
 
 int s() {
-    int n = 1;
-    while (n < 1'000'000'000) n++;
-    return n; }
+  int n = 1;
+  while (n < 1'000'000'000)
+    n++;
+  return n;
+}
 
 int main() {
-    cout << s();
-    return 0; }
+  cout << s();
+  return 0;
+}
