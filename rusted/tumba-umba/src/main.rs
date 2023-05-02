@@ -12,17 +12,21 @@ fn main() {
 
     gen(&mut words, &alpha, &mut vec![' '; k], 0);
     words.sort();
-    
-    for word in &words {
-        println!("{}", word); }
-    println!("{}", words.len()); }
 
+    for word in &words {
+        println!("{}", word);
+    }
+    println!("{}", words.len());
+}
 
 fn gen(words: &mut Vec<String>, alpha: &Vec<char>, current: &mut Vec<char>, i: usize) {
     if i == current.len() {
         words.push(current.iter().collect());
-        return; }
+        return;
+    }
 
     for j in 0..alpha.len() {
         current[i] = alpha[j];
-        gen(words, alpha, current, i+1); } }
+        gen(words, alpha, current, i + 1);
+    }
+}

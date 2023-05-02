@@ -1,7 +1,7 @@
 // Russian poem
 
 #![allow(unconditional_recursion)]
-use std::{time::Duration, thread::sleep};
+use std::{thread::sleep, time::Duration};
 
 fn pop() -> ! {
     println!("У попа была собака,");
@@ -16,7 +16,9 @@ fn pop() -> ! {
     sleep(Duration::from_secs_f32(1.5));
     println!("И написал он, что");
     sleep(Duration::from_secs_f32(1.5));
-    pop() }
+    pop()
+}
 
 fn main() {
-    pop() }
+    pop()
+}
