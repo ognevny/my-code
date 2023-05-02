@@ -1,49 +1,58 @@
 // oint algorithms (Rust)
 
-use std::io::stdin;
+use meval::{eval_str_with_context, Context};
 use scan_fmt::scan_fmt;
-use maval::{eval_str, Context};
+use std::io::stdin;
 
 fn f(x: f64, expr: &str) -> f64 {
     let mut context = Context::new();
-    context.var("x", x); 
-    eval_str(expr, &context).unwrap() }
-
+    context.var("x", x);
+    eval_str_with_context(expr, &context).unwrap()
+}
 
 fn lrect(a: f64, b: f64, n: u64, expr: &str) -> f64 {
     let mut s: f64 = 0.0;
     for i in 0..=n - 1 {
-        s += f(a + i as f64 * (b - a) / (n as f64), expr) }
-    s * ((b - a) / n as f64) }
-
+        s += f(a + i as f64 * (b - a) / (n as f64), expr)
+    }
+    s * ((b - a) / n as f64)
+}
 
 fn rrect(a: f64, b: f64, n: u64, expr: &str) -> f64 {
     let mut s: f64 = 0.0;
     for i in 1..=n {
-        s += f(a + i as f64 * (b - a) / (n as f64), expr) }
-    s * ((b - a) / n as f64) }
-
+        s += f(a + i as f64 * (b - a) / (n as f64), expr)
+    }
+    s * ((b - a) / n as f64)
+}
 
 fn mrect(a: f64, b: f64, n: u64, expr: &str) -> f64 {
     let mut s: f64 = 0.0;
     for i in 0..=n - 1 {
-        s += f(a + (b - a) * (2.0 * i as f64 + 1.0) / (2.0 * n as f64), expr) }
-    s * ((b - a) / n as f64) }
-
+        s += f(
+            a + (b - a) * (2.0 * i as f64 + 1.0) / (2.0 * n as f64),
+            expr,
+        )
+    }
+    s * ((b - a) / n as f64)
+}
 
 fn trapezoid(a: f64, b: f64, n: u64, expr: &str) -> f64 {
     let mut s: f64 = 0.0;
     for i in 0..=n - 1 {
-        s += (f(a + i as f64 * (b - a) / n as f64, expr) + f(a + (i + 1) as f64 * (b - a) / n as f64, expr)) / 2.0 }
-    s * ((b - a) / n as f64) }
-
+        s += (f(a + i as f64 * (b - a) / n as f64, expr)
+            + f(a + (i + 1) as f64 * (b - a) / n as f64, expr))
+            / 2.0
+    }
+    s * ((b - a) / n as f64)
+}
 
 fn main() {
     let (mut seg, mut eps, mut expr) = (String::new(), String::new(), String::new());
 
     stdin().read_line(&mut seg).unwrap();
     stdin().read_line(&mut eps).unwrap();
-    stdin().reas_line(&mut expr).unwrap();
+    stdin().read_line(&mut expr).unwrap();
 
     let input = format!("{seg} {eps}");
 
@@ -53,7 +62,8 @@ fn main() {
 
     while (s2 - s1).abs() > eps {
         n *= 2;
-        (s1, s2) = (s2, lrect(a, b, n, &expr)); }
+        (s1, s2) = (s2, lrect(a, b, n, &expr));
+    }
 
     println!("\nl = {s2}");
 
@@ -61,7 +71,8 @@ fn main() {
 
     while (s2 - s1).abs() > eps {
         n *= 2;
-        (s1, s2) = (s2, rrect(a, b, n, &expr)); }
+        (s1, s2) = (s2, rrect(a, b, n, &expr));
+    }
 
     println!("r = {s2}");
 
@@ -69,7 +80,8 @@ fn main() {
 
     while (s2 - s1).abs() > eps {
         n *= 2;
-        (s1, s2) = (s2, mrect(a, b, n, &expr)); }
+        (s1, s2) = (s2, mrect(a, b, n, &expr));
+    }
 
     println!("m = {s2}");
 
@@ -77,6 +89,8 @@ fn main() {
 
     while (s2 - s1).abs() > eps {
         n *= 2;
-        (s1, s2) = (s2, trapezoid(a, b, n, &expr)); }
+        (s1, s2) = (s2, trapezoid(a, b, n, &expr));
+    }
 
-    print!("t = {s2}"); }
+    print!("t = {s2}");
+}
