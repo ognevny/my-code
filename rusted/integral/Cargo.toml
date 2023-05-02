@@ -7,4 +7,4 @@ edition = "2021"
 
 [dependencies]
 scan_fmt = "0.2.6"
-meval = { git = "https://github.com/Titaniumtown/meval-rs" }
+meval = { git = "https://github.com/Titaniumtown/meval-rs" } # this version has more modern code
