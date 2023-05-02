@@ -4,20 +4,29 @@
 using namespace std;
 
 int main() {
-    int n;
-    cin >> n;
-    bool printed = false;
-    for (int i = 2; i <= n and n > 1; i++) {
-        int count = 0;
-        if (n % i == 0) {
-            while (n % i == 0) {
-                n /= i;
-                count++; }
-            if (printed) {
-                if (count == 1) cout << "*" << i;
-                else cout << "*" << i << "^" << count; }
-            else {
-                if (count == 1) cout << i;
-                else cout << i << "^" << count;
-                printed = true; } } }
-    return 0; }
+  int n;
+  cin >> n;
+  bool printed = false;
+  for (int i = 2; i <= n and n > 1; i++) {
+    int count = 0;
+    if (n % i == 0) {
+      while (n % i == 0) {
+        n /= i;
+        count++;
+      }
+      if (printed) {
+        if (count == 1)
+          cout << "*" << i;
+        else
+          cout << "*" << i << "^" << count;
+      } else {
+        if (count == 1)
+          cout << i;
+        else
+          cout << i << "^" << count;
+        printed = true;
+      }
+    }
+  }
+  return 0;
+}
