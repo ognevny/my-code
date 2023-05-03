@@ -83,6 +83,27 @@ pub fn insertion<T: Ord>(arr: &mut [T]) {
 /// ```
 
 pub fn merge<T: Ord + Clone + Copy>(arr: &Vec<T>) -> Vec<T> {
+    fn merging<T: Ord + Clone + Copy>(left: &Vec<T>, right: &Vec<T>) -> Vec<T> {
+        let (mut i, mut j) = (0, 0);
+        let mut merged: Vec<T> = Vec::new();
+        while i < left.len() && j < right.len() {
+            if left[i] < right[j] {
+                merged.push(left[i]);
+                i += 1;
+            } else {
+                merged.push(right[j]);
+                j += 1;
+            }
+        }
+        if i < left.len() {
+            merged.extend_from_slice(&left[i..]);
+        }
+        if j < right.len() {
+            merged.extend_from_slice(&right[j..]);
+        }
+        merged
+    }
+
     if arr.len() >= 2 {
         let mid = arr.len() / 2;
         let left = merge(&arr[..mid].to_vec());
@@ -91,25 +112,4 @@ pub fn merge<T: Ord + Clone + Copy>(arr: &Vec<T>) -> Vec<T> {
     } else {
         arr.to_vec()
     }
-}
-
-fn merging<T: Ord + Clone + Copy>(left: &Vec<T>, right: &Vec<T>) -> Vec<T> {
-    let (mut i, mut j) = (0, 0);
-    let mut merged: Vec<T> = Vec::new();
-    while i < left.len() && j < right.len() {
-        if left[i] < right[j] {
-            merged.push(left[i]);
-            i += 1;
-        } else {
-            merged.push(right[j]);
-            j += 1;
-        }
-    }
-    if i < left.len() {
-        merged.extend_from_slice(&left[i..]);
-    }
-    if j < right.len() {
-        merged.extend_from_slice(&right[j..]);
-    }
-    merged
 }
