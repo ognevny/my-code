@@ -54,9 +54,7 @@ fn main() {
     stdin().read_line(&mut eps).unwrap();
     stdin().read_line(&mut expr).unwrap();
 
-    let input = format!("{seg} {eps}");
-
-    let (a, b, eps) = scan_fmt!(&input, "{} {} {}", f64, f64, f64).unwrap();
+    let (a, b, eps) = scan_fmt!(&format!("{seg} {eps}"), "{} {} {}", f64, f64, f64).unwrap();
 
     let (mut n, mut s1, mut s2): (u64, f64, f64) = (1, 0.0, f(a, &expr) * (b - a));
 
