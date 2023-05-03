@@ -93,7 +93,7 @@ impl Radix {
     /// assert_eq!(new2.radix, 10);
     /// ```
 
-    pub fn to_radix(&mut self, k: u8) -> Radix {
+    pub fn to_radix(&mut self, k: u8) -> Self {
         fn to_dec(n: &mut Radix) -> Radix {
             use super::power::bin_pow;
 
@@ -186,7 +186,7 @@ impl Radix {
     /// assert_eq!(result.radix, 8);
     /// ```
 
-    pub fn add(&mut self, b: &mut Radix, k: u8) -> Radix {
+    pub fn add(&mut self, b: &mut Radix, k: u8) -> Self {
         let mut dec = Radix::from(self.to_radix(10).number + b.to_radix(10).number);
         dec.to_radix(k)
     }
@@ -224,7 +224,7 @@ impl Radix {
     /// assert_eq!(result.radix, 8);
     /// ```
 
-    pub fn dif(&mut self, a: &mut Radix, k: u8) -> Radix {
+    pub fn dif(&mut self, a: &mut Radix, k: u8) -> Self {
         let mut dec = Radix::from(self.to_radix(10).number - a.to_radix(10).number);
         dec.to_radix(k)
     }
@@ -262,7 +262,7 @@ impl Radix {
     /// assert_eq!(result.radix, 8);
     /// ```
 
-    pub fn mul(&mut self, a: &mut Radix, k: u8) -> Radix {
+    pub fn mul(&mut self, a: &mut Radix, k: u8) -> Self {
         let mut dec = Radix::from(self.to_radix(10).number * a.to_radix(10).number);
         dec.to_radix(k)
     }
@@ -358,7 +358,7 @@ impl StringRadix {
     /// assert_eq!(res.radix, 16);
     /// ```
 
-    pub fn to_radix(&mut self, k: u8) -> StringRadix {
+    pub fn to_radix(&mut self, k: u8) -> Self {
         fn to_dec(n: &mut StringRadix) -> Radix {
             Radix::from(usize::from_str_radix(&n.number, n.radix.into()).unwrap())
         }
@@ -437,7 +437,7 @@ impl StringRadix {
     /// assert_eq!(result.radix, 16);
     /// ```
 
-    pub fn add(&mut self, b: &mut StringRadix, k: u8) -> StringRadix {
+    pub fn add(&mut self, b: &mut StringRadix, k: u8) -> Self {
         let mut dec = StringRadix::from(
             &(self.to_int_radix(10).number + b.to_int_radix(10).number).to_string(),
         );
@@ -477,7 +477,7 @@ impl StringRadix {
     /// assert_eq!(result.radix, 16);
     /// ```
 
-    pub fn dif(&mut self, a: &mut StringRadix, k: u8) -> StringRadix {
+    pub fn dif(&mut self, a: &mut StringRadix, k: u8) -> Self {
         let mut dec = StringRadix::from(
             &(self.to_int_radix(10).number - a.to_int_radix(10).number).to_string(),
         );
@@ -517,7 +517,7 @@ impl StringRadix {
     /// assert_eq!(result.radix, 16);
     /// ```
 
-    pub fn mul(&mut self, a: &mut StringRadix, k: u8) -> StringRadix {
+    pub fn mul(&mut self, a: &mut StringRadix, k: u8) -> Self {
         let mut dec = StringRadix::from(
             &(self.to_int_radix(10).number * a.to_int_radix(10).number).to_string(),
         );
