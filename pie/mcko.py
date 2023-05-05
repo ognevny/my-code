@@ -20,7 +20,7 @@ def n12() -> tuple:
     for i in file:
         i = int(i.strip())
         data.append(i)
-        if i < min:
+        if i < min and i % 15 != 0:
             min = i
     file.close()
 
