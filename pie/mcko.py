@@ -21,7 +21,7 @@ def n12() -> list:
         i = int(i.strip())
         data.append(i)
         if i < min:
-            min = int(i)
+            min = i
     file.close()
 
     for i in range(len(data) - 1):
