@@ -32,7 +32,7 @@ pub fn n11() -> Vec<usize> {
             usize::from_str_radix(&format!("154{num}3"), 12).unwrap(),
             usize::from_str_radix(&format!("1{num}365"), 12).unwrap(),
         );
-        if ((num1 + num2) as f32 / 13.0).fract() == 0.0 {
+        if (num1 + num2) % 13 == 0 {
             res.push(i)
         }
     }
