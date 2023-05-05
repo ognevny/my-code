@@ -1,4 +1,8 @@
-// TODO: write a code for more sorts
+//! A list of sorting algorithms that are written to practice Rust.
+//! I know, that there is dozens of crates with these algorithms.
+//! This code is not intended to be a very serious project.
+
+// TODO: write a code for more sorts.
 
 /// Bubble sort algorithm
 /// # Examples

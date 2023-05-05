@@ -1,3 +1,5 @@
+//! A list of algorithms that can't be categorized by me
+
 /// A binary search algorithm (sorted array is requiered)
 /// # Examples
 ///
