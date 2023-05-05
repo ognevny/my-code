@@ -18,9 +18,11 @@ def n12() -> list:
     min, count, max = 100_000, 0, 0
 
     for i in file:
-        data.append(int(i.strip()))
-        if int(i) < min:
+        i = int(i.strip())
+        data.append(i)
+        if i < min:
             min = int(i)
+    file.close()
 
     for i in range(len(data) - 1):
         t1, t2 = data[i], data[i + 1]
