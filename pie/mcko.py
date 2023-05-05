@@ -1,4 +1,5 @@
 # same as mcko.rs
+# https://mcko.ru/uploads/documents/informatika_-10-klass_komplekt_1-91f3befffaba6eed.zip
 
 
 def n11() -> int:
@@ -10,4 +11,26 @@ def n11() -> int:
     return (num1 + num2) / 13
 
 
+def n12() -> list:
+    file = open("C:\\msys64\\home\\maksa\\my-code\\12.txt")
+
+    data = []
+    min, count, max = 100_000, 0, 0
+
+    for i in file:
+        data.append(int(i.strip()))
+        if int(i) < min:
+            min = int(i)
+
+    for i in range(len(data) - 1):
+        t1, t2 = data[i], data[i + 1]
+        if t1 % min == 0 and t2 % min == 0:
+            count += 1
+            if t1 + t2 > max:
+                max = t1 + t2
+
+    return [count, max]
+
+
 assert n11() == 4340
+assert n12() == [157, 176024]
