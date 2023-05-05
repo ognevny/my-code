@@ -1,3 +1,5 @@
+//! Functions for operations with digits
+
 /// Calculate sum of digits in number
 /// # Examples
 ///

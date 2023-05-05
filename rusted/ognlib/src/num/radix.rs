@@ -1,3 +1,6 @@
+//! Structs and impls for radix numbers (String nums and int nums).
+//! All numbers are unsigned ints.
+
 // TODO: write more ariphmetic functions.
 
 pub const RADIX: &[char] = &[

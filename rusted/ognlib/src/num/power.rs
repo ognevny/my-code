@@ -1,3 +1,5 @@
+//! Power algorithms
+
 /// Algorithm for binary power
 /// # Examples
 ///
