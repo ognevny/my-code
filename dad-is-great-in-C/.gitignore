@@ -1,8 +1,0 @@
-*.exe
-mytest.*
-# for homework
-*.*.cpp
-*.txt
-#
-for_lesson.*
-.vscode

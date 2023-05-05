@@ -1,0 +1,16 @@
+# binary
+*.exe
+__pycache__
+target
+# for testing
+mytest*
+# for homework
+*.*.cpp
+*.txt
+# for lesson
+for_lesson*
+# IDEs and editors
+.vscode
+.idea
+# only for me
+im.py
