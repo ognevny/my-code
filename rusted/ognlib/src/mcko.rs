@@ -38,3 +38,33 @@ pub fn n11() -> usize {
     }
     (num1 + num2) / 13
 }
+
+pub fn n12() -> (usize, i32) {
+    use std::{fs::File, io::Read};
+
+    let mut file = File::open("C:\\msys64\\home\\maksa\\my-code\\12.txt").unwrap();
+
+    let mut data: Vec<i32> = Vec::new();
+    let (mut min, mut count, mut max, mut contents) = (100_000, 0, 0, String::new());
+
+    file.read_to_string(&mut contents).unwrap();
+
+    for i in contents.lines() {
+        let num = i.parse::<i32>().unwrap();
+        data.push(num);
+        if num < min {
+            min = num;
+        }
+    }
+    for i in 0..data.len() - 1 {
+        let t1 = data[i];
+        let t2 = data[i + 1];
+        if t1 % min == 0 && t2 % min == 0 {
+            count += 1;
+            if t1 + t2 > max {
+                max = t1 + t2;
+            }
+        }
+    }
+    (count, max)
+}

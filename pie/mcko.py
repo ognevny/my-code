@@ -11,7 +11,7 @@ def n11() -> int:
     return (num1 + num2) / 13
 
 
-def n12() -> list:
+def n12() -> tuple:
     file = open("C:\\msys64\\home\\maksa\\my-code\\12.txt")
 
     data = []
@@ -31,8 +31,8 @@ def n12() -> list:
             if t1 + t2 > max:
                 max = t1 + t2
 
-    return [count, max]
+    return (count, max)
 
 
 assert n11() == 4340
-assert n12() == [157, 176024]
+assert n12() == (157, 176024)
