@@ -21,20 +21,20 @@
 /// ```
 /// use ognlib::mcko::n11;
 ///
-/// assert_eq!(n11(), vec![3]);
+/// assert_eq!(n11(), 4340);
 
-pub fn n11() -> Vec<usize> {
+pub fn n11() -> usize {
     const RADIX: &[char] = &['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B'];
 
-    let mut res: Vec<usize> = Vec::new();
-    for (i, num) in RADIX.iter().enumerate() {
-        let (num1, num2) = (
+    let (mut num1, mut num2): (usize, usize) = (0, 0);
+    for num in RADIX {
+        (num1, num2) = (
             usize::from_str_radix(&format!("154{num}3"), 12).unwrap(),
             usize::from_str_radix(&format!("1{num}365"), 12).unwrap(),
         );
         if (num1 + num2) % 13 == 0 {
-            res.push(i)
+            break;
         }
     }
-    res
+    (num1 + num2) / 13
 }
