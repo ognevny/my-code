@@ -29,8 +29,8 @@ Command line shell `fish` 3.6.1 and its command `time`.
 Below will be a log of the commands I typed into the terminal
 #### C
 ```fish
-/m/dad-is-great-in-C> clang -O3 speedometer.c
-/m/dad-is-great-in-C> time ./a
+~/m/dad-is-great-in-C> clang -O3 speedometer.c
+~/m/dad-is-great-in-C> time ./a
 1000000000
 ________________________________________________________
 Executed in   64,89 millis    fish           external
@@ -39,8 +39,8 @@ Executed in   64,89 millis    fish           external
 ```
 #### C++
 ```fish
-/m/dad-is-great-in-C> clang++ -O3 speedometer.cpp
-/m/dad-is-great-in-C> time ./a
+~/m/dad-is-great-in-C> clang++ -O3 speedometer.cpp
+~/m/dad-is-great-in-C> time ./a
 1000000000
 ________________________________________________________
 Executed in   55,05 millis    fish           external
@@ -50,7 +50,7 @@ Executed in   55,05 millis    fish           external
 #### Python
 speedometer.py
 ```fish
-/m/pie> time python speedometer.py
+~/m/pie> time python speedometer.py
 1000000000
 
 ________________________________________________________
@@ -60,7 +60,7 @@ Executed in   26,65 secs      fish           external
 ```
 numbed.py
 ```fish
-/m/pie> time python numbed.py
+~/m/pie> time python numbed.py
 1000000000
 
 ________________________________________________________
@@ -70,10 +70,10 @@ Executed in    3,01 secs      fish           external
 ```
 #### Rust
 ```fish
-/m/r/speedometer> cargo b -r
+~/m/r/speedometer> cargo b -r
    Compiling speedometer v0.1.0 (C:\...\my-code\rusted\speedometer)
     Finished release [optimized] target(s) in 0.96s
-/m/r/speedometer> time cargo r -r
+~/m/r/speedometer> time cargo r -r
     Finished release [optimized] target(s) in 0.00s
      Running `target\release\speedometer.exe`
 1000000000
