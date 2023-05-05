@@ -12,7 +12,7 @@ def n11() -> int:
 
 
 def n12() -> tuple:
-    file = open("C:\\msys64\\home\\maksa\\my-code\\12.txt")
+    file = open("12.txt")
 
     data = []
     min, count, max = 100_000, 0, 0

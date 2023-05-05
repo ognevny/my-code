@@ -59,7 +59,7 @@ pub fn n11() -> usize {
 pub fn n12() -> (usize, i32) {
     use std::{fs::File, io::Read};
 
-    let mut file = File::open("C:\\msys64\\home\\maksa\\my-code\\12.txt").unwrap();
+    let mut file = File::open("12.txt").unwrap();
 
     let mut data: Vec<i32> = Vec::new();
     let (mut min, mut count, mut max, mut contents) = (100_000, 0, 0, String::new());

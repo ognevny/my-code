@@ -6,7 +6,7 @@ target
 mytest*
 # for homework
 *.*.cpp
-*.txt
+*-*.txt
 # for lesson
 for_lesson*
 # IDEs and editors
