@@ -83,12 +83,10 @@ def n10() -> str:
 
 
 def n11() -> int:
-    RADIX: list = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B"]
-    for i in RADIX:
-        num1, num2 = int(f"154{i}3", 12), int(f"1{i}365", 12)
+    for i in range(12):
+        num1, num2 = int(f"154{i:X}3", 12), int(f"1{i:X}365", 12)
         if (num1 + num2) % 13 == 0:
-            break
-    return (num1 + num2) / 13
+            return (num1 + num2) // 13
 
 
 """ Номер 12:
@@ -103,26 +101,20 @@ def n11() -> int:
 
 
 def n12() -> tuple:
-    file = open("12.txt")
+    with open("12.txt") as f:
+        data = [int(line.strip()) for line in f]
 
-    data = []
-    min, count, max = 100_000, 0, 0
-
-    for i in file:
-        i = int(i.strip())
-        data.append(i)
-        if i < min and i % 15 != 0:
-            min = i
-    file.close()
+    min_val = min(filter(lambda x: x % 15 != 0, data))
+    count, max_val = 0, 0
 
     for i in range(len(data) - 1):
         t1, t2 = data[i], data[i + 1]
-        if t1 % min == 0 and t2 % min == 0:
+        if t1 % min_val == 0 and t2 % min_val == 0:
             count += 1
-            if t1 + t2 > max:
-                max = t1 + t2
+            if t1 + t2 > max_val:
+                max_val = t1 + t2
 
-    return (count, max)
+    return count, max_val
 
 
 assert n2(1) == 11
