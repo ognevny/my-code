@@ -104,17 +104,17 @@ def n12() -> tuple:
     with open("12.txt") as f:
         data = [int(line.strip()) for line in f]
 
-    min_val = min(filter(lambda x: x % 15 != 0, data))
-    count, max_val = 0, 0
+    min_ = min(filter(lambda x: x % 15 != 0, data))
+    count, max_ = 0, 0
 
     for i in range(len(data) - 1):
         t1, t2 = data[i], data[i + 1]
-        if t1 % min_val == 0 and t2 % min_val == 0:
+        if t1 % min_ == 0 and t2 % min_ == 0:
             count += 1
-            if t1 + t2 > max_val:
-                max_val = t1 + t2
+            if t1 + t2 > max_:
+                max_ = t1 + t2
 
-    return count, max_val
+    return count, max_
 
 
 assert n2(1) == 11
