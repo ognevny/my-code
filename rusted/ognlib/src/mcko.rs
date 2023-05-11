@@ -28,19 +28,14 @@
 /// ```
 
 pub fn n2(n: u16) -> u16 {
-    use super::num::radix::StringRadix;
-
-    let mut num = StringRadix::from(&n.to_string()).to_radix(2);
-
-    if n % 2 == 0 {
-        num.number = format!("{}10", num.number);
+    let m = format!("{n:b}");
+    let m = if n % 2 == 0 {
+        format!("{m}10")
     } else {
-        num.number = format!("1{}00", num.number);
-    }
-
-    let num = num.to_int_radix(10);
-
-    if num.number > 107 {
+        format!("1{m}00")
+    };
+    let m = u32::from_str_radix(&m, 2).unwrap();
+    if m > 107 {
         n
     } else {
         n2(n + 1)
@@ -115,20 +110,17 @@ pub fn n10() -> String {
 ///
 /// assert_eq!(n11(), 4340);
 
-pub fn n11() -> usize {
-    const RADIX: &[char] = &['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B'];
-
-    let (mut num1, mut num2): (usize, usize) = (0, 0);
-    for num in RADIX {
-        (num1, num2) = (
-            usize::from_str_radix(&format!("154{num}3"), 12).unwrap(),
-            usize::from_str_radix(&format!("1{num}365"), 12).unwrap(),
+pub fn n11() -> u32 {
+    for i in 0..12 {
+        let (num1, num2) = (
+            u32::from_str_radix(&format!("154{i:X}3"), 12).unwrap(),
+            u32::from_str_radix(&format!("1{i:X}365"), 12).unwrap(),
         );
         if (num1 + num2) % 13 == 0 {
-            break;
+            return (num1 + num2) / 13;
         }
     }
-    (num1 + num2) / 13
+    0
 }
 
 /// #### Номер 12
@@ -148,24 +140,19 @@ pub fn n11() -> usize {
 /// assert_eq!(n12(), (157, 176024));
 /// ```
 
-pub fn n12() -> (usize, i32) {
+pub fn n12() -> (i32, i32) {
     use std::{fs::File, io::Read};
 
-    let mut file = File::open("12.txt").unwrap();
-
-    let mut data: Vec<i32> = Vec::new();
-    let (mut min, mut count, mut max, mut contents) = (100_000, 0, 0, String::new());
-
+    let (mut file, mut contents) = (File::open("12.txt").unwrap(), String::new());
     file.read_to_string(&mut contents).unwrap();
+    let data: Vec<i32> = contents
+        .lines()
+        .map(|line| line.trim().parse().unwrap())
+        .collect();
 
-    for i in contents.lines() {
-        let num = i.parse::<i32>().unwrap();
-        data.push(num);
-        if num < min && num % 15 != 0 {
-            min = num;
-        }
-    }
-    for i in 0..data.len() - 1 {
+    let (min, mut count, mut max) = (*data.iter().filter(|x| *x % 15 != 0).min().unwrap(), 0, 0);
+
+    for i in 0..(data.len() - 1) {
         let (t1, t2) = (data[i], data[i + 1]);
         if t1 % min == 0 && t2 % min == 0 {
             count += 1;
