@@ -142,9 +142,9 @@ pub fn n11() -> u32 {
 pub fn n12() -> (i32, i32) {
     use std::{fs::File, io::Read};
 
-    let (mut file, mut contents) = (File::open("12.txt").unwrap(), String::new());
-    file.read_to_string(&mut contents).unwrap();
-    let data: Vec<i32> = contents
+    let (mut file, mut data) = (File::open("12.txt").unwrap(), String::new());
+    file.read_to_string(&mut data).unwrap();
+    let data: Vec<i32> = data
         .lines()
         .map(|line| line.trim().parse().unwrap())
         .collect();
