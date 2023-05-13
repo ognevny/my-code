@@ -29,23 +29,23 @@ Command line shell `fish` 3.6.1 and its command `time`.
 Below will be a log of the commands I typed into the terminal
 #### C
 ```fish
-~/m/dad-is-great-in-C> clang -O3 speedometer.c
+~/m/dad-is-great-in-C> clang speedometer.c
 ~/m/dad-is-great-in-C> time ./a
 1000000000
 ________________________________________________________
-Executed in   64,89 millis    fish           external
-   usr time    0,00 millis    0,00 micros    0,00 millis
-   sys time   15,00 millis    0,00 micros   15,00 millis
+Executed in  551,16 millis    fish           external
+   usr time   15,00 millis    0,00 micros   15,00 millis
+   sys time    0,00 millis    0,00 micros    0,00 millis
 ```
 #### C++
 ```fish
-~/m/dad-is-great-in-C> clang++ -O3 speedometer.cpp
+~/m/dad-is-great-in-C> clang++ speedometer.cpp
 ~/m/dad-is-great-in-C> time ./a
 1000000000
 ________________________________________________________
-Executed in   55,05 millis    fish           external
-   usr time    0,00 micros    0,00 micros    0,00 micros
-   sys time    0,00 micros    0,00 micros    0,00 micros
+Executed in  562,58 millis    fish           external
+   usr time    0,00 millis    0,00 micros    0,00 millis
+   sys time   15,00 millis    0,00 micros   15,00 millis
 ```
 #### Python
 speedometer.py
@@ -70,17 +70,17 @@ Executed in    3,01 secs      fish           external
 ```
 #### Rust
 ```fish
-~/m/r/speedometer> cargo b -r
+~/m/r/speedometer> cargo b
    Compiling speedometer v0.1.0 (C:\...\my-code\rusted\speedometer)
-    Finished release [optimized] target(s) in 0.96s
-~/m/r/speedometer> time cargo r -r
-    Finished release [optimized] target(s) in 0.00s
-     Running `target\release\speedometer.exe`
+    Finished dev [unoptimized + debuginfo] target(s) in 0.00s
+~/m/r/speedometer> time cargo r
+    Finished dev [unoptimized + debuginfo] target(s) in 0.00s
+     Running `target\debug\speedometer.exe`
 1000000000
 ________________________________________________________
-Executed in   57,09 millis    fish           external
-   usr time    0,00 millis    0,00 micros    0,00 millis
-   sys time   15,00 millis    0,00 micros   15,00 millis
+Executed in  823,31 millis    fish           external
+   usr time    0,00 micros    0,00 micros    0,00 micros
+   sys time    0,00 micros    0,00 micros    0,00 micros
 ```
 ### Reference
 **RU**: данные коды вдохновлены видео на ютуб от The Builder 
