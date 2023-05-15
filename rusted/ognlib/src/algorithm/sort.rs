@@ -116,7 +116,7 @@ where
     let (left, right) = slice.as_ref().split_at(mid);
     let mut buffer = Vec::with_capacity(len);
     let (mut i, mut j) = (0, 0);
-    
+
     while i < mid && j < len - mid {
         if left[i] < right[j] {
             buffer.push(left[i]);
