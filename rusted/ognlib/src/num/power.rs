@@ -1,19 +1,22 @@
 //! Power algorithms
 
-/// Algorithm for binary power
+/// Algorithm for binary power. Base must be at least neither i32 or u16. 
 /// # Examples
 ///
 /// ```
 /// use ognlib::num::power::bin_pow;
 ///
-/// assert_eq!(bin_pow(123.0, 3), 1860867.0);
+/// assert_eq!(bin_pow(123, 3), 1860867);
 /// assert_eq!(bin_pow(0.5, 4), 0.0625);
 /// ```
 
-pub fn bin_pow(mut b: f64, mut e: u16) -> f64 {
-    let mut v: f64 = 1.0;
+pub fn bin_pow<N>(mut b: N, mut e: u16) -> N
+where
+    N: std::ops::Mul<Output = N> + std::ops::MulAssign + From<u16> + Copy + PartialEq + Sized,
+{
+    let mut v = N::from(1);
     while e != 0 {
-        if (e & 1) != 0 {
+        if N::from(e & 1) != N::from(0) {
             v *= b
         }
         b *= b;

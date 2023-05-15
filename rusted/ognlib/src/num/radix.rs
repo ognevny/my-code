@@ -103,7 +103,7 @@ impl Radix {
             let mut dec = Radix::new(10);
             let mut count = 0;
             while n.number != 0 {
-                dec.number += (n.number % 10) * bin_pow(n.radix as f64, count) as usize;
+                dec.number += (n.number % 10) * bin_pow(n.radix as u16, count) as usize;
                 n.number /= 10;
                 count += 1;
             }
@@ -149,7 +149,7 @@ impl Radix {
             let mut dec = Radix::new(10);
             let mut count = 0;
             while n.number != 0 {
-                dec.number += (n.number % 10) * bin_pow(n.radix as f64, count) as usize;
+                dec.number += (n.number % 10) * bin_pow(n.radix as u16, count) as usize;
                 n.number /= 10;
                 count += 1;
             }
