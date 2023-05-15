@@ -82,38 +82,55 @@ pub fn insertion<T: Ord>(arr: &mut [T]) {
 /// use ognlib::algorithm::sort::merge;
 ///
 /// let mut arr = vec![5, 3, 4, 1, 2];
-/// arr = merge(&arr);
+/// arr = merge(&mut arr).to_vec();
 /// assert_eq!(arr, [1, 2, 3, 4, 5]);
 /// ```
 
-pub fn merge<T: Ord + Clone + Copy>(arr: &Vec<T>) -> Vec<T> {
-    fn merging<T: Ord + Clone + Copy>(left: &Vec<T>, right: &Vec<T>) -> Vec<T> {
-        let (mut i, mut j) = (0, 0);
-        let mut merged: Vec<T> = Vec::new();
-        while i < left.len() && j < right.len() {
-            if left[i] < right[j] {
-                merged.push(left[i]);
-                i += 1;
-            } else {
-                merged.push(right[j]);
-                j += 1;
-            }
-        }
-        if i < left.len() {
-            merged.extend_from_slice(&left[i..]);
-        }
-        if j < right.len() {
-            merged.extend_from_slice(&right[j..]);
-        }
-        merged
+pub fn merge<T>(slice: &mut [T]) -> &mut [T]
+where
+    T: Ord + Clone + Copy + Send + Sync,
+{
+    let len = slice.len();
+    if len < 2 {
+        return slice;
     }
+    let mid = len / 2;
+    let (left, right) = slice.split_at_mut(mid);
 
-    if arr.len() >= 2 {
-        let mid = arr.len() / 2;
-        let left = merge(&arr[..mid].to_vec());
-        let right = merge(&arr[mid..].to_vec());
-        merging(&left, &right)
-    } else {
-        arr.to_vec()
+    rayon::join(|| merge(left), || merge(right));
+
+    merging(slice);
+    slice
+}
+
+pub fn merging<S, T>(slice: &mut S)
+where
+    S: AsMut<[T]> + AsRef<[T]> + Sync + Send + ?Sized,
+    T: Ord + Clone + Send + Copy,
+{
+    let len = slice.as_ref().len();
+    if len < 2 {
+        return;
     }
+    let mid = len / 2;
+    let (left, right) = slice.as_ref().split_at(mid);
+    let mut buffer = Vec::with_capacity(len);
+    let (mut i, mut j) = (0, 0);
+    
+    while i < mid && j < len - mid {
+        if left[i] < right[j] {
+            buffer.push(left[i]);
+            i += 1;
+        } else {
+            buffer.push(right[j]);
+            j += 1;
+        }
+    }
+    if i < mid {
+        buffer.extend_from_slice(&left[i..]);
+    }
+    if j < len - mid {
+        buffer.extend_from_slice(&right[j..]);
+    }
+    slice.as_mut().copy_from_slice(&buffer);
 }
