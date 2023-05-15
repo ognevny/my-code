@@ -2,7 +2,7 @@
 
 use std::ops::MulAssign;
 
-/// Algorithm for binary power. Base must be at least neither i32 or u16.
+/// Algorithm for binary power. Remember that returned value has the same type, so it can fail with overflowing.
 /// # Examples
 ///
 /// ```
