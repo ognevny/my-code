@@ -1,6 +1,6 @@
 //! Functions for operations with digits
 
-use std::ops::{Add, AddAssign, Div, Mul, Rem};
+use std::ops::{Add, AddAssign, DivAssign, Mul, Rem};
 
 /// Calculate sum of digits in number
 /// # Examples
@@ -14,12 +14,12 @@ use std::ops::{Add, AddAssign, Div, Mul, Rem};
 
 pub fn digit_sum<N>(mut n: N) -> N
 where
-    N: Rem<Output = N> + Div<Output = N> + AddAssign + From<u8> + Copy + PartialEq,
+    N: Rem<Output = N> + DivAssign + AddAssign + From<u8> + Copy + Eq,
 {
     let mut sum = N::from(0);
     while n != N::from(0) {
         sum += n % N::from(10);
-        n = n / N::from(10);
+        n /= N::from(10);
     }
     sum
 }
@@ -36,11 +36,11 @@ where
 
 pub fn digit_count<N>(mut n: N) -> u8
 where
-    N: Div<Output = N> + From<u8> + PartialEq + Copy,
+    N: DivAssign + From<u8> + Eq + Copy,
 {
     let mut count = 0;
     while n != N::from(0) {
-        n = n / N::from(10);
+        n /= N::from(10);
         count += 1;
     }
     count
@@ -58,18 +58,12 @@ where
 
 pub fn rev<N>(mut n: N) -> N
 where
-    N: Mul<Output = N>
-        + Add<Output = N>
-        + Rem<Output = N>
-        + Div<Output = N>
-        + From<u8>
-        + Copy
-        + PartialEq,
+    N: Mul<Output = N> + Add<Output = N> + Rem<Output = N> + DivAssign + From<u8> + Copy + Eq,
 {
     let mut rev = N::from(0);
     while n != N::from(0) {
         rev = rev * N::from(10) + (n % N::from(10));
-        n = n / N::from(10);
+        n /= N::from(10);
     }
     rev
 }
@@ -86,13 +80,13 @@ where
 
 pub fn has_digit<N>(mut n: N, k: u8) -> bool
 where
-    N: Rem<Output = N> + Div<Output = N> + PartialEq + From<u8> + Copy,
+    N: Rem<Output = N> + DivAssign + Eq + From<u8> + Copy,
 {
     while n != N::from(0) {
         if n % N::from(10) == N::from(k) {
             return true;
         }
-        n = n / N::from(10);
+        n /= N::from(10);
     }
     false
 }
