@@ -34,11 +34,11 @@ where
 /// assert_eq!(digit_count(1337228), 7);
 /// ```
 
-pub fn digit_count<N>(mut n: N) -> u16
+pub fn digit_count<N>(mut n: N) -> u8
 where
     N: Div<Output = N> + From<u8> + PartialEq + Copy,
 {
-    let mut count: u16 = 0;
+    let mut count = 0;
     while n != N::from(0) {
         n = n / N::from(10);
         count += 1;
@@ -66,7 +66,7 @@ where
         + Copy
         + PartialEq,
 {
-    let mut rev: N = N::from(0);
+    let mut rev = N::from(0);
     while n != N::from(0) {
         rev = rev * N::from(10) + (n % N::from(10));
         n = n / N::from(10);
