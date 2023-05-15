@@ -1,6 +1,8 @@
 //! Power algorithms
 
-/// Algorithm for binary power. Base must be at least neither i32 or u16. 
+use std::ops::{Mul, MulAssign};
+
+/// Algorithm for binary power. Base must be at least neither i32 or u16.
 /// # Examples
 ///
 /// ```
@@ -12,7 +14,7 @@
 
 pub fn bin_pow<N>(mut b: N, mut e: u16) -> N
 where
-    N: std::ops::Mul<Output = N> + std::ops::MulAssign + From<u16> + Copy + PartialEq + Sized,
+    N: Mul<Output = N> + MulAssign + From<u16> + Copy + PartialEq + Sized,
 {
     let mut v = N::from(1);
     while e != 0 {
