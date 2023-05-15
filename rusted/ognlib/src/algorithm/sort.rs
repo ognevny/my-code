@@ -103,7 +103,7 @@ where
     slice
 }
 
-pub fn merging<S, T>(slice: &mut S)
+fn merging<S, T>(slice: &mut S)
 where
     S: AsMut<[T]> + AsRef<[T]> + Sync + Send + ?Sized,
     T: Ord + Clone + Send + Copy,
@@ -133,4 +133,43 @@ where
         buffer.extend_from_slice(&right[j..]);
     }
     slice.as_mut().copy_from_slice(&buffer);
+}
+
+/// Cocktail shaker sort algorithm
+/// # Examples
+///
+/// ```
+/// use ognlib::algorithm::sort::cocktail_shaker;
+///
+/// let mut arr = vec![5, 3, 4, 1, 2];
+/// cocktail_shaker(&mut arr);
+/// assert_eq!(arr, [1, 2, 3, 4, 5]);
+/// ```
+
+pub fn cocktail_shaker<T: Ord>(arr: &mut [T]) {
+    let (mut swapped, mut left, mut right) = (true, 0, arr.len() - 1);
+
+    while swapped {
+        swapped = false;
+
+        for i in left..right {
+            if arr[i] > arr[i + 1] {
+                arr.swap(i, i + 1);
+                swapped = true;
+            }
+        }
+        if !swapped {
+            break;
+        }
+        swapped = false;
+
+        right -= 1;
+        for i in (left..right).rev() {
+            if arr[i] > arr[i + 1] {
+                arr.swap(i, i + 1);
+                swapped = true;
+            }
+        }
+        left += 1;
+    }
 }
