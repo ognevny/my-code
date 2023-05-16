@@ -2,7 +2,8 @@
 
 use std::ops::MulAssign;
 
-/// Algorithm for binary power. Remember that returned value has the same type, so it can fail with overflowing.
+/// Algorithm for binary power. Due to fact that returned value has the same
+/// type as base, it could fail with overflowing.
 /// # Examples
 ///
 /// ```
@@ -12,13 +13,13 @@ use std::ops::MulAssign;
 /// assert_eq!(bin_pow(0.5, 4), 0.0625);
 /// ```
 
-pub fn bin_pow<N>(mut b: N, mut e: u16) -> N
+pub fn bin_pow<N>(mut b: N, mut e: u8) -> N
 where
-    N: MulAssign + From<u16> + Copy + PartialEq + Sized,
+    N: MulAssign + From<u8> + Copy + PartialEq + Sized,
 {
     let mut v = N::from(1);
     while e != 0 {
-        if N::from(e & 1) != N::from(0) {
+        if (e & 1) != 0 {
             v *= b
         }
         b *= b;

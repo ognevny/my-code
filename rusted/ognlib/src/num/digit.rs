@@ -1,6 +1,6 @@
 //! Functions for operations with digits
 
-use std::ops::{Add, AddAssign, DivAssign, Mul, Rem};
+use std::ops::{AddAssign, DivAssign, MulAssign, Rem};
 
 /// Calculate sum of digits in number
 /// # Examples
@@ -58,11 +58,12 @@ where
 
 pub fn rev<N>(mut n: N) -> N
 where
-    N: Mul<Output = N> + Add<Output = N> + Rem<Output = N> + DivAssign + From<u8> + Copy + Eq,
+    N: MulAssign + AddAssign + Rem<Output = N> + DivAssign + From<u8> + Copy + Eq,
 {
     let mut rev = N::from(0);
     while n != N::from(0) {
-        rev = rev * N::from(10) + (n % N::from(10));
+        rev *= N::from(10);
+        rev += n % N::from(10);
         n /= N::from(10);
     }
     rev
