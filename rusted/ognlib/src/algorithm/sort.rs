@@ -82,17 +82,17 @@ pub fn insertion<T: Ord>(arr: &mut [T]) {
 /// use ognlib::algorithm::sort::merge;
 ///
 /// let mut arr = vec![5, 3, 4, 1, 2];
-/// arr = merge(&mut arr).to_vec();
+/// merge(&mut arr);
 /// assert_eq!(arr, [1, 2, 3, 4, 5]);
 /// ```
 
-pub fn merge<T>(slice: &mut [T]) -> &mut [T]
+pub fn merge<T>(slice: &mut [T])
 where
     T: Ord + Clone + Copy + Send + Sync,
 {
     let len = slice.len();
     if len < 2 {
-        return slice;
+        return;
     }
     let mid = len / 2;
     let (left, right) = slice.split_at_mut(mid);
@@ -100,7 +100,6 @@ where
     rayon::join(|| merge(left), || merge(right));
 
     merging(slice);
-    slice
 }
 
 fn merging<S, T>(slice: &mut S)
@@ -172,4 +171,52 @@ pub fn cocktail_shaker<T: Ord>(arr: &mut [T]) {
         }
         left += 1;
     }
+}
+
+/// Quick sort algorithm
+/// # Examples
+///
+/// ```
+/// use ognlib::algorithm::sort::quicksort;
+///
+/// let mut arr = vec![5, 3, 4, 1, 2];
+/// quicksort(&mut arr);
+/// assert_eq!(arr, [1, 2, 3, 4, 5]);
+/// ```
+
+pub fn quicksort<T>(arr: &mut [T])
+where
+    T: Ord + Send,
+{
+    if arr.len() <= 1 {
+        return;
+    }
+    let pivot = partition(arr);
+    let (left, right) = arr.split_at_mut(pivot);
+
+    rayon::join(|| quicksort(left), || quicksort(right));
+}
+
+fn partition<T>(arr: &mut [T]) -> usize
+where
+    T: Ord + Send,
+{
+    let len = arr.len();
+    if len == 0 {
+        return 0;
+    }
+    let pivot_index = len / 2;
+
+    arr.swap(pivot_index, len - 1);
+
+    let mut store_index = 0;
+    for i in 0..(len - 1) {
+        if arr[i] <= arr[len - 1] {
+            arr.swap(i, store_index);
+            store_index += 1;
+        }
+    }
+    arr.swap(store_index, len - 1);
+
+    store_index
 }
