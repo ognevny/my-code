@@ -15,7 +15,7 @@ use std::ops::MulAssign;
 
 pub fn bin_pow<N>(mut b: N, mut e: u8) -> N
 where
-    N: MulAssign + From<u8> + Copy + PartialEq + Sized,
+    N: MulAssign + From<u8> + Copy,
 {
     let mut v = N::from(1);
     while e != 0 {

@@ -36,7 +36,7 @@ where
 
 pub fn digit_count<N>(mut n: N) -> u8
 where
-    N: DivAssign + From<u8> + Eq + Copy,
+    N: DivAssign + From<u8> + Copy + Eq,
 {
     let mut count = 0;
     while n != N::from(0) {
@@ -58,7 +58,7 @@ where
 
 pub fn rev<N>(mut n: N) -> N
 where
-    N: MulAssign + AddAssign + Rem<Output = N> + DivAssign + From<u8> + Copy + Eq,
+    N: AddAssign + DivAssign + MulAssign + Rem<Output = N> + From<u8> + Copy + Eq,
 {
     let mut rev = N::from(0);
     while n != N::from(0) {
@@ -81,7 +81,7 @@ where
 
 pub fn has_digit<N>(mut n: N, k: u8) -> bool
 where
-    N: Rem<Output = N> + DivAssign + Eq + From<u8> + Copy,
+    N: DivAssign + Rem<Output = N> + From<u8> + Copy + Eq,
 {
     while n != N::from(0) {
         if n % N::from(10) == N::from(k) {
