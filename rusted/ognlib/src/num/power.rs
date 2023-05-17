@@ -1,7 +1,5 @@
 //! Power algorithms
 
-use std::ops::MulAssign;
-
 /// Algorithm for binary power. Due to fact that returned value has the same
 /// type as base, it could fail with overflowing.
 /// # Examples
@@ -15,7 +13,7 @@ use std::ops::MulAssign;
 
 pub fn bin_pow<N>(mut b: N, mut e: u8) -> N
 where
-    N: MulAssign + From<u8> + Copy,
+    N: std::ops::MulAssign + From<u8> + Copy,
 {
     let mut v = N::from(1);
     while e != 0 {
