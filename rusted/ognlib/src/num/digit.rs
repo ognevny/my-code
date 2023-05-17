@@ -14,7 +14,7 @@ use std::ops::{AddAssign, DivAssign, MulAssign, Rem};
 
 pub fn digit_sum<N>(mut n: N) -> N
 where
-    N: Rem<Output = N> + DivAssign + AddAssign + From<u8> + Copy + Eq,
+    N: AddAssign + DivAssign + Rem<Output = N> + From<u8> + Copy + Eq,
 {
     let mut sum = N::from(0);
     while n != N::from(0) {
