@@ -9,6 +9,8 @@
 #define f32 float
 #define f64 double
 #define String string
+#define Vec vector
 #define use using
 #define push push_back
 #define read_line getline
+#define size len
