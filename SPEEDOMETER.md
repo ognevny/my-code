@@ -78,7 +78,7 @@ Executed in    3,01 secs      fish           external
      Running `target\debug\speedometer.exe`
 1000000000
 ________________________________________________________
-Executed in  823,31 millis    fish           external
+Executed in  779,18 millis    fish           external
    usr time    0,00 micros    0,00 micros    0,00 micros
    sys time    0,00 micros    0,00 micros    0,00 micros
 ```
