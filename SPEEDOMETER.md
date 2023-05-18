@@ -72,9 +72,9 @@ Executed in    3,01 secs      fish           external
 ```fish
 ~/m/r/speedometer> cargo b
    Compiling speedometer v0.1.0 (C:\...\my-code\rusted\speedometer)
-    Finished dev [unoptimized + debuginfo] target(s) in 0.00s
+    Finished dev [unoptimized] target(s) in 0.00s
 ~/m/r/speedometer> time cargo r
-    Finished dev [unoptimized + debuginfo] target(s) in 0.00s
+    Finished dev [unoptimized] target(s) in 0.00s
      Running `target\debug\speedometer.exe`
 1000000000
 ________________________________________________________
