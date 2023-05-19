@@ -11,6 +11,7 @@ pub mod num {
 
 pub mod algorithm {
     pub mod extra;
+    pub mod prime;
     pub mod sort;
 }
 
