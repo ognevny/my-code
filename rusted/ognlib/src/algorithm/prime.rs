@@ -15,11 +15,15 @@ pub enum PrimeStatus {
 /// ```
 /// use ognlib::algorithm::prime::*;
 ///
-/// // PrimeStatus::Prime
-/// wilson_th(13);
+/// let (prime1, prime2);
+/// if let PrimeStatus::Prime = wilson_th(13) { prime1 = true; }
+/// else { prime1 = false; };
+/// 
+/// if let PrimeStatus::NotPrime = wilson_th(444) { prime2 = false; }
+/// else { prime2 = true; };
 ///
-/// // PrimeStatus::NotPrime
-/// wilson_th(444);
+/// assert!(prime1);
+/// assert!(!prime2);
 /// ```
 
 pub fn wilson_th(n: usize) -> PrimeStatus {
