@@ -38,17 +38,14 @@ def Miller_Rabin(number):
 def sqrtest(number):
     if number < 2:
         return "ERROR"
-    elif number == 2:
+    elif number % 2 = 0:
         return "YES"
     else:
-        counter = 0
-        for i in range(1, ceil(sqrt(number)) + 1):
+        for i in range(3, ceil(sqrt(number)), 2):
             if number % i == 0:
-                counter += 1
-        if counter == 1:
-            return "YES"
-        else:
-            return "NO"
+                return "YES"
+        
+    return "NO"
 
 
 def Wilson(number):
