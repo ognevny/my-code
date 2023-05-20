@@ -4,18 +4,15 @@ from math import ceil, factorial, log2, sqrt
 from random import sample
 
 
-def Miller_Rabin(number):
+def Miller_Rabin(number: int) -> str:
     if number < 2:
         return "ERROR"
-    elif number == 2 or number == 3:
+    elif number == 2 or number == 3 or number == 5:
         return "YES"
     elif number % 2 == 0:
         return "NO"
     else:
-        if number < 6:
-            k = number - 3
-        else:
-            k = (ceil(log2(number))) ** 2
+        k: int = (ceil(log2(number))) ** 2
         t = number - 1
         s = 0
         while t % 2 == 0:
@@ -35,20 +32,20 @@ def Miller_Rabin(number):
         return "PROBABLY"
 
 
-def sqrtest(number):
+def sqrtest(number: int) -> str:
     if number < 2:
         return "ERROR"
-    elif number % 2 = 0:
-        return "YES"
+    elif number % 2 == 0:
+        return "NO"
     else:
         for i in range(3, ceil(sqrt(number)), 2):
             if number % i == 0:
                 return "YES"
-        
+
     return "NO"
 
 
-def Wilson(number):
+def Wilson(number: int) -> str:
     if number < 2:
         return "ERROR"
     elif (factorial(number - 1) + 1) % number == 0:
