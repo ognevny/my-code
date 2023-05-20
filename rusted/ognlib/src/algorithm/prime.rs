@@ -1,3 +1,9 @@
+//! Primality tests. These tests are divided into 2 major
+//! groups: first group of tests gives exact results; second
+//! group is for probabilistic tests, which can only suppose
+//! whether number is probably prime or not.
+//! This code uses enum of 3: Prime, NotPrime and ProbablyPrime.
+
 pub enum PrimeStatus {
     Prime,
     NotPrime,
@@ -74,24 +80,26 @@ pub fn wilson_th(n: usize) -> PrimeStatus {
     }
 }
 
-/// Miller-Rabbin's prime test.
-///
+/// Miller-Rabin's prime test.
+/// From [Wikipedia](https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test):
+/// the Miller–Rabin primality test or Rabin–Miller primality test is a probabilistic primality test:
+/// an algorithm which determines whether a given number is likely to be prime.
 /// # Examples
 /// ```
 /// use ognlib::algorithm::prime::*;
 ///
 /// let (prime1, prime2);
-/// if let PrimeStatus::ProbablyPrime = miller_rabbin(13) { prime1 = true; }
+/// if let PrimeStatus::ProbablyPrime = miller_rabin(13) { prime1 = true; }
 /// else { prime1 = false; };
 ///
-/// if let PrimeStatus::NotPrime = miller_rabbin(444) { prime2 = false; }
+/// if let PrimeStatus::NotPrime = miller_rabin(444) { prime2 = false; }
 /// else { prime2 = true; };
 ///
 /// assert!(prime1);
 /// assert!(!prime2);
 /// ```
 
-pub fn miller_rabbin(n: usize) -> PrimeStatus {
+pub fn miller_rabin(n: usize) -> PrimeStatus {
     if n == 2 || n == 3 || n == 5 {
         return PrimeStatus::Prime;
     } else if n % 2 == 0 || n % 3 == 0 {
