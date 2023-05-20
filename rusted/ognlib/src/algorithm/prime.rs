@@ -33,7 +33,7 @@ pub fn sqrtest(n: usize) -> PrimeStatus {
         return PrimeStatus::NotPrime;
     }
     let sqrt = (n as f64).sqrt().ceil() as usize;
-    for i in 3..=sqrt {
+    for i in (3..=sqrt).step_by(2) {
         if n % i == 0 {
             return PrimeStatus::NotPrime;
         }
