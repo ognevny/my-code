@@ -58,7 +58,7 @@ pub fn sqrtest(n: usize) -> PrimeStatus {
 /// ```
 
 pub fn wilson_th(n: usize) -> PrimeStatus {
-    use num::bigint::BigInt;
+    use num_bigint::BigInt;
 
     fn factorial(n: usize) -> BigInt {
         if n == 0 {
@@ -75,7 +75,7 @@ pub fn wilson_th(n: usize) -> PrimeStatus {
 }
 
 /// Miller-Rabbin's prime test.
-/// 
+///
 /// # Examples
 /// ```
 /// use ognlib::algorithm::prime::*;
@@ -97,7 +97,7 @@ pub fn miller_rabbin(n: usize) -> PrimeStatus {
     } else if n % 2 == 0 || n % 3 == 0 {
         return PrimeStatus::NotPrime;
     } else {
-        use num::bigint::BigUint;
+        use num_bigint::BigUint;
         use rand::Rng;
 
         let k = (n as f64).log2().ceil() as usize;
