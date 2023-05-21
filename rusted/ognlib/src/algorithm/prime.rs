@@ -115,10 +115,10 @@ pub fn miller_rabin(n: usize) -> PrimeStatus {
             s += 1;
         }
         let mut rng = rand::thread_rng();
+        for _ in 0..k {
+            let a = BigUint::from(rng.gen_range(2..n - 1));
 
-        let a: Vec<usize> = (0..k).map(|_| rng.gen_range(2..n - 1)).collect();
-        for elem in a {
-            let mut x = BigUint::from(elem).modpow(&BigUint::from(t), &BigUint::from(n));
+            let mut x = a.modpow(&BigUint::from(t), &BigUint::from(n));
             if x == BigUint::from(1u8) || x == BigUint::from(n - 1) {
                 continue;
             }
