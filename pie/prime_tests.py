@@ -35,6 +35,8 @@ def Miller_Rabin(number: int) -> str:
 def sqrtest(number: int) -> str:
     if number < 2:
         return "ERROR"
+    elif number == 2:
+        return "YES"
     elif number % 2 == 0:
         return "NO"
     else:
