@@ -4,6 +4,8 @@
 //! whether number is probably prime or not.
 //! This code uses enum of 3: Prime, NotPrime and ProbablyPrime.
 
+// TODO: use Result for cases when n < 1
+
 pub enum PrimeStatus {
     Prime,
     NotPrime,
@@ -29,6 +31,9 @@ pub enum PrimeStatus {
 /// ```
 
 pub fn sqrtest(n: usize) -> PrimeStatus {
+    if n == 2 {
+        return PrimeStatus::Prime;
+    }
     if n % 2 == 0 {
         return PrimeStatus::NotPrime;
     }
