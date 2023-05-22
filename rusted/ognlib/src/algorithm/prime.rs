@@ -60,6 +60,9 @@ pub fn sqrtest(n: isize) -> Result<PrimeStatus, PrimeStatusError> {
     if n == 2 {
         return Ok(PrimeStatus::Prime);
     }
+    if n == 2 {
+        return Ok(PrimeStatus::Prime);
+    }
     if n % 2 == 0 {
         return Ok(PrimeStatus::NotPrime);
     }
