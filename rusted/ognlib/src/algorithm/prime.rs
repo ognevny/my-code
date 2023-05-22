@@ -67,10 +67,9 @@ pub fn wilson_th(n: usize) -> PrimeStatus {
     use num_bigint::BigInt;
 
     fn factorial(n: usize) -> BigInt {
-        if n == 0 {
-            BigInt::from(1u8)
-        } else {
-            BigInt::from(n) * factorial(n - 1)
+        match n {
+            0 | 1 => BigInt::from(1),
+            _ => BigInt::from(n) * factorial(n - 1),
         }
     }
     if (factorial(n - 1) % BigInt::from(n)) - BigInt::from(n) == BigInt::from(-1) {
