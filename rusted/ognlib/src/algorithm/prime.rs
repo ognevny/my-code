@@ -56,20 +56,16 @@ pub fn sqrtest(n: isize) -> Result<PrimeStatus, PrimeStatusError> {
         return Err(PrimeStatusError::new(
             "This number is neither prime nor not prime",
         ));
-    }
-    if n == 2 {
+    } else if n == 2 {
         return Ok(PrimeStatus::Prime);
-    }
-    if n == 2 {
-        return Ok(PrimeStatus::Prime);
-    }
-    if n % 2 == 0 {
+    } else if n % 2 == 0 {
         return Ok(PrimeStatus::NotPrime);
-    }
-    let sqrt = (n as f64).sqrt().ceil() as usize;
-    for i in (3..=sqrt).step_by(2) {
-        if n as usize % i == 0 {
-            return Ok(PrimeStatus::NotPrime);
+    } else {
+        let sqrt = (n as f64).sqrt().ceil() as usize;
+        for i in (3..=sqrt).step_by(2) {
+            if n as usize % i == 0 {
+                return Ok(PrimeStatus::NotPrime);
+            }
         }
     }
     Ok(PrimeStatus::Prime)
