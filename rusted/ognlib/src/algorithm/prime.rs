@@ -41,10 +41,10 @@ pub enum PrimeStatus {
 /// use ognlib::algorithm::prime::*;
 ///
 /// let (prime1, prime2);
-/// if let PrimeStatus::Prime = sqrtest(13) { prime1 = true; }
+/// if let Ok(PrimeStatus::Prime) = sqrtest(13) { prime1 = true; }
 /// else { prime1 = false; };
 ///
-/// if let PrimeStatus::NotPrime = sqrtest(444) { prime2 = false; }
+/// if let Ok(PrimeStatus::NotPrime) = sqrtest(444) { prime2 = false; }
 /// else { prime2 = true; };
 ///
 /// assert!(prime1);
@@ -83,10 +83,10 @@ pub fn sqrtest(n: isize) -> Result<PrimeStatus, PrimeStatusError> {
 /// use ognlib::algorithm::prime::*;
 ///
 /// let (prime1, prime2);
-/// if let PrimeStatus::Prime = wilson_th(13) { prime1 = true; }
+/// if let Ok(PrimeStatus::Prime) = wilson_th(13) { prime1 = true; }
 /// else { prime1 = false; };
 ///
-/// if let PrimeStatus::NotPrime = wilson_th(444) { prime2 = false; }
+/// if let Ok(PrimeStatus::NotPrime) = wilson_th(444) { prime2 = false; }
 /// else { prime2 = true; };
 ///
 /// assert!(prime1);
@@ -123,10 +123,10 @@ pub fn wilson_th(n: isize) -> Result<PrimeStatus, PrimeStatusError> {
 /// use ognlib::algorithm::prime::*;
 ///
 /// let (prime1, prime2);
-/// if let PrimeStatus::ProbablyPrime = miller_rabin(13) { prime1 = true; }
+/// if let Ok(PrimeStatus::ProbablyPrime) = miller_rabin(13) { prime1 = true; }
 /// else { prime1 = false; };
 ///
-/// if let PrimeStatus::NotPrime = miller_rabin(444) { prime2 = false; }
+/// if let Ok(PrimeStatus::NotPrime) = miller_rabin(444) { prime2 = false; }
 /// else { prime2 = true; };
 ///
 /// assert!(prime1);
