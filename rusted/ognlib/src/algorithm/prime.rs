@@ -4,6 +4,29 @@
 //! whether number is probably prime or not.
 //! This code uses enum of 3: Prime, NotPrime and ProbablyPrime.
 
+use std::{error::Error, fmt};
+
+#[derive(Debug)]
+pub struct PrimeStatusError {
+    message: String,
+}
+
+impl PrimeStatusError {
+    fn new(message: &str) -> PrimeStatusError {
+        PrimeStatusError {
+            message: message.to_string(),
+        }
+    }
+}
+
+impl fmt::Display for PrimeStatusError {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{}", self.message)
+    }
+}
+
+impl Error for PrimeStatusError {}
+
 pub enum PrimeStatus {
     Prime,
     NotPrime,
@@ -28,17 +51,25 @@ pub enum PrimeStatus {
 /// assert!(!prime2);
 /// ```
 
-pub fn sqrtest(n: usize) -> PrimeStatus {
+pub fn sqrtest(n: isize) -> Result<PrimeStatus, PrimeStatusError> {
+    if n < 2 {
+        return Err(PrimeStatusError::new(
+            "This number is neither prime nor not prime",
+        ));
+    }
+    if n == 2 {
+        return Ok(PrimeStatus::Prime);
+    }
     if n % 2 == 0 {
-        return PrimeStatus::NotPrime;
+        return Ok(PrimeStatus::NotPrime);
     }
     let sqrt = (n as f64).sqrt().ceil() as usize;
     for i in (3..=sqrt).step_by(2) {
-        if n % i == 0 {
-            return PrimeStatus::NotPrime;
+        if n as usize % i == 0 {
+            return Ok(PrimeStatus::NotPrime);
         }
     }
-    PrimeStatus::Prime
+    Ok(PrimeStatus::Prime)
 }
 
 /// Wilson's theory.
@@ -63,19 +94,24 @@ pub fn sqrtest(n: usize) -> PrimeStatus {
 /// assert!(!prime2);
 /// ```
 
-pub fn wilson_th(n: usize) -> PrimeStatus {
+pub fn wilson_th(n: isize) -> Result<PrimeStatus, PrimeStatusError> {
     use num_bigint::BigInt;
 
-    fn factorial(n: usize) -> BigInt {
+    if n < 2 {
+        return Err(PrimeStatusError::new(
+            "This number is neither prime nor not prime",
+        ));
+    }
+    fn factorial(n: isize) -> BigInt {
         match n {
             0 | 1 => BigInt::from(1),
             _ => BigInt::from(n) * factorial(n - 1),
         }
     }
     if (factorial(n - 1) % BigInt::from(n)) - BigInt::from(n) == BigInt::from(-1) {
-        PrimeStatus::Prime
+        Ok(PrimeStatus::Prime)
     } else {
-        PrimeStatus::NotPrime
+        Ok(PrimeStatus::NotPrime)
     }
 }
 
@@ -98,11 +134,15 @@ pub fn wilson_th(n: usize) -> PrimeStatus {
 /// assert!(!prime2);
 /// ```
 
-pub fn miller_rabin(n: usize) -> PrimeStatus {
-    if n == 2 || n == 3 || n == 5 {
-        return PrimeStatus::Prime;
+pub fn miller_rabin(n: usize) -> Result<PrimeStatus, PrimeStatusError> {
+    if n < 2 {
+        return Err(PrimeStatusError::new(
+            "This number is neither Prime nor Not Prime",
+        ));
+    } else if n == 2 || n == 3 || n == 5 {
+        return Ok(PrimeStatus::Prime);
     } else if n % 2 == 0 || n % 3 == 0 {
-        return PrimeStatus::NotPrime;
+        return Ok(PrimeStatus::NotPrime);
     } else {
         use num_bigint::BigUint;
         use rand::Rng;
@@ -124,7 +164,7 @@ pub fn miller_rabin(n: usize) -> PrimeStatus {
             for _ in 0..s - 1 {
                 x = x.modpow(&BigUint::from(2u8), &BigUint::from(n));
                 if x == BigUint::from(1u8) {
-                    return PrimeStatus::NotPrime;
+                    return Ok(PrimeStatus::NotPrime);
                 }
                 if x == BigUint::from(n - 1) {
                     break;
@@ -132,5 +172,5 @@ pub fn miller_rabin(n: usize) -> PrimeStatus {
             }
         }
     }
-    PrimeStatus::ProbablyPrime
+    Ok(PrimeStatus::ProbablyPrime)
 }
