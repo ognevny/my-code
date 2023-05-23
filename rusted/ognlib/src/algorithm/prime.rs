@@ -137,10 +137,10 @@ pub fn miller_rabin(n: usize) -> Result<PrimeStatus, PrimeStatusError> {
     } else if n % 2 == 0 || n % 3 == 0 {
         return Ok(PrimeStatus::NotPrime);
     } else {
-        use num_bigint::BigUint;
+        use num_bigint::BigInt;
         use rand::Rng;
 
-        let k = (n as f64).log2().ceil() as usize;
+        let k = (n as f64).log2().ceil() as isize;
         let (k, mut t, mut s) = (k * k, n - 1, 0);
         while t % 2 == 0 {
             t /= 2;
@@ -148,18 +148,18 @@ pub fn miller_rabin(n: usize) -> Result<PrimeStatus, PrimeStatusError> {
         }
         let mut rng = rand::thread_rng();
         for _ in 0..k {
-            let a = BigUint::from(rng.gen_range(2..n - 1));
+            let a = BigInt::from(rng.gen_range(2..n - 1));
 
-            let mut x = a.modpow(&BigUint::from(t), &BigUint::from(n));
-            if x == BigUint::from(1u8) || x == BigUint::from(n - 1) {
+            let mut x = a.modpow(&BigInt::from(t), &BigInt::from(n));
+            if x == BigInt::from(1) || x == BigInt::from(n - 1) {
                 continue;
             }
             for _ in 0..s - 1 {
-                x = x.modpow(&BigUint::from(2u8), &BigUint::from(n));
-                if x == BigUint::from(1u8) {
+                x = x.modpow(&BigInt::from(2), &BigUint::from(n));
+                if x == BigInt::from(1) {
                     return Ok(PrimeStatus::NotPrime);
                 }
-                if x == BigUint::from(n - 1) {
+                if x == BigInt::from(n - 1) {
                     break;
                 }
             }
