@@ -12,8 +12,8 @@ pub struct PrimeStatusError {
 }
 
 impl PrimeStatusError {
-    fn new() -> PrimeStatusError {
-        PrimeStatusError {
+    fn new() -> Self {
+        Self {
             message: String::from("This number is neither prime nor not prime"),
         }
     }
