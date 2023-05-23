@@ -12,9 +12,9 @@ pub struct PrimeStatusError {
 }
 
 impl PrimeStatusError {
-    fn new(message: &str) -> PrimeStatusError {
+    fn new() -> PrimeStatusError {
         PrimeStatusError {
-            message: message.to_string(),
+            message: String::from("This number is neither prime nor not prime"),
         }
     }
 }
@@ -53,9 +53,7 @@ pub enum PrimeStatus {
 
 pub fn sqrtest(n: isize) -> Result<PrimeStatus, PrimeStatusError> {
     if n < 2 {
-        return Err(PrimeStatusError::new(
-            "This number is neither prime nor not prime",
-        ));
+        return Err(PrimeStatusError::new());
     } else if n == 2 {
         return Ok(PrimeStatus::Prime);
     } else if n % 2 == 0 {
@@ -97,9 +95,7 @@ pub fn wilson_th(n: isize) -> Result<PrimeStatus, PrimeStatusError> {
     use num_bigint::BigInt;
 
     if n < 2 {
-        return Err(PrimeStatusError::new(
-            "This number is neither prime nor not prime",
-        ));
+        return Err(PrimeStatusError::new());
     }
     fn factorial(n: isize) -> BigInt {
         match n {
@@ -135,9 +131,7 @@ pub fn wilson_th(n: isize) -> Result<PrimeStatus, PrimeStatusError> {
 
 pub fn miller_rabin(n: usize) -> Result<PrimeStatus, PrimeStatusError> {
     if n < 2 {
-        return Err(PrimeStatusError::new(
-            "This number is neither Prime nor Not Prime",
-        ));
+        return Err(PrimeStatusError::new());
     } else if n == 2 || n == 3 || n == 5 {
         return Ok(PrimeStatus::Prime);
     } else if n % 2 == 0 || n % 3 == 0 {
