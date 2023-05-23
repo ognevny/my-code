@@ -14,7 +14,7 @@ pub struct PrimeStatusError {
 impl PrimeStatusError {
     fn new() -> Self {
         Self {
-            message: String::from("This number is neither prime nor not prime"),
+            message: String::from("This number is neither prime nor composite"),
         }
     }
 }
@@ -29,7 +29,7 @@ impl Error for PrimeStatusError {}
 
 pub enum PrimeStatus {
     Prime,
-    NotPrime,
+    Composite,
     ProbablyPrime,
 }
 
@@ -44,7 +44,7 @@ pub enum PrimeStatus {
 /// if let Ok(PrimeStatus::Prime) = sqrtest(13) { prime1 = true; }
 /// else { prime1 = false; };
 ///
-/// if let Ok(PrimeStatus::NotPrime) = sqrtest(444) { prime2 = false; }
+/// if let Ok(PrimeStatus::Composite) = sqrtest(444) { prime2 = false; }
 /// else { prime2 = true; };
 ///
 /// assert!(prime1);
@@ -57,12 +57,12 @@ pub fn sqrtest(n: isize) -> Result<PrimeStatus, PrimeStatusError> {
     } else if n == 2 {
         return Ok(PrimeStatus::Prime);
     } else if n % 2 == 0 {
-        return Ok(PrimeStatus::NotPrime);
+        return Ok(PrimeStatus::Composite);
     } else {
         let sqrt = (n as f64).sqrt().ceil() as usize;
         for i in (3..=sqrt).step_by(2) {
             if n as usize % i == 0 {
-                return Ok(PrimeStatus::NotPrime);
+                return Ok(PrimeStatus::Composite);
             }
         }
     }
@@ -84,7 +84,7 @@ pub fn sqrtest(n: isize) -> Result<PrimeStatus, PrimeStatusError> {
 /// if let Ok(PrimeStatus::Prime) = wilson_th(13) { prime1 = true; }
 /// else { prime1 = false; };
 ///
-/// if let Ok(PrimeStatus::NotPrime) = wilson_th(444) { prime2 = false; }
+/// if let Ok(PrimeStatus::Composite) = wilson_th(444) { prime2 = false; }
 /// else { prime2 = true; };
 ///
 /// assert!(prime1);
@@ -106,7 +106,7 @@ pub fn wilson_th(n: isize) -> Result<PrimeStatus, PrimeStatusError> {
     if (factorial(n - 1) % BigInt::from(n)) - BigInt::from(n) == BigInt::from(-1) {
         Ok(PrimeStatus::Prime)
     } else {
-        Ok(PrimeStatus::NotPrime)
+        Ok(PrimeStatus::Composite)
     }
 }
 
@@ -122,7 +122,7 @@ pub fn wilson_th(n: isize) -> Result<PrimeStatus, PrimeStatusError> {
 /// if let Ok(PrimeStatus::ProbablyPrime) = miller_rabin(13) { prime1 = true; }
 /// else { prime1 = false; };
 ///
-/// if let Ok(PrimeStatus::NotPrime) = miller_rabin(444) { prime2 = false; }
+/// if let Ok(PrimeStatus::Composite) = miller_rabin(444) { prime2 = false; }
 /// else { prime2 = true; };
 ///
 /// assert!(prime1);
@@ -135,7 +135,7 @@ pub fn miller_rabin(n: usize) -> Result<PrimeStatus, PrimeStatusError> {
     } else if n == 2 || n == 3 || n == 5 {
         return Ok(PrimeStatus::Prime);
     } else if n % 2 == 0 || n % 3 == 0 {
-        return Ok(PrimeStatus::NotPrime);
+        return Ok(PrimeStatus::Composite);
     } else {
         use num_bigint::BigInt;
         use rand::Rng;
@@ -155,9 +155,9 @@ pub fn miller_rabin(n: usize) -> Result<PrimeStatus, PrimeStatusError> {
                 continue;
             }
             for _ in 0..s - 1 {
-                x = x.modpow(&BigInt::from(2), &BigUint::from(n));
+                x = x.modpow(&BigInt::from(2), &BigInt::from(n));
                 if x == BigInt::from(1) {
-                    return Ok(PrimeStatus::NotPrime);
+                    return Ok(PrimeStatus::Composite);
                 }
                 if x == BigInt::from(n - 1) {
                     break;
