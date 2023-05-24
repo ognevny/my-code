@@ -27,6 +27,7 @@ impl fmt::Display for PrimeStatusError {
 
 impl Error for PrimeStatusError {}
 
+#[derive(Debug, PartialEq)]
 pub enum PrimeStatus {
     Prime,
     Composite,
@@ -40,15 +41,8 @@ pub enum PrimeStatus {
 /// ```
 /// use ognlib::algorithm::prime::*;
 ///
-/// let (prime1, prime2);
-/// if let Ok(PrimeStatus::Prime) = sqrtest(13) { prime1 = true; }
-/// else { prime1 = false; };
-///
-/// if let Ok(PrimeStatus::Composite) = sqrtest(444) { prime2 = false; }
-/// else { prime2 = true; };
-///
-/// assert!(prime1);
-/// assert!(!prime2);
+/// assert_eq!(sqrtest(13).unwrap(), PrimeStatus::Prime);
+/// assert_eq!(sqrtest(444).unwrap(), PrimeStatus::Composite);
 /// ```
 
 pub fn sqrtest(n: isize) -> Result<PrimeStatus, PrimeStatusError> {
@@ -80,15 +74,8 @@ pub fn sqrtest(n: isize) -> Result<PrimeStatus, PrimeStatusError> {
 /// ```
 /// use ognlib::algorithm::prime::*;
 ///
-/// let (prime1, prime2);
-/// if let Ok(PrimeStatus::Prime) = wilson_th(13) { prime1 = true; }
-/// else { prime1 = false; };
-///
-/// if let Ok(PrimeStatus::Composite) = wilson_th(444) { prime2 = false; }
-/// else { prime2 = true; };
-///
-/// assert!(prime1);
-/// assert!(!prime2);
+/// assert_eq!(sqrtest(13).unwrap(), PrimeStatus::Prime);
+/// assert_eq!(sqrtest(444).unwrap(), PrimeStatus::Composite);
 /// ```
 
 pub fn wilson_th(n: isize) -> Result<PrimeStatus, PrimeStatusError> {
@@ -118,15 +105,8 @@ pub fn wilson_th(n: isize) -> Result<PrimeStatus, PrimeStatusError> {
 /// ```
 /// use ognlib::algorithm::prime::*;
 ///
-/// let (prime1, prime2);
-/// if let Ok(PrimeStatus::ProbablyPrime) = miller_rabin(13) { prime1 = true; }
-/// else { prime1 = false; };
-///
-/// if let Ok(PrimeStatus::Composite) = miller_rabin(444) { prime2 = false; }
-/// else { prime2 = true; };
-///
-/// assert!(prime1);
-/// assert!(!prime2);
+/// assert_eq!(sqrtest(13).unwrap(), PrimeStatus::Prime);
+/// assert_eq!(sqrtest(444).unwrap(), PrimeStatus::Composite);
 /// ```
 
 pub fn miller_rabin(n: usize) -> Result<PrimeStatus, PrimeStatusError> {
