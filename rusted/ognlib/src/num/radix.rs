@@ -8,11 +8,13 @@ pub const RADIX: &[char] = &[
     'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
 ];
 
+#[derive(Debug)]
 pub struct Radix {
     pub number: usize,
     pub radix: u8,
 }
 
+#[derive(Debug)]
 pub struct StringRadix {
     pub number: String,
     pub radix: u8,
