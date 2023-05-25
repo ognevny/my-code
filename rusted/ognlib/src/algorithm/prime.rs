@@ -33,7 +33,7 @@ pub enum PrimeStatus {
 ///
 /// assert_eq!(sqrtest(1).err(), Some(PrimeStatusError));
 /// assert_eq!(sqrtest(13).ok(), Some(PrimeStatus::Prime));
-/// assert_eq!(sqrtest(444).ok(), Some(PrimeStatus::Composite));
+/// assert_eq!(sqrtest(455).ok(), Some(PrimeStatus::Composite));
 /// ```
 
 pub fn sqrtest(n: isize) -> Result<PrimeStatus, PrimeStatusError> {
@@ -65,9 +65,9 @@ pub fn sqrtest(n: isize) -> Result<PrimeStatus, PrimeStatusError> {
 /// ```
 /// use ognlib::algorithm::prime::*;
 ///
-/// assert_eq!(sqrtest(1).err(), Some(PrimeStatusError));
-/// assert_eq!(sqrtest(13).ok(), Some(PrimeStatus::Prime));
-/// assert_eq!(sqrtest(444).ok(), Some(PrimeStatus::Composite));
+/// assert_eq!(wilson_th(1).err(), Some(PrimeStatusError));
+/// assert_eq!(wilson_th(13).ok(), Some(PrimeStatus::Prime));
+/// assert_eq!(wilson_th(444).ok(), Some(PrimeStatus::Composite));
 /// ```
 
 pub fn wilson_th(n: isize) -> Result<PrimeStatus, PrimeStatusError> {
@@ -97,9 +97,9 @@ pub fn wilson_th(n: isize) -> Result<PrimeStatus, PrimeStatusError> {
 /// ```
 /// use ognlib::algorithm::prime::*;
 ///
-/// assert_eq!(sqrtest(1).err(), Some(PrimeStatusError));
-/// assert_eq!(sqrtest(13).ok(), Some(PrimeStatus::Prime));
-/// assert_eq!(sqrtest(444).ok(), Some(PrimeStatus::Composite));
+/// assert_eq!(miller_rabin(1).err(), Some(PrimeStatusError));
+/// assert_eq!(miller_rabin(13).ok(), Some(PrimeStatus::ProbablyPrime));
+/// assert_eq!(miller_rabin(455).ok(), Some(PrimeStatus::ProbablyPrime));
 /// ```
 
 pub fn miller_rabin(n: isize) -> Result<PrimeStatus, PrimeStatusError> {
@@ -113,8 +113,8 @@ pub fn miller_rabin(n: isize) -> Result<PrimeStatus, PrimeStatusError> {
         use crate::num::power::modpow;
         use rand::Rng;
 
-        let k = (n as f64).log2().ceil() as isize;
-        let (k, mut t, mut s) = (k * k, n - 1, 0);
+        let k = ((n as f64).log2().ceil() * (n as f64).log2().ceil()) as isize;
+        let (mut t, mut s) = (n - 1, 0);
         while t % 2 == 0 {
             t /= 2;
             s += 1;
