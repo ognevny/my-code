@@ -7,21 +7,11 @@
 use std::{error::Error, fmt};
 
 #[derive(Debug)]
-pub struct PrimeStatusError {
-    message: String,
-}
-
-impl PrimeStatusError {
-    fn new() -> Self {
-        Self {
-            message: String::from("This number is neither prime nor composite"),
-        }
-    }
-}
+pub struct PrimeStatusError;
 
 impl fmt::Display for PrimeStatusError {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(f, "{}", self.message)
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "This number is neither prime nor composite")
     }
 }
 
@@ -47,7 +37,7 @@ pub enum PrimeStatus {
 
 pub fn sqrtest(n: isize) -> Result<PrimeStatus, PrimeStatusError> {
     if n < 2 {
-        return Err(PrimeStatusError::new());
+        return Err(PrimeStatusError);
     } else if n == 2 {
         return Ok(PrimeStatus::Prime);
     } else if n % 2 == 0 {
@@ -82,7 +72,7 @@ pub fn wilson_th(n: isize) -> Result<PrimeStatus, PrimeStatusError> {
     use num_bigint::BigInt;
 
     if n < 2 {
-        return Err(PrimeStatusError::new());
+        return Err(PrimeStatusError);
     }
     fn factorial(n: isize) -> BigInt {
         match n {
@@ -111,7 +101,7 @@ pub fn wilson_th(n: isize) -> Result<PrimeStatus, PrimeStatusError> {
 
 pub fn miller_rabin(n: isize) -> Result<PrimeStatus, PrimeStatusError> {
     if n < 2 {
-        return Err(PrimeStatusError::new());
+        return Err(PrimeStatusError);
     } else if n == 2 || n == 3 || n == 5 {
         return Ok(PrimeStatus::Prime);
     } else if n % 2 == 0 || n % 3 == 0 {
