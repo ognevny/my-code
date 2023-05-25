@@ -2,7 +2,7 @@
 //! groups: first group of tests gives exact results; second
 //! group is for probabilistic tests, which can only suppose
 //! whether number is probably prime or not.
-//! This code uses enum of 3: Prime, NotPrime and ProbablyPrime.
+//! This code uses enum of 3: Prime, Composite and ProbablyPrime.
 
 use std::{error::Error, fmt};
 
