@@ -6,7 +6,7 @@
 
 use std::{error::Error, fmt};
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq)]
 pub struct PrimeStatusError;
 
 impl fmt::Display for PrimeStatusError {
@@ -31,8 +31,9 @@ pub enum PrimeStatus {
 /// ```
 /// use ognlib::algorithm::prime::*;
 ///
-/// assert_eq!(sqrtest(13).unwrap(), PrimeStatus::Prime);
-/// assert_eq!(sqrtest(444).unwrap(), PrimeStatus::Composite);
+/// assert_eq!(sqrtest(1).err(), Some(PrimeStatusError));
+/// assert_eq!(sqrtest(13).ok(), Some(PrimeStatus::Prime));
+/// assert_eq!(sqrtest(444).ok(), Some(PrimeStatus::Composite));
 /// ```
 
 pub fn sqrtest(n: isize) -> Result<PrimeStatus, PrimeStatusError> {
@@ -64,8 +65,9 @@ pub fn sqrtest(n: isize) -> Result<PrimeStatus, PrimeStatusError> {
 /// ```
 /// use ognlib::algorithm::prime::*;
 ///
-/// assert_eq!(sqrtest(13).unwrap(), PrimeStatus::Prime);
-/// assert_eq!(sqrtest(444).unwrap(), PrimeStatus::Composite);
+/// assert_eq!(sqrtest(1).err(), Some(PrimeStatusError));
+/// assert_eq!(sqrtest(13).ok(), Some(PrimeStatus::Prime));
+/// assert_eq!(sqrtest(444).ok(), Some(PrimeStatus::Composite));
 /// ```
 
 pub fn wilson_th(n: isize) -> Result<PrimeStatus, PrimeStatusError> {
@@ -95,8 +97,9 @@ pub fn wilson_th(n: isize) -> Result<PrimeStatus, PrimeStatusError> {
 /// ```
 /// use ognlib::algorithm::prime::*;
 ///
-/// assert_eq!(sqrtest(13).unwrap(), PrimeStatus::Prime);
-/// assert_eq!(sqrtest(444).unwrap(), PrimeStatus::Composite);
+/// assert_eq!(sqrtest(1).err(), Some(PrimeStatusError));
+/// assert_eq!(sqrtest(13).ok(), Some(PrimeStatus::Prime));
+/// assert_eq!(sqrtest(444).ok(), Some(PrimeStatus::Composite));
 /// ```
 
 pub fn miller_rabin(n: isize) -> Result<PrimeStatus, PrimeStatusError> {
