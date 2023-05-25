@@ -36,12 +36,12 @@ where
 ///
 /// let mod1 = modpow(2, 3, 5);
 /// let mod2 = modpow(5, 4, 3);
-/// 
+///
 /// assert_eq!(mod1, 3);
 /// assert_eq!(mod2, 1);
 /// ```
 
-pub fn modpow<N>(b: N, e: u8, m: N) -> N
+pub fn modpow<N>(b: N, e: usize, m: N) -> N
 where
     N: Mul<Output = N> + Rem<Output = N> + From<u8> + Copy + Eq,
 {

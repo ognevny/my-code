@@ -109,7 +109,7 @@ pub fn wilson_th(n: isize) -> Result<PrimeStatus, PrimeStatusError> {
 /// assert_eq!(sqrtest(444).unwrap(), PrimeStatus::Composite);
 /// ```
 
-pub fn miller_rabin(n: usize) -> Result<PrimeStatus, PrimeStatusError> {
+pub fn miller_rabin(n: isize) -> Result<PrimeStatus, PrimeStatusError> {
     if n < 2 {
         return Err(PrimeStatusError::new());
     } else if n == 2 || n == 3 || n == 5 {
@@ -117,7 +117,7 @@ pub fn miller_rabin(n: usize) -> Result<PrimeStatus, PrimeStatusError> {
     } else if n % 2 == 0 || n % 3 == 0 {
         return Ok(PrimeStatus::Composite);
     } else {
-        use num_bigint::BigInt;
+        use crate::num::power::modpow;
         use rand::Rng;
 
         let k = (n as f64).log2().ceil() as isize;
@@ -128,18 +128,18 @@ pub fn miller_rabin(n: usize) -> Result<PrimeStatus, PrimeStatusError> {
         }
         let mut rng = rand::thread_rng();
         for _ in 0..k {
-            let a = BigInt::from(rng.gen_range(2..n - 1));
+            let a = rng.gen_range(2..n - 1);
 
-            let mut x = a.modpow(&BigInt::from(t), &BigInt::from(n));
-            if x == BigInt::from(1) || x == BigInt::from(n - 1) {
+            let mut x = modpow(a, t as usize, n);
+            if x == 1 || x == n - 1 {
                 continue;
             }
             for _ in 0..s - 1 {
-                x = x.modpow(&BigInt::from(2), &BigInt::from(n));
-                if x == BigInt::from(1) {
+                x = modpow(x, 2, n);
+                if x == 1 {
                     return Ok(PrimeStatus::Composite);
                 }
-                if x == BigInt::from(n - 1) {
+                if x == n - 1 {
                     break;
                 }
             }
