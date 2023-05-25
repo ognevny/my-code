@@ -3,21 +3,57 @@
 
 // TODO: write more ariphmetic functions. error handling. tests
 
+use std::cmp::Ordering;
+
 pub const RADIX: &[char] = &[
     '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I',
     'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
 ];
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Eq)]
 pub struct Radix {
     pub number: usize,
     pub radix: u8,
 }
 
-#[derive(Debug, PartialEq)]
+impl PartialOrd for Radix {
+    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+        usize::from_str_radix(&self.number.to_string(), self.radix.into())
+            .unwrap()
+            .partial_cmp(
+                &usize::from_str_radix(&other.number.to_string(), other.radix.into()).unwrap(),
+            )
+    }
+}
+
+impl Ord for Radix {
+    fn cmp(&self, other: &Self) -> Ordering {
+        usize::from_str_radix(&self.number.to_string(), self.radix.into())
+            .unwrap()
+            .cmp(&usize::from_str_radix(&other.number.to_string(), other.radix.into()).unwrap())
+    }
+}
+
+#[derive(Debug, PartialEq, Eq)]
 pub struct StringRadix {
     pub number: String,
     pub radix: u8,
+}
+
+impl PartialOrd for StringRadix {
+    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+        usize::from_str_radix(&self.number, self.radix.into())
+            .unwrap()
+            .partial_cmp(&usize::from_str_radix(&other.number, other.radix.into()).unwrap())
+    }
+}
+
+impl Ord for StringRadix {
+    fn cmp(&self, other: &Self) -> Ordering {
+        usize::from_str_radix(&self.number, self.radix.into())
+            .unwrap()
+            .cmp(&usize::from_str_radix(&other.number, other.radix.into()).unwrap())
+    }
 }
 
 impl Radix {
@@ -117,9 +153,8 @@ impl Radix {
             Radix::from_radix(res.chars().rev().collect::<String>().parse().unwrap(), k)
         }
         if self.radix == 10 {
-            return from_dec(self, k);
-        }
-        if k == 10 {
+            from_dec(self, k)
+        } else if k == 10 {
             to_dec(self)
         } else {
             from_dec(&mut to_dec(self), k)
@@ -160,9 +195,8 @@ impl Radix {
             StringRadix::from_radix(&res.chars().rev().collect::<String>(), k)
         }
         if self.radix == 0 {
-            return from_dec(self, k);
-        }
-        if k == 10 {
+            from_dec(self, k)
+        } else if k == 10 {
             StringRadix::from(&to_dec(self).number.to_string())
         } else {
             from_dec(&mut to_dec(self), k)
@@ -361,9 +395,8 @@ impl StringRadix {
             StringRadix::from_radix(&res.chars().rev().collect::<String>(), k)
         }
         if k == 10 {
-            return Self::from(&to_dec(self).number.to_string());
-        }
-        if self.radix == 10 {
+            Self::from(&to_dec(self).number.to_string())
+        } else if self.radix == 10 {
             from_dec(&mut Radix::from(self.number.parse().unwrap()), k)
         } else {
             from_dec(&mut to_dec(self), k)
@@ -399,9 +432,8 @@ impl StringRadix {
             Radix::from_radix(res.chars().rev().collect::<String>().parse().unwrap(), k)
         }
         if self.radix == 10 {
-            return from_dec(&mut Radix::from(self.number.parse().unwrap()), k);
-        }
-        if k == 10 {
+            from_dec(&mut Radix::from(self.number.parse().unwrap()), k)
+        } else if k == 10 {
             to_dec(self)
         } else {
             from_dec(&mut to_dec(self), k)
