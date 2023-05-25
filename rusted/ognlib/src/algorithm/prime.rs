@@ -119,9 +119,8 @@ pub fn miller_rabin(n: isize) -> Result<PrimeStatus, PrimeStatusError> {
             t /= 2;
             s += 1;
         }
-        let mut rng = rand::thread_rng();
         for _ in 0..k {
-            let a = rng.gen_range(2..n - 1);
+            let a = rand::thread_rng().gen_range(2..n - 1);
 
             let mut x = modpow(a, t as usize, n);
             if x == 1 || x == n - 1 {
