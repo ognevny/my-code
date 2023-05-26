@@ -10,7 +10,7 @@ pub const RADIX: &[char] = &[
     'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
 ];
 
-#[derive(Debug, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct Radix {
     pub number: usize,
     pub radix: u8,
@@ -34,7 +34,159 @@ impl Ord for Radix {
     }
 }
 
-#[derive(Debug, PartialEq, Eq)]
+impl std::ops::Add for Radix {
+    type Output = Self;
+
+    /// Performs a `+` operation
+    /// # Examples
+    ///
+    /// ```
+    /// use ognlib::num::radix::Radix;
+    ///
+    /// let mut n1 = Radix::from_radix(123, 4);
+    /// let mut n2 = Radix::from_radix(444, 5);
+    ///
+    /// let res = (n1 + n2).to_radix(8);
+    /// assert_eq!(res, Radix::from_radix(227, 8));
+    /// ```
+
+    fn add(self, other: Self) -> Self::Output {
+        Self {
+            number: Self::from(
+                usize::from_str_radix(&self.number.to_string(), self.radix.into()).unwrap()
+                    + usize::from_str_radix(&other.number.to_string(), other.radix.into()).unwrap(),
+            )
+            .to_radix(self.radix)
+            .number,
+            radix: self.radix,
+        }
+    }
+}
+
+impl std::ops::AddAssign for Radix {
+    /// Performs a `+=` operation
+    /// # Examples
+    ///
+    /// ```
+    /// use ognlib::num::radix::Radix;
+    ///
+    /// let mut n1 = Radix::from_radix(123, 4);
+    /// let n2 = Radix::from_radix(444, 5);
+    ///
+    /// n1 += n2;
+    /// n1 = n1.to_radix(8);
+    /// assert_eq!(n1, Radix::from_radix(227, 8));
+    /// ```
+
+    fn add_assign(&mut self, other: Self) {
+        self.number = Self::from(
+            usize::from_str_radix(&self.number.to_string(), self.radix.into()).unwrap()
+                + usize::from_str_radix(&other.number.to_string(), other.radix.into()).unwrap(),
+        )
+        .to_radix(self.radix)
+        .number;
+    }
+}
+
+impl std::ops::Sub for Radix {
+    type Output = Self;
+
+    /// Performs a `-` operation
+    /// # Examples
+    ///
+    /// ```
+    /// use ognlib::num::radix::Radix;
+    ///
+    /// let mut n1 = Radix::from_radix(123, 4);
+    /// let mut n2 = Radix::from_radix(444, 5);
+    ///
+    /// let res = (n1 - n2).to_radix(8);
+    /// assert_eq!(res, Radix::from_radix(141, 8));
+    /// ```
+
+    fn sub(self, other: Self) -> Self::Output {
+        if self > other {
+            Self {
+                number: Self::from(
+                    usize::from_str_radix(&self.number.to_string(), self.radix.into()).unwrap()
+                        - usize::from_str_radix(&other.number.to_string(), other.radix.into())
+                            .unwrap(),
+                )
+                .to_radix(self.radix)
+                .number,
+                radix: self.radix,
+            }
+        } else {
+            Self {
+                number: Self::from(
+                    usize::from_str_radix(&other.number.to_string(), other.radix.into()).unwrap()
+                        - usize::from_str_radix(&self.number.to_string(), self.radix.into())
+                            .unwrap(),
+                )
+                .to_radix(other.radix)
+                .number,
+                radix: other.radix,
+            }
+        }
+    }
+}
+
+impl std::ops::Mul for Radix {
+    type Output = Self;
+
+    /// Performs a `*` operation
+    /// # Examples
+    ///
+    /// ```
+    /// use ognlib::num::radix::Radix;
+    ///
+    /// let mut n1 = Radix::from_radix(123, 4);
+    /// let mut n2 = Radix::from_radix(444, 5);
+    ///
+    /// let res = (n1 * n2).to_radix(8);
+    /// assert_eq!(res, Radix::from_radix(6424, 8));
+    /// ```
+
+    fn mul(self, other: Self) -> Self::Output {
+        Self {
+            number: Self::from(
+                usize::from_str_radix(&self.number.to_string(), self.radix.into()).unwrap()
+                    * usize::from_str_radix(&other.number.to_string(), other.radix.into()).unwrap(),
+            )
+            .to_radix(self.radix)
+            .number,
+            radix: self.radix,
+        }
+    }
+}
+
+impl std::ops::MulAssign for Radix {
+    /// Performs a `*=` operation
+    /// # Examples
+    ///
+    /// ```
+    /// use ognlib::num::radix::Radix;
+    ///
+    /// let mut n1 = Radix::from_radix(123, 4);
+    /// let n2 = Radix::from_radix(444, 5);
+    ///
+    /// n1 *= n2;
+    /// n1 = n1.to_radix(8);
+    /// 
+    /// assert_eq!(n1, Radix::from_radix(6424, 8));
+    /// ```
+
+    fn mul_assign(&mut self, other: Self) {
+        self.number = Self::from(
+            usize::from_str_radix(&self.number.to_string(), self.radix.into()).unwrap()
+                * usize::from_str_radix(&other.number.to_string(), other.radix.into()).unwrap(),
+        )
+        .to_radix(self.radix)
+        .number;
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
 pub struct StringRadix {
     pub number: String,
     pub radix: u8,
@@ -185,112 +337,55 @@ impl Radix {
         }
     }
 
-    /// Sum 2 `Radix` new `Radix` (2 <= k <= 10)
-    /// # Examples
-    ///
-    /// ```
-    /// use ognlib::num::radix::Radix;
-    ///
-    /// let mut n1 = Radix::from_radix(123, 4);
-    /// let mut n2 = Radix::from_radix(444, 5);
-    ///
-    /// let res = Radix::add(&mut n1, &mut n2, 8);
-    /// assert_eq!(res, Radix::from_radix(227, 8));
-    /// ```
-
-    pub fn add(&mut self, b: &mut Radix, k: u8) -> Self {
-        let mut dec = Self::from(self.to_radix(10).number + b.to_radix(10).number);
-        dec.to_radix(k)
-    }
-
     /// Sum 2 `Radix` to new `StringRadix` (2 <= k <= 36)
     /// # Examples
     ///
     /// ```
     /// use ognlib::num::radix::*;
     ///
-    /// let mut n1 = Radix::from_radix(123, 4);
-    /// let mut n2 = Radix::from_radix(444, 5);
+    /// let n1 = Radix::from_radix(123, 4);
+    /// let n2 = Radix::from_radix(444, 5);
     ///
-    /// let res = Radix::add_to_string(&mut n1, &mut n2, 16);
+    /// let res = Radix::add_to_string(n1, n2, 16);
     /// assert_eq!(res, StringRadix::from_radix("97", 16));
     /// ```
 
-    pub fn add_to_string(&mut self, a: &mut Radix, k: u8) -> StringRadix {
-        let mut dec = Self::from(self.to_radix(10).number + a.to_radix(10).number);
-        dec.to_string_radix(k)
+    pub fn add_to_string(self, a: Radix, k: u8) -> StringRadix {
+        (self + a).to_string_radix(k)
     }
 
-    /// Dif 2 `Radix` to new `Radix` (2 <= k <= 10)
-    /// # Examples
-    ///
-    /// ```
-    /// use ognlib::num::radix::Radix;
-    ///
-    /// let mut n1 = Radix::from_radix(123, 4);
-    /// let mut n2 = Radix::from_radix(444, 5);
-    ///
-    /// let res = Radix::dif(&mut n2, &mut n1, 8);
-    /// assert_eq!(res, Radix::from_radix(141, 8));
-    /// ```
-
-    pub fn dif(&mut self, a: &mut Radix, k: u8) -> Self {
-        let mut dec = Self::from(self.to_radix(10).number - a.to_radix(10).number);
-        dec.to_radix(k)
-    }
-
-    /// Dif 2 `Radix` to new `StringRadix` (2 <= k <= 36)
+    /// Sub 2 `Radix` to new `StringRadix` (2 <= k <= 36)
     /// # Examples
     ///
     /// ```
     /// use ognlib::num::radix::*;
     ///
-    /// let mut n1 = Radix::from_radix(123, 4);
-    /// let mut n2 = Radix::from_radix(444, 5);
+    /// let n1 = Radix::from_radix(123, 4);
+    /// let n2 = Radix::from_radix(444, 5);
     ///
-    /// let res = Radix::dif_to_string(&mut n2, &mut n1, 16);
+    /// let res = Radix::sub_to_string(n2, n1, 16);
     /// assert_eq!(res, StringRadix::from_radix("61", 16));
     /// ```
 
-    pub fn dif_to_string(&mut self, a: &mut Radix, k: u8) -> StringRadix {
-        let mut dec = Self::from(self.to_radix(10).number - a.to_radix(10).number);
-        dec.to_string_radix(k)
+    pub fn sub_to_string(self, a: Radix, k: u8) -> StringRadix {
+        (self - a).to_string_radix(k)
     }
 
-    /// Multiply 2 `Radix` to new `Radix` (2 <= k <= 10)
-    /// # Examples
-    ///
-    /// ```
-    /// use ognlib::num::radix::Radix;
-    ///
-    /// let mut n1 = Radix::from_radix(123, 4);
-    /// let mut n2 = Radix::from_radix(444, 5);
-    ///
-    /// let res = Radix::mul(&mut n1, &mut n2, 8);
-    /// assert_eq!(res, Radix::from_radix(6424, 8));
-    /// ```
-
-    pub fn mul(&mut self, a: &mut Radix, k: u8) -> Self {
-        let mut dec = Self::from(self.to_radix(10).number * a.to_radix(10).number);
-        dec.to_radix(k)
-    }
-
-    /// Multiply 2 `Radix` to new `StringRadix` (2 <= k <= 36)
+    /// Mul 2 `Radix` to new `StringRadix` (2 <= k <= 36)
     /// # Examples
     ///
     /// ```
     /// use ognlib::num::radix::*;
     ///
-    /// let mut n1 = Radix::from_radix(123, 4);
-    /// let mut n2 = Radix::from_radix(444, 5);
+    /// let n1 = Radix::from_radix(123, 4);
+    /// let n2 = Radix::from_radix(444, 5);
     ///
-    /// let res = Radix::mul_to_string(&mut n1, &mut n2, 16);
+    /// let res = Radix::mul_to_string(n1, n2, 16);
     /// assert_eq!(res, StringRadix::from_radix("D14", 16));
     /// ```
 
-    pub fn mul_to_string(&mut self, a: &mut Radix, k: u8) -> StringRadix {
-        let mut dec = Self::from(self.to_radix(10).number * a.to_radix(10).number);
-        dec.to_string_radix(k)
+    pub fn mul_to_string(self, a: Radix, k: u8) -> StringRadix {
+        (self * a).to_string_radix(k)
     }
 }
 
