@@ -133,16 +133,7 @@ impl Radix {
 
     pub fn to_radix(&mut self, k: u8) -> Self {
         fn to_dec(n: &mut Radix) -> Radix {
-            use super::power::bin_pow;
-
-            let mut dec = Radix::new(10);
-            let mut count = 0;
-            while n.number != 0 {
-                dec.number += (n.number % 10) * bin_pow(n.radix as usize, count);
-                n.number /= 10;
-                count += 1;
-            }
-            dec
+            Radix::from(usize::from_str_radix(&n.number.to_string(), n.radix.into()).unwrap())
         }
         fn from_dec(n: &mut Radix, k: u8) -> Radix {
             let mut res = String::new();
@@ -175,16 +166,7 @@ impl Radix {
 
     pub fn to_string_radix(&mut self, k: u8) -> StringRadix {
         fn to_dec(n: &mut Radix) -> Radix {
-            use super::power::bin_pow;
-
-            let mut dec = Radix::new(10);
-            let mut count = 0;
-            while n.number != 0 {
-                dec.number += (n.number % 10) * bin_pow(n.radix as usize, count);
-                n.number /= 10;
-                count += 1;
-            }
-            dec
+            Radix::from(usize::from_str_radix(&n.number.to_string(), n.radix.into()).unwrap())
         }
         fn from_dec(n: &mut Radix, k: u8) -> StringRadix {
             let mut res = String::new();
