@@ -419,6 +419,10 @@ impl Radix {
         }
     }
 
+    fn to_dec(self) -> Self {
+        Radix::from(usize::from_str_radix(&self.number.to_string(), self.radix.into()).unwrap())
+    }
+
     /// Translate `Radix` to another `Radix` (2 <= k <= 10)
     /// # Panics
     ///
@@ -440,9 +444,6 @@ impl Radix {
     /// ```
 
     pub fn to_radix(&mut self, k: u8) -> Self {
-        fn to_dec(n: &mut Radix) -> Radix {
-            Radix::from(usize::from_str_radix(&n.number.to_string(), n.radix.into()).unwrap())
-        }
         fn from_dec(n: &mut Radix, k: u8) -> Radix {
             let mut res = String::new();
             while n.number != 0 {
@@ -454,9 +455,9 @@ impl Radix {
         if self.radix == 10 {
             from_dec(self, k)
         } else if k == 10 {
-            to_dec(self)
+            self.to_dec()
         } else {
-            from_dec(&mut to_dec(self), k)
+            from_dec(&mut self.to_dec(), k)
         }
     }
 
@@ -473,9 +474,6 @@ impl Radix {
     /// ```
 
     pub fn to_string_radix(&mut self, k: u8) -> StringRadix {
-        fn to_dec(n: &mut Radix) -> Radix {
-            Radix::from(usize::from_str_radix(&n.number.to_string(), n.radix.into()).unwrap())
-        }
         fn from_dec(n: &mut Radix, k: u8) -> StringRadix {
             let mut res = String::new();
             while n.number != 0 {
@@ -484,12 +482,12 @@ impl Radix {
             }
             StringRadix::from_radix(&res.chars().rev().collect::<String>(), k)
         }
-        if self.radix == 0 {
+        if self.radix == 10 {
             from_dec(self, k)
         } else if k == 10 {
-            StringRadix::from(&to_dec(self).number.to_string())
+            StringRadix::from(&self.to_dec().number.to_string())
         } else {
-            from_dec(&mut to_dec(self), k)
+            from_dec(&mut self.to_dec(), k)
         }
     }
 
@@ -600,6 +598,10 @@ impl StringRadix {
         }
     }
 
+    fn to_dec(&self) -> Radix {
+        Radix::from(usize::from_str_radix(&self.number, self.radix.into()).unwrap())
+    }
+
     /// Translate `StringRadix` to another `StringRadix`
     /// # Panics
     ///
@@ -616,9 +618,6 @@ impl StringRadix {
     /// ```
 
     pub fn to_radix(&mut self, k: u8) -> Self {
-        fn to_dec(n: &mut StringRadix) -> Radix {
-            Radix::from(usize::from_str_radix(&n.number, n.radix.into()).unwrap())
-        }
         fn from_dec(n: &mut Radix, k: u8) -> StringRadix {
             let mut res = String::new();
             while n.number != 0 {
@@ -628,11 +627,11 @@ impl StringRadix {
             StringRadix::from_radix(&res.chars().rev().collect::<String>(), k)
         }
         if k == 10 {
-            Self::from(&to_dec(self).number.to_string())
+            Self::from(&self.to_dec().number.to_string())
         } else if self.radix == 10 {
             from_dec(&mut Radix::from(self.number.parse().unwrap()), k)
         } else {
-            from_dec(&mut to_dec(self), k)
+            from_dec(&mut self.to_dec(), k)
         }
     }
 
@@ -653,9 +652,6 @@ impl StringRadix {
     /// ```
 
     pub fn to_int_radix(&mut self, k: u8) -> Radix {
-        fn to_dec(n: &mut StringRadix) -> Radix {
-            Radix::from(usize::from_str_radix(&n.number, n.radix.into()).unwrap())
-        }
         fn from_dec(n: &mut Radix, k: u8) -> Radix {
             let mut res = String::new();
             while n.number != 0 {
@@ -667,9 +663,9 @@ impl StringRadix {
         if self.radix == 10 {
             from_dec(&mut Radix::from(self.number.parse().unwrap()), k)
         } else if k == 10 {
-            to_dec(self)
+            self.to_dec()
         } else {
-            from_dec(&mut to_dec(self), k)
+            from_dec(&mut self.to_dec(), k)
         }
     }
 
