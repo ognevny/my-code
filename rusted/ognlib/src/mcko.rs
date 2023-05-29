@@ -140,14 +140,13 @@ pub fn n11() -> u32 {
 /// ```
 
 pub fn n12() -> (i32, i32) {
-    use std::{fs::File, io::Read};
+    use std::fs;
 
-    let (mut file, mut data) = (File::open("12.txt").unwrap(), String::new());
-    file.read_to_string(&mut data).unwrap();
-    let data: Vec<i32> = data
+    let data = fs::read_to_string("12.txt").unwrap();
+    let data = data
         .lines()
         .map(|line| line.trim().parse().unwrap())
-        .collect();
+        .collect::<Vec<i32>>();
 
     let (min, mut count, mut max) = (*data.iter().filter(|x| *x % 15 != 0).min().unwrap(), 0, 0);
 
