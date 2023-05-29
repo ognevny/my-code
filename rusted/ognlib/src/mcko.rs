@@ -155,9 +155,7 @@ pub fn n12() -> (i32, i32) {
         let (t1, t2) = (data[i], data[i + 1]);
         if t1 % min == 0 && t2 % min == 0 {
             count += 1;
-            if t1 + t2 > max {
-                max = t1 + t2;
-            }
+            max = max.max(t1 + t2);
         }
     }
     (count, max)
