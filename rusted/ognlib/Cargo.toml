@@ -4,6 +4,8 @@ version = "0.1.0"
 edition = "2021"
 license = "MIT OR Apache-2.0"
 description = "Some code that is written to practice Rust"
+authors = ["Maksim Bondarenkov"]
+repository = "https://github.com/ognevnydemon/my-code/tree/master/rusted/ognlib"
 
 [dependencies]
 rayon = "1.7.0"
