@@ -1,7 +1,8 @@
-//! This library was made not for uploading to crates.io, but for personal use (for me at least).
-//! This code is not intended to be very serious.
-//! I know, there is maybe some crates that have more useful implementations that mine.
-//! This code is made to practice Rust at something
+//! # ognlib
+//! 
+//! This is a code that I wrote to practice Rust. There is a big chance that there is some
+//! more efficient code already in Crates.io. Nevertheless, with this code I can better learn
+//! Rust and many of features it has.
 
 pub mod num {
     pub mod digit;

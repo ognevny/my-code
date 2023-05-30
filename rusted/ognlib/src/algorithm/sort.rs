@@ -1,6 +1,5 @@
 //! A list of sorting algorithms that are written to practice Rust.
-//! I know, that there is dozens of crates with these algorithms.
-//! This code is not intended to be a very serious project.
+//! There are many efficient code, that are faster than mine, obviously.
 
 // TODO: write a code for more sorts.
 

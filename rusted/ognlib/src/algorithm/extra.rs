@@ -1,4 +1,4 @@
-//! A list of algorithms that can't be categorized by me
+//! A list of algorithms that is not categorized currently.
 
 /// A binary search algorithm (sorted array is requiered)
 /// # Examples
