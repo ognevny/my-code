@@ -1,5 +1,5 @@
 //! # ognlib
-//! 
+//!
 //! This is a code that I wrote to practice Rust. There is a big chance that there is some
 //! more efficient code already in Crates.io. Nevertheless, with this code I can better learn
 //! Rust and many of features it has.
