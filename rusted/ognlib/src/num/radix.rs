@@ -26,8 +26,8 @@ pub enum RadixError<'a> {
 impl<'a> fmt::Display for RadixError<'a> {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
-            RadixError::BaseError(e) => write!(f, "{e}"),
-            RadixError::NumberError(e) => write!(f, "{e}"),
+            RadixError::BaseError(e) => write!(f, "Base error: {e}"),
+            RadixError::NumberError(e) => write!(f, "Number error: {e}"),
         }
     }
 }
@@ -547,17 +547,17 @@ impl<'a> Radix {
     /// assert_eq!(n.base, 2);
     ///
     /// let e1 = Radix::new(1).unwrap_err();
-    /// assert_eq!(e1.to_string(), "Base is less than two");
+    /// assert_eq!(e1.to_string(), "Base error: base is less than two");
     ///
     /// let e2 = Radix::new(33).unwrap_err();
-    /// assert_eq!(e2.to_string(), "Base is more than ten");
+    /// assert_eq!(e2.to_string(), "Base error: base is more than ten");
     /// ```
 
     pub fn new(k: u8) -> Result<Self, RadixError<'a>> {
         if k < 2 {
-            return Err(RadixError::BaseError("Base is less than two"));
+            return Err(RadixError::BaseError("base is less than two"));
         } else if k > 10 {
-            return Err(RadixError::BaseError("Base is more than ten"));
+            return Err(RadixError::BaseError("base is more than ten"));
         } else {
             Ok(Self { number: 0, base: k })
         }
@@ -597,21 +597,21 @@ impl<'a> Radix {
     /// assert_eq!(n.base, 2);
     ///
     /// let e = Radix::from_radix(444, 3).unwrap_err();
-    /// assert_eq!(e.to_string(), "Number contains a digit that is more or equal than base");
+    /// assert_eq!(e.to_string(), "Number error: number contains a digit that is more or equal than base");
     /// ```
 
     pub fn from_radix(n: usize, k: u8) -> Result<Self, RadixError<'a>> {
         if k < 2 {
-            return Err(RadixError::BaseError("Base is less than two"));
+            return Err(RadixError::BaseError("base is less than two"));
         } else if k > 10 {
-            return Err(RadixError::BaseError("Base is more than ten"));
+            return Err(RadixError::BaseError("base is more than ten"));
         } else {
             use super::digit::has_digit;
 
             for i in k..10 {
                 if has_digit(n, i) {
                     return Err(RadixError::NumberError(
-                        "Number contains a digit that is more or equal than base",
+                        "number contains a digit that is more or equal than base",
                     ));
                 }
             }
@@ -646,14 +646,14 @@ impl<'a> Radix {
     /// assert_eq!(new2, Radix::from(123));
     ///
     /// let e = new2.to_radix(1).unwrap_err();
-    /// assert_eq!(e.to_string(), "Base is less than two");
+    /// assert_eq!(e.to_string(), "Base error: base is less than two");
     /// ```
 
     pub fn to_radix(&mut self, k: u8) -> Result<Self, RadixError<'a>> {
         if k < 2 {
-            return Err(RadixError::BaseError("Base is less than two"));
+            return Err(RadixError::BaseError("base is less than two"));
         } else if k > 10 {
-            return Err(RadixError::BaseError("Base is more than ten"));
+            return Err(RadixError::BaseError("base is more than ten"));
         }
 
         fn from_dec(n: &mut Radix, k: u8) -> Radix {
@@ -691,14 +691,14 @@ impl<'a> Radix {
     /// assert_eq!(res, StringRadix::from_radix("D0", 16).unwrap());
     ///
     /// let e = n.to_string_radix(42).unwrap_err();
-    /// assert_eq!(e.to_string(), "Base is more than thirty six (36)");
+    /// assert_eq!(e.to_string(), "Base error: base is more than thirty six (36)");
     /// ```
 
     pub fn to_string_radix(&mut self, k: u8) -> Result<StringRadix, RadixError<'a>> {
         if k < 2 {
-            return Err(RadixError::BaseError("Base is less than two"));
+            return Err(RadixError::BaseError("base is less than two"));
         } else if k > 36 {
-            return Err(RadixError::BaseError("Base is more than thirty six (36)"));
+            return Err(RadixError::BaseError("base is more than thirty six (36)"));
         }
 
         fn from_dec(n: &mut Radix, k: u8) -> StringRadix {
@@ -798,17 +798,17 @@ impl<'a> StringRadix {
     /// assert_eq!(n.base, 2);
     ///
     /// let e1 = StringRadix::new(1).unwrap_err();
-    /// assert_eq!(e1.to_string(), "Base is less than two");
+    /// assert_eq!(e1.to_string(), "Base error: base is less than two");
     ///
     /// let e2 = StringRadix::new(255).unwrap_err();
-    /// assert_eq!(e2.to_string(), "Base is more than thirty six (36)");
+    /// assert_eq!(e2.to_string(), "Base error: base is more than thirty six (36)");
     /// ```
 
     pub fn new(k: u8) -> Result<Self, RadixError<'a>> {
         if k < 2 {
-            return Err(RadixError::BaseError("Base is less than two"));
+            return Err(RadixError::BaseError("base is less than two"));
         } else if k > 36 {
-            return Err(RadixError::BaseError("Base is more than thirty six (36)"));
+            return Err(RadixError::BaseError("base is more than thirty six (36)"));
         } else {
             Ok(Self {
                 number: String::from("0"),
@@ -832,14 +832,14 @@ impl<'a> StringRadix {
     /// assert_eq!(n.base, 10);
     ///
     /// let e = StringRadix::from("123A").unwrap_err();
-    /// assert_eq!(e.to_string(), "Number contains digit from range `'A'..='Z'`");
+    /// assert_eq!(e.to_string(), "Number error: number contains digit from range `'A'..='Z'`");
     /// ```
 
     pub fn from(n: &str) -> Result<Self, RadixError<'a>> {
         for i in RADIX.iter().take(36).skip(10) {
             if n.contains(*i) {
                 return Err(RadixError::NumberError(
-                    "Number contains digit from range `'A'..='Z'`",
+                    "number contains digit from range `'A'..='Z'`",
                 ));
             }
         }
@@ -865,19 +865,19 @@ impl<'a> StringRadix {
     /// assert_eq!(n.base, 2);
     ///
     /// let e = StringRadix::from_radix("123A", 9).unwrap_err();
-    /// assert_eq!(e.to_string(), "Number contains digit that is more or equal than base");
+    /// assert_eq!(e.to_string(), "Number error: number contains digit that is more or equal than base");
     /// ```
 
     pub fn from_radix(n: &str, k: u8) -> Result<Self, RadixError<'a>> {
         if k < 2 {
-            return Err(RadixError::BaseError("Base is less than two"));
+            return Err(RadixError::BaseError("base is less than two"));
         } else if k > 36 {
-            return Err(RadixError::BaseError("Base is more than thirty six (36)"));
+            return Err(RadixError::BaseError("base is more than thirty six (36)"));
         } else {
             for i in RADIX.iter().take(36).skip(k.into()) {
                 if n.contains(*i) {
                     return Err(RadixError::NumberError(
-                        "Number contains digit that is more or equal than base",
+                        "number contains digit that is more or equal than base",
                     ));
                 }
             }
@@ -910,14 +910,14 @@ impl<'a> StringRadix {
     /// assert_eq!(res, StringRadix::from_radix("D0", 16).unwrap());
     ///
     /// let e = res.to_radix(42).unwrap_err();
-    /// assert_eq!(e.to_string(), "Base is more than thirty six (36)");
+    /// assert_eq!(e.to_string(), "Base error: base is more than thirty six (36)");
     /// ```
 
     pub fn to_radix(&mut self, k: u8) -> Result<Self, RadixError<'a>> {
         if k < 2 {
-            return Err(RadixError::BaseError("Base is less than two"));
+            return Err(RadixError::BaseError("base is less than two"));
         } else if k > 36 {
-            return Err(RadixError::BaseError("Base is more than thirty six (36)"));
+            return Err(RadixError::BaseError("base is more than thirty six (36)"));
         }
 
         fn from_dec(n: &mut Radix, k: u8) -> StringRadix {
@@ -955,14 +955,14 @@ impl<'a> StringRadix {
     /// assert_eq!(res, Radix::from_radix(110100010100, 2).unwrap());
     ///
     /// let e = n.to_int_radix(12).unwrap_err();
-    /// assert_eq!(e.to_string(), "Base is more than ten");
+    /// assert_eq!(e.to_string(), "Base error: base is more than ten");
     /// ```
 
     pub fn to_int_radix(&mut self, k: u8) -> Result<Radix, RadixError<'a>> {
         if k < 2 {
-            return Err(RadixError::BaseError("Base is less than two"));
+            return Err(RadixError::BaseError("base is less than two"));
         } else if k > 10 {
-            return Err(RadixError::BaseError("Base is more than ten"));
+            return Err(RadixError::BaseError("base is more than ten"));
         }
 
         fn from_dec(n: &mut Radix, k: u8) -> Radix {
