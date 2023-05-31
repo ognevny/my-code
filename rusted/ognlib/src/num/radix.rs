@@ -219,6 +219,63 @@ impl std::ops::MulAssign for Radix {
     }
 }
 
+impl std::ops::Div for Radix {
+    type Output = Self;
+
+    /// Performs a `/` operation
+    /// # Examples
+    ///
+    /// ```
+    /// use ognlib::num::radix::Radix;
+    ///
+    /// let mut n1 = Radix::from_radix(123, 4).unwrap();
+    /// let mut n2 = Radix::from_radix(444, 5).unwrap();
+    ///
+    /// let res = (n2 / n1).to_radix(8).unwrap();
+    /// assert_eq!(res, Radix::from_radix(4, 8).unwrap());
+    /// ```
+
+    fn div(self, other: Self) -> Self::Output {
+        Self {
+            number: Self::from(
+                usize::from_str_radix(&self.number.to_string(), self.base.into()).unwrap()
+                    / usize::from_str_radix(&other.number.to_string(), other.base.into()).unwrap(),
+            )
+            .to_radix(self.base)
+            .unwrap()
+            .number,
+            base: self.base,
+        }
+    }
+}
+
+impl std::ops::DivAssign for Radix {
+    /// Performs a `/=` operation
+    /// # Examples
+    ///
+    /// ```
+    /// use ognlib::num::radix::Radix;
+    ///
+    /// let n1 = Radix::from_radix(123, 4).unwrap();
+    /// let mut n2 = Radix::from_radix(444, 5).unwrap();
+    ///
+    /// n2 /= n1;
+    /// n2 = n2.to_radix(8).unwrap();
+    ///
+    /// assert_eq!(n2, Radix::from_radix(4, 8).unwrap());
+    /// ```
+
+    fn div_assign(&mut self, other: Self) {
+        self.number = Self::from(
+            usize::from_str_radix(&self.number.to_string(), self.base.into()).unwrap()
+                / usize::from_str_radix(&other.number.to_string(), other.base.into()).unwrap(),
+        )
+        .to_radix(self.base)
+        .unwrap()
+        .number;
+    }
+}
+
 /// Radix number, that is usually written as *number*<sub>*base*</sub>
 /// (444<sub>8</sub> for example), but number is represented as
 /// [`String`] so base could be from range `2..=36`. fields have the same
@@ -404,6 +461,67 @@ impl std::ops::MulAssign for StringRadix {
         self.number = Self::from(
             &(usize::from_str_radix(&self.number, self.base.into()).unwrap()
                 * usize::from_str_radix(&other.number, other.base.into()).unwrap())
+            .to_string(),
+        )
+        .unwrap()
+        .to_radix(self.base)
+        .unwrap()
+        .number;
+    }
+}
+
+impl std::ops::Div for StringRadix {
+    type Output = Self;
+
+    /// Performs a `/` operation
+    /// # Examples
+    ///
+    /// ```
+    /// use ognlib::num::radix::StringRadix;
+    ///
+    /// let mut n1 = StringRadix::from_radix("123", 4).unwrap();
+    /// let mut n2 = StringRadix::from_radix("444", 5).unwrap();
+    ///
+    /// let res = (n2 / n1).to_radix(8).unwrap();
+    /// assert_eq!(res, StringRadix::from_radix("4", 8).unwrap());
+    /// ```
+
+    fn div(self, other: Self) -> Self::Output {
+        Self {
+            number: Self::from(
+                &(usize::from_str_radix(&self.number, self.base.into()).unwrap()
+                    / usize::from_str_radix(&other.number, other.base.into()).unwrap())
+                .to_string(),
+            )
+            .unwrap()
+            .to_radix(self.base)
+            .unwrap()
+            .number,
+            base: self.base,
+        }
+    }
+}
+
+impl std::ops::DivAssign for StringRadix {
+    /// Performs a `/=` operation
+    /// # Examples
+    ///
+    /// ```
+    /// use ognlib::num::radix::StringRadix;
+    ///
+    /// let n1 = StringRadix::from_radix("123", 4).unwrap();
+    /// let mut n2 = StringRadix::from_radix("444", 5).unwrap();
+    ///
+    /// n2 /= n1;
+    /// n2 = n2.to_radix(8).unwrap();
+    ///
+    /// assert_eq!(n2, StringRadix::from_radix("4", 8).unwrap());
+    /// ```
+
+    fn div_assign(&mut self, other: Self) {
+        self.number = Self::from(
+            &(usize::from_str_radix(&self.number, self.base.into()).unwrap()
+                / usize::from_str_radix(&other.number, other.base.into()).unwrap())
             .to_string(),
         )
         .unwrap()
