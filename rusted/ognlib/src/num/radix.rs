@@ -36,7 +36,7 @@ impl<'a> Error for RadixError<'a> {}
 
 /// Radix number, that is usually written as *number*<sub>*base*</sub>
 /// (444<sub>8</sub> for example). So fields are named in that way.
-/// Base can b only in range `2..=10`
+/// Base can be only in range `2..=10`
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct Radix {
     pub number: usize,
