@@ -119,14 +119,14 @@ pub fn miller_rabin(n: isize) -> Result<PrimeStatus, PrimeStatusError> {
             t /= 2;
             s += 1;
         }
-        for _ in 0..k {
+        for _i in 0..k {
             let a = rand::thread_rng().gen_range(2..n - 1);
 
             let mut x = modpow(a, t as usize, n);
             if x == 1 || x == n - 1 {
                 continue;
             }
-            for _ in 0..s - 1 {
+            for _j in 0..s - 1 {
                 x = modpow(x, 2, n);
                 if x == 1 {
                     return Ok(PrimeStatus::Composite);
