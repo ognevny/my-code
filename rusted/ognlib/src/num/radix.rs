@@ -1,7 +1,7 @@
 //! Structs and impls for radix numbers (String nums and int nums).
 //! All numbers are unsigned ints.
 
-// TODO: write more ariphmetic functions. error handling. tests
+// TODO: write tests
 
 use std::{cmp::Ordering, error::Error, fmt};
 
