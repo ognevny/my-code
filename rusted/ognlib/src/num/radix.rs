@@ -820,7 +820,7 @@ impl<'a> StringRadix {
     /// ```
 
     pub fn from(n: &str) -> Result<Self, RadixError<'a>> {
-        for i in RADIX.iter().take(36).skip(10) {
+        for i in RADIX.iter().skip(10) {
             if n.contains(*i) {
                 return Err(RadixError::NumberError(
                     "number contains digit from range `'A'..='Z'`",
@@ -858,7 +858,7 @@ impl<'a> StringRadix {
         } else if k > 36 {
             return Err(RadixError::BaseError("base is more than thirty six (36)"));
         } else {
-            for i in RADIX.iter().take(36).skip(k.into()) {
+            for i in RADIX.iter().skip(k.into()) {
                 if n.contains(*i) {
                     return Err(RadixError::NumberError(
                         "number contains digit that is more or equal than base",
