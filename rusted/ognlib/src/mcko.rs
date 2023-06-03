@@ -27,8 +27,8 @@
 /// ```
 
 pub fn n2(n: u16) -> u16 {
-    let m = format!("{n:b}");
-    let m = if n % 2 == 0 {
+    let mut m = format!("{n:b}");
+    m = if n % 2 == 0 {
         format!("{m}10")
     } else {
         format!("1{m}00")
@@ -141,13 +141,11 @@ pub fn n11() -> u32 {
 /// ```
 
 pub fn n12() -> (i32, i32) {
-    use std::fs;
-
-    let data = fs::read_to_string("12.txt").unwrap();
-    let data = data
+    let data: Vec<i32> = std::fs::read_to_string("12.txt")
+        .unwrap()
         .lines()
         .map(|line| line.trim().parse().unwrap())
-        .collect::<Vec<i32>>();
+        .collect();
 
     let (min, mut count, mut max) = (*data.iter().filter(|x| *x % 15 != 0).min().unwrap(), 0, 0);
 
