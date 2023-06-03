@@ -72,8 +72,8 @@ impl ops::Add for Radix {
     /// ```
     /// use ognlib::num::radix::Radix;
     ///
-    /// let mut n1 = Radix::from_radix(123, 4).unwrap();
-    /// let mut n2 = Radix::from_radix(444, 5).unwrap();
+    /// let n1 = Radix::from_radix(123, 4).unwrap();
+    /// let n2 = Radix::from_radix(444, 5).unwrap();
     ///
     /// let res = (n1 + n2).to_radix(8).unwrap();
     /// assert_eq!(res, Radix::from_radix(227, 8).unwrap());
@@ -128,8 +128,8 @@ impl ops::Sub for Radix {
     /// ```
     /// use ognlib::num::radix::Radix;
     ///
-    /// let mut n1 = Radix::from_radix(123, 4).unwrap();
-    /// let mut n2 = Radix::from_radix(444, 5).unwrap();
+    /// let n1 = Radix::from_radix(123, 4).unwrap();
+    /// let n2 = Radix::from_radix(444, 5).unwrap();
     ///
     /// let res = (n1 - n2).to_radix(8).unwrap();
     /// assert_eq!(res, Radix::from_radix(141, 8).unwrap());
@@ -173,8 +173,8 @@ impl ops::Mul for Radix {
     /// ```
     /// use ognlib::num::radix::Radix;
     ///
-    /// let mut n1 = Radix::from_radix(123, 4).unwrap();
-    /// let mut n2 = Radix::from_radix(444, 5).unwrap();
+    /// let n1 = Radix::from_radix(123, 4).unwrap();
+    /// let n2 = Radix::from_radix(444, 5).unwrap();
     ///
     /// let res = (n1 * n2).to_radix(8).unwrap();
     /// assert_eq!(res, Radix::from_radix(6424, 8).unwrap());
@@ -230,8 +230,8 @@ impl ops::Div for Radix {
     /// ```
     /// use ognlib::num::radix::Radix;
     ///
-    /// let mut n1 = Radix::from_radix(123, 4).unwrap();
-    /// let mut n2 = Radix::from_radix(444, 5).unwrap();
+    /// let n1 = Radix::from_radix(123, 4).unwrap();
+    /// let n2 = Radix::from_radix(444, 5).unwrap();
     ///
     /// let res = (n2 / n1).to_radix(8).unwrap();
     /// assert_eq!(res, Radix::from_radix(4, 8).unwrap());
@@ -313,8 +313,8 @@ impl ops::Add for StringRadix {
     /// ```
     /// use ognlib::num::radix::StringRadix;
     ///
-    /// let mut n1 = StringRadix::from_radix("123", 4).unwrap();
-    /// let mut n2 = StringRadix::from_radix("444", 5).unwrap();
+    /// let n1 = StringRadix::from_radix("123", 4).unwrap();
+    /// let n2 = StringRadix::from_radix("444", 5).unwrap();
     ///
     /// let res = (n1 + n2).to_radix(8).unwrap();
     /// assert_eq!(res, StringRadix::from_radix("227", 8).unwrap());
@@ -369,8 +369,8 @@ impl ops::Sub for StringRadix {
     /// ```
     /// use ognlib::num::radix::StringRadix;
     ///
-    /// let mut n1 = StringRadix::from_radix("123", 4).unwrap();
-    /// let mut n2 = StringRadix::from_radix("444", 5).unwrap();
+    /// let n1 = StringRadix::from_radix("123", 4).unwrap();
+    /// let n2 = StringRadix::from_radix("444", 5).unwrap();
     ///
     /// let res = (n1 - n2).to_radix(8).unwrap();
     /// assert_eq!(res, StringRadix::from_radix("141", 8).unwrap());
@@ -412,8 +412,8 @@ impl ops::Mul for StringRadix {
     /// ```
     /// use ognlib::num::radix::StringRadix;
     ///
-    /// let mut n1 = StringRadix::from_radix("123", 4).unwrap();
-    /// let mut n2 = StringRadix::from_radix("444", 5).unwrap();
+    /// let n1 = StringRadix::from_radix("123", 4).unwrap();
+    /// let n2 = StringRadix::from_radix("444", 5).unwrap();
     ///
     /// let res = (n1 * n2).to_radix(8).unwrap();
     /// assert_eq!(res, StringRadix::from_radix("6424", 8).unwrap());
@@ -469,8 +469,8 @@ impl ops::Div for StringRadix {
     /// ```
     /// use ognlib::num::radix::StringRadix;
     ///
-    /// let mut n1 = StringRadix::from_radix("123", 4).unwrap();
-    /// let mut n2 = StringRadix::from_radix("444", 5).unwrap();
+    /// let n1 = StringRadix::from_radix("123", 4).unwrap();
+    /// let n2 = StringRadix::from_radix("444", 5).unwrap();
     ///
     /// let res = (n2 / n1).to_radix(8).unwrap();
     /// assert_eq!(res, StringRadix::from_radix("4", 8).unwrap());
@@ -618,11 +618,11 @@ impl<'a> Radix {
     /// ```
     /// use ognlib::num::radix::Radix;
     ///
-    /// let mut n1 = Radix::from(123);
+    /// let n1 = Radix::from(123);
     /// let new1 = n1.to_radix(8).unwrap();
     ///
-    /// let mut n2 = Radix::from_radix(173, 8).unwrap();
-    /// let mut new2 = n2.to_radix(10).unwrap();
+    /// let n2 = Radix::from_radix(173, 8).unwrap();
+    /// let new2 = n2.to_radix(10).unwrap();
     ///
     /// assert_eq!(new1, Radix::from_radix(173, 8).unwrap());
     /// assert_eq!(new2, Radix::from(123));
@@ -682,8 +682,8 @@ impl<'a> Radix {
     /// ```
     /// use ognlib::num::radix::*;
     ///
-    /// let mut n = Radix::from_radix(11010000, 2).unwrap();
-    /// let mut res = n.to_str_radix(16).unwrap();
+    /// let n = Radix::from_radix(11010000, 2).unwrap();
+    /// let res = n.to_str_radix(16).unwrap();
     /// assert_eq!(res, StringRadix::from_radix("D0", 16).unwrap());
     ///
     /// let e = n.to_str_radix(42).unwrap_err();

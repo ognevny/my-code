@@ -9,10 +9,10 @@
 ///
 /// # Examples
 /// ```
-/// #[macro_use]
 /// use ognlib::read;
 ///
-/// read!(x as i32); // this creates a variable `x` from the line and parse it into i32
+/// // this creates a variable `x` from the line and parse it into i32
+/// read!(x as i32);
 /// ```
 #[macro_export]
 macro_rules! read {
@@ -31,10 +31,10 @@ macro_rules! read {
 ///
 /// # Examples
 /// ```
-/// #[macro_use]
 /// use ognlib::read_str;
-///
-/// read_str!(x); // this creates a String `x` from the line and trim it
+/// 
+/// // this creates a String `x` from the line and trim it
+/// read_str!(x);
 /// ```
 #[macro_export]
 macro_rules! read_str {
@@ -53,10 +53,10 @@ macro_rules! read_str {
 ///
 /// # Examples
 /// ```
-/// #[macro_use]
 /// use ognlib::read_vec;
-///
-/// read_vec!(x as i32); // this creates a Vec `x` from the line and parse every number into i32
+/// 
+/// // this creates a Vec `x` from the line and parse every number into i32
+/// read_vec!(x as i32);
 /// ```
 #[macro_export]
 macro_rules! read_vec {
