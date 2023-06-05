@@ -147,14 +147,9 @@ pub fn n12() -> (i32, i32) {
         .map(|line| line.trim().parse().unwrap())
         .collect();
 
-    let (min, mut count, mut max) = (*data.iter().filter(|x| *x % 15 != 0).min().unwrap(), 0, 0);
+    let min = *data.iter().filter(|x| *x % 15 != 0).min().unwrap();
 
-    for i in 0..data.len() - 1 {
-        let (t1, t2) = (data[i], data[i + 1]);
-        if t1 % min == 0 && t2 % min == 0 {
-            count += 1;
-            max = max.max(t1 + t2);
-        }
-    }
-    (count, max)
+    data.windows(2)
+        .filter(|t| t[0] % min == 0 && t[1] % min == 0)
+        .fold((0, 0), |(count, max), t| (count + 1, max.max(t[0] + t[1])))
 }

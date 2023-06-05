@@ -32,7 +32,7 @@ macro_rules! read {
 /// # Examples
 /// ```
 /// use ognlib::read_str;
-/// 
+///
 /// // this creates a String `x` from the line and trim it
 /// read_str!(x);
 /// ```
@@ -54,7 +54,7 @@ macro_rules! read_str {
 /// # Examples
 /// ```
 /// use ognlib::read_vec;
-/// 
+///
 /// // this creates a Vec `x` from the line and parse every number into i32
 /// read_vec!(x as i32);
 /// ```
