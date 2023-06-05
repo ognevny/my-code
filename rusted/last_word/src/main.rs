@@ -1,10 +1,10 @@
 // same as lastword.cpp, but with Rust syntax
 
-use std::io::stdin;
+use std::io;
 
-fn main() {
+fn main() -> io::Result<()> {
     let mut line = String::new();
-    stdin().read_line(&mut line).unwrap();
+    io::stdin().read_line(&mut line)?;
     print!(
         "{}",
         match line.trim().rfind(' ') {
@@ -12,4 +12,5 @@ fn main() {
             None => line.trim(),
         }
     );
+    Ok(())
 }

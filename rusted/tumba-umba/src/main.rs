@@ -1,13 +1,13 @@
 // same as tumba-umba.cpp, but for only the first task
 
-use std::io::stdin;
+use std::io;
 
-fn main() {
+fn main() -> io::Result<()> {
     let (mut alpha, mut k, mut words) = (String::new(), String::new(), Vec::new());
-    stdin().read_line(&mut alpha).unwrap();
+    io::stdin().read_line(&mut alpha)?;
     let alpha: Vec<char> = alpha.trim().chars().collect();
 
-    stdin().read_line(&mut k).unwrap();
+    io::stdin().read_line(&mut k)?;
     let k: usize = k.trim().parse().unwrap();
 
     gen(&mut words, &alpha, &mut vec![' '; k], 0);
@@ -17,6 +17,7 @@ fn main() {
         println!("{}", word);
     }
     println!("{}", words.len());
+    Ok(())
 }
 
 fn gen(words: &mut Vec<String>, alpha: &Vec<char>, current: &mut Vec<char>, i: usize) {

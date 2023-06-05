@@ -1,8 +1,8 @@
-use std::io::stdin;
+use std::io;
 
-fn main() {
+fn main() -> io::Result<()> {
     let mut input = String::new();
-    stdin().read_line(&mut input).unwrap();
+    io::stdin().read_line(&mut input)?;
     print!(
         "{}",
         match input.find(' ') {
@@ -10,4 +10,5 @@ fn main() {
             None => input.trim(),
         }
     );
+    Ok(())
 }
