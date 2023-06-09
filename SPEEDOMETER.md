@@ -28,7 +28,7 @@ Rust 1.69.0;
 Command line shell `fish` 3.6.1 and its command `time`.  
 Below will be a log of the commands I typed into the terminal
 #### C
-```shell
+```console
 ~/m/dad-is-great-in-C> clang speedometer.c
 ~/m/dad-is-great-in-C> time ./a
 1000000000
@@ -38,7 +38,7 @@ Executed in  551,16 millis    fish           external
    sys time    0,00 millis    0,00 micros    0,00 millis
 ```
 #### C++
-```shell
+```console
 ~/m/dad-is-great-in-C> clang++ speedometer.cpp
 ~/m/dad-is-great-in-C> time ./a
 1000000000
@@ -49,7 +49,7 @@ Executed in  562,58 millis    fish           external
 ```
 #### Python
 speedometer.py
-```shell
+```console
 ~/m/pie> time python speedometer.py
 1000000000
 
@@ -59,7 +59,7 @@ Executed in   26,65 secs      fish           external
    sys time    0,00 micros    0,00 micros    0,00 micros
 ```
 numbed.py
-```shell
+```console
 ~/m/pie> time python numbed.py
 1000000000
 
@@ -69,7 +69,7 @@ Executed in    3,01 secs      fish           external
    sys time    0,00 micros    0,00 micros    0,00 micros
 ```
 #### Rust
-```shell
+```console
 ~/m/r/speedometer> cargo b
    Compiling speedometer v0.1.0 (C:\...\my-code\rusted\speedometer)
     Finished dev [unoptimized] target(s) in 0.00s
