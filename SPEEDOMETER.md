@@ -13,7 +13,7 @@ OS - Windows 11 последней версии;
 [дистрибутив MSYS2](https://msys2.org), который предоставляет мне:  
 clang 16.0.2 - компилятор C и C++;  
 Python 3.10.11 с numba 0.57.0;  
-Rust 1.69.0;  
+Rust 1.70.0;  
 Командная оболочка `fish` 3.6.1, и её команда `time`.  
 Ниже (под ENG) будет представлен лог команд, которые я вписывал в терминал  
 **ENG**: You can test these programs yourself. I will show you how I do it:  
@@ -28,7 +28,7 @@ Rust 1.69.0;
 Command line shell `fish` 3.6.1 and its command `time`.  
 Below will be a log of the commands I typed into the terminal
 #### C
-```fish
+```shell
 ~/m/dad-is-great-in-C> clang speedometer.c
 ~/m/dad-is-great-in-C> time ./a
 1000000000
@@ -38,7 +38,7 @@ Executed in  551,16 millis    fish           external
    sys time    0,00 millis    0,00 micros    0,00 millis
 ```
 #### C++
-```fish
+```shell
 ~/m/dad-is-great-in-C> clang++ speedometer.cpp
 ~/m/dad-is-great-in-C> time ./a
 1000000000
@@ -49,7 +49,7 @@ Executed in  562,58 millis    fish           external
 ```
 #### Python
 speedometer.py
-```fish
+```shell
 ~/m/pie> time python speedometer.py
 1000000000
 
@@ -59,7 +59,7 @@ Executed in   26,65 secs      fish           external
    sys time    0,00 micros    0,00 micros    0,00 micros
 ```
 numbed.py
-```fish
+```shell
 ~/m/pie> time python numbed.py
 1000000000
 
@@ -69,7 +69,7 @@ Executed in    3,01 secs      fish           external
    sys time    0,00 micros    0,00 micros    0,00 micros
 ```
 #### Rust
-```fish
+```shell
 ~/m/r/speedometer> cargo b
    Compiling speedometer v0.1.0 (C:\...\my-code\rusted\speedometer)
     Finished dev [unoptimized] target(s) in 0.00s
@@ -78,9 +78,9 @@ Executed in    3,01 secs      fish           external
      Running `target\debug\speedometer.exe`
 1000000000
 ________________________________________________________
-Executed in  779,18 millis    fish           external
-   usr time    0,00 micros    0,00 micros    0,00 micros
-   sys time    0,00 micros    0,00 micros    0,00 micros
+Executed in  798,00 millis    fish           external
+   usr time    0,00 millis    0,00 micros    0,00 millis
+   sys time   15,00 millis    0,00 micros   15,00 millis
 ```
 ### Reference
 **RU**: данные коды вдохновлены видео на ютуб от The Builder 
