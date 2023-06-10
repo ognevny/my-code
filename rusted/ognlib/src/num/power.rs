@@ -2,8 +2,8 @@
 
 use std::ops::{Mul, MulAssign, Rem};
 
-/// Algorithm for binary power. Due to fact that returned value has the same
-/// type as base, it could fail with overflowing.
+/// Algorithm for binary power. Due to fact that returned value has the same type as base, it could
+/// fail with overflowing.
 /// # Examples
 ///
 /// ```

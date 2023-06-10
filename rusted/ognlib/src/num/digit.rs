@@ -1,6 +1,5 @@
-//! Functions for operations with number digits. It has already
-//! been tested, that Iterators are less quick, that `while` loops
-//! in these cases.
+//! Functions for operations with number digits. It has already been tested, that Iterators are less
+//! quick, than `while` loops in these cases.
 
 use std::ops::{AddAssign, DivAssign, MulAssign, Rem};
 
