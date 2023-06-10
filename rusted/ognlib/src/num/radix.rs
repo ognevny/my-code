@@ -1,22 +1,20 @@
-//! Structs and impls for radix numbers (String nums and int nums).
-//! All numbers are unsigned ints.
+//! Structs and impls for radix numbers (String nums and int nums). All numbers are unsigned ints.
 
 // TODO: write tests
 
 use std::{cmp::Ordering, error::Error, fmt, ops};
 
-/// Reference to slice of chars from '0' to 'Z' (maximum base is 36)
+/// Reference to slice of chars from '0' to 'Z' (maximum base is 36).
 pub const RADIX: &[char] = &[
     '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I',
     'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
 ];
 
-/// You can have 2 problems with radix numbers:
-/// first, base could be incorrect when it's not in range `2..=10`
-/// for [`Radix`] or `2..=36` for [`StringRadix`]; second, number
-/// can be incorrect, this could be caused by fact that number
-/// contains digits that are more or equal than base.
-/// So this enum is about these 2 problems.
+/// You can have 2 problems with radix numbers: first, base could be incorrect when it's not in
+/// range `2..=10` for [`Radix`] or `2..=36` for [`StringRadix`]; second, number can be incorrect,
+/// this could be caused by fact that number contains digits that are more or equal than base. So
+/// this enum is about these 2 problems. But also there is ParseError which is just
+/// [`ParseIntError`] from std.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum RadixError<'a> {
     BaseError(&'a str),
@@ -36,9 +34,8 @@ impl<'a> fmt::Display for RadixError<'a> {
 
 impl<'a> Error for RadixError<'a> {}
 
-/// Radix number, that is usually written as *number*<sub>*base*</sub>
-/// (444<sub>8</sub> for example). So fields are named in that way.
-/// Base can be only in range `2..=10`
+/// Radix number, that is usually written as *number*<sub>*base*</sub> (444<sub>8</sub> for
+/// example). So fields are named in that way. Base can be only in range `2..=10`.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct Radix {
     pub number: usize,
@@ -66,7 +63,7 @@ impl Ord for Radix {
 impl ops::Add for Radix {
     type Output = Self;
 
-    /// Performs a `+` operation
+    /// Performs a `+` operation.
     /// # Examples
     ///
     /// ```
@@ -94,7 +91,7 @@ impl ops::Add for Radix {
 }
 
 impl ops::AddAssign for Radix {
-    /// Performs a `+=` operation
+    /// Performs a `+=` operation.
     /// # Examples
     ///
     /// ```
@@ -122,7 +119,7 @@ impl ops::AddAssign for Radix {
 impl ops::Sub for Radix {
     type Output = Self;
 
-    /// Performs a `-` operation
+    /// Performs a `-` operation.
     /// # Examples
     ///
     /// ```
@@ -167,7 +164,7 @@ impl ops::Sub for Radix {
 impl ops::Mul for Radix {
     type Output = Self;
 
-    /// Performs a `*` operation
+    /// Performs a `*` operation.
     /// # Examples
     ///
     /// ```
@@ -195,7 +192,7 @@ impl ops::Mul for Radix {
 }
 
 impl ops::MulAssign for Radix {
-    /// Performs a `*=` operation
+    /// Performs a `*=` operation.
     /// # Examples
     ///
     /// ```
@@ -224,7 +221,7 @@ impl ops::MulAssign for Radix {
 impl ops::Div for Radix {
     type Output = Self;
 
-    /// Performs a `/` operation
+    /// Performs a `/` operation.
     /// # Examples
     ///
     /// ```
@@ -252,7 +249,7 @@ impl ops::Div for Radix {
 }
 
 impl ops::DivAssign for Radix {
-    /// Performs a `/=` operation
+    /// Performs a `/=` operation.
     /// # Examples
     ///
     /// ```
@@ -278,10 +275,66 @@ impl ops::DivAssign for Radix {
     }
 }
 
-/// Radix number, that is usually written as *number*<sub>*base*</sub>
-/// (444<sub>8</sub> for example), but number is represented as
-/// [`String`] so base could be from range `2..=36`. fields have the same
-/// names as fields of [`Radix`]
+impl ops::Rem for Radix {
+    type Output = Self;
+
+    /// Performs a `%` operation.
+    /// # Examples
+    ///
+    /// ```
+    /// use ognlib::num::radix::Radix;
+    ///
+    /// let n1 = Radix::from_radix(123, 4).unwrap();
+    /// let n2 = Radix::from_radix(444, 5).unwrap();
+    ///
+    /// let res = (n2 % n1).to_radix(8).unwrap();
+    /// assert_eq!(res, Radix::from_radix(20, 8).unwrap());
+    /// ```
+
+    fn rem(self, other: Self) -> Self::Output {
+        Self {
+            number: Self::from(
+                usize::from_str_radix(&self.number.to_string(), self.base.into()).unwrap()
+                    % usize::from_str_radix(&other.number.to_string(), other.base.into()).unwrap(),
+            )
+            .to_radix(self.base)
+            .unwrap()
+            .number,
+            base: self.base,
+        }
+    }
+}
+
+impl ops::RemAssign for Radix {
+    /// Performs a `%=` operation.
+    /// # Examples
+    ///
+    /// ```
+    /// use ognlib::num::radix::Radix;
+    ///
+    /// let n1 = Radix::from_radix(123, 4).unwrap();
+    /// let mut n2 = Radix::from_radix(444, 5).unwrap();
+    ///
+    /// n2 %= n1;
+    /// n2 = n2.to_radix(8).unwrap();
+    ///
+    /// assert_eq!(n2, Radix::from_radix(20, 8).unwrap());
+    /// ```
+
+    fn rem_assign(&mut self, other: Self) {
+        self.number = Self::from(
+            usize::from_str_radix(&self.number.to_string(), self.base.into()).unwrap()
+                % usize::from_str_radix(&other.number.to_string(), other.base.into()).unwrap(),
+        )
+        .to_radix(self.base)
+        .unwrap()
+        .number;
+    }
+}
+
+/// Radix number, that is usually written as *number*<sub>*base*</sub> (444<sub>8</sub> for
+/// example), but number is represented as [`String`] so base could be from range `2..=36`.
+/// Fields have the same names as fields of [`Radix`].
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct StringRadix {
     pub number: String,
@@ -307,7 +360,7 @@ impl Ord for StringRadix {
 impl ops::Add for StringRadix {
     type Output = Self;
 
-    /// Performs a `+` operation
+    /// Performs a `+` operation.
     /// # Examples
     ///
     /// ```
@@ -335,7 +388,7 @@ impl ops::Add for StringRadix {
 }
 
 impl ops::AddAssign for StringRadix {
-    /// Performs a `+=` operation
+    /// Performs a `+=` operation.
     /// # Examples
     ///
     /// ```
@@ -363,7 +416,7 @@ impl ops::AddAssign for StringRadix {
 impl ops::Sub for StringRadix {
     type Output = Self;
 
-    /// Performs a `-` operation
+    /// Performs a `-` operation.
     /// # Examples
     ///
     /// ```
@@ -406,7 +459,7 @@ impl ops::Sub for StringRadix {
 impl ops::Mul for StringRadix {
     type Output = Self;
 
-    /// Performs a `*` operation
+    /// Performs a `*` operation.
     /// # Examples
     ///
     /// ```
@@ -434,7 +487,7 @@ impl ops::Mul for StringRadix {
 }
 
 impl ops::MulAssign for StringRadix {
-    /// Performs a `*=` operation
+    /// Performs a `*=` operation.
     /// # Examples
     ///
     /// ```
@@ -463,7 +516,7 @@ impl ops::MulAssign for StringRadix {
 impl ops::Div for StringRadix {
     type Output = Self;
 
-    /// Performs a `/` operation
+    /// Performs a `/` operation.
     /// # Examples
     ///
     /// ```
@@ -491,7 +544,7 @@ impl ops::Div for StringRadix {
 }
 
 impl ops::DivAssign for StringRadix {
-    /// Performs a `/=` operation
+    /// Performs a `/=` operation.
     /// # Examples
     ///
     /// ```
@@ -517,11 +570,68 @@ impl ops::DivAssign for StringRadix {
     }
 }
 
+impl ops::Rem for StringRadix {
+    type Output = Self;
+
+    /// Performs a `%` operation.
+    /// # Examples
+    ///
+    /// ```
+    /// use ognlib::num::radix::StringRadix;
+    ///
+    /// let n1 = StringRadix::from_radix("123", 4).unwrap();
+    /// let n2 = StringRadix::from_radix("444", 5).unwrap();
+    ///
+    /// let res = (n2 % n1).to_radix(8).unwrap();
+    /// assert_eq!(res, StringRadix::from_radix("20", 8).unwrap());
+    /// ```
+
+    fn rem(self, other: Self) -> Self::Output {
+        Self {
+            number: Radix::from(
+                usize::from_str_radix(&self.number, self.base.into()).unwrap()
+                    % usize::from_str_radix(&other.number, other.base.into()).unwrap(),
+            )
+            .to_str_radix(self.base)
+            .unwrap()
+            .number,
+            base: self.base,
+        }
+    }
+}
+
+impl ops::RemAssign for StringRadix {
+    /// Performs a `%=` operation.
+    /// # Examples
+    ///
+    /// ```
+    /// use ognlib::num::radix::StringRadix;
+    ///
+    /// let n1 = StringRadix::from_radix("123", 4).unwrap();
+    /// let mut n2 = StringRadix::from_radix("444", 5).unwrap();
+    ///
+    /// n2 %= n1;
+    /// n2 = n2.to_radix(8).unwrap();
+    ///
+    /// assert_eq!(n2, StringRadix::from_radix("20", 8).unwrap());
+    /// ```
+
+    fn rem_assign(&mut self, other: Self) {
+        self.number = Radix::from(
+            usize::from_str_radix(&self.number, self.base.into()).unwrap()
+                % usize::from_str_radix(&other.number, other.base.into()).unwrap(),
+        )
+        .to_str_radix(self.base)
+        .unwrap()
+        .number;
+    }
+}
+
 impl<'a> Radix {
     /// Creates a new [`Radix`].
     ///
     /// # Error
-    /// Returns a `BaseError` when base isn't correct
+    /// Returns a `BaseError` when base isn't correct.
     ///
     /// # Examples
     ///
@@ -549,7 +659,7 @@ impl<'a> Radix {
         }
     }
 
-    /// Creates a new [`Radix`] with base 10 and given number
+    /// Creates a new [`Radix`] with base 10 and given number.
     /// # Examples
     ///
     /// ```
@@ -567,11 +677,10 @@ impl<'a> Radix {
         }
     }
 
-    /// Creates a new [`Radix`] with given number and base
+    /// Creates a new [`Radix`] with given number and base.
     ///
     /// # Error
-    /// Returns a `BaseError` if base isn't correct; `NumberError` if
-    /// number isn't correct
+    /// Returns a `BaseError` if base isn't correct; `NumberError` if number isn't correct.
     ///
     /// # Examples
     ///
@@ -605,13 +714,14 @@ impl<'a> Radix {
         }
     }
 
-    /// Translate [`Radix`] to another [`Radix`]
+    /// Translate [`Radix`] to another [`Radix`].
     ///
     /// # Panics
-    /// Panics if k is less than 2 or k more than 36
+    /// Panics if k is less than 2 or k more than 36.
     ///
     /// # Error
-    /// Returns a `BaseError` when base isn't correct
+    /// Returns a `BaseError` when base isn't correct; `ParseError` if there was error with parse
+    /// functions.
     ///
     /// # Examples
     ///
@@ -669,13 +779,14 @@ impl<'a> Radix {
         )
     }
 
-    /// Translate [`Radix`] to another [`StringRadix`]
+    /// Translate [`Radix`] to another [`StringRadix`].
     ///
     /// # Panics
-    /// Panics if k is less than 2 or k more than 36
+    /// Panics if k is less than 2 or k more than 36.
     ///
     /// # Error
-    /// Returns a `BaseError` when base isn't correct
+    /// Returns a `BaseError` when base isn't correct; `ParseError` if there was error with parse
+    /// functions.
     ///
     /// # Examples
     ///
@@ -713,10 +824,10 @@ impl<'a> Radix {
         StringRadix::from_radix(&res.chars().rev().collect::<String>(), k)
     }
 
-    /// Sum 2 [`Radix`] to new [`StringRadix`] (2 <= k <= 36)
+    /// Sum 2 [`Radix`] to new [`StringRadix`].
     ///
     /// # Error
-    /// Returns the same error as `to_string_radix`
+    /// Same as `to_string_radix`.
     ///
     /// # Examples
     ///
@@ -734,10 +845,10 @@ impl<'a> Radix {
         (self + a).to_str_radix(k)
     }
 
-    /// Sub 2 [`Radix`] to new [`StringRadix`] (2 <= k <= 36)
+    /// Sub 2 [`Radix`] to new [`StringRadix`].
     ///
     /// # Error
-    /// Returns the same error as `to_string_radix`
+    /// Same as `to_string_radix`.
     ///
     /// # Examples
     ///
@@ -755,10 +866,10 @@ impl<'a> Radix {
         (self - a).to_str_radix(k)
     }
 
-    /// Mul 2 [`Radix`] to new [`StringRadix`] (2 <= k <= 36)
+    /// Mul 2 [`Radix`] to new [`StringRadix`].
     ///
     /// # Error
-    /// Returns the same error as `to_string_radix`
+    /// Same as `to_string_radix`.
     ///
     /// # Examples
     ///
@@ -781,7 +892,7 @@ impl<'a> StringRadix {
     /// Creates a new [`StringRadix`].
     ///
     /// # Error
-    /// Returns a `BaseError` when base isn't correct
+    /// Returns a `BaseError` when base isn't correct.
     ///
     /// # Examples
     ///
@@ -812,10 +923,10 @@ impl<'a> StringRadix {
         }
     }
 
-    /// Creates a new [`StringRadix`] with base 10 and given str number
+    /// Creates a new [`StringRadix`] with base 10 and given str number.
     ///
     /// # Error
-    /// Return a `NumberError` when number contains digit from range `'A'..='Z'`
+    /// Return a `NumberError` when number contains digit from range `'A'..='Z'`.
     ///
     /// # Examples
     ///
@@ -844,11 +955,11 @@ impl<'a> StringRadix {
         })
     }
 
-    /// Creates a new [`StringRadix`] with given number and base
+    /// Creates a new [`StringRadix`] with given number and base.
     ///
     /// # Error
-    /// Returns a `BaseError` when base isn't correct or `NumberError` when number
-    /// contains digit that are more or equal than base
+    /// Returns a `BaseError` when base isn't correct or `NumberError` when number contains digit
+    /// that are more or equal than base.
     ///
     /// # Examples
     ///
@@ -883,13 +994,14 @@ impl<'a> StringRadix {
         }
     }
 
-    /// Translate [`StringRadix`] to another [`StringRadix`]
+    /// Translate [`StringRadix`] to another [`StringRadix`].
     ///
     /// # Panics
-    /// Panics if k is less than 2 or k more than 36
+    /// Panics if k is less than 2 or k more than 36.
     ///
     /// # Error
-    /// Returns a `BaseError` when base isn't correct
+    /// Returns a `BaseError` when base isn't correct; `ParseError` if there was error with parse
+    /// functions.
     ///
     /// # Examples
     ///
@@ -942,13 +1054,14 @@ impl<'a> StringRadix {
         StringRadix::from_radix(&res.chars().rev().collect::<String>(), k)
     }
 
-    /// Translate [`StringRadix`] to another [`Radix`]
+    /// Translate [`StringRadix`] to another [`Radix`].
     ///
     /// # Panics
-    /// Panics if k is less than 2 or k more than 36
+    /// Panics if k is less than 2 or k more than 36.
     ///
     /// # Error
-    /// Returns a `BaseError` when base isn't correct
+    /// Returns a `BaseError` when base isn't correct; `ParseError` if there was error with parse
+    /// functions.
     ///
     /// # Examples
     ///
@@ -998,10 +1111,10 @@ impl<'a> StringRadix {
         )
     }
 
-    /// Sum 2 [`StringRadix`] to new [`Radix`] (2 <= k <= 10)
+    /// Sum 2 [`StringRadix`] to new [`Radix`].
     ///
     /// # Error
-    /// Returns the same error as `to_int_radix`
+    /// Same as `to_int_radix`.
     ///
     /// # Examples
     ///
@@ -1019,10 +1132,10 @@ impl<'a> StringRadix {
         (self + a).to_int_radix(k)
     }
 
-    /// Sub 2 [`StringRadix`] to new [`Radix`] (2 <= k <= 10)
+    /// Sub 2 [`StringRadix`] to new [`Radix`].
     ///
     /// # Error
-    /// Returns the same error as `to_int_radix`
+    /// Same as `to_int_radix`.
     ///
     /// # Examples
     ///
@@ -1040,10 +1153,10 @@ impl<'a> StringRadix {
         (self - a).to_int_radix(k)
     }
 
-    /// Mul 2 [`StringRadix`] to new [`Radix`] (2 <= k <= 10)
+    /// Mul 2 [`StringRadix`] to new [`Radix`].
     ///
     /// # Error
-    /// Returns the same error as `to_int_radix`
+    /// Same as `to_int_radix`.
     ///
     /// # Examples
     ///
