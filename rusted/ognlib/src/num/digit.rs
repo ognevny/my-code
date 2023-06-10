@@ -3,92 +3,92 @@
 
 use std::ops::{AddAssign, DivAssign, MulAssign, Rem};
 
-/// Calculate sum of digits in number
-/// # Examples
-///
-/// ```
-/// use ognlib::num::digit::digit_sum;
-///
-/// assert_eq!(digit_sum(123), 6);
-/// assert_eq!(digit_sum(444), 12);
-/// ```
-
-pub fn digit_sum<N>(mut n: N) -> N
-where
-    N: AddAssign + DivAssign + Rem<Output = N> + From<u8> + Copy + Eq,
-{
-    let mut sum = N::from(0);
-    while n != N::from(0) {
-        sum += n % N::from(10);
-        n /= N::from(10);
-    }
-    sum
+pub trait Digit {
+    fn count(self) -> u8;
+    fn has_digit(self, k: u8) -> bool;
+    fn rev(self) -> Self;
+    fn sum(self) -> Self;
 }
 
-/// Calculate size of number (how many digits it contains)
-/// # Examples
-///
-/// ```
-/// use ognlib::num::digit::digit_count;
-///
-/// assert_eq!(digit_count(123), 3);
-/// assert_eq!(digit_count(1337228), 7);
-/// ```
-
-pub fn digit_count<N>(mut n: N) -> u8
-where
-    N: DivAssign + From<u8> + Copy + Eq,
-{
-    let mut count = 0;
-    while n != N::from(0) {
-        n /= N::from(10);
-        count += 1;
-    }
-    count
-}
-
-/// Reverse number
-/// # Examples
-///
-/// ```
-/// use ognlib::num::digit::rev;
-///
-/// assert_eq!(rev(123), 321);
-/// assert_eq!(rev(444), 444);
-/// ```
-
-pub fn rev<N>(mut n: N) -> N
+impl<N> Digit for N
 where
     N: AddAssign + DivAssign + MulAssign + Rem<Output = N> + From<u8> + Copy + Eq,
 {
-    let mut rev = N::from(0);
-    while n != N::from(0) {
-        rev *= N::from(10);
-        rev += n % N::from(10);
-        n /= N::from(10);
-    }
-    rev
-}
+    /// Calculate sum of number digits
+    /// # Examples
+    ///
+    /// ```
+    /// use ognlib::num::digit::Digit;
+    ///
+    /// assert_eq!(123.sum(), 6);
+    /// assert_eq!(444.sum(), 12);
+    /// ```
 
-/// Checks, if digit is in number
-/// # Examples
-///
-/// ```
-/// use ognlib::num::digit::has_digit;
-///
-/// assert_eq!(has_digit(123, 2), true);
-/// assert_eq!(has_digit(444, 9), false);
-/// ```
-
-pub fn has_digit<N>(mut n: N, k: u8) -> bool
-where
-    N: DivAssign + Rem<Output = N> + From<u8> + Copy + Eq,
-{
-    while n != N::from(0) {
-        if n % N::from(10) == N::from(k) {
-            return true;
+    fn sum(mut self) -> Self {
+        let mut sum = N::from(0);
+        while self != N::from(0) {
+            sum += self % N::from(10);
+            self /= N::from(10);
         }
-        n /= N::from(10);
+        sum
     }
-    false
+
+    /// Calculate size of number (how many digits it contains)
+    /// # Examples
+    ///
+    /// ```
+    /// use ognlib::num::digit::Digit;
+    ///
+    /// assert_eq!(123.count(), 3);
+    /// assert_eq!(1337228.count(), 7);
+    /// ```
+
+    fn count(mut self) -> u8 {
+        let mut count = 0;
+        while self != N::from(0) {
+            self /= N::from(10);
+            count += 1;
+        }
+        count
+    }
+
+    /// Reverse number
+    /// # Examples
+    ///
+    /// ```
+    /// use ognlib::num::digit::Digit;
+    ///
+    /// assert_eq!(123.rev(), 321);
+    /// assert_eq!(444.rev(), 444);
+    /// ```
+
+    fn rev(mut self) -> Self {
+        let mut rev = N::from(0);
+        while self != N::from(0) {
+            rev *= N::from(10);
+            rev += self % N::from(10);
+            self /= N::from(10);
+        }
+        rev
+    }
+
+    /// Checks, if digit is in number
+    /// # Examples
+    ///
+    /// ```
+    /// use ognlib::num::digit::Digit;
+    ///
+    /// assert_eq!(123.has_digit(2), true);
+    /// assert_eq!(444.has_digit(9), false);
+    /// ```
+
+    fn has_digit(mut self, k: u8) -> bool {
+        while self != N::from(0) {
+            if self % N::from(10) == N::from(k) {
+                return true;
+            }
+            self /= N::from(10);
+        }
+        false
+    }
 }

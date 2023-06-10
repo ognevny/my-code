@@ -701,10 +701,10 @@ impl<'a> Radix {
         } else if k > 10 {
             return Err(RadixError::BaseError("base is more than ten"));
         } else {
-            use super::digit::has_digit;
+            use super::digit::Digit;
 
             for i in k..10 {
-                if has_digit(n, i) {
+                if n.has_digit(i) {
                     return Err(RadixError::NumberError(
                         "number contains a digit that is more or equal than base",
                     ));
