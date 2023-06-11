@@ -13,6 +13,7 @@
 /// // this creates a variable `x` from the line and parse it into i32
 /// read!(x as i32);
 /// ```
+#[cfg(not(doctest))]
 #[macro_export]
 macro_rules! read {
     ($out:ident as $type:ty) => {
@@ -35,6 +36,7 @@ macro_rules! read {
 /// // this creates a String `x` from the line and trim it
 /// read_str!(x);
 /// ```
+#[cfg(not(doctest))]
 #[macro_export]
 macro_rules! read_str {
     ($out:ident) => {
@@ -57,6 +59,7 @@ macro_rules! read_str {
 /// // this creates a Vec `x` from the line and parse every number into i32
 /// read_vec!(x as i32);
 /// ```
+#[cfg(not(doctest))]
 #[macro_export]
 macro_rules! read_vec {
     ($out:ident as $type:ty) => {
