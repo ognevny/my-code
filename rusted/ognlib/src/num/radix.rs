@@ -15,6 +15,8 @@ pub const RADIX: &[char] = &[
 /// this could be caused by fact that number contains digits that are more or equal than base. So
 /// this enum is about these 2 problems. But also there is ParseError which is just
 /// [`ParseIntError`] from std.
+/// 
+/// [`ParseIntError`]: std::num::ParseIntError
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum RadixError<'a> {
     BaseError(&'a str),
@@ -631,7 +633,9 @@ impl<'a> Radix {
     /// Creates a new [`Radix`].
     ///
     /// # Error
-    /// Returns a `BaseError` when base isn't correct.
+    /// Returns a [`BaseError`] when base isn't correct.
+    /// 
+    /// [`BaseError`]: RadixError::BaseError
     ///
     /// # Examples
     ///
@@ -680,7 +684,10 @@ impl<'a> Radix {
     /// Creates a new [`Radix`] with given number and base.
     ///
     /// # Error
-    /// Returns a `BaseError` if base isn't correct; `NumberError` if number isn't correct.
+    /// Returns a [`BaseError`] if base isn't correct; [`NumberError`] if number isn't correct.
+    /// 
+    /// [`BaseError`]: RadixError::BaseError
+    /// [`NumberError`]: RadixError::NumberError
     ///
     /// # Examples
     ///
@@ -692,7 +699,10 @@ impl<'a> Radix {
     /// assert_eq!(n.base, 2);
     ///
     /// let e = Radix::from_radix(444, 3).unwrap_err();
-    /// assert_eq!(e.to_string(), "Number error: number contains a digit that is more or equal than base");
+    /// assert_eq!(
+    ///     e.to_string(), 
+    ///     "Number error: number contains a digit that is more or equal than base",
+    /// );
     /// ```
 
     pub fn from_radix(n: usize, k: u8) -> Result<Self, RadixError<'a>> {
@@ -720,8 +730,11 @@ impl<'a> Radix {
     /// Panics if k is less than 2 or k more than 36.
     ///
     /// # Error
-    /// Returns a `BaseError` when base isn't correct; `ParseError` if there was error with parse
-    /// functions.
+    /// Returns a [`BaseError`] when base isn't correct; [`ParseError`] if there was error with 
+    /// parse functions.
+    /// 
+    /// [`BaseError`]: RadixError::BaseError
+    /// [`ParseError`]: RadixError::ParseError
     ///
     /// # Examples
     ///
@@ -785,8 +798,11 @@ impl<'a> Radix {
     /// Panics if k is less than 2 or k more than 36.
     ///
     /// # Error
-    /// Returns a `BaseError` when base isn't correct; `ParseError` if there was error with parse
-    /// functions.
+    /// Returns a [`BaseError`] when base isn't correct; [`ParseError`] if there was error with
+    /// parse functions.
+    /// 
+    /// [`BaseError`]: RadixError::BaseError
+    /// [`ParseError`]: RadixError::ParseError
     ///
     /// # Examples
     ///
@@ -827,7 +843,9 @@ impl<'a> Radix {
     /// Sum 2 [`Radix`] to new [`StringRadix`].
     ///
     /// # Error
-    /// Same as `to_string_radix`.
+    /// Same as [`to_str_radix`].
+    /// 
+    /// [`to_str_radix`]: Radix::to_str_radix
     ///
     /// # Examples
     ///
@@ -848,7 +866,9 @@ impl<'a> Radix {
     /// Sub 2 [`Radix`] to new [`StringRadix`].
     ///
     /// # Error
-    /// Same as `to_string_radix`.
+    /// Same as [`to_str_radix`].
+    /// 
+    /// [`to_str_radix`]: Radix::to_str_radix
     ///
     /// # Examples
     ///
@@ -869,7 +889,9 @@ impl<'a> Radix {
     /// Mul 2 [`Radix`] to new [`StringRadix`].
     ///
     /// # Error
-    /// Same as `to_string_radix`.
+    /// Same as [`to_str_radix`].
+    /// 
+    /// [`to_str_radix`]: Radix::to_str_radix
     ///
     /// # Examples
     ///
@@ -892,7 +914,9 @@ impl<'a> StringRadix {
     /// Creates a new [`StringRadix`].
     ///
     /// # Error
-    /// Returns a `BaseError` when base isn't correct.
+    /// Returns a [`BaseError`] when base isn't correct.
+    /// 
+    /// [`BaseError`]: RadixError::BaseError
     ///
     /// # Examples
     ///
@@ -926,7 +950,9 @@ impl<'a> StringRadix {
     /// Creates a new [`StringRadix`] with base 10 and given str number.
     ///
     /// # Error
-    /// Return a `NumberError` when number contains digit from range `'A'..='Z'`.
+    /// Return a [`NumberError`] when number contains digit from range `'A'..='Z'`.
+    /// 
+    /// [`NumberError`]: RadixError::NumberError
     ///
     /// # Examples
     ///
@@ -958,8 +984,11 @@ impl<'a> StringRadix {
     /// Creates a new [`StringRadix`] with given number and base.
     ///
     /// # Error
-    /// Returns a `BaseError` when base isn't correct or `NumberError` when number contains digit
-    /// that are more or equal than base.
+    /// Returns a [`BaseError`] when base isn't correct or [`NumberError`] when number contains 
+    /// digit that are more or equal than base.
+    /// 
+    /// [`BaseError`]: RadixError::BaseError
+    /// [`NumberError`]: RadixError::NumberError
     ///
     /// # Examples
     ///
@@ -1000,8 +1029,11 @@ impl<'a> StringRadix {
     /// Panics if k is less than 2 or k more than 36.
     ///
     /// # Error
-    /// Returns a `BaseError` when base isn't correct; `ParseError` if there was error with parse
-    /// functions.
+    /// Returns a [`BaseError`] when base isn't correct; [`ParseError`] if there was error with
+    /// parse functions.
+    /// 
+    /// [`BaseError`]: RadixError::BaseError
+    /// [`ParseError`]: RadixError::ParseError
     ///
     /// # Examples
     ///
@@ -1060,8 +1092,11 @@ impl<'a> StringRadix {
     /// Panics if k is less than 2 or k more than 36.
     ///
     /// # Error
-    /// Returns a `BaseError` when base isn't correct; `ParseError` if there was error with parse
-    /// functions.
+    /// Returns a [`BaseError`] when base isn't correct; [`ParseError`] if there was error with 
+    /// parse functions.
+    /// 
+    /// [`BaseError`]: RadixError::BaseError
+    /// [`ParseError`]: RadixError::ParseError
     ///
     /// # Examples
     ///
@@ -1114,7 +1149,9 @@ impl<'a> StringRadix {
     /// Sum 2 [`StringRadix`] to new [`Radix`].
     ///
     /// # Error
-    /// Same as `to_int_radix`.
+    /// Same as [`to_int_radix`].
+    /// 
+    /// [`to_int_radix`]: StringRadix::to_int_radix
     ///
     /// # Examples
     ///
@@ -1135,7 +1172,9 @@ impl<'a> StringRadix {
     /// Sub 2 [`StringRadix`] to new [`Radix`].
     ///
     /// # Error
-    /// Same as `to_int_radix`.
+    /// Same as [`to_int_radix`].
+    /// 
+    /// [`to_int_radix`]: StringRadix::to_int_radix
     ///
     /// # Examples
     ///
@@ -1156,7 +1195,9 @@ impl<'a> StringRadix {
     /// Mul 2 [`StringRadix`] to new [`Radix`].
     ///
     /// # Error
-    /// Same as `to_int_radix`.
+    /// Same as [`to_int_radix`].
+    /// 
+    /// [`to_int_radix`]: StringRadix::to_int_radix
     ///
     /// # Examples
     ///

@@ -1,11 +1,10 @@
-//! Primality tests. These tests are divided into 2 major
-//! groups: first group of tests gives exact results; second
-//! group is for probabilistic tests, which can only suppose
-//! whether number is probably prime or not.
-//! This code uses enum of 3: Prime, Composite and ProbablyPrime.
+//! Primality tests. These tests are divided into 2 major groups: first group of tests gives exact
+//! results; second group is for probabilistic tests, which can only suppose whether number is prime
+//! or not. This code uses enum of 3: Prime, Composite and ProbablyPrime.
 
 use std::{error::Error, fmt};
 
+/// If number is less than 2, we couldn't say that number is either prime or composite
 #[derive(Debug, PartialEq)]
 pub struct PrimeStatusError;
 
@@ -24,8 +23,8 @@ pub enum PrimeStatus {
     ProbablyPrime,
 }
 
-/// Simple prime test. Takes ceil of sqrt(n) as upper bound and
-/// checks if there is any divisor from 3 to ceil.
+/// Simple prime test. Takes ceil of sqrt(n) as upper bound and checks if there is any divisor from
+/// 3 to ceil with step 2.
 ///
 /// # Examples
 /// ```
@@ -54,11 +53,9 @@ pub fn sqrtest(n: isize) -> Result<PrimeStatus, PrimeStatusError> {
     Ok(PrimeStatus::Prime)
 }
 
-/// Wilson's theory.
-/// From [Wikipedia](https://en.wikipedia.org/wiki/Wilson%27s_theorem):
-/// "Wilson's theorem states that a natural number n > 1 is a prime
-/// number if and only if the product of all the positive integers
-/// less than n is one less than a multiple of n. That is the factorial
+/// Wilson's theory. From [Wikipedia](https://en.wikipedia.org/wiki/Wilson%27s_theorem): "Wilson's 
+/// theorem states that a natural number n > 1 is a prime number if and only if the product of all
+/// the positive integers less than n is one less than a multiple of n. That is the factorial
 /// (n - 1)! satisfies (n - 1)! % n == -1."
 ///
 /// # Examples
@@ -89,10 +86,11 @@ pub fn wilson_th(n: isize) -> Result<PrimeStatus, PrimeStatusError> {
     }
 }
 
-/// Miller-Rabin's prime test.
-/// From [Wikipedia](https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test):
-/// the Miller–Rabin primality test or Rabin–Miller primality test is a probabilistic primality test:
-/// an algorithm which determines whether a given number is likely to be prime.
+/// Miller-Rabin's prime test. From
+/// [Wikipedia](https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test): the Miller–Rabin
+/// primality test or Rabin–Miller primality test is a probabilistic primality test: an algorithm
+/// which determines whether a given number is likely to be prime.
+/// 
 /// # Examples
 /// ```
 /// use ognlib::algorithm::prime::*;
