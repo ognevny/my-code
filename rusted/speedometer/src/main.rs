@@ -9,6 +9,7 @@ fn s() -> u32 {
 }
 
 fn main() {
-    let i = 1;
+    let i = &1u32 as *const u32;
+    let h = *i;
     print!("{}", s());
 }
