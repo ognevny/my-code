@@ -16,11 +16,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.base.ref }}
       - name: Install compilers
         run: sudo apt-get install gcc clang
       - name: Compile files
         run: |
-          for file in $(git diff --name-only HEAD master); do
+          for file in $(git diff --name-only HEAD $(git merge-base HEAD ${{ github.event.pull_request.base.ref }})); do
             if [[ $file == *.c ]]; then
               gcc $file
               clang $file
