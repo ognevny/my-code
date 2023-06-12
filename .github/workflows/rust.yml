@@ -24,16 +24,16 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Get list of changed files
-        id: get-changes
-        run: echo "changes=$(git diff --name-only HEAD $(git merge-base HEAD master))" >> $GITHUB_STATE
+        id: get_changes
+        run: echo "changes=$(git diff --name-only HEAD $(git merge-base HEAD ${{ github.event.pull_request.base.ref }}))" >> $GITHUB_STATE
       - name: Extract project names from changed files
-        id: extract-projects
-        run: echo "projects=$(echo ${{ steps.get-changes.outputs.changes }} | grep -oE 'rusted/([^/]+)/' | cut -d'/' -f2- | sort | uniq)"
+        id: extract_projects
+        run: echo "projects=$(echo ${{ steps.get_changes.outputs.changes }} | grep -oE 'rusted/([^/]+)/' | cut -d'/' -f2- | sort | uniq)"
       - name: Install Rust toolchain
         run: rustup update ${{ matrix.toolchain }} && rustup default ${{ matrix.toolchain }}
       - name: Build and test changed projects
         run: |
-          for project in ${{ steps.extract-projects.outputs.projects }}; do
+          for project in ${{ steps.extract_projects.outputs.projects }}; do
             cd ${{ github.workspace }}/rusted/$project
             cargo build --verbose
             cargo test --verbose
