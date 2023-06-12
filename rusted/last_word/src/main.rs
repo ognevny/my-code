@@ -1,4 +1,4 @@
-// same as lastword.cpp, but with Rust syntax
+// same as lastword.cpp, but with Rust syntax bla
 
 use std::io;
 

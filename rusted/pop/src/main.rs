@@ -1,4 +1,4 @@
-// Russian poem
+// Russian poem bla
 
 #![allow(unconditional_recursion)]
 use std::{thread::sleep, time::Duration};

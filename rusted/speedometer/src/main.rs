@@ -1,4 +1,4 @@
-// a programm to test speed of each language (Rust implementation)
+// a programm to test speed of each language (Rust implementation) bla
 
 fn s() -> u32 {
     let mut n = 1;
