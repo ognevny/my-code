@@ -1,0 +1,10 @@
+[workspace]
+members = [
+    "first_word",
+    "integral",
+    "last_word",
+    "longman",
+    "pop",
+    "speedometer",
+    "tumba-umba",
+]

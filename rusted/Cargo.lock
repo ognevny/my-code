@@ -4,12 +4,16 @@ version = 3
 
 [[package]]
 name = "aho-corasick"
-version = "1.0.1"
+version = "1.0.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "67fc08ce920c31afb70f013dcce1bfc3a3195de6a228474e45e1f145b36f8d04"
+checksum = "43f6cb1bf222025340178f382c426f13757b2960e89779dfcb319c32542a5a41"
 dependencies = [
  "memchr",
 ]
+
+[[package]]
+name = "first_word"
+version = "0.1.0"
 
 [[package]]
 name = "fnv"
@@ -24,6 +28,14 @@ dependencies = [
  "meval",
  "scan_fmt",
 ]
+
+[[package]]
+name = "last_word"
+version = "0.1.0"
+
+[[package]]
+name = "longman"
+version = "0.1.0"
 
 [[package]]
 name = "memchr"
@@ -57,10 +69,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "pop"
+version = "0.1.0"
+
+[[package]]
 name = "regex"
-version = "1.8.1"
+version = "1.8.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "af83e617f331cc6ae2da5443c602dfa5af81e517212d9d611a5b3ba1777b5370"
+checksum = "d0ab3ca65655bb1e41f2a8c8cd662eb4fb035e67c3f78da1d61dffe89d07300f"
 dependencies = [
  "aho-corasick",
  "memchr",
@@ -69,9 +85,9 @@ dependencies = [
 
 [[package]]
 name = "regex-syntax"
-version = "0.7.1"
+version = "0.7.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a5996294f19bd3aae0453a862ad728f60e6600695733dd5df01da90c54363a3c"
+checksum = "436b050e76ed2903236f032a59761c1eb99e1b0aead2c257922771dab1fc8c78"
 
 [[package]]
 name = "scan_fmt"
@@ -81,3 +97,11 @@ checksum = "0b53b0a5db882a8e2fdaae0a43f7b39e7e9082389e978398bdf223a55b581248"
 dependencies = [
  "regex",
 ]
+
+[[package]]
+name = "speedometer"
+version = "0.1.0"
+
+[[package]]
+name = "tumba-umba"
+version = "0.1.0"
