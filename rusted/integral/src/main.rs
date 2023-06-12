@@ -1,4 +1,4 @@
-// oint algorithms (Rust) bla
+// oint algorithms (Rust) blabla
 
 use meval::{eval_str_with_context, Context};
 use scan_fmt::scan_fmt;
