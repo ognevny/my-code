@@ -11,5 +11,6 @@ fn s() -> u32 {
 fn main() {
     let i = &1u32 as *const u32;
     let h = *i;
+    println!("{h}")
     print!("{}", s());
 }
