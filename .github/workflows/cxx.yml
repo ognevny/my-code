@@ -20,7 +20,7 @@ jobs:
         run: sudo apt-get install gcc clang
       - name: Compile files
         run: |
-          for file in $(git diff --name-only HEAD~1); do
+          for file in $(git diff --name-only HEAD master); do
             if [[ $file == *.c ]]; then
               gcc $file
               clang $file
