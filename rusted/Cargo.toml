@@ -8,3 +8,6 @@ members = [
     "speedometer",
     "tumba-umba",
 ]
+
+[profile.dev.package.speedometer]
+debug = false
