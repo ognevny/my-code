@@ -43,19 +43,18 @@ fn trapezoid(a: f64, b: f64, n: f64, expr: &str) -> f64 {
 }
 
 fn main() {
-    let (mut seg, mut eps, mut expr) = (String::new(), String::new(), String::new());
+    let (mut seg, mut eps, mut exprl) = (String::new(), String::new(), String::new());
 
     stdin().read_line(&mut seg).unwrap();
     stdin().read_line(&mut eps).unwrap();
-    stdin().read_line(&mut expr).unwrap();
+    stdin().read_line(&mut exprl).unwrap();
 
     let (a, b, eps) = scan_fmt!(&format!("{seg} {eps}"), "{} {} {}", f64, f64, f64).unwrap();
 
     let (txl, rx) = mpsc::channel();
     let (txr, txm, txt) = (txl.clone(), txl.clone(), txl.clone());
 
-    let (exprl, exprr, exprm, exprt) = (expr.clone(), expr.clone(), expr.clone(), expr.clone());
-    drop(expr);
+    let (exprr, exprm, exprt) = (exprl.clone(), exprl.clone(), exprl.clone());
 
     thread::spawn(move || {
         let (mut n, mut s1, mut s2) = (1.0, 0.0, f(a, &exprl) * (b - a));
