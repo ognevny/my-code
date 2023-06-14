@@ -2,7 +2,7 @@
 
 use meval::{eval_str_with_context, Context};
 use scan_fmt::scan_fmt;
-use std::io::stdin;
+use std::{io::stdin, sync::mpsc, thread};
 
 fn f(x: f64, expr: &str) -> f64 {
     let mut context = Context::new();
@@ -51,39 +51,49 @@ fn main() {
 
     let (a, b, eps) = scan_fmt!(&format!("{seg} {eps}"), "{} {} {}", f64, f64, f64).unwrap();
 
-    let (mut n, mut s1, mut s2): (f64, f64, f64) = (1.0, 0.0, f(a, &expr) * (b - a));
+    let (txl, rx) = mpsc::channel();
+    let (txr, txm, txt) = (txl.clone(), txl.clone(), txl.clone());
 
-    while (s2 - s1).abs() > eps {
-        n *= 2.0;
-        (s1, s2) = (s2, lrect(a, b, n, &expr));
+    let (exprl, exprr, exprm, exprt) = (expr.clone(), expr.clone(), expr.clone(), expr.clone());
+    drop(expr);
+
+    thread::spawn(move || {
+        let (mut n, mut s1, mut s2) = (1.0, 0.0, f(a, &exprl) * (b - a));
+        while (s2 - s1).abs() > eps {
+            n *= 2.0;
+            (s1, s2) = (s2, lrect(a, b, n, &exprl));
+        }
+        txl.send(format!("left: {s2}")).unwrap();
+    });
+
+    thread::spawn(move || {
+        let (mut n, mut s1, mut s2) = (1.0, 0.0, f(a, &exprr) * (b - a));
+        while (s2 - s1).abs() > eps {
+            n *= 2.0;
+            (s1, s2) = (s2, rrect(a, b, n, &exprr));
+        }
+        txr.send(format!("right: {s2}")).unwrap();
+    });
+
+    thread::spawn(move || {
+        let (mut n, mut s1, mut s2) = (1.0, 0.0, f((a + b) / 2.0, &exprm) * (b - a));
+        while (s2 - s1).abs() > eps {
+            n *= 2.0;
+            (s1, s2) = (s2, mrect(a, b, n, &exprm));
+        }
+        txm.send(format!("middle: {s2}")).unwrap();
+    });
+
+    thread::spawn(move || {
+        let (mut n, mut s1, mut s2) = (1.0, 0.0, (b - a) * (f(a, &exprt) + f(b, &exprt)) / 2.0);
+        while (s2 - s1).abs() > eps {
+            n *= 2.0;
+            (s1, s2) = (s2, trapezoid(a, b, n, &exprt));
+        }
+        txt.send(format!("trapezoid: {s2}")).unwrap();
+    });
+
+    for received in rx {
+        println!("{received}");
     }
-
-    println!("\nl = {s2}");
-
-    (s1, s2) = (0.0, f(a, &expr) * (b - a));
-
-    while (s2 - s1).abs() > eps {
-        n *= 2.0;
-        (s1, s2) = (s2, rrect(a, b, n, &expr));
-    }
-
-    println!("r = {s2}");
-
-    (s1, s2) = (0.0, f((a + b) / 2.0, &expr) * (b - a));
-
-    while (s2 - s1).abs() > eps {
-        n *= 2.0;
-        (s1, s2) = (s2, mrect(a, b, n, &expr));
-    }
-
-    println!("m = {s2}");
-
-    (s1, s2) = (0.0, (b - a) * (f(a, &expr) + f(b, &expr)) / 2.0);
-
-    while (s2 - s1).abs() > eps {
-        n *= 2.0;
-        (s1, s2) = (s2, trapezoid(a, b, n, &expr));
-    }
-
-    print!("t = {s2}");
 }
