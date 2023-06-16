@@ -8,6 +8,10 @@ members = [
     "speedometer",
     "tumba-umba",
 ]
+exclude = [
+    "mytest",
+    "for_lesson",
+]
 
 [profile.dev.package.speedometer]
 debug = false
