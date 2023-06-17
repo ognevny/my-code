@@ -1,0 +1,30 @@
+name: CI-CXX
+
+on:
+  push:
+    paths:
+      '**.cpp'
+      '**.c'
+  pull_requests:
+    paths:
+      '**.cpp'
+      '**.c'
+
+jobs:
+  build:
+    name: compile with gcc and clang
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: fish
+    steps:
+      - uses: actions/checkout@v3
+      - name: install clang
+      run: sudo apt-get install clang
+      - name: compile files
+      run: |
+      cd dad-is-great-in-C
+      for file in *
+          gcc $file ; clang $file
+      end
+    
