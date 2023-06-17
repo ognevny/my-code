@@ -3,17 +3,18 @@ name: CI-rust
 on:
   push:
     paths:
-      '**.cpp'
-      '**.c'
+      '**.rs'
   pull_requests:
     paths:
-      '**.cpp'
-      '**.c'
+      '**.rs'
 
 jobs:
   build:
     name: build with latest rust
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: fish
     strategy:
       matrix:
         toolchain:
@@ -23,6 +24,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: update to $ {{ matrix.toolchain }} rust
-        run: rustup update ${{ matrix.toolchain }} && rustup default $${{ matrix.toolchain }}
+        run: rustup update ${{ matrix.toolchain }} ; rustup default $${{ matrix.toolchain }}
       - name: build workspace
-        run: cargo b -v
+        run: cd rusted ; cargo b -v
