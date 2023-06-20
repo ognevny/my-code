@@ -1,7 +1,7 @@
 // oint algorithms (Rust)
 
 use meval::{eval_str_with_context, Context};
-use scan_fmt::scan_fmt;
+use scan_fmt::*;
 use std::{io::stdin, sync::mpsc, thread};
 
 fn f(x: f64, expr: &str) -> f64 {
@@ -43,14 +43,14 @@ fn trapezoid(a: f64, b: f64, n: f64, expr: &str) -> f64 {
 }
 
 fn main() {
-    let (mut seg, mut eps, mut exprl) = (String::new(), String::new(), String::new());
+    println!("first, write lower bound, upper bound, then epsilon in this format");
+    println!("[a;b],e");
+    let (a, b, eps) = scanln_fmt!("[{};{}],{}", f64, f64, f64).unwrap();
 
-    stdin().read_line(&mut seg).unwrap();
-    stdin().read_line(&mut eps).unwrap();
+    println!("then write your function with `x` variable");
+    let mut exprl = String::new();
     stdin().read_line(&mut exprl).unwrap();
-
-    let (a, b, eps) = scan_fmt!(&format!("{seg} {eps}"), "{} {} {}", f64, f64, f64).unwrap();
-
+    
     let (txl, rx) = mpsc::channel();
     let (txr, txm, txt) = (txl.clone(), txl.clone(), txl.clone());
 
@@ -92,7 +92,8 @@ fn main() {
         txt.send(format!("trapezoid: {s2}")).unwrap();
     });
 
-    for received in rx {
-        println!("{received}");
+    println!();
+    for res in rx {
+        println!("{res}");
     }
 }
