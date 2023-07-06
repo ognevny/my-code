@@ -4,7 +4,7 @@ on:
   push:
     paths:
       '**.rs'
-  pull_requests:
+  pull_request:
     paths:
       '**.rs'
 
