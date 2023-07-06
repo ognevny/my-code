@@ -5,7 +5,7 @@ on:
     paths:
       '**.cpp'
       '**.c'
-  pull_requests:
+  pull_request:
     paths:
       '**.cpp'
       '**.c'
