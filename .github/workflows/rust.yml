@@ -2,11 +2,9 @@ name: CI-rust
 
 on:
   push:
-    paths:
-      '**.rs'
+    paths: ['**.rs', '**.toml', 'rust.yml']
   pull_request:
-    paths:
-      '**.rs'
+    paths: ['**.rs', '**.toml', 'rust.yml']
 
 jobs:
   build:
