@@ -12,6 +12,7 @@ exclude = [
     "mytest",
     "for_lesson",
 ]
+resolver = "2"
 
 [profile.dev.package.speedometer]
 debug = false
