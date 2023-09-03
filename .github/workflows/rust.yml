@@ -6,11 +6,15 @@ on:
   pull_request:
     paths: ['**.rs', '**.toml', '**.lock', '.github/workflows/rust.yml']
 
+env:
+  CARGO_TERM_COLOR: always
+
 jobs:
   build:
     name: check with latest rust
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         toolchain: [stable, beta, nightly]
     steps:
