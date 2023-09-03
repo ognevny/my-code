@@ -2,7 +2,7 @@
 
 #include <stdio.h>
 
-int s() {
+const int s() {
   int n = 1;
   while (n < 1000000000)
     n++;

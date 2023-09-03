@@ -3,7 +3,7 @@
 #include <iostream>
 using namespace std;
 
-int s() {
+const int s() {
   int n = 1;
   while (n < 1'000'000'000)
     n++;
