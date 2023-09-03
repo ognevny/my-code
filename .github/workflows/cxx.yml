@@ -18,6 +18,10 @@ jobs:
         run: |
           cd dad-is-great-in-C
           for file in *; do
-            gcc $file && clang $file
+            if [[ $file == *.c ]]; then
+              gcc $file && clang $file
+            elif [[ $file == *.cpp ]]; then
+              g++ $file && clang++ $file
+            fi
           done
     
