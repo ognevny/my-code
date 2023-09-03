@@ -50,7 +50,7 @@ fn main() {
     println!("then write your function with `x` variable");
     let mut exprl = String::new();
     stdin().read_line(&mut exprl).unwrap();
-    
+
     let (txl, rx) = mpsc::channel();
     let (txr, txm, txt) = (txl.clone(), txl.clone(), txl.clone());
 
