@@ -15,4 +15,4 @@ exclude = [
 resolver = "2"
 
 [profile.dev.package.speedometer]
-debug = false
+debug = false # as I see it doesn't work and I don't know what to do with this
