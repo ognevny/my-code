@@ -10,9 +10,6 @@ jobs:
   build:
     name: compile with gcc and clang
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        shell: fish
     steps:
       - uses: actions/checkout@v3
       - name: install clang
@@ -20,7 +17,7 @@ jobs:
       - name: compile files
         run: |
           cd dad-is-great-in-C
-          for file in *
-            gcc $file ; clang $file
-          end
+          for file in *; do
+            gcc $file && clang $file
+          done
     
