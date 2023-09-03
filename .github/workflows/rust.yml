@@ -2,9 +2,9 @@ name: CI-rust
 
 on:
   push:
-    paths: ['**.rs', '**.toml', '**.lock', 'rust.yml']
+    paths: ['**.rs', '**.toml', '**.lock', '.github/workflows/rust.yml']
   pull_request:
-    paths: ['**.rs', '**.toml', '**.lock',  'rust.yml']
+    paths: ['**.rs', '**.toml', '**.lock', '.github/workflows/rust.yml']
 
 jobs:
   build:
