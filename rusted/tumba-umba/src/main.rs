@@ -2,19 +2,19 @@
 
 use std::io;
 
-fn main() -> io::Result<()> {
+fn main() -> Result<(), Box<dyn std::error::Error>> {
     let (mut alpha, mut k, mut words) = (String::new(), String::new(), Vec::new());
     io::stdin().read_line(&mut alpha)?;
     let alpha: Vec<char> = alpha.trim().chars().collect();
 
     io::stdin().read_line(&mut k)?;
-    let k: usize = k.trim().parse().unwrap();
+    let k = k.trim().parse()?;
 
     gen(&mut words, &alpha, &mut vec![' '; k], 0);
     words.sort();
 
     for word in &words {
-        println!("{}", word);
+        println!("{word}");
     }
     println!("{}", words.len());
     Ok(())

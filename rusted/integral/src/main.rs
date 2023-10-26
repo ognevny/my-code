@@ -1,8 +1,8 @@
 // oint algorithms (Rust)
 
 use meval::{eval_str_with_context, Context};
-use scan_fmt::*;
-use std::{io::stdin, sync::mpsc, thread};
+use scan_fmt::{scanln_fmt, scan_fmt};
+use std::{io::{self, Write}, sync::mpsc::{self, SendError}, thread};
 
 fn f(x: f64, expr: &str) -> f64 {
     let mut context = Context::new();
@@ -42,58 +42,65 @@ fn trapezoid(a: f64, b: f64, n: f64, expr: &str) -> f64 {
     s * ((b - a) / n)
 }
 
-fn main() {
+fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("first, write lower bound, upper bound, then epsilon in this format");
     println!("[a;b],e");
-    let (a, b, eps) = scanln_fmt!("[{};{}],{}", f64, f64, f64).unwrap();
+    let (a, b, eps) = scanln_fmt!("[{};{}],{}", f64, f64, f64)?;
 
     println!("then write your function with `x` variable");
     let mut exprl = String::new();
-    stdin().read_line(&mut exprl).unwrap();
+    io::stdin().read_line(&mut exprl)?;
 
     let (txl, rx) = mpsc::channel();
     let (txr, txm, txt) = (txl.clone(), txl.clone(), txl.clone());
 
     let (exprr, exprm, exprt) = (exprl.clone(), exprl.clone(), exprl.clone());
 
-    thread::spawn(move || {
+    thread::spawn(move || -> Result<(), SendError<_>> {
         let (mut n, mut s1, mut s2) = (1.0, 0.0, f(a, &exprl) * (b - a));
         while (s2 - s1).abs() > eps {
             n *= 2.0;
             (s1, s2) = (s2, lrect(a, b, n, &exprl));
         }
-        txl.send(format!("left: {s2}")).unwrap();
+        txl.send(format!("left: {s2}"))?;
+        Ok(())
     });
 
-    thread::spawn(move || {
+    thread::spawn(move || -> Result<(), SendError<_>> {
         let (mut n, mut s1, mut s2) = (1.0, 0.0, f(a, &exprr) * (b - a));
         while (s2 - s1).abs() > eps {
             n *= 2.0;
             (s1, s2) = (s2, rrect(a, b, n, &exprr));
         }
-        txr.send(format!("right: {s2}")).unwrap();
+        txr.send(format!("right: {s2}"))?;
+        Ok(())
     });
 
-    thread::spawn(move || {
+    thread::spawn(move || -> Result<(), SendError<_>> {
         let (mut n, mut s1, mut s2) = (1.0, 0.0, f((a + b) / 2.0, &exprm) * (b - a));
         while (s2 - s1).abs() > eps {
             n *= 2.0;
             (s1, s2) = (s2, mrect(a, b, n, &exprm));
         }
-        txm.send(format!("middle: {s2}")).unwrap();
+        txm.send(format!("middle: {s2}"))?;
+        Ok(())
     });
 
-    thread::spawn(move || {
+    thread::spawn(move || -> Result<(), SendError<_>> {
         let (mut n, mut s1, mut s2) = (1.0, 0.0, (b - a) * (f(a, &exprt) + f(b, &exprt)) / 2.0);
         while (s2 - s1).abs() > eps {
             n *= 2.0;
             (s1, s2) = (s2, trapezoid(a, b, n, &exprt));
         }
-        txt.send(format!("trapezoid: {s2}")).unwrap();
+        txt.send(format!("trapezoid: {s2}"))?;
+        Ok(())
     });
 
     println!();
+    let mut stdout = io::stdout().lock();
     for res in rx {
-        println!("{res}");
+        writeln!(stdout, "{res}")?;
     }
+    stdout.flush()?;
+    Ok(())
 }
