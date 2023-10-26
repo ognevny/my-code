@@ -17,9 +17,9 @@ jobs:
           cd dad-is-great-in-C
           for file in *; do
             if [[ $file == *.c ]]; then
-              gcc $file
-            elif [[ $file == *.cpp ]]; then
-              g++ $file
+              gcc -v $file
+            elif [[ $file == *.cpp && $file == ognlib.cpp ]]; then
+              g++ -v $file
             fi
           done
     
