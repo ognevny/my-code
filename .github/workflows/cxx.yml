@@ -8,18 +8,19 @@ on:
 
 jobs:
   build:
-    name: compile with gcc and clang
+    name: compile with gcc
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - run: sudo apt-get update && sudo apt-get --only-upgrade install gcc g++
       - name: compile files
         run: |
           cd dad-is-great-in-C
           for file in *; do
             if [[ $file == *.c ]]; then
-              gcc -v $file
+              gcc --verbose $file
             elif [[ $file == *.cpp && $file == ognlib.cpp ]]; then
-              g++ -v $file
+              g++ --verbose $file
             fi
           done
     
