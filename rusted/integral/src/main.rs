@@ -1,8 +1,12 @@
 // oint algorithms (Rust)
 
 use meval::{eval_str_with_context, Context};
-use scan_fmt::{scanln_fmt, scan_fmt};
-use std::{io::{self, Write}, sync::mpsc::{self, SendError}, thread};
+use scan_fmt::{scan_fmt, scanln_fmt};
+use std::{
+    io::{self, Write},
+    sync::mpsc::{self, SendError},
+    thread,
+};
 
 fn f(x: f64, expr: &str) -> f64 {
     let mut context = Context::new();

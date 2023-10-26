@@ -19,6 +19,4 @@ fn pop() -> ! {
     pop()
 }
 
-fn main() {
-    pop()
-}
+fn main() { pop() }
