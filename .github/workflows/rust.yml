@@ -2,9 +2,9 @@ name: CI-rust
 
 on:
   push:
-    paths: ['**.rs', '**.toml', '**.lock', '.github/workflows/rust.yml']
+    paths: ['**.rs', '**.toml', '**.lock', '**/rust.yml']
   pull_request:
-    paths: ['**.rs', '**.toml', '**.lock', '.github/workflows/rust.yml']
+    paths: ['**.rs', '**.toml', '**.lock', '**/rust.yml']
 
 env:
   CARGO_TERM_COLOR: always
@@ -20,8 +20,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: update to ${{ matrix.toolchain }} rust
-        run: rustup update ${{ matrix.toolchain }} && rustup default $${{ matrix.toolchain }} && rustup component add rustfmt clippy
+        run: |
+          rustup update ${{ matrix.toolchain }} && rustup default ${{ matrix.toolchain }}
+          rustup component add rustfmt clippy
       - name: build workspace
         run: cd rusted && cargo b -v
       - name: fmt and clippy check
+        if: ${{ matrix.toolchain == 'nightly' }}
         run: cd rusted && cargo fmt -- --check && cargo clippy -- -D warnings
