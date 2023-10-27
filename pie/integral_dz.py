@@ -31,7 +31,10 @@ def integral_trapezoids(function, left, right, n):
     return integral
 
 
-f = lambda x: 1 / (1 + x**2)
+def f(x):
+    return 1 / (1 + x**2)
+
+
 print(integral_rectangles(f, -1, 1, 10000))
 print(integral_parabolas(f, -1, 1, 10000))
 print(integral_trapezoids(f, -1, 1, 10000))

@@ -7,9 +7,7 @@ class Polynomials:
 
     def __add__(self, m):
         if isinstance(m, Polynomials):
-            res = Polynomials(
-                list(map(lambda x, y: x + y, self.plnm, m.plnm))
-            )  # type: ignore
+            res = Polynomials(list(map(lambda x, y: x + y, self.plnm, m.plnm)))  # type: ignore
             res.plnm.extend(
                 self.plnm[len(m.plnm) :]
                 if len(self.plnm) > len(m.plnm)
@@ -22,7 +20,7 @@ class Polynomials:
 
     def __mul__(self, arg):
         if isinstance(arg, int) or isinstance(arg, float):
-            return Polynomials(list(map(lambda x: x * arg, self.plnm)))
+            return Polynomials(list(map(lambda x: x * arg, self.plnm)))  # type: ignore
 
         else:
             res = Polynomials([0 for i in range(len(self.plnm) + len(arg.plnm) - 1)])
@@ -33,7 +31,7 @@ class Polynomials:
 
     def __rmul__(self, arg):
         if isinstance(arg, int) or isinstance(arg, float):
-            return Polynomials(list(map(lambda x: x * arg, self.plnm)))
+            return Polynomials(list(map(lambda x: x * arg, self.plnm)))  # type: ignore
 
     def simplify(self):
         while self.plnm[-1] == 0 and len(self.plnm) > 1:

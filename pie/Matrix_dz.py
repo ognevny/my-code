@@ -1,6 +1,6 @@
 import functools
 import random
-from math import *
+from math import cos, pi, sqrt
 
 import matplotlib.pyplot as plt
 
@@ -109,7 +109,6 @@ class Matrix:
             self.kill(m[0], m[1], i)
 
     def linsolve(self):
-        flag_opr = 0
         flag_neopr = 0
         flag_nes = 0
 

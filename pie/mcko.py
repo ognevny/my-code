@@ -87,6 +87,7 @@ def n11() -> int:
         num1, num2 = int(f"154{i:X}3", 12), int(f"1{i:X}365", 12)
         if (num1 + num2) % 13 == 0:
             return (num1 + num2) // 13
+    return 0
 
 
 """ Номер 12:

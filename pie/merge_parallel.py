@@ -6,21 +6,21 @@ from random import randint
 from time import perf_counter
 
 
-def merge(l, r):
+def merge(left, right):
     res = []
     i = 0
     j = 0
 
-    while i < len(l) and j < len(r):
-        if l[i] < r[j]:
-            res.append(l[i])
+    while i < len(left) and j < len(right):
+        if left[i] < right[j]:
+            res.append(left[i])
             i += 1
         else:
-            res.append(r[j])
+            res.append(right[j])
             j += 1
 
-    res += l[i:]
-    res += r[j:]
+    res += left[i:]
+    res += right[j:]
 
     return res
 
