@@ -9,6 +9,7 @@ members = [
     "tumba-umba",
     "mcko",
     "sfml_apps/*",
+    "resheto",
 ]
 exclude = [
     "mytest",
