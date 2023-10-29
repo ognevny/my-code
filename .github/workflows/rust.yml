@@ -40,7 +40,7 @@ jobs:
               cmake
           cd ~
           curl -O https://github.com/SFML/SFML/archive/refs/tags/${{ matrix.sfml_ver }}.tar.gz
-          tar -xzf ${{ matrix.sfml_ver }}
+          tar -xzf ${{ matrix.sfml_ver }}.tar.gz
           mkdir -p build && cd ${{ matrix.sfml_ver }}
           cmake -DCMAKE_BUILD_TYPE=Release \
             -DCMAKE_INSTALL_PREFIX=/usr \
