@@ -19,7 +19,7 @@ jobs:
           for file in *; do
             if [[ $file == *.c ]]; then
               gcc --verbose $file
-            elif [[ $file == *.cpp && $file == ognlib.cpp ]]; then
+            elif [[ $file == *.cpp && $file != ognlib.cpp ]]; then
               g++ --verbose $file
             fi
           done
