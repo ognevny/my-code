@@ -39,7 +39,7 @@ jobs:
               libegl1-mesa-dev \
               cmake
           cd ~
-          curl -LO https://github.com/SFML/SFML/archive/refs/tags/${{ matrix.sfml_ver }}.tar.gz | tar -xzf
+          curl -LO https://github.com/SFML/SFML/archive/refs/tags/${{ matrix.sfml_ver }}.tar.gz | tar -xzf -
           mkdir -p build && cd SFML-${{ matrix.sfml_ver }}
           cmake -DCMAKE_BUILD_TYPE=Release \
             -DCMAKE_INSTALL_PREFIX=/usr \
