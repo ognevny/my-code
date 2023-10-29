@@ -8,6 +8,7 @@ members = [
     "speedometer",
     "tumba-umba",
     "mcko",
+    "sfml_apps/*",
 ]
 exclude = [
     "mytest",
