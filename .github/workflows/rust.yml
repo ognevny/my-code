@@ -44,8 +44,6 @@ jobs:
           mkdir -p build && cd SFML-${{ matrix.sfml_ver }}
           cmake -DCMAKE_BUILD_TYPE=Release \
             -DCMAKE_INSTALL_PREFIX=/usr \
-            -DSFML_INSTALL_PKGCONFIG_FILES=ON \
-            -DSFML_PKGCONFIG_INSTALL_PREFIX=/usr/lib/pkgconfig \
             -DBUILD_SHARED_LIBS=ON \
             -S . \
             -B ../build
