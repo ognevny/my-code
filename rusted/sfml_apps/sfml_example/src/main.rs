@@ -27,10 +27,9 @@ fn main() {
                     let view = View::from_rect(FloatRect::new(0., 0., width as f32, height as f32));
                     let radius = width.min(height) as f32 / 2.;
                     shape.set_radius(radius);
-                    shape.set_position(Vector2f::new(
-                        width as f32 / 2. - radius,
-                        height as f32 / 2. - radius,
-                    ));
+                    shape.set_origin(Vector2f::new(radius, radius));
+                    shape.set_scale(Vector2f::new(width as f32 / height as f32, 1.));
+                    shape.set_position(Vector2f::new(width as f32 / 2., height as f32 / 2.));
                     window.set_view(&view);
                 },
                 _ => (),
