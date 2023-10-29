@@ -17,14 +17,39 @@ jobs:
       fail-fast: false
       matrix:
         toolchain: [stable, beta, nightly]
+        sfml_ver: ['2.6.0']
     steps:
       - uses: actions/checkout@v4
       - name: update to ${{ matrix.toolchain }} rust
         run: |
           rustup update ${{ matrix.toolchain }} && rustup default ${{ matrix.toolchain }}
           rustup component add rustfmt clippy
-      - name: install sfml
-        run: sudo apt-get update && sudo apt-get install libsfml-dev
+      - name: build sfml
+        run: |
+          sudo apt-get update
+          sudo apt-get install \
+              libxrandr-dev \
+              libxcursor-dev \
+              libudev-dev \
+              libfreetype-dev \
+              libopenal-dev \
+              libflac-dev \
+              libvorbis-dev \
+              libgl1-mesa-dev \
+              libegl1-mesa-dev \
+              cmake
+          cd ~
+          curl -O https://github.com/SFML/SFML/archive/refs/tags/${{ matrix.sfml_ver }}.tar.gz | tar -xzf 
+          mkdir -p build && cd ${{ matrix.sfml_ver }}
+          cmake -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_INSTALL_PREFIX=/usr \
+            -DSFML_INSTALL_PKGCONFIG_FILES=ON \
+            -DSFML_PKGCONFIG_INSTALL_PREFIX=/usr/lib/pkgconfig \
+            -DBUILD_SHARED_LIBS=ON \
+            -S . \
+            -B ../build
+          cmake --build ../build
+          cmake --install ../build
       - name: build workspace
         run: cd rusted && cargo b -v
       - name: fmt and clippy check
