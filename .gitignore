@@ -1,4 +1,4 @@
-# binary
+# binaries
 *.exe
 __pycache__
 target
@@ -12,5 +12,3 @@ for_lesson*
 # IDEs and editors
 .vscode
 .idea
-# only for me
-im.py
