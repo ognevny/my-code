@@ -1,6 +1,6 @@
 // same as tumba-umba.cpp, but for only the first task
 
-use std::io;
+use std::io::{self, Write};
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let (mut alpha, mut k, mut words) = (String::new(), String::new(), Vec::new());
@@ -13,10 +13,11 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     gen(&mut words, &alpha, &mut vec![' '; k], 0);
     words.sort();
 
+    let mut handle = io::BufWriter::new(io::stdout());
     for word in &words {
-        println!("{word}");
+        writeln!(handle, "{word}")?;
     }
-    println!("{}", words.len());
+    writeln!(handle, "{}", words.len())?;
     Ok(())
 }
 

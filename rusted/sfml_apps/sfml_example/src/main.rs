@@ -9,7 +9,7 @@ use sfml::{
 fn main() {
     let mut window = RenderWindow::new(
         (200, 200),
-        "blazingly fast, memory safe sfml window",
+        "blazingly fast, memory-safe sfml window",
         Style::RESIZE | Style::CLOSE,
         &Default::default(),
     );

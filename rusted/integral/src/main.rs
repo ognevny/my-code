@@ -49,8 +49,7 @@ fn trapezoid(a: f64, b: f64, n: f64, expr: &str) -> f64 {
 }
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    println!("first, write lower bound, upper bound, then epsilon in this format");
-    println!("[a;b],e");
+    println!("first, write lower bound, upper bound, then epsilon in this format\n[a;b],e");
     let (a, b, eps) = scanln_fmt!("[{};{}],{}", f64, f64, f64)?;
 
     println!("then write your function with `x` variable");
@@ -102,11 +101,11 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         Ok(())
     });
 
-    println!();
-    let mut stdout = io::stdout().lock();
+    let mut handle = io::BufWriter::new(io::stdout());
+    writeln!(handle)?;
     for res in rx {
-        writeln!(stdout, "{res}")?;
+        writeln!(handle, "{res}")?;
     }
-    stdout.flush()?;
+    handle.flush()?;
     Ok(())
 }
