@@ -2,8 +2,8 @@
 
 #include <stdio.h>
 
-const int s() {
-  int n = 1;
+const unsigned int s() {
+  unsigned n = 1;
   while (n < 1000000000)
     n++;
   return n;

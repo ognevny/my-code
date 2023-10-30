@@ -3,8 +3,8 @@
 #include <iostream>
 using namespace std;
 
-const int s() {
-  int n = 1;
+const unsigned int s() {
+  unsigned n = 1;
   while (n < 1'000'000'000)
     n++;
   return n;
