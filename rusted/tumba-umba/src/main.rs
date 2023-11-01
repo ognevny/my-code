@@ -15,7 +15,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let count = gen(&alpha, &mut vec![' '; k], 0, &mut words);
     words.sort();
     for word in words {
-        handle.write_all((word + "\n").as_bytes())?;
+        handle.write_all(word.as_bytes())?;
     }
     writeln!(handle, "{count}")?;
 
@@ -24,7 +24,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 fn gen(alpha: &Vec<char>, current: &mut Vec<char>, i: usize, words: &mut Vec<String>) -> usize {
     if i == current.len() {
-        words.push(current.iter().collect::<String>());
+        words.push(current.iter().collect::<String>() + "\n");
         return 1;
     }
 
