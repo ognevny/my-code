@@ -5,6 +5,11 @@
 //! Здесь приведены решения лишь 4 номеров, так как остальные либо вообще не решаются
 //! программированием, либо гораздо быстрее решаются руками.
 
+use std::{
+    fs::File,
+    io::{BufRead, BufReader},
+};
+
 // Номер 2
 // Автомат обрабатывает натуральное число N по следующему алгоритму:
 // 1) Строится двоичная запись числа N.
@@ -16,18 +21,19 @@
 //
 // Ответ: 11
 
-pub fn n2(n: u16) -> u16 {
-    let mut m = format!("{n:b}");
-    m = if n % 2 == 0 {
-        format!("{m}10")
-    } else {
-        format!("1{m}00")
-    };
-    let m = u32::from_str_radix(&m, 2).unwrap();
-    if m > 107 {
-        n
-    } else {
-        n2(n + 1)
+pub fn n2(mut n: u16) -> u16 {
+    loop {
+        let binary = format!("{n:b}");
+        let m = if n % 2 == 0 {
+            format!("{binary}10")
+        } else {
+            format!("1{binary}00")
+        };
+        let m = u32::from_str_radix(&m, 2).unwrap();
+        if m > 107 {
+            return n;
+        }
+        n += 1;
     }
 }
 
@@ -59,7 +65,7 @@ pub fn n10() -> String {
     let mut input = String::from(
         "333333444444444444444444444444444444444444444444444444444444444444444444444444444",
     );
-    while input.contains("35") || input.contains("355") || input.contains("3444") {
+    while ["35", "355", "3444"].iter().any(|&s| input.contains(s)) {
         if input.contains("35") {
             input = input.replace("35", "4");
         } else if input.contains("355") {
@@ -82,16 +88,20 @@ pub fn n10() -> String {
 // Ответ: 4340
 
 pub fn n11() -> u32 {
-    for i in 0..12 {
-        let (num1, num2) = (
-            u32::from_str_radix(&format!("154{i:X}3"), 12).unwrap(),
-            u32::from_str_radix(&format!("1{i:X}365"), 12).unwrap(),
-        );
-        if (num1 + num2) % 13 == 0 {
-            return (num1 + num2) / 13;
-        }
-    }
-    0
+    let i = (0..12)
+        .find(|i| {
+            let (num1, num2) = (
+                u32::from_str_radix(&format!("154{:X}3", i), 12).unwrap(),
+                u32::from_str_radix(&format!("1{:X}365", i), 12).unwrap(),
+            );
+            (num1 + num2) % 13 == 0
+        })
+        .unwrap();
+    let (num1, num2) = (
+        u32::from_str_radix(&format!("154{:X}3", i), 12).unwrap(),
+        u32::from_str_radix(&format!("1{:X}365", i), 12).unwrap(),
+    );
+    (num1 + num2) / 13
 }
 
 // Номер 12
@@ -105,10 +115,9 @@ pub fn n11() -> u32 {
 // Ответ: (157, 176024)
 
 pub fn n12() -> (i32, i32) {
-    let data: Vec<i32> = std::fs::read_to_string("12.txt")
-        .unwrap()
+    let data: Vec<i32> = BufReader::new(File::open("12.txt").unwrap())
         .lines()
-        .map(|line| line.trim().parse().unwrap())
+        .map(|line| line.unwrap().trim().parse().unwrap())
         .collect();
 
     let min = *data.iter().filter(|x| *x % 15 != 0).min().unwrap();
