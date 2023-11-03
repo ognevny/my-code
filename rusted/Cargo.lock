@@ -74,6 +74,13 @@ name = "longman"
 version = "0.1.0"
 
 [[package]]
+name = "mask1"
+version = "0.1.0"
+dependencies = [
+ "regex",
+]
+
+[[package]]
 name = "mcko"
 version = "0.1.0"
 
