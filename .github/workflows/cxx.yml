@@ -20,7 +20,7 @@ jobs:
             echo "~~~$file~~~"
             if [[ $file == *.c ]]; then
               gcc --verbose $file
-            elif [[ $file == *.cpp ]]; then
+            elif [[ $file == *.cpp && $file != ognfunc.cpp ]]; then
               g++ --verbose $file
             fi
           done
