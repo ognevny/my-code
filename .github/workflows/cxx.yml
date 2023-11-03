@@ -23,4 +23,3 @@ jobs:
               g++ --verbose $file
             fi
           done
-    
