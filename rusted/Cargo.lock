@@ -129,6 +129,9 @@ dependencies = [
 [[package]]
 name = "mcko"
 version = "0.1.0"
+dependencies = [
+ "rayon",
+]
 
 [[package]]
 name = "memchr"

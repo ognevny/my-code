@@ -5,9 +5,12 @@
 //! Здесь приведены решения лишь 4 номеров, так как остальные либо вообще не решаются
 //! программированием, либо гораздо быстрее решаются руками.
 
-use std::{
-    fs::File,
-    io::{BufRead, BufReader},
+use {
+    rayon::prelude::*,
+    std::{
+        fs::File,
+        io::{BufRead, BufReader},
+    },
 };
 
 // Номер 2
@@ -120,11 +123,18 @@ pub fn n12() -> (i32, i32) {
         .map(|line| line.unwrap().trim().parse().unwrap())
         .collect();
 
-    let min = *data.iter().filter(|x| *x % 15 != 0).min().unwrap();
+    let min = *data.par_iter().filter(|x| *x % 15 != 0).min().unwrap();
 
-    data.windows(2)
+    data.par_windows(2)
         .filter(|t| t[0] % min == 0 && t[1] % min == 0)
-        .fold((0, 0), |(count, max), t| (count + 1, max.max(t[0] + t[1])))
+        .fold(
+            || (0, 0),
+            |(count, max), t| (count + 1, max.max(t[0] + t[1])),
+        )
+        .reduce(
+            || (0, 0),
+            |(count1, max1), (count2, max2)| (count1 + count2, max1.max(max2)),
+        )
 }
 
 fn main() {
