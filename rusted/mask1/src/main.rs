@@ -1,16 +1,11 @@
-use {
-    regex::Regex,
-    std::io::{self, BufWriter, Write},
-};
+use {rayon::prelude::*, regex::Regex};
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let mask = Regex::new(r"^123.*567.?$")?;
-    let mut handle = BufWriter::new(io::stdout());
-    for num in (169..1000000000usize).step_by(169) {
-        if mask.is_match(&num.to_string()) {
-            writeln!(handle, "{num} {}", num / 169)?;
-        }
-    }
-    handle.flush()?;
+    let res: Vec<usize> = (169..1000000000usize)
+        .into_par_iter()
+        .filter(|x| x % 169 == 0 && mask.is_match(&x.to_string()))
+        .collect();
+    println!("{res:?}");
     Ok(())
 }
