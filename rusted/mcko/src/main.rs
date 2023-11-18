@@ -26,13 +26,15 @@ use {
 
 pub fn n2(mut n: u16) -> u16 {
     loop {
-        let binary = format!("{n:b}");
-        let m = if n % 2 == 0 {
-            format!("{binary}10")
-        } else {
-            format!("1{binary}00")
-        };
-        let m = u32::from_str_radix(&m, 2).unwrap();
+        let m = u32::from_str_radix(
+            &if n % 2 == 0 {
+                format!("{n:b}10")
+            } else {
+                format!("1{n:b}00")
+            },
+            2,
+        )
+        .unwrap();
         if m > 107 {
             return n;
         }
@@ -91,20 +93,17 @@ pub fn n10() -> String {
 // Ответ: 4340
 
 pub fn n11() -> u32 {
-    let i = (0..12)
-        .find(|i| {
-            let (num1, num2) = (
-                u32::from_str_radix(&format!("154{:X}3", i), 12).unwrap(),
-                u32::from_str_radix(&format!("1{:X}365", i), 12).unwrap(),
-            );
-            (num1 + num2) % 13 == 0
+    (0..12)
+        .find_map(|i| {
+            let sum = u32::from_str_radix(&format!("154{:X}3", i), 12).unwrap()
+                + u32::from_str_radix(&format!("1{:X}365", i), 12).unwrap();
+            if sum % 13 == 0 {
+                Some(sum / 13)
+            } else {
+                None
+            }
         })
-        .unwrap();
-    let (num1, num2) = (
-        u32::from_str_radix(&format!("154{:X}3", i), 12).unwrap(),
-        u32::from_str_radix(&format!("1{:X}365", i), 12).unwrap(),
-    );
-    (num1 + num2) / 13
+        .unwrap()
 }
 
 // Номер 12
@@ -123,7 +122,7 @@ pub fn n12() -> (i32, i32) {
         .map(|line| line.unwrap().trim().parse().unwrap())
         .collect();
 
-    let min = *data.par_iter().filter(|x| *x % 15 != 0).min().unwrap();
+    let min = *data.par_iter().filter(|&&x| x % 15 != 0).min().unwrap();
 
     data.par_windows(2)
         .filter(|t| t[0] % min == 0 && t[1] % min == 0)
