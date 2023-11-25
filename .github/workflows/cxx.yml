@@ -26,6 +26,5 @@ jobs:
       - name: run speedometer
         run: |
           cd dad-is-great-in-C/build
-          ls
           time ./speedometer_c
           time ./speedometer_cpp
