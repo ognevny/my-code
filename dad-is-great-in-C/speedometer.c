@@ -2,7 +2,7 @@
 
 #include <stdio.h>
 
-const unsigned int s() {
+unsigned int s() {
   unsigned n = 1;
   while (n < 1000000000)
     n++;
