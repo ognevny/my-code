@@ -58,7 +58,7 @@ jobs:
         run: |
           cd rusted
           cargo b -v -p first_word -p integral -p last_word -p longman -p mask1 -p mcko -p pop -p \
-          resheto -p speedometer -p tumba-umba
+          probnik -p resheto -p speedometer -p tumba-umba
       - name: fmt and clippy check
         if: ${{ matrix.toolchain == 'nightly' }}
         run: cd rusted && cargo fmt -- --check && cargo clippy -- -D warnings
