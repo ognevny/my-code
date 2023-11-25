@@ -11,6 +11,7 @@ members = [
     "sfml_apps/*",
     "resheto",
     "mask1",
+    "probnik",
 ]
 exclude = [
     "mytest",
