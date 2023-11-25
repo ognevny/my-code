@@ -2,25 +2,30 @@ name: CI-CXX
 
 on:
   push:
-    paths: ['**.cpp', '**.c', '**/cxx.yml']
+    paths: ['**.cpp', '**.c', '**/cxx.yml', '**/meson.build']
   pull_request:
-    paths: ['**.cpp', '**.c', '**/cxx.yml']
+    paths: ['**.cpp', '**.c', '**/cxx.yml', '**/meson.build']
 
 jobs:
   build:
-    name: compile with gcc
+    name: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: sudo apt-get update && sudo apt-get --only-upgrade install gcc g++
+      - name: install and update deps
+        run: | 
+          sudo apt-get update && sudo apt-get --only-upgrade install gcc g++
+          sudo apt-get install meson
       - name: compile files
         run: |
           cd dad-is-great-in-C
-          for file in *; do
-            echo "~~~$file~~~"
-            if [[ $file == *.c ]]; then
-              gcc --verbose $file
-            elif [[ $file == *.cpp && $file != ognfunc.cpp ]]; then
-              g++ --verbose $file
-            fi
-          done
+          export CFLAGS="-Wall -Wextra"
+          export CXXFLAGS="-Wall -Wextra"
+          meson setup build && cd build
+          meson compile
+      - name: run speedometer
+        run: |
+          cd dad-is-great-in-C/build
+          ls
+          time ./speedometer_c
+          time ./speedometer_cpp
