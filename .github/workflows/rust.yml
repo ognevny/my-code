@@ -56,8 +56,9 @@ jobs:
       - name: build workspace
         if: ${{ matrix.toolchain != 'nightly' }}
         run: |
-          sudo apt-get install meson
-          cd rusted && meson setup build && cd build && meson compile
+          cd rusted
+          cargo b -v -p first_word -p integral -p last_word -p longman -p mask1 -p mcko -p pop -p \
+          probnik -p resheto -p speedometer -p tumba-umba
       - name: fmt and clippy check
         if: ${{ matrix.toolchain == 'nightly' }}
         run: cd rusted && cargo fmt -- --check && cargo clippy -- -D warnings
