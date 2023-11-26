@@ -2,9 +2,9 @@ name: CI-rust
 
 on:
   push:
-    paths: ['**.rs', '**.toml', '**.lock', '**/rust.yml', 'rusted/meson.build']
+    paths: ['**.rs', '**.toml', '**.lock', '**/rust.yml']
   pull_request:
-    paths: ['**.rs', '**.toml', '**.lock', '**/rust.yml', 'rusted/meson.build']
+    paths: ['**.rs', '**.toml', '**.lock', '**/rust.yml']
 
 env:
   CARGO_TERM_COLOR: always
