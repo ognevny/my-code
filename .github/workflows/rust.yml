@@ -38,7 +38,8 @@ jobs:
               libvorbis-dev \
               libgl1-mesa-dev \
               libegl1-mesa-dev \
-              cmake
+              cmake \
+              mold
           cd ~
           curl -LO https://github.com/SFML/SFML/archive/refs/tags/${{ matrix.sfml_ver }}.tar.gz
           tar -xzf ${{ matrix.sfml_ver }}.tar.gz
@@ -46,19 +47,22 @@ jobs:
           cmake -DCMAKE_BUILD_TYPE=Release \
             -DCMAKE_INSTALL_PREFIX=/usr \
             -DBUILD_SHARED_LIBS=ON \
+            -DCMAKE_LINKER=/usr/bin/mold \
             -S . \
             -B ../build
           cmake --build ../build
           sudo cmake --install ../build
       - name: build workspace
         if: ${{ matrix.toolchain == 'nightly' }}
-        run: cd rusted && cargo b -v
+        run: cd rusted && mold -run cargo b -v
       - name: build workspace
         if: ${{ matrix.toolchain != 'nightly' }}
         run: |
+          sudo apt-get update
+          sudo apt-get install mold
           cd rusted
-          cargo b -v -p first_word -p integral -p last_word -p longman -p mask1 -p mcko -p pop -p \
-          probnik -p resheto -p speedometer -p tumba-umba
+          mold -run cargo b -v -p first_word -p integral -p last_word -p longman -p mask1 -p mcko \
+          -p pop -p probnik -p resheto -p speedometer -p tumba-umba
       - name: fmt and clippy check
         if: ${{ matrix.toolchain == 'nightly' }}
-        run: cd rusted && cargo fmt -- --check && cargo clippy -- -D warnings
+        run: cd rusted && mold -run cargo fmt -- --check && mold -run cargo clippy -- -D warnings
