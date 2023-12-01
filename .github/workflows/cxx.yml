@@ -15,14 +15,14 @@ jobs:
       - name: install and update deps
         run: | 
           sudo apt-get update && sudo apt-get --only-upgrade install gcc g++
-          sudo apt-get install meson mold
+          sudo apt-get install meson
       - name: compile files
         run: |
           cd dad-is-great-in-C
           export CFLAGS="-Wall -Wextra"
           export CXXFLAGS="-Wall -Wextra"
-          LD=/usr/bin/mold meson setup build && cd build
-          LD=/usr/bin/mold meson compile
+          meson setup build && cd build
+          meson compile
       - name: run speedometer
         run: |
           cd dad-is-great-in-C/build
