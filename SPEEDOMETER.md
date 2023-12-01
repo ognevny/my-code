@@ -23,9 +23,9 @@ a billion, it adds 1.
 Инструменты:
 OS - Windows 11 последней версии;
 [дистрибутив MSYS2](https://msys2.org), который предоставляет мне:
-clang 17.0.2 - компилятор C и C++;
+clang 17.0.6 - компилятор C и C++;
 Python 3.11.6 с numba 0.58.1;
-Rust 1.73.0;
+Rust 1.74.0;
 Командная оболочка `fish` 3.6.1, и её команда `time`.
 Ниже (под ENG) будет представлен лог команд, которые я вписывал в терминал
 **ENG**: You can test these programs yourself. I will show you how I do it:
@@ -35,9 +35,9 @@ AMD Radeon 5 5600H based laptop, 16GB RAM, programs stored on 512GB SSD
 Tools:
 OS - Windows 11 latest version;
 [MSYS2 distribution](https://msys2.org) which provides me:
-clang 17.0.2 - C and C++ compiler;
+clang 17.0.6 - C and C++ compiler;
 Python 3.11.6 with numba 0.58.1;
-Rust 1.73.0;
+Rust 1.74.0;
 Command line shell `fish` 3.6.1 and its command `time`.
 Below will be a log of the commands I typed into the terminal
 
@@ -96,13 +96,13 @@ Executed in  603,01 millis    fish           external
 ```console
 $ cargo b
    Compiling speedometer v0.1.0 (C:\...\my-code\rusted\speedometer)
-    Finished dev [unoptimized] target(s) in 0.00s
+    Finished dev [unoptimized + debuginfo] target(s) in 0.00s
 $ time ../target/debug/speedometer
 1000000000
 ________________________________________________________
-Executed in  762,43 millis    fish           external
-   usr time   15,00 millis    0,00 millis   15,00 millis
-   sys time   16,00 millis   16,00 millis    0,00 millis
+Executed in  790,55 millis    fish           external
+   usr time    0,00 micros    0,00 micros    0,00 micros
+   sys time    0,00 micros    0,00 micros    0,00 micros
 ```
 
 ### Reference
