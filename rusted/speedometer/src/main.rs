@@ -1,5 +1,6 @@
 // a programm to test speed of each language (Rust implementation)
 
+#[inline]
 const fn s() -> u32 {
     let mut n = 1;
     while n < 1_000_000_000 {

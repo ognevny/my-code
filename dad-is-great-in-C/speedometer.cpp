@@ -3,9 +3,9 @@
 #include <iostream>
 using namespace std;
 
-unsigned int s() {
-  unsigned n = 1;
-  while (n < 1'000'000'000)
+static inline unsigned int s() {
+  unsigned int n = 1;
+  while (n < 1000000000)
     n++;
   return n;
 }

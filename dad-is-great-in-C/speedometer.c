@@ -2,14 +2,14 @@
 
 #include <stdio.h>
 
-unsigned int s() {
-  unsigned n = 1;
+static inline unsigned int sum() {
+  unsigned int n = 1;
   while (n < 1000000000)
     n++;
   return n;
 }
 
 int main() {
-  printf("%d", s());
+  printf("%d", sum());
   return 0;
 }

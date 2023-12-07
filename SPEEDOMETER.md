@@ -48,9 +48,9 @@ $ clang speedometer.c
 $ time ./a
 1000000000
 ________________________________________________________
-Executed in  516,14 millis    fish           external
-   usr time    0,00 millis    0,00 micros    0,00 millis
-   sys time   15,00 millis    0,00 micros   15,00 millis
+Executed in  525,38 millis    fish           external
+   usr time    0,00 micros    0,00 micros    0,00 micros
+   sys time    0,00 micros    0,00 micros    0,00 micros
 ```
 
 #### C++
@@ -60,9 +60,9 @@ $ clang++ speedometer.cpp
 $ time ./a
 1000000000
 ________________________________________________________
-Executed in  521,68 millis    fish           external
-   usr time    0,00 millis    0,00 micros    0,00 millis
-   sys time   46,00 millis    0,00 micros   46,00 millis
+Executed in  531,55 millis    fish           external
+   usr time    0,00 micros    0,00 micros    0,00 micros
+   sys time    0,00 micros    0,00 micros    0,00 micros
 ```
 
 #### Python
@@ -100,7 +100,7 @@ $ cargo b
 $ time ../target/debug/speedometer
 1000000000
 ________________________________________________________
-Executed in  790,55 millis    fish           external
+Executed in  754,14 millis    fish           external
    usr time    0,00 micros    0,00 micros    0,00 micros
    sys time    0,00 micros    0,00 micros    0,00 micros
 ```
