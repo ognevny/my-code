@@ -1,5 +1,5 @@
 project(
-  'my-dad-is-great-in-C', 
+  'dad-is-great-in-C', 
   'c', 
   'cpp',
   version: '0.0.0',
