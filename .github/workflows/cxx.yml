@@ -19,8 +19,6 @@ jobs:
       - name: compile files
         run: |
           cd dad-is-great-in-C
-          export CFLAGS="-Wall -Wextra"
-          export CXXFLAGS="-Wall -Wextra"
           meson setup build && cd build
           meson compile
       - name: run speedometer
