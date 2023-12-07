@@ -10,7 +10,7 @@ int main() {
   cin >> n;
   clock_t st = clock();
   int a[n];
-  srand(time(NULL));
+  srand(time(nullptr));
   for (int i = 0; i < n; i++)
     a[i] = rand();
 
@@ -25,6 +25,6 @@ int main() {
 
   // for (int i : a) cout << i << " ";
   clock_t end = clock();
-  cout << (double)(end - st) / CLOCKS_PER_SEC;
+  cout << static_cast<double>(end - st) / CLOCKS_PER_SEC;
   return 0;
 }

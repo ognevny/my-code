@@ -1,4 +1,11 @@
-project('my-dad-is-great-in-C', 'c', 'cpp')
+project(
+  'my-dad-is-great-in-C', 
+  'c', 
+  'cpp',
+  version: '0.0.0',
+  meson_version: '>= 0.56.0',
+  default_options: ['warning_level=3']
+)
 
 executable('b_sort', 'b_sort.cpp')
 executable('firstword', 'firstword.cpp')

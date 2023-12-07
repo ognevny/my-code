@@ -5,17 +5,17 @@
 #include <random>
 using namespace std;
 
-void merge(int arr[], int left, int mid, int right) {
-  int rt = mid - left + 1, lt = right - mid;
+void merge(int arr[], size_t left, size_t mid, size_t right) {
+  size_t rt = mid - left + 1, lt = right - mid;
   int *left_arr = new int[rt],
       *right_arr = new int[lt]; // создаём два новых массива
 
-  for (int i = 0; i < rt; i++)
+  for (size_t i = 0; i < rt; i++)
     left_arr[i] = arr[left + i]; // заполняем их
-  for (int i = 0; i < lt; i++)
+  for (size_t i = 0; i < lt; i++)
     right_arr[i] = arr[mid + 1 + i];
 
-  int i_right = 0, i_left = 0,
+  size_t i_right = 0, i_left = 0,
       i_merged = left; // индексы, по которым мы идём вдоль массивов
 
   while (i_right < rt and i_left < lt) { // слияние
@@ -45,7 +45,7 @@ void merge(int arr[], int left, int mid, int right) {
   delete[] right_arr;
 }
 
-void merge_sort(int arr[], int begin, int end) {
+void merge_sort(int arr[], size_t begin, size_t end) {
   if (begin >= end)
     return; // раздел до единичных
 
@@ -56,16 +56,16 @@ void merge_sort(int arr[], int begin, int end) {
 }
 
 int main() {
-  int n;
+  size_t n;
   cin >> n;
   clock_t st = clock();
   int a[n];
-  srand(time(NULL));
-  for (int i = 0; i < n; i++)
+  srand(time(nullptr));
+  for (size_t i = 0; i < n; i++)
     a[i] = rand();
   merge_sort(a, 0, n - 1);
   // for (int i : a) cout << i << " ";
   clock_t end = clock();
-  cout << endl << (double)(end - st) / CLOCKS_PER_SEC;
+  cout << endl << static_cast<double>(end - st) / CLOCKS_PER_SEC;
   return 0;
 }

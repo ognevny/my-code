@@ -5,7 +5,7 @@
 #include <random>
 using namespace std;
 
-void bubble(int *arr, int n) {
+static void bubble(int *arr, int n) {
   for (int i = n - 1; i > 0; i--) {
     int count = 0;
     for (int j = 0; j < i; j++) {
@@ -24,7 +24,7 @@ int main() {
   cin >> n;
   // clock_t st = clock();
   int a[n];
-  srand(time(NULL));
+  srand(time(nullptr));
   for (int i = 0; i < n; i++) {
     a[i] = rand();
     cout << a[i] << " ";
