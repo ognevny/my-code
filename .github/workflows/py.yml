@@ -19,10 +19,10 @@ jobs:
         with:
           python-version: '3.11'
           cache: 'pip'
-      - uses: chartboost/ruff-action@v1
       - name: compile all files
         run: |
           cd pie && pip install -r requirements.txt
           python -m compileall .
-      - name: check with ruff
-        run: cd pie && ruff check .
+      - uses: chartboost/ruff-action@v1
+        with:
+          src: "./pie"
