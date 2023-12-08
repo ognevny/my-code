@@ -83,15 +83,15 @@ class Matrix:
 
     def kill(self, r, c, rr):  # r,c - опорный элемент,rr - строка, с которой работаем
         if rr != r:
-            l = -1 * self.matr[rr][c] / self.matr[r][c] + 1
+            lol = -1 * self.matr[rr][c] / self.matr[r][c] + 1
             self.matr[rr] = list(
-                map(lambda x, y: x + l * y, self.matr[rr], self.matr[r])
+                map(lambda x, y: x + lol * y, self.matr[rr], self.matr[r])
             )
 
         for i in range(rr + 1, self.rows):
-            l = -1 * self.matr[i][c] / self.matr[rr][c]
+            lol = -1 * self.matr[i][c] / self.matr[rr][c]
             self.matr[i] = list(
-                map(lambda x, y: x + l * y, self.matr[i], self.matr[rr])
+                map(lambda x, y: x + lol * y, self.matr[i], self.matr[rr])
             )
 
     def Triangular(self):
