@@ -13,14 +13,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: install and update deps
-        run: | 
+        run: |
           sudo apt-get update && sudo apt-get --only-upgrade install gcc g++
           sudo apt-get install meson
       - name: compile files
-        run: |
-          cd dad-is-great-in-C
-          meson setup build && cd build
-          meson compile
+        run: make c
       - name: run speedometer
         run: |
           cd dad-is-great-in-C/build

@@ -17,14 +17,14 @@ jobs:
       fail-fast: false
       matrix:
         toolchain: [stable, beta, nightly]
-        sfml_ver: ['2.6.0']
+        sfml_ver: ['2.6.1']
     steps:
       - uses: actions/checkout@v4
       - name: update to ${{ matrix.toolchain }} rust
         run: |
           rustup update ${{ matrix.toolchain }} && rustup default ${{ matrix.toolchain }}
           rustup component add rustfmt clippy
-      - name: build sfml
+      - name: build workspace (nightly)
         if: ${{ matrix.toolchain == 'nightly' }}
         run: |
           sudo apt-get update
@@ -40,29 +40,13 @@ jobs:
               libegl1-mesa-dev \
               cmake \
               mold
-          cd ~
-          curl -LO https://github.com/SFML/SFML/archive/refs/tags/${{ matrix.sfml_ver }}.tar.gz
-          tar -xzf ${{ matrix.sfml_ver }}.tar.gz
-          mkdir -p build && cd SFML-${{ matrix.sfml_ver }}
-          cmake -DCMAKE_BUILD_TYPE=Release \
-            -DCMAKE_INSTALL_PREFIX=/usr \
-            -DBUILD_SHARED_LIBS=ON \
-            -DCMAKE_LINKER=/usr/bin/mold \
-            -S . \
-            -B ../build
-          cmake --build ../build
-          sudo cmake --install ../build
-      - name: build workspace
-        if: ${{ matrix.toolchain == 'nightly' }}
-        run: cd rusted && mold -run cargo b -v
+          make nightly SFML=${{ matrix.sfml_ver }} MOLD=true
       - name: build workspace
         if: ${{ matrix.toolchain != 'nightly' }}
         run: |
           sudo apt-get update
           sudo apt-get install mold
-          cd rusted
-          mold -run cargo b -v -p first_word -p integral -p last_word -p longman -p mask1 -p mcko \
-          -p pop -p probnik -p resheto -p speedometer -p tumba-umba
+          make rust MOLD=true
       - name: fmt and clippy check
         if: ${{ matrix.toolchain == 'nightly' }}
-        run: cd rusted && mold -run cargo fmt -- --check && mold -run cargo clippy -- -D warnings
+        run: cd rusted && cargo fmt -- --check && mold -run cargo clippy -- -D warnings

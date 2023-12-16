@@ -20,9 +20,7 @@ jobs:
           python-version: '3.11'
           cache: 'pip'
       - name: compile all files
-        run: |
-          cd pie && pip install -r requirements.txt
-          python -m compileall .
+        run: make py PY_OPT=true
       - uses: chartboost/ruff-action@v1
         with:
           src: "./pie"
