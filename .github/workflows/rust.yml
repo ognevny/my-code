@@ -17,7 +17,6 @@ jobs:
       fail-fast: false
       matrix:
         toolchain: [stable, beta, nightly]
-        sfml_ver: ['2.6.1']
     steps:
       - uses: actions/checkout@v4
       - name: update to ${{ matrix.toolchain }} rust
@@ -40,7 +39,7 @@ jobs:
               libegl1-mesa-dev \
               cmake \
               mold
-          make nightly SFML=${{ matrix.sfml_ver }} MOLD=true
+          make nightly MOLD=true
       - name: build workspace
         if: ${{ matrix.toolchain != 'nightly' }}
         run: |
