@@ -2,9 +2,9 @@ name: CI-CXX
 
 on:
   push:
-    paths: ['**.cpp', '**.c', '**/cxx.yml', '**/meson.build']
+    paths: ['**.cpp', '**.c', '**/cxx.yml', '**/meson.build', 'Makefile']
   pull_request:
-    paths: ['**.cpp', '**.c', '**/cxx.yml', '**/meson.build']
+    paths: ['**.cpp', '**.c', '**/cxx.yml', '**/meson.build', 'Makefile']
 
 jobs:
   build:

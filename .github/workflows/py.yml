@@ -2,9 +2,9 @@ name: CI-py
 
 on:
   push:
-    paths: ['**.py', '**/py.yml']
+    paths: ['**.py', '**/py.yml', 'Makefile']
   pull_request:
-    paths: ['**.rs', '**/py.yml']
+    paths: ['**.rs', '**/py.yml', 'Makefile']
 
 jobs:
   build:
