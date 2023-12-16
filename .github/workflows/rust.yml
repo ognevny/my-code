@@ -39,7 +39,7 @@ jobs:
               libegl1-mesa-dev \
               cmake \
               mold
-          make nightly MOLD=true
+          make rust-with-sfml MOLD=true SFML_SOURCE=true
       - name: build workspace
         if: ${{ matrix.toolchain != 'nightly' }}
         run: |
