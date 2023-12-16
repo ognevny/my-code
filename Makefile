@@ -17,8 +17,9 @@ c:
 
 nightly:
 ifdef MOLD
-	cd ~ && curl -LO https://github.com/SFML/SFML/archive/refs/tags/$(SFML).tar.gz &&
-	tar -xzf $(SFML).tar.gz && mkdir -p build && build && cmake -DCMAKE_BUILD_TYPE=Release \
+	cd ~ && curl -LO https://github.com/SFML/SFML/archive/refs/tags/$(SFML).tar.gz
+	cd ~ && tar -xzf $(SFML).tar.gz && mkdir -p build && build && cmake \
+	-DCMAKE_BUILD_TYPE=Release \
 	-DCMAKE_INSTALL_PREFIX=/usr \
 	-DBUILD_SHARED_LIBS=ON \
 	-DCMAKE_LINKER=/usr/bin/mold \
