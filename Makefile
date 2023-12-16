@@ -22,7 +22,7 @@ c:
 rust-with-sfml:
 ifdef MOLD
 ifdef SFML_SOURCE
-		(cd ~ && curl -LO https://github.com/SFML/SFML/archive/refs/tags/$(SFML).tar.gz &&
+		(cd ~ && curl -LO https://github.com/SFML/SFML/archive/refs/tags/$(SFML).tar.gz && \
 		tar -xzf $(SFML).tar.gz && mkdir -p build && cd build && cmake \
 		-DCMAKE_BUILD_TYPE=Release \
 		-DCMAKE_INSTALL_PREFIX=/usr/local \
