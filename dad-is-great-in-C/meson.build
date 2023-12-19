@@ -1,6 +1,6 @@
 project(
-  'dad-is-great-in-C', 
-  'c', 
+  'dad-is-great-in-C',
+  'c',
   'cpp',
   version: '0.0.0',
   meson_version: '>= 0.56.0',
