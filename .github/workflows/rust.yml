@@ -48,4 +48,4 @@ jobs:
           make rust MOLD=true
       - name: fmt and clippy check
         if: ${{ matrix.toolchain == 'nightly' }}
-        run: cd rusted && cargo fmt -- --check && mold -run cargo clippy -- -D warnings
+        run: cd rusted && cargo fmt -- --check && mold -run cargo clippy --locked -- -D warnings
