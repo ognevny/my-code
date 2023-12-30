@@ -20,7 +20,11 @@ jobs:
           python-version: '3.11'
           cache: 'pip'
       - name: compile all files
-        run: make py PY_OPT=true
+        run: make py
       - uses: chartboost/ruff-action@v1
         with:
           src: "./pie"
+      - name: run speedometers
+        run: |
+          time python pie/speedometer.py
+          time python pie/numbed.py
