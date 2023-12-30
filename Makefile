@@ -17,7 +17,7 @@ else
 endif
 
 c:
-	(cd dad-is-great-in-C && meson setup build && cd build && meson compile)
+	(cd dad-is-great-in-C && meson setup && cd builddir && meson compile)
 
 rust-with-sfml:
 ifdef MOLD
@@ -55,5 +55,5 @@ endif
 
 clean:
 	(cd pie && rm -rf __pycache__)
-	(cd dad-is-great-in-c && rm -rf build)
+	(cd dad-is-great-in-c && rm -rf build*)
 	(cd rusted && cargo clean)
