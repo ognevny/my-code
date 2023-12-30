@@ -39,13 +39,13 @@ jobs:
               libegl1-mesa-dev \
               cmake \
               mold
-          make rust-with-sfml MOLD=true SFML_SOURCE=true
+          make rust-with-sfml MOLD=1 SFML_SOURCE=1
       - name: build workspace
         if: ${{ matrix.toolchain != 'nightly' }}
         run: |
           sudo apt-get update
           sudo apt-get install mold
-          make rust MOLD=true
+          make rust MOLD=1
       - name: fmt and clippy check
         if: ${{ matrix.toolchain == 'nightly' }}
         run: cd rusted && cargo fmt -- --check && mold -run cargo clippy --locked -- -D warnings
