@@ -17,7 +17,7 @@ else
 endif
 
 c:
-	(cd dad-is-great-in-C && meson setup && cd builddir && meson compile)
+	(cd dad-is-great-in-C && meson setup builddir && cd builddir && meson compile)
 
 rust-with-sfml:
 ifdef MOLD
