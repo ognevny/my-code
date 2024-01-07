@@ -1,7 +1,6 @@
 // a programm to test speed of each language (C++ implementation)
 
 #include <iostream>
-using namespace std;
 
 static inline unsigned int s() {
   unsigned int n = 1;
@@ -11,6 +10,6 @@ static inline unsigned int s() {
 }
 
 int main() {
-  cout << s();
+  std::cout << s();
   return 0;
 }
