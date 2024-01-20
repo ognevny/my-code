@@ -11,7 +11,7 @@ int main() {
   getline(cin, line);
   stringstream ss(line);
   string word;
-  unsigned long long max = 0;
+  uint64_t max = 0;
   string maxstr;
   while (ss >> word) {
     if (word.size() > max) {

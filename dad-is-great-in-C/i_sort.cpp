@@ -3,14 +3,15 @@
 #include <ctime>
 #include <iostream>
 #include <random>
+#include <vector>
 using namespace std;
 
 int main() {
   int n;
   cin >> n;
   clock_t st = clock();
-  int a[n];
-  srand(time(nullptr));
+  vector<int> a(n);
+  srand(time(0));
   for (int i = 0; i < n; i++)
     a[i] = rand();
 

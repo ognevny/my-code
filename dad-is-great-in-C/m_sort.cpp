@@ -3,9 +3,10 @@
 #include <ctime>
 #include <iostream>
 #include <random>
+#include <vector>
 using namespace std;
 
-void merge(int arr[], size_t left, size_t mid, size_t right) {
+static void merge(vector<int> arr, size_t left, size_t mid, size_t right) {
   size_t rt = mid - left + 1, lt = right - mid;
   int *left_arr = new int[rt],
       *right_arr = new int[lt]; // создаём два новых массива
@@ -45,11 +46,11 @@ void merge(int arr[], size_t left, size_t mid, size_t right) {
   delete[] right_arr;
 }
 
-void merge_sort(int arr[], size_t begin, size_t end) {
+static void merge_sort(vector<int> arr, size_t begin, size_t end) {
   if (begin >= end)
     return; // раздел до единичных
 
-  int mid = (end + begin) / 2;
+  size_t mid = (end + begin) / 2;
   merge_sort(arr, begin, mid);
   merge_sort(arr, mid + 1, end);
   merge(arr, begin, mid, end);
@@ -59,8 +60,8 @@ int main() {
   size_t n;
   cin >> n;
   clock_t st = clock();
-  int a[n];
-  srand(time(nullptr));
+  vector<int> a(n);
+  srand(time(0));
   for (size_t i = 0; i < n; i++)
     a[i] = rand();
   merge_sort(a, 0, n - 1);
