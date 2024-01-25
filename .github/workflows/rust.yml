@@ -49,3 +49,7 @@ jobs:
       - name: fmt and clippy check
         if: ${{ matrix.toolchain == 'nightly' }}
         run: cd rusted && cargo fmt -- --check && mold -run cargo clippy --locked -- -D warnings
+      - name: run speedometer
+        run: |
+          make rust-speedometer PROFILE=speedometer
+          time ./rusted/target/speedometer/speedometer

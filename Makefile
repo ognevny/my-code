@@ -12,9 +12,12 @@ ifdef MOLD
 	speedometer -p tumba-umba)
 else
 	(cargo b -v --profile $(PROFILE) --manifest-path rusted/Cargo.toml -p first_word -p \
-	integral -p last_word -p longman -p mask1 -p mcko -p pop -p probnik -p resheto -p \
-	speedometer -p tumba-umba)
+	integral -p last_word -p longman -p mask1 -p mcko -p pop -p probnik -p resheto \
+	-p tumba-umba)
 endif
+
+rust-speedometer:
+	(cargo b -v --profile $(PROFILE) --manifest-path rusted/Cargo.toml -p speedometer)
 
 c:
 	(cd dad-is-great-in-C && meson setup builddir && cd builddir && meson compile)
