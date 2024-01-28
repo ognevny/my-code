@@ -33,6 +33,7 @@ jobs:
       - name: compile files
         run: make c
       - name: include diagnostics
+        if: ${{ matrix.sys }} == clang64
         run: |
           cd dad-is-great-in-C
           for file in *.c*; do
