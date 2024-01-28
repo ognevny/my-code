@@ -28,9 +28,16 @@ jobs:
           pacboy: >-
             cc:p
             meson:p
+            include-what-you-use:p
             make
       - name: compile files
         run: make c
+      - name: include diagnostics
+        run: |
+          cd dad-is-great-in-C
+          for file in *.c*; do
+            include-what-you-use $file
+          done
       - name: run speedometers
         run: |
           time ./dad-is-great-in-C/builddir/speedometer_c
