@@ -4,7 +4,7 @@ project(
   'cpp',
   version: '0.0.0',
   meson_version: '>= 0.56.0',
-  default_options: ['warning_level=everything', 'cpp_std=gnu++17', 'c_std=gnu17']
+  default_options: ['warning_level=3', 'cpp_std=gnu++17', 'c_std=gnu17']
 )
 
 executable('b_sort', 'b_sort.cpp')
