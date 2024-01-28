@@ -27,6 +27,7 @@ jobs:
           pacboy: >-
             cc:p
             meson:p
+            make
       - name: compile files
         run: make c
       - name: run speedometers
