@@ -1,10 +1,10 @@
 // merge sort
 
+#include <chrono>
+#include <cstdlib>
 #include <ctime>
 #include <iostream>
-#include <random>
 #include <vector>
-#include <chrono>
 
 static void merge(std::vector<int> arr, size_t left, size_t mid, size_t right) {
   size_t rt = mid - left + 1, lt = right - mid;
@@ -17,7 +17,7 @@ static void merge(std::vector<int> arr, size_t left, size_t mid, size_t right) {
     right_arr[i] = arr[mid + 1 + i];
 
   size_t i_right = 0, i_left = 0,
-      i_merged = left; // индексы, по которым мы идём вдоль массивов
+         i_merged = left; // индексы, по которым мы идём вдоль массивов
 
   while (i_right < rt and i_left < lt) { // слияние
     if (left_arr[i_right] <= right_arr[i_left]) {
@@ -61,7 +61,8 @@ int main() {
   std::cin >> n;
   clock_t st = clock();
   std::vector<int> a(n);
-  srand(static_cast<unsigned int>(std::chrono::system_clock::now().time_since_epoch().count()));
+  srand(static_cast<unsigned int>(
+      std::chrono::system_clock::now().time_since_epoch().count()));
   for (size_t i = 0; i < n; i++)
     a[i] = rand();
   merge_sort(a, 0, n - 1);

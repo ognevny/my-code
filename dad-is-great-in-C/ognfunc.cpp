@@ -1,8 +1,8 @@
 // a list of useful functions written by me
 
 #include "ognfunc.hpp"
-#include <string>
 #include <cstdint>
+#include <string>
 
 uint16_t numsum(uint64_t n) { // sum of number digits
   uint16_t res = 0;

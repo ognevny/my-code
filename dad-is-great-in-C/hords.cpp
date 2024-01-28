@@ -2,6 +2,7 @@
 c = a - f(a)(a - b)/(f(a) - f(b)) */
 
 #include <cmath>
+#include <cstdlib>
 #include <iomanip>
 #include <iostream>
 

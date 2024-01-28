@@ -1,7 +1,9 @@
 // a test to check that ognfunc works fine
 
 #include "ognfunc.hpp"
+#include <cstdint>
 #include <iostream>
+#include <string>
 
 int main() {
   uint64_t a = 12345;

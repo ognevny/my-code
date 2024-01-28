@@ -1,17 +1,19 @@
 // insertion sort
 
+#include <chrono>
+#include <cstdint>
+#include <cstdlib>
 #include <ctime>
 #include <iostream>
-#include <random>
 #include <vector>
-#include <chrono>
 
 int main() {
   size_t n;
   std::cin >> n;
   clock_t st = clock();
   std::vector<int> a(n);
-  srand(static_cast<unsigned int>(std::chrono::system_clock::now().time_since_epoch().count()));
+  srand(static_cast<unsigned int>(
+      std::chrono::system_clock::now().time_since_epoch().count()));
   for (size_t i = 0; i < n; i++)
     a[i] = rand();
 

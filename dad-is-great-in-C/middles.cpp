@@ -1,6 +1,7 @@
 // something like binary search for solving equations
 
 #include <cmath>
+#include <cstdlib>
 #include <iomanip>
 #include <iostream>
 
