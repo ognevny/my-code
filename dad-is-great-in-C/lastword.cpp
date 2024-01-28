@@ -2,14 +2,13 @@
 
 #include <iostream>
 #include <string>
-using namespace std;
 
 int main() {
-  string line;
-  getline(cin, line);
+  std::string line;
+  std::getline(std::cin, line);
   size_t end = line.find_last_not_of(" ");
-  string trimmed = line.substr(0, end + 1);
-  string last(trimmed.begin() + static_cast<int64_t>(trimmed.rfind(" ")) + 1, trimmed.end());
-  cout << last;
+  std::string trimmed = line.substr(0, end + 1);
+  std::string last(trimmed.begin() + static_cast<int64_t>(trimmed.rfind(" ")) + 1, trimmed.end());
+  std::cout << last;
   return 0;
 }

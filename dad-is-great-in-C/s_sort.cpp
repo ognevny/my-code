@@ -4,20 +4,19 @@
 #include <iostream>
 #include <random>
 #include <vector>
-using namespace std;
 
 int main() {
-  int n;
-  cin >> n;
+  size_t n;
+  std::cin >> n;
   clock_t st = clock();
-  vector<int> a(n);
-  srand(time(0));
-  for (int i = 0; i < n; i++)
+  std::vector<int> a(n);
+  srand(static_cast<unsigned int>(std::chrono::system_clock::now().time_since_epoch().count()));
+  for (size_t i = 0; i < n; i++)
     a[i] = rand();
 
-  for (int i = 0; i < n - 1; i++) {
-    int i_min = i;
-    for (int j = i + 1; j < n; j++) {
+  for (size_t i = 0; i < n - 1; i++) {
+    size_t i_min = i;
+    for (size_t j = i + 1; j < n; j++) {
       if (a[j] < a[i_min])
         i_min = j;
     }
@@ -30,6 +29,6 @@ int main() {
 
   // for (int i : a) cout << i << " ";
   clock_t end = clock();
-  cout << static_cast<double>(end - st) / CLOCKS_PER_SEC;
+  std::cout << static_cast<double>(end - st) / CLOCKS_PER_SEC;
   return 0;
 }

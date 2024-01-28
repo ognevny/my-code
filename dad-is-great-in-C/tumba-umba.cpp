@@ -4,35 +4,34 @@ k */
 #include <iostream>
 #include <string>
 #include <vector>
-using namespace std;
 
 int main() {
-  string alpha;
-  cin >> alpha;
+  std::string alpha;
+  std::cin >> alpha;
   int k;
-  cin >> k;
+  std::cin >> k;
   int count = 0;
-  vector<string> a;
-  vector<string> b;
+  std::vector<std::string> a;
+  std::vector<std::string> b;
   for (char c : alpha) {
-    string buf(1, c);
+    std::string buf(1, c);
     a.push_back(buf);
     b.push_back(buf);
   }
   for (int i = 1; i < k; i++) {
-    vector<string> words;
-    for (string first : a) {
-      for (string second : b) {
+    std::vector<std::string> words;
+    for (std::string first : a) {
+      for (std::string second : b) {
         words.push_back(first + second);
       }
     }
     a = words;
   }
-  for (string word : a) {
-    // if (word[1] == alpha[0]) { // just for another task
-    cout << word << endl;
+  for (std::string word : a) {
+    // if (word[1] == alpha[0]) { // for another task
+    std::cout << word << std::endl;
     count++;
   } //}
-  cout << count;
+  std::cout << count;
   return 0;
 }

@@ -4,11 +4,10 @@ c = a - f(a)(a - b)/(f(a) - f(b)) */
 #include <cmath>
 #include <iomanip>
 #include <iostream>
-using namespace std;
 
 int main() {
   long double C;
-  cin >> C;
+  std::cin >> C;
   long double a = 0.0L, b = C;
   long double c = a - (a * a + sqrtl(a) - C) * (a - b) /
                           ((a * a + sqrtl(a) - C) - (b * b + sqrtl(b) - C));
@@ -20,6 +19,6 @@ int main() {
     c = a - (a * a + sqrtl(a) - C) * (a - b) /
                 ((a * a + sqrtl(a) - C) - (b * b + sqrtl(b) - C));
   }
-  cout << setprecision(9) << c;
+  std::cout << std::setprecision(9) << c;
   return 0;
 }

@@ -4,9 +4,8 @@
 #include <iostream>
 #include <random>
 #include <vector>
-using namespace std;
 
-static void merge(vector<int> arr, size_t left, size_t mid, size_t right) {
+static void merge(std::vector<int> arr, size_t left, size_t mid, size_t right) {
   size_t rt = mid - left + 1, lt = right - mid;
   int *left_arr = new int[rt],
       *right_arr = new int[lt]; // создаём два новых массива
@@ -46,7 +45,7 @@ static void merge(vector<int> arr, size_t left, size_t mid, size_t right) {
   delete[] right_arr;
 }
 
-static void merge_sort(vector<int> arr, size_t begin, size_t end) {
+static void merge_sort(std::vector<int> arr, size_t begin, size_t end) {
   if (begin >= end)
     return; // раздел до единичных
 
@@ -58,15 +57,15 @@ static void merge_sort(vector<int> arr, size_t begin, size_t end) {
 
 int main() {
   size_t n;
-  cin >> n;
+  std::cin >> n;
   clock_t st = clock();
-  vector<int> a(n);
-  srand(time(0));
+  std::vector<int> a(n);
+  srand(static_cast<unsigned int>(std::chrono::system_clock::now().time_since_epoch().count()));
   for (size_t i = 0; i < n; i++)
     a[i] = rand();
   merge_sort(a, 0, n - 1);
   // for (int i : a) cout << i << " ";
   clock_t end = clock();
-  cout << endl << static_cast<double>(end - st) / CLOCKS_PER_SEC;
+  std::cout << std::endl << static_cast<double>(end - st) / CLOCKS_PER_SEC;
   return 0;
 }

@@ -4,14 +4,14 @@
 #include <iostream>
 #include <random>
 #include <vector>
-using namespace std;
+#include <chrono>
 
-static void bubble(vector<int> arr, int n) {
-  for (int i = n - 1; i > 0; i--) {
+static void bubble(std::vector<int> arr, size_t n) {
+  for (size_t i = n - 1; i > 0; i--) {
     int count = 0;
-    for (int j = 0; j < i; j++) {
+    for (size_t j = 0; j < i; j++) {
       if (arr[j] > arr[j + 1]) {
-        swap(arr[j], arr[j + 1]);
+        std::swap(arr[j], arr[j + 1]);
         count++;
       }
     }
@@ -21,20 +21,20 @@ static void bubble(vector<int> arr, int n) {
 }
 
 int main() {
-  int n;
-  cin >> n;
+  size_t n;
+  std::cin >> n;
   clock_t st = clock();
-  vector<int> a(n);
-  srand(time(0));
-  for (int i = 0; i < n; i++) {
+  std::vector<int> a(n);
+  srand(static_cast<unsigned int>(std::chrono::system_clock::now().time_since_epoch().count()));
+  for (size_t i = 0; i < n; i++) {
     a[i] = rand();
-    cout << a[i] << " ";
+    std::cout << a[i] << " ";
   }
-  cout << endl;
+  std::cout << std::endl;
   bubble(a, n);
   // for (int i : a)
     // cout << i << " ";
   clock_t end = clock();
-  cout << endl << (double)(end - st) / CLOCKS_PER_SEC;
+  std::cout << std::endl << static_cast<double>(end - st) / CLOCKS_PER_SEC;
   return 0;
 }

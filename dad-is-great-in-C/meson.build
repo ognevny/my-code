@@ -4,7 +4,7 @@ project(
   'cpp',
   version: '0.0.0',
   meson_version: '>= 0.56.0',
-  default_options: ['warning_level=3', 'cpp_std=c++17', 'c_std=c17']
+  default_options: ['warning_level=everything', 'cpp_std=gnu++17', 'c_std=gnu17']
 )
 
 executable('b_sort', 'b_sort.cpp')
@@ -20,3 +20,4 @@ executable('s_sort', 's_sort.cpp')
 executable('speedometer_cpp', 'speedometer.cpp')
 executable('speedometer_c', 'speedometer.c')
 executable('tumba-umba', 'tumba-umba.cpp')
+executable('ogntest', 'ognfunc.cpp', 'ogntest.cpp')
