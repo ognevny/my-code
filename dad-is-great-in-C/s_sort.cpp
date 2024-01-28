@@ -4,6 +4,7 @@
 #include <iostream>
 #include <random>
 #include <vector>
+#include <chrono>
 
 int main() {
   size_t n;

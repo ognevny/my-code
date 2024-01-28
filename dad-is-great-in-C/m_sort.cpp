@@ -4,6 +4,7 @@
 #include <iostream>
 #include <random>
 #include <vector>
+#include <chrono>
 
 static void merge(std::vector<int> arr, size_t left, size_t mid, size_t right) {
   size_t rt = mid - left + 1, lt = right - mid;
