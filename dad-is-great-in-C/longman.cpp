@@ -1,10 +1,14 @@
 /* task: print the longest word in input and its length
 reference to "Long, long, maaaaaaaan" (Japanese ad) */
 
+#ifdef __clang__
+#include <__fwd/sstream.h>
+#endif
+
 #include <cstdint>
 #include <iostream>
-#include <sstream>
 #include <string>
+#include <sstream>
 
 int main() {
   std::string line;
