@@ -13,7 +13,7 @@ int main() {
   std::cin >> C;
   long double a = 0.0L, b = C;
   long double c = (a + b) / 2;
-  while (abs(f(c) - C) > epsilon) {
+  while (std::abs(f(c) - C) > epsilon) {
     if ((f(a) - C) * (f(c) - C) < 0)
       b = c;
     else

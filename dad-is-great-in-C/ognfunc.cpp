@@ -7,7 +7,7 @@
 uint16_t numsum(uint64_t n) { // sum of number digits
   uint16_t res = 0;
   while (n) {
-    res += n % 10;
+    res += static_cast<uint16_t>(n % 10);
     n /= 10;
   }
   return res;

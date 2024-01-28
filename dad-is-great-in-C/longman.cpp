@@ -1,7 +1,6 @@
 /* task: print the longest word in input and its length
 reference to "Long, long, maaaaaaaan" (Japanese ad) */
 
-#include <__fwd/sstream.h>
 #include <cstdint>
 #include <iostream>
 #include <sstream>

@@ -12,7 +12,7 @@ int main() {
   long double a = 0.0L, b = C;
   long double c = a - (a * a + sqrtl(a) - C) * (a - b) /
                           ((a * a + sqrtl(a) - C) - (b * b + sqrtl(b) - C));
-  while (abs(c * c + sqrtl(c) - C) > 0.000001L) {
+  while (std::abs(c * c + sqrtl(c) - C) > 0.000001L) {
     if ((a * a + sqrtl(a) - C) * (c * c + sqrtl(c) - C) < 0)
       b = c;
     else

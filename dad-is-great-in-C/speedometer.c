@@ -10,6 +10,6 @@ static inline unsigned int sum(void) {
 }
 
 int main(void) {
-  printf("%d", sum());
+  printf("%u", sum());
   return 0;
 }
