@@ -9,17 +9,27 @@ on:
 jobs:
   build:
     name: build
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: msys2 {0}
+    strategy:
+      matrix:
+        sys:
+          - clang64
+          - ucrt64
     steps:
       - uses: actions/checkout@v4
-      - name: install and update deps
-        run: |
-          sudo apt-get update && sudo apt-get --only-upgrade install gcc g++
-          sudo apt-get install meson
+      - uses: msys2/setup-msys2@v2
+        with:
+          update: true
+          msystem: ${{ matrix.sys }}
+          pacboy: >-
+            cc:p
+            meson:p
       - name: compile files
         run: make c
       - name: run speedometers
         run: |
-          cd dad-is-great-in-C/builddir
-          time ./speedometer_c
-          time ./speedometer_cpp
+          time ./dad-is-great-in-C/builddir/speedometer_c
+          time ./dad-is-great-in-C/builddir/speedometer_cpp
