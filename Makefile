@@ -9,16 +9,17 @@ LIBDIR ?= $(PREFIX)/lib
 all: rust-with-sfml c py
 
 ifdef MOLD
-	CARGO := mold -run cargo b -v --profile $(PROFILE) --manifest-path rusted/Cargo.toml
+CARGO := mold -run cargo b -v --profile $(PROFILE) --manifest-path rusted/Cargo.toml
 else
-	CARGO := cargo b -v --profile $(PROFILE) --manifest-path rusted/Cargo.toml
+CARGO := cargo b -v --profile $(PROFILE) --manifest-path rusted/Cargo.toml
 endif
 
 ifdef PY_OPT
-	OPT_OPTS := -o 0 -o 1
+OPT_OPTS := -o 0 -o 1
 endif
 
 compile-sfml:
+ifdef SFML_SOURCE
 	(cd ~ && curl -LO https://github.com/SFML/SFML/archive/$(SFML).tar.gz && \
 	tar -xzf $(SFML).tar.gz && mkdir -p build && cd build && cmake \
 	-DCMAKE_BUILD_TYPE=Release \
@@ -26,6 +27,7 @@ compile-sfml:
 	-DBUILD_SHARED_LIBS=ON \
 	../SFML-$(SFML))
 	(cd ~/build && cmake --build . && sudo cmake --install .)
+endif
 
 rust:
 	$(CARGO) -p first_word -p integral -p last_word -p longman -p mask1 -p mcko -p pop -p \
@@ -37,9 +39,8 @@ rust-speedometer:
 c:
 	(cd dad-is-great-in-C && meson setup builddir && cd builddir && meson compile)
 
-rust-with-sfml:
+rust-with-sfml: compile-sfml
 ifdef SFML_SOURCE
-	compile-sfml
 	SFML_LIBS_DIR=$(LIBDIR) SFML_INCLUDE_DIR=$(INCLUDEDIR) $(CARGO)
 else
 	$(CARGO)
