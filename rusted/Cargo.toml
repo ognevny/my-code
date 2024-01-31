@@ -12,6 +12,7 @@ members = [
     "resheto",
     "mask1",
     "probnik",
+    "ege1",
 ]
 exclude = [
     "mytest",
