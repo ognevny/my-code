@@ -13,6 +13,7 @@
 #define Vec vector
 #define use using
 #define push push_back
+#define pop pop_back
 #define read_line getline
 #define len size
 #define let auto
