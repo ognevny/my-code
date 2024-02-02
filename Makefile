@@ -1,5 +1,6 @@
 PREFIX ?= /usr/local
 PROFILE ?= dev
+BUILDTYPE ?= debug
 SFML ?= 2.6.1
 INCLUDEDIR ?= $(PREFIX)/include
 LIBDIR ?= $(PREFIX)/lib
@@ -37,7 +38,9 @@ rust-speedometer:
 	$(CARGO) -p speedometer
 
 c:
-	(cd dad-is-great-in-C && meson setup builddir && cd builddir && meson compile)
+	(cd dad-is-great-in-C && \
+	meson setup --buildtype=$(BUILDTYPE) builddir && \
+	cd builddir && meson compile)
 
 rust-with-sfml: compile-sfml
 ifdef SFML_SOURCE
