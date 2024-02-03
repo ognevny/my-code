@@ -19,10 +19,7 @@ fn main() {
     while window.is_open() {
         while let Some(event) = window.poll_event() {
             match event {
-                Event::Closed
-                | Event::KeyPressed {
-                    code: Key::Escape, ..
-                } => window.close(),
+                Event::Closed | Event::KeyPressed { code: Key::Escape, .. } => window.close(),
                 Event::Resized { width, height } => {
                     let view = View::from_rect(FloatRect::new(0., 0., width as f32, height as f32));
                     let radius = width.min(height) as f32 / 2.;

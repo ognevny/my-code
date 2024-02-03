@@ -27,11 +27,7 @@ use {
 pub fn n2(mut n: u16) -> u16 {
     loop {
         let m = u32::from_str_radix(
-            &if n % 2 == 0 {
-                format!("{n:b}10")
-            } else {
-                format!("1{n:b}00")
-            },
+            &if n % 2 == 0 { format!("{n:b}10") } else { format!("1{n:b}00") },
             2,
         )
         .unwrap();
@@ -97,11 +93,7 @@ pub fn n11() -> u32 {
         .find_map(|i| {
             let sum = u32::from_str_radix(&format!("154{:X}3", i), 12).unwrap()
                 + u32::from_str_radix(&format!("1{:X}365", i), 12).unwrap();
-            if sum % 13 == 0 {
-                Some(sum / 13)
-            } else {
-                None
-            }
+            if sum % 13 == 0 { Some(sum / 13) } else { None }
         })
         .unwrap()
 }
@@ -126,14 +118,8 @@ pub fn n12() -> (i32, i32) {
 
     data.par_windows(2)
         .filter(|t| t[0] % min == 0 && t[1] % min == 0)
-        .fold(
-            || (0, 0),
-            |(count, max), t| (count + 1, max.max(t[0] + t[1])),
-        )
-        .reduce(
-            || (0, 0),
-            |(count1, max1), (count2, max2)| (count1 + count2, max1.max(max2)),
-        )
+        .fold(|| (0, 0), |(count, max), t| (count + 1, max.max(t[0] + t[1])))
+        .reduce(|| (0, 0), |(count1, max1), (count2, max2)| (count1 + count2, max1.max(max2)))
 }
 
 fn main() {
