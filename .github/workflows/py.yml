@@ -20,7 +20,9 @@ jobs:
           python-version: '3.12'
           cache: 'pip'
       - name: compile all files
-        run: make py
+        run: |
+          pip install pipx
+          make py
       - uses: chartboost/ruff-action@v1
         with:
           src: "./pie"
