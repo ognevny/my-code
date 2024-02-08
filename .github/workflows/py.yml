@@ -9,7 +9,7 @@ on:
 jobs:
   build:
     name: check python files
-    runs-on: ubuntu-latest
+    runs-on: macos-14
     strategy:
       fail-fast: false
     steps:
@@ -17,7 +17,7 @@ jobs:
       - name: setup python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: '3.12'
           cache: 'pip'
       - name: compile all files
         run: make py
