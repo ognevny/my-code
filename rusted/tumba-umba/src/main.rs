@@ -24,7 +24,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 fn gen(alpha: &Vec<char>, current: &mut Vec<char>, i: usize, words: &mut Vec<String>) -> usize {
     if i == current.len() {
-        words.push(current.iter().collect::<String>() + "\n");
+        let mut temp = current.iter().collect::<String>();
+        temp.push('\n');
+        words.push(temp);
         return 1;
     }
 
