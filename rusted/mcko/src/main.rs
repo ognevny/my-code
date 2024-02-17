@@ -91,8 +91,8 @@ pub fn n10() -> String {
 pub fn n11() -> u32 {
     (0..12)
         .find_map(|i| {
-            let sum = u32::from_str_radix(&format!("154{:X}3", i), 12).unwrap()
-                + u32::from_str_radix(&format!("1{:X}365", i), 12).unwrap();
+            let sum = u32::from_str_radix(&format!("154{i:X}3"), 12).unwrap()
+                + u32::from_str_radix(&format!("1{i:X}365"), 12).unwrap();
             if sum % 13 == 0 { Some(sum / 13) } else { None }
         })
         .unwrap()

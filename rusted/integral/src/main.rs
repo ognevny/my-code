@@ -22,7 +22,7 @@ fn f(x: f64, expr: &str) -> f64 {
 fn lrect(a: f64, b: f64, n: f64, expr: &str) -> f64 {
     let mut s: f64 = 0.0;
     for i in 0..=(n - 1.0) as u64 {
-        s += f(a + i as f64 * (b - a) / n, expr)
+        s += f(a + i as f64 * (b - a) / n, expr);
     }
     s * ((b - a) / n)
 }
@@ -30,7 +30,7 @@ fn lrect(a: f64, b: f64, n: f64, expr: &str) -> f64 {
 fn rrect(a: f64, b: f64, n: f64, expr: &str) -> f64 {
     let mut s: f64 = 0.0;
     for i in 1..=n as u64 {
-        s += f(a + i as f64 * (b - a) / n, expr)
+        s += f(a + i as f64 * (b - a) / n, expr);
     }
     s * ((b - a) / n)
 }
@@ -38,7 +38,7 @@ fn rrect(a: f64, b: f64, n: f64, expr: &str) -> f64 {
 fn mrect(a: f64, b: f64, n: f64, expr: &str) -> f64 {
     let mut s: f64 = 0.0;
     for i in 0..=(n - 1.0) as u64 {
-        s += f(a + (b - a) * (2.0 * i as f64 + 1.0) / (2.0 * n), expr)
+        s += f(a + (b - a) * (2.0 * i as f64 + 1.0) / (2.0 * n), expr);
     }
     s * ((b - a) / n)
 }
@@ -46,7 +46,7 @@ fn mrect(a: f64, b: f64, n: f64, expr: &str) -> f64 {
 fn trapezoid(a: f64, b: f64, n: f64, expr: &str) -> f64 {
     let mut s: f64 = 0.0;
     for i in 0..=(n - 1.0) as u64 {
-        s += (f(a + i as f64 * (b - a) / n, expr) + f(a + (i + 1) as f64 * (b - a) / n, expr)) / 2.0
+        s += (f(a + i as f64 * (b - a) / n, expr) + f(a + (i + 1) as f64 * (b - a) / n, expr)) / 2.0;
     }
     s * ((b - a) / n)
 }

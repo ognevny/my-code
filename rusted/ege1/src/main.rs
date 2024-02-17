@@ -1,9 +1,6 @@
 //! the first code with tasks from EGE examW
 
-use {
-    ansi_term::Colour,
-    std::{cmp::max, fs},
-};
+use {ansi_term::Colour, std::fs};
 
 fn ex1() -> Result<usize, Box<dyn std::error::Error>> {
     let text = fs::read_to_string("11.txt")?;
@@ -16,7 +13,7 @@ fn ex1() -> Result<usize, Box<dyn std::error::Error>> {
     }
     let mut mx = 0;
     for i in 0..(pos.len() - 1001) {
-        mx = max(pos[i + 1001] - pos[i] - 1 + 7000 + 14, mx);
+        mx = mx.max(pos[i + 1001] - pos[i] - 1 + 7000 + 14);
     }
     Ok(mx)
 }
