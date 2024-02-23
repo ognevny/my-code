@@ -1,30 +1,30 @@
 [workspace]
+exclude = [
+    "for_lesson",
+    "mytest",
+]
 members = [
+    "ege1",
     "first_word",
     "integral",
     "last_word",
     "longman",
+    "mask1",
+    "mcko",
     "pop",
+    "probnik",
+    "resheto",
+    "sfml_apps/*",
     "speedometer",
     "tumba-umba",
-    "mcko",
-    "sfml_apps/*",
-    "resheto",
-    "mask1",
-    "probnik",
-    "ege1",
-]
-exclude = [
-    "mytest",
-    "for_lesson",
 ]
 resolver = "2"
 
 [profile.speedometer]
-inherits = "dev"
 debug = false
 debug-assertions = false
-overflow-checks = false
+inherits = "dev"
 lto = false
-strip = false
 opt-level = 0
+overflow-checks = false
+strip = false
