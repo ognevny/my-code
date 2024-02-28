@@ -7,10 +7,7 @@
 
 use {
     rayon::prelude::*,
-    std::{
-        fs::File,
-        io::{BufRead, BufReader},
-    },
+    std::{error::Error, fs::read_to_string},
 };
 
 // Номер 2
@@ -108,23 +105,22 @@ pub fn n11() -> u32 {
 //
 // Ответ: (157, 176024)
 
-pub fn n12() -> (i32, i32) {
-    let data: Vec<i32> = BufReader::new(File::open("12.txt").unwrap())
-        .lines()
-        .map(|line| line.unwrap().trim().parse().unwrap())
-        .collect();
+pub fn n12() -> Result<(i32, i32), Box<dyn Error>> {
+    let data: Vec<i32> =
+        read_to_string("12.txt")?.par_lines().map(|line| line.trim().parse().unwrap()).collect();
 
     let min = *data.par_iter().filter(|&&x| x % 15 != 0).min().unwrap();
 
-    data.par_windows(2)
+    Ok(data
+        .par_windows(2)
         .filter(|t| t[0] % min == 0 && t[1] % min == 0)
         .fold(|| (0, 0), |(count, max), t| (count + 1, max.max(t[0] + t[1])))
-        .reduce(|| (0, 0), |(count1, max1), (count2, max2)| (count1 + count2, max1.max(max2)))
+        .reduce(|| (0, 0), |(count1, max1), (count2, max2)| (count1 + count2, max1.max(max2))))
 }
 
 fn main() {
     assert_eq!(n2(1), 11);
     assert_eq!(n10(), "333333");
     assert_eq!(n11(), 4340);
-    assert_eq!(n12(), (157, 176024));
+    assert_eq!(n12().unwrap(), (157, 176024));
 }
