@@ -5,6 +5,7 @@ exclude = [
 ]
 members = [
     "ege1",
+    "ege2",
     "first_word",
     "integral",
     "last_word",

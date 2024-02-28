@@ -1,0 +1,73 @@
+    Checking ege2 v0.1.0 (C:\msys64\home\maksa\my-code\rusted\ege2)
+error: `clippy::restriction` is not meant to be enabled as a group
+  |
+  = note: because of the command line `--warn clippy::restriction`
+  = help: enable the restriction lints you need individually
+  = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#blanket_clippy_restriction_lints
+  = note: `-D clippy::blanket-clippy-restriction-lints` implied by `-D warnings`
+  = help: to override `-D warnings` add `#[allow(clippy::blanket_clippy_restriction_lints)]`
+
+error: missing `return` statement
+  --> ege2\src\main.rs:31:5
+   |
+31 |     Ok(())
+   |     ^^^^^^ help: add `return` as shown: `return Ok(())`
+   |
+   = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#implicit_return
+   = note: `-D clippy::implicit-return` implied by `-D warnings`
+   = help: to override `-D warnings` add `#[allow(clippy::implicit_return)]`
+
+error: question mark operator was used
+  --> ege2\src\main.rs:11:5
+   |
+11 |     stdin().read_line(&mut data)?;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: consider using a custom macro or match expression
+   = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#question_mark_used
+   = note: `-D clippy::question-mark-used` implied by `-D warnings`
+   = help: to override `-D warnings` add `#[allow(clippy::question_mark_used)]`
+
+error: used `unwrap()` on an `Option` value
+  --> ege2\src\main.rs:26:15
+   |
+26 |       let max = nums
+   |  _______________^
+27 | |         .par_iter()
+28 | |         .max_by_key(|&num| usize::from_str_radix(num, 16).unwrap())
+29 | |         .unwrap();
+   | |_________________^
+   |
+   = note: if this value is `None`, it will panic
+   = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#unwrap_used
+   = note: `-D clippy::unwrap-used` implied by `-D warnings`
+   = help: to override `-D warnings` add `#[allow(clippy::unwrap_used)]`
+
+error: missing `return` statement
+  --> ege2\src\main.rs:28:28
+   |
+28 |         .max_by_key(|&num| usize::from_str_radix(num, 16).unwrap())
+   |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: add `return` as shown: `return usize::from_str_radix(num, 16).unwrap()`
+   |
+   = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#implicit_return
+
+error: used `unwrap()` on a `Result` value
+  --> ege2\src\main.rs:28:28
+   |
+28 |         .max_by_key(|&num| usize::from_str_radix(num, 16).unwrap())
+   |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: if this value is an `Err`, it will panic
+   = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#unwrap_used
+
+error: use of `println!`
+  --> ege2\src\main.rs:30:5
+   |
+30 |     println!("{max}");
+   |     ^^^^^^^^^^^^^^^^^
+   |
+   = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#print_stdout
+   = note: `-D clippy::print-stdout` implied by `-D warnings`
+   = help: to override `-D warnings` add `#[allow(clippy::print_stdout)]`
+
+error: could not compile `ege2` (bin "ege2") due to 7 previous errors
