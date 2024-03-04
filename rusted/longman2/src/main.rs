@@ -11,7 +11,9 @@ fn main() -> Result<(), Box<dyn Error>> {
     stdin().read_line(&mut data)?;
     let mut word = String::new();
     for char in data.chars() {
-        if usize::from_str_radix(&char.to_string(), 16).is_ok() {
+        if char.is_ascii_digit()
+            || ['a', 'b', 'c', 'd', 'e', 'f'].contains(&char.to_ascii_lowercase())
+        {
             word.push(char);
         } else {
             if !word.is_empty() {
@@ -20,10 +22,7 @@ fn main() -> Result<(), Box<dyn Error>> {
             word = String::new();
         }
     }
-    let max = nums
-        .par_iter()
-        .max_by_key(|&num| usize::from_str_radix(num, 16).unwrap())
-        .unwrap();
+    let max = nums.par_iter().max_by_key(|&num| usize::from_str_radix(num, 16).unwrap()).unwrap();
     println!("{max}");
     Ok(())
 }
