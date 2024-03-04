@@ -31,8 +31,8 @@ ifdef SFML_SOURCE
 endif
 
 rust:
-	$(CARGO) -p first_word -p integral -p last_word -p longman -p mask1 -p mcko -p pop -p \
-	probnik -p resheto -p speedometer -p tumba-umba
+	$(CARGO) -p ege1 -p first_word -p integral -p last_word -p longman -p longman2 -p mask1 -p \
+	mcko -p pop -p probnik -p resheto -p speedometer -p tumba-umba
 
 rust-speedometer:
 	$(CARGO) -p speedometer
