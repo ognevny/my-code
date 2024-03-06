@@ -1,16 +1,16 @@
 // same as tumba-umba.cpp, but for only the first task
 
-use std::io::{self, BufWriter, Write};
+use std::io::{stdin, stdout, BufWriter, Write};
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let (mut alpha, mut k) = (String::new(), String::new());
-    io::stdin().read_line(&mut alpha)?;
+    stdin().read_line(&mut alpha)?;
     let alpha: Vec<char> = alpha.trim().chars().collect();
 
-    io::stdin().read_line(&mut k)?;
+    stdin().read_line(&mut k)?;
     let k = k.trim().parse()?;
 
-    let mut handle = BufWriter::new(io::stdout());
+    let mut handle = BufWriter::new(stdout());
     let mut words: Vec<String> = Vec::new();
     let count = gen(&alpha, &mut vec![' '; k], 0, &mut words);
     words.sort();

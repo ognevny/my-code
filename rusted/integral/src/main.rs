@@ -4,7 +4,7 @@ use {
     meval::{eval_str_with_context, Context},
     scan_fmt::{scan_fmt, scanln_fmt},
     std::{
-        io::{self, Write},
+        io::{stdin, stdout, BufWriter, Write},
         sync::{
             mpsc::{self, SendError},
             Arc,
@@ -60,7 +60,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     println!("then write your function with `x` variable");
     let mut expr = String::new();
-    io::stdin().read_line(&mut expr)?;
+    stdin().read_line(&mut expr)?;
 
     let (txl, rx) = mpsc::channel();
     let (txr, txm, txt) = (txl.clone(), txl.clone(), txl.clone());
@@ -108,7 +108,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         Ok(())
     });
 
-    let mut handle = io::BufWriter::new(io::stdout());
+    let mut handle = BufWriter::new(stdout());
     handle.write_all(b"\n")?;
     for res in rx {
         handle.write_all(res.as_bytes())?;
