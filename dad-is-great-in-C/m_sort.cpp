@@ -1,12 +1,12 @@
 // merge sort
 
-#include <chrono>
-#include <cstdlib>
 #include <ctime>
 #include <iostream>
+#include <random>
 #include <vector>
 
-static void merge(std::vector<int> arr, size_t left, size_t mid, size_t right) {
+static void merge(std::vector<unsigned int> arr, size_t left, size_t mid,
+                  size_t right) {
   size_t rt = mid - left + 1, lt = right - mid;
   int *left_arr = new int[rt],
       *right_arr = new int[lt]; // создаём два новых массива
@@ -46,7 +46,8 @@ static void merge(std::vector<int> arr, size_t left, size_t mid, size_t right) {
   delete[] right_arr;
 }
 
-static void merge_sort(std::vector<int> arr, size_t begin, size_t end) {
+static void merge_sort(std::vector<unsigned int> arr, size_t begin,
+                       size_t end) {
   if (begin >= end)
     return; // раздел до единичных
 
@@ -60,13 +61,19 @@ int main() {
   size_t n;
   std::cin >> n;
   clock_t st = clock();
-  std::vector<int> a(n);
-  srand(static_cast<unsigned int>(
-      std::chrono::system_clock::now().time_since_epoch().count()));
+
+  std::vector<unsigned int> a(n);
+  std::random_device rd;
+  std::mt19937 gen(rd());
+  std::uniform_int_distribution<std::mt19937::result_type> dist(1, 1000000);
+
   for (size_t i = 0; i < n; i++)
-    a[i] = rand();
+    a[i] = dist(gen);
   merge_sort(a, 0, n - 1);
-  // for (int i : a) cout << i << " ";
+
+  // for (int i : a)
+  //   std::cout << i << " ";
+
   clock_t end = clock();
   std::cout << std::endl << static_cast<double>(end - st) / CLOCKS_PER_SEC;
   return 0;

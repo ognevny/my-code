@@ -1,13 +1,12 @@
 // bubble sort
 
-#include <chrono>
-#include <cstdlib>
 #include <ctime>
 #include <iostream>
+#include <random>
 #include <utility>
 #include <vector>
 
-static void bubble(std::vector<int> arr, size_t n) {
+static void bubble(std::vector<unsigned int> arr, size_t n) {
   for (size_t i = n - 1; i > 0; i--) {
     int count = 0;
     for (size_t j = 0; j < i; j++) {
@@ -25,17 +24,18 @@ int main() {
   size_t n;
   std::cin >> n;
   clock_t st = clock();
-  std::vector<int> a(n);
-  srand(static_cast<unsigned int>(
-      std::chrono::system_clock::now().time_since_epoch().count()));
-  for (size_t i = 0; i < n; i++) {
-    a[i] = rand();
-    std::cout << a[i] << " ";
-  }
-  std::cout << std::endl;
+  std::vector<unsigned int> a(n);
+
+  std::random_device rd;
+  std::mt19937 gen(rd());
+  std::uniform_int_distribution<std::mt19937::result_type> dist(1, 1000000);
+
+  for (size_t i = 0; i < n; i++)
+    a[i] = dist(gen);
+
   bubble(a, n);
   // for (int i : a)
-  // cout << i << " ";
+  //   std::cout << i << " ";
   clock_t end = clock();
   std::cout << std::endl << static_cast<double>(end - st) / CLOCKS_PER_SEC;
   return 0;
