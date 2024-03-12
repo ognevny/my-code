@@ -3,6 +3,8 @@
 #include <chrono>
 #include <iostream>
 #include <random>
+#include <ratio>
+#include <stddef.h>
 #include <vector>
 
 static void merge(std::vector<unsigned int> arr, size_t left, size_t mid,

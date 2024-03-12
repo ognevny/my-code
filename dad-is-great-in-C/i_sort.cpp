@@ -4,6 +4,8 @@
 #include <cstdint>
 #include <iostream>
 #include <random>
+#include <ratio>
+#include <stddef.h>
 #include <vector>
 
 int main() {
