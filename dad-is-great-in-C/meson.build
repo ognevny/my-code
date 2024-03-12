@@ -6,8 +6,8 @@ project(
   meson_version: '>= 1.3.0',
   default_options: [
     'warning_level=everything',
-    'cpp_std=c++17,gnu++17',
-    'c_std=c17,gnu17',
+    'cpp_std=c++11,gnu++11',
+    'c_std=c11,gnu11',
     'c_args=-fdiagnostics-color=always -Wp,-D_FORTIFY_SOURCE=2 -fstack-protector-strong -pipe',
     'cpp_args=-fdiagnostics-color=always -Wp,-D_FORTIFY_SOURCE=2 -fstack-protector-strong -pipe'
   ]

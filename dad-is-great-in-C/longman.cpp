@@ -5,17 +5,16 @@ reference to "Long, long, maaaaaaaan" (Japanese ad) */
 #include <__fwd/sstream.h>
 #endif
 
-#include <cstdint>
 #include <iostream>
-#include <string>
 #include <sstream>
+#include <string>
 
 int main() {
   std::string line;
   std::getline(std::cin, line);
   std::stringstream ss(line);
   std::string word;
-  uint64_t max = 0;
+  unsigned long long max = 0;
   std::string maxstr;
   while (ss >> word) {
     if (word.size() > max) {

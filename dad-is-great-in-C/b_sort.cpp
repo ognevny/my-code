@@ -1,6 +1,6 @@
 // bubble sort
 
-#include <ctime>
+#include <chrono>
 #include <iostream>
 #include <random>
 #include <utility>
@@ -23,7 +23,7 @@ static void bubble(std::vector<unsigned int> arr, size_t n) {
 int main() {
   size_t n;
   std::cin >> n;
-  clock_t st = clock();
+  auto st = std::chrono::system_clock::now();
   std::vector<unsigned int> a(n);
 
   std::random_device rd;
@@ -34,9 +34,14 @@ int main() {
     a[i] = dist(gen);
 
   bubble(a, n);
+
   // for (int i : a)
   //   std::cout << i << " ";
-  clock_t end = clock();
-  std::cout << std::endl << static_cast<double>(end - st) / CLOCKS_PER_SEC;
+
+  auto end = std::chrono::system_clock::now();
+  auto elapsed =
+      std::chrono::duration_cast<std::chrono::microseconds>(end - st) /
+      1000000.0;
+  std::cout << std::fixed << elapsed.count();
   return 0;
 }

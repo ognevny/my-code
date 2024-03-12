@@ -1,12 +1,11 @@
 // a test to check that ognfunc works fine
 
 #include "ognfunc.hpp"
-#include <cstdint>
 #include <iostream>
 #include <string>
 
 int main() {
-  uint64_t a = 12345;
+  auto a = 12345ULL;
   std::cout << rev(a) << std::endl;
   std::cout << numcount(a) << std::endl;
   std::cout << numsum(a) << std::endl;

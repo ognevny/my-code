@@ -1,9 +1,8 @@
-#include <cstdint>
 #include <string>
 
-uint16_t numsum(uint64_t n);
-uint64_t rev(uint64_t n);
-uint64_t numsys(uint64_t n, uint8_t k);
-uint16_t numcount(uint64_t n);
-std::string numsys16(uint64_t n, uint8_t k);
-double binpow(double b, uint16_t e);
+unsigned short numsum(unsigned long long n);
+unsigned long long rev(unsigned long long n);
+unsigned long long numsys(unsigned long long n, unsigned char k);
+unsigned short numcount(unsigned long long n);
+std::string numsys16(unsigned long long n, unsigned char k);
+double binpow(double b, unsigned short e);

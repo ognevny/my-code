@@ -1,20 +1,19 @@
 // a list of useful functions written by me
 
 #include "ognfunc.hpp"
-#include <cstdint>
 #include <string>
 
-uint16_t numsum(uint64_t n) { // sum of number digits
-  uint16_t res = 0;
+unsigned short numsum(unsigned long long n) { // sum of number digits
+  unsigned short res = 0;
   while (n) {
-    res += static_cast<uint16_t>(n % 10);
+    res += static_cast<unsigned short>(n % 10);
     n /= 10;
   }
   return res;
 }
 
-uint64_t rev(uint64_t n) { // reverse number
-  uint64_t rev = 0;
+unsigned long long rev(unsigned long long n) { // reverse number
+  auto rev = 0ULL;
   while (n) {
     rev = rev * 10 + (n % 10);
     n /= 10;
@@ -22,8 +21,8 @@ uint64_t rev(uint64_t n) { // reverse number
   return rev;
 }
 
-uint64_t numsys(uint64_t n, uint8_t k) {
-  uint64_t ns = 1;
+unsigned long long numsys(unsigned long long n, unsigned char k) {
+  auto ns = 1ULL;
   while (n) {
     ns = ns * 10 + (n % k);
     n /= k;
@@ -31,8 +30,8 @@ uint64_t numsys(uint64_t n, uint8_t k) {
   return (rev(ns) - 1) / 10;
 }
 
-uint16_t numcount(uint64_t n) { // counts number digits
-  uint16_t count = 0;
+unsigned short numcount(unsigned long long n) { // counts number digits
+  unsigned short count = 0;
   while (n) {
     n /= 10;
     count++;
@@ -40,7 +39,7 @@ uint16_t numcount(uint64_t n) { // counts number digits
   return count;
 }
 
-std::string numsys16(uint64_t n, uint8_t k) {
+std::string numsys16(unsigned long long n, unsigned char k) {
   const std::string NUMS[16] = {"0", "1", "2", "3", "4", "5", "6", "7",
                                 "8", "9", "A", "B", "C", "D", "E", "F"};
   std::string res = "";
@@ -52,7 +51,7 @@ std::string numsys16(uint64_t n, uint8_t k) {
   return rev;
 }
 
-double binpow(double b, uint16_t e) { // binary power
+double binpow(double b, unsigned short e) { // binary power
   double v = 1.0;
   while (e != 0) {
     if ((e & 1) != 0)
