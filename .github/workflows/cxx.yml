@@ -43,3 +43,8 @@ jobs:
         run: |
           time ./dad-is-great-in-C/builddir/speedometer_c
           time ./dad-is-great-in-C/builddir/speedometer_cpp
+      - name: check format
+        if: ${{ matrix.sys == 'clang64' }}
+        run: |
+          cd dad-is-great-in-C
+          clang-format -Werror --dry-run *.c* *.h*
