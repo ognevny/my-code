@@ -1,6 +1,7 @@
 name: CI-rust
 
 on:
+  workflow_dispatch:
   push:
     paths: ['**.rs', '**.toml', '**.lock', '**/rust.yml', 'Makefile']
   pull_request:

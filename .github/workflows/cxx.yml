@@ -1,6 +1,7 @@
 name: CI-CXX
 
 on:
+  workflow_dispatch:
   push:
     paths: ['**.cpp', '**.c', '**/cxx.yml', '**/meson.build', 'Makefile']
   pull_request:

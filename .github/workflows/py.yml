@@ -1,6 +1,7 @@
 name: CI-py
 
 on:
+  workflow_dispatch:
   push:
     paths: ['**.py', '**/py.yml', 'Makefile']
   pull_request:
