@@ -8,11 +8,11 @@
 static long double f(long double n) { return n * n + sqrtl(n); }
 
 int main() {
-  long double epsilon = 0.0000000001L; // could be in input
+  auto epsilon = 0.0000000001L; // could be in input
   long double C;
   std::cin >> C;
-  long double a = 0.0L, b = C;
-  long double c = (a + b) / 2;
+  auto a = 0.0L, b = C;
+  auto c = (a + b) / 2;
   while (std::abs(f(c) - C) > epsilon) {
     if ((f(a) - C) * (f(c) - C) < 0)
       b = c;

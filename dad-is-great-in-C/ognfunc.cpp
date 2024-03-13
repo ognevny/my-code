@@ -4,7 +4,7 @@
 #include <string>
 
 unsigned long long numsum(unsigned long long n) { // sum of number digits
-  unsigned long long res = 0;
+  auto res = 0ULL;
   while (n) {
     res += n % 10;
     n /= 10;

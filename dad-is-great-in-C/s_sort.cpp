@@ -15,12 +15,12 @@ int main() {
   std::random_device rd;
   std::mt19937 gen(rd());
   std::uniform_int_distribution<std::mt19937::result_type> dist(1, 1000000);
-  for (unsigned long long i = 0; i < n; i++)
+  for (auto i = 0ULL; i < n; i++)
     a[i] = dist(gen);
 
-  for (unsigned long long i = 0; i < n - 1; i++) {
-    unsigned long long i_min = i;
-    for (unsigned long long j = i + 1; j < n; j++) {
+  for (auto i = 0ULL; i < n - 1; i++) {
+    auto i_min = i;
+    for (auto j = i + 1; j < n; j++) {
       if (a[j] < a[i_min])
         i_min = j;
     }

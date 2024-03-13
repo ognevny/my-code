@@ -14,7 +14,7 @@ int main() {
   std::getline(std::cin, line);
   std::stringstream ss(line);
   std::string word;
-  unsigned long long max = 0;
+  auto max = 0ULL;
   std::string maxstr;
   while (ss >> word) {
     if (word.size() > max) {

@@ -8,9 +8,9 @@
 #include <vector>
 
 static void bubble(std::vector<unsigned int> arr, unsigned long long n) {
-  for (unsigned long long i = n - 1; i > 0; i--) {
+  for (auto i = n - 1; i > 0; i--) {
     int count = 0;
-    for (unsigned long long j = 0; j < i; j++) {
+    for (auto j = 0ULL; j < i; j++) {
       if (arr[j] > arr[j + 1]) {
         std::swap(arr[j], arr[j + 1]);
         count++;
@@ -31,7 +31,7 @@ int main() {
   std::mt19937 gen(rd());
   std::uniform_int_distribution<std::mt19937::result_type> dist(1, 1000000);
 
-  for (unsigned long long i = 0; i < n; i++)
+  for (auto i = 0ULL; i < n; i++)
     a[i] = dist(gen);
 
   bubble(a, n);

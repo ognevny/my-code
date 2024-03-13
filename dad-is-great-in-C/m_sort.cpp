@@ -8,18 +8,17 @@
 
 static void merge(std::vector<unsigned int> arr, unsigned long long left,
                   unsigned long long mid, unsigned long long right) {
-  unsigned long long rt = mid - left + 1, lt = right - mid;
+  auto rt = mid - left + 1, lt = right - mid;
   unsigned int *left_arr = new unsigned int[rt],
                *right_arr = new unsigned int[lt]; // создаём два новых массива
 
-  for (unsigned long long i = 0; i < rt; i++)
+  for (auto i = 0ULL; i < rt; i++)
     left_arr[i] = arr[left + i]; // заполняем их
-  for (unsigned long long i = 0; i < lt; i++)
+  for (auto i = 0ULL; i < lt; i++)
     right_arr[i] = arr[mid + 1 + i];
 
-  unsigned long long i_right = 0, i_left = 0,
-                     i_merged =
-                         left; // индексы, по которым мы идём вдоль массивов
+  auto i_right = 0ULL, i_left = 0ULL,
+       i_merged = left; // индексы, по которым мы идём вдоль массивов
 
   while (i_right < rt and i_left < lt) { // слияние
     if (left_arr[i_right] <= right_arr[i_left]) {
@@ -53,7 +52,7 @@ static void merge_sort(std::vector<unsigned int> arr, unsigned long long begin,
   if (begin >= end)
     return; // раздел до единичных
 
-  unsigned long long mid = (end + begin) / 2;
+  auto mid = (end + begin) / 2;
   merge_sort(arr, begin, mid);
   merge_sort(arr, mid + 1, end);
   merge(arr, begin, mid, end);
@@ -69,7 +68,7 @@ int main() {
   std::mt19937 gen(rd());
   std::uniform_int_distribution<std::mt19937::result_type> dist(1, 1000000);
 
-  for (unsigned long long i = 0; i < n; i++)
+  for (auto i = 0ULL; i < n; i++)
     a[i] = dist(gen);
   merge_sort(a, 0, n - 1);
 
