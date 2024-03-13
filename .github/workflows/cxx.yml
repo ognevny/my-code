@@ -36,7 +36,7 @@ jobs:
         if: ${{ matrix.sys == 'clang64' }}
         run: |
           cd dad-is-great-in-C
-          for file in *.c*; do
+          for file in *.c* *.h*; do
             include-what-you-use $file
           done
       - name: run speedometers
