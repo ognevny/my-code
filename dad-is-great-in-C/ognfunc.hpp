@@ -1,6 +1,6 @@
 #include <string>
 
-unsigned short numsum(unsigned long long n);
+unsigned long long numsum(unsigned long long n);
 unsigned long long rev(unsigned long long n);
 unsigned long long numsys(unsigned long long n, unsigned char k);
 unsigned short numcount(unsigned long long n);

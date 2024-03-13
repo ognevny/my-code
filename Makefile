@@ -61,5 +61,5 @@ clean:
 	(ninja -C dad-is-great-in-C/$(BUILDDIR) clean)
 	(cd rusted && cargo clean)
 
-clean-c:
+clean-all: clean
 	(rm -rf dad-is-great-in-C/$(BUILDDIR))

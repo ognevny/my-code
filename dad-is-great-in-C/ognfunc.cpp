@@ -3,10 +3,10 @@
 #include "ognfunc.hpp"
 #include <string>
 
-unsigned short numsum(unsigned long long n) { // sum of number digits
-  unsigned short res = 0;
+unsigned long long numsum(unsigned long long n) { // sum of number digits
+  unsigned long long res = 0;
   while (n) {
-    res += static_cast<unsigned short>(n % 10);
+    res += n % 10;
     n /= 10;
   }
   return res;
@@ -40,8 +40,8 @@ unsigned short numcount(unsigned long long n) { // counts number digits
 }
 
 std::string numsys16(unsigned long long n, unsigned char k) {
-  const std::string NUMS[16] = {"0", "1", "2", "3", "4", "5", "6", "7",
-                                "8", "9", "A", "B", "C", "D", "E", "F"};
+  const char NUMS[16] = {'0', '1', '2', '3', '4', '5', '6', '7',
+                         '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
   std::string res = "";
   while (n) {
     res += NUMS[n % k];

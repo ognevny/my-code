@@ -13,6 +13,7 @@ project(
       -Wp,-D_FORTIFY_SOURCE=2
       -fstack-protector-strong
       -pipe
+      -Wno-abi-tag
       -Wno-c++98-compat-pedantic
       -Wno-unsafe-buffer-usage''',
     '''cpp_args=
@@ -20,6 +21,7 @@ project(
       -Wp,-D_FORTIFY_SOURCE=2
       -fstack-protector-strong
       -pipe
+      -Wno-abi-tag
       -Wno-c++98-compat-pedantic
       -Wno-unsafe-buffer-usage'''
   ]
