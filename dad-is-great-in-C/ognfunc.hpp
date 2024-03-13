@@ -1,3 +1,7 @@
+#ifdef __GNUC__
+#define _GLIBCXX_USE_CXX11_ABI 0
+#endif
+
 #include <string>
 
 unsigned long long numsum(unsigned long long n);
