@@ -4,14 +4,13 @@
 #include <iostream>
 #include <random>
 #include <ratio>
-#include <stddef.h>
 #include <utility>
 #include <vector>
 
-static void bubble(std::vector<unsigned int> arr, size_t n) {
-  for (size_t i = n - 1; i > 0; i--) {
+static void bubble(std::vector<unsigned int> arr, unsigned long long n) {
+  for (unsigned long long i = n - 1; i > 0; i--) {
     int count = 0;
-    for (size_t j = 0; j < i; j++) {
+    for (unsigned long long j = 0; j < i; j++) {
       if (arr[j] > arr[j + 1]) {
         std::swap(arr[j], arr[j + 1]);
         count++;
@@ -23,7 +22,7 @@ static void bubble(std::vector<unsigned int> arr, size_t n) {
 }
 
 int main() {
-  size_t n;
+  unsigned long long n;
   std::cin >> n;
   auto st = std::chrono::system_clock::now();
   std::vector<unsigned int> a(n);
@@ -32,7 +31,7 @@ int main() {
   std::mt19937 gen(rd());
   std::uniform_int_distribution<std::mt19937::result_type> dist(1, 1000000);
 
-  for (size_t i = 0; i < n; i++)
+  for (unsigned long long i = 0; i < n; i++)
     a[i] = dist(gen);
 
   bubble(a, n);

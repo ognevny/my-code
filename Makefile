@@ -4,6 +4,7 @@ BUILDTYPE ?= debug
 SFML ?= 2.6.1
 INCLUDEDIR ?= $(PREFIX)/include
 LIBDIR ?= $(PREFIX)/lib
+BUILDDIR ?= builddir
 
 .PHONY: rust rust-with-sfml c py clean rust-speedometer compile-sfml
 
@@ -37,10 +38,13 @@ rust:
 rust-speedometer:
 	$(CARGO) -p speedometer
 
-c:
+c-setup:
+	cd dad-is-great-in-C && meson setup --buildtype=$(BUILDTYPE) $(BUILDDIR)
+
+c: c-setup
 	(cd dad-is-great-in-C && \
-	meson setup --buildtype=$(BUILDTYPE) builddir && \
-	cd builddir && meson compile)
+	meson setup --reconfigure --buildtype=$(BUILDTYPE) $(BUILDDIR) && \
+	cd $(BUILDDIR) && meson compile)
 
 rust-with-sfml: compile-sfml
 ifdef SFML_SOURCE
@@ -54,5 +58,8 @@ py:
 
 clean:
 	(rm -rf pie/__pycache__)
-	(rm -rf dad-is-great-in-c/build*)
+	(ninja -C dad-is-great-in-C/$(BUILDDIR) clean)
 	(cd rusted && cargo clean)
+
+clean-c:
+	(rm -rf dad-is-great-in-C/$(BUILDDIR))

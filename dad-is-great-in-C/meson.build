@@ -8,8 +8,20 @@ project(
     'warning_level=everything',
     'cpp_std=c++11,gnu++11',
     'c_std=c11,gnu11',
-    'c_args=-fdiagnostics-color=always -Wp,-D_FORTIFY_SOURCE=2 -fstack-protector-strong -pipe',
-    'cpp_args=-fdiagnostics-color=always -Wp,-D_FORTIFY_SOURCE=2 -fstack-protector-strong -pipe'
+    '''c_args=
+      -fdiagnostics-color=always
+      -Wp,-D_FORTIFY_SOURCE=2
+      -fstack-protector-strong
+      -pipe
+      -Wno-c++98-compat-pedantic
+      -Wno-unsafe-buffer-usage''',
+    '''cpp_args=
+      -fdiagnostics-color=always
+      -Wp,-D_FORTIFY_SOURCE=2
+      -fstack-protector-strong
+      -pipe
+      -Wno-c++98-compat-pedantic
+      -Wno-unsafe-buffer-usage'''
   ]
 )
 
