@@ -9,8 +9,8 @@
 static void merge(std::vector<unsigned int> arr, unsigned long long left,
                   unsigned long long mid, unsigned long long right) {
   auto rt = mid - left + 1, lt = right - mid;
-  unsigned int *left_arr = new unsigned int[rt],
-               *right_arr = new unsigned int[lt]; // создаём два новых массива
+  auto *left_arr = new unsigned int[rt],
+       *right_arr = new unsigned int[lt]; // создаём два новых массива
 
   for (auto i = 0ULL; i < rt; i++)
     left_arr[i] = arr[left + i]; // заполняем их

@@ -51,8 +51,8 @@ std::string numsys16(unsigned long long n, unsigned char k) {
   return rev;
 }
 
-double binpow(double b, unsigned short e) { // binary power
-  double v = 1.0;
+long double binpow(long double b, unsigned short e) { // binary power
+  auto v = 1.0L;
   while (e != 0) {
     if ((e & 1) != 0)
       v *= b;
