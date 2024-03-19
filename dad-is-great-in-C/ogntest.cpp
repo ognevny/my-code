@@ -2,7 +2,6 @@
 
 #include "ognfunc.hpp"
 #include <cassert>
-#include <iostream>
 #include <string>
 
 int main() {
