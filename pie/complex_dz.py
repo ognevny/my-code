@@ -88,9 +88,9 @@ class C_numb:
         resultc = []
         for j in range(a):
             resultc += [
-                str((self.mod ** (1 / a)) * (cos(atan((self.arg + 2 * pi * j) / a))))  # type: ignore
+                str((self.mod ** (1 / a)) * (cos(atan((self.arg + 2 * pi * j) / a))))
                 + "+"
-                + str((self.mod ** (1 / a)) * (sin(atan((self.arg + 2 * pi * j) / a))))  # type: ignore
+                + str((self.mod ** (1 / a)) * (sin(atan((self.arg + 2 * pi * j) / a))))
                 + "i"
             ]
         return resultc

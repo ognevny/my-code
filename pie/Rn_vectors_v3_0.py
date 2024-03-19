@@ -34,7 +34,7 @@ class Rn:
         return self + vec * (-1)
 
     def norm(self):
-        return sqrt(self * self)  # type: ignore
+        return sqrt(self * self)
 
     def angle(self, vec):
         return acos((self * vec) / (self.norm() * vec.norm()))
