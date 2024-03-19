@@ -119,8 +119,18 @@ pub fn n12() -> Result<(i32, i32), Box<dyn Error>> {
 }
 
 fn main() {
-    assert_eq!(n2(1), 11);
-    assert_eq!(n10(), "333333");
-    assert_eq!(n11(), 4340);
-    assert_eq!(n12().unwrap(), (157, 176024));
+    println!("mcko: run `cargo test` instead");
+}
+
+#[cfg(test)]
+mod tests {
+    use crate::*;
+
+    #[test]
+    fn test_all() {
+        assert_eq!(n2(1), 11);
+        assert_eq!(n10(), "333333");
+        assert_eq!(n11(), 4340);
+        assert_eq!(n12().unwrap(), (157, 176024));
+    }
 }

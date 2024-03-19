@@ -12,7 +12,7 @@ unsigned long long numsum(unsigned long long n) { // sum of number digits
   return res;
 }
 
-unsigned long long rev(unsigned long long n) { // reverse number
+unsigned long long reverse(unsigned long long n) { // reverse number
   auto rev = 0ULL;
   while (n) {
     rev = rev * 10 + (n % 10);
@@ -27,7 +27,7 @@ unsigned long long numsys(unsigned long long n, unsigned char k) {
     ns = ns * 10 + (n % k);
     n /= k;
   }
-  return (rev(ns) - 1) / 10;
+  return (reverse(ns) - 1) / 10;
 }
 
 unsigned short numcount(unsigned long long n) { // counts number digits

@@ -2,14 +2,16 @@
 
 #include "ognfunc.hpp"
 #include <iostream>
+#include <cassert>
 #include <string>
 
 int main() {
   auto a = 12345ULL;
-  std::cout << rev(a) << std::endl;
-  std::cout << numcount(a) << std::endl;
-  std::cout << numsum(a) << std::endl;
-  std::cout << numsys(a, 8) << std::endl;
-  std::cout << numsys16(a, 16) << std::endl;
-  std::cout << binpow(static_cast<double>(a), 2) << std::endl;
+  assert(reverse(a) == 54321);
+  assert(numcount(a) == 5);
+  assert(numsum(a) == 15);
+  assert(numsys(a, 8) == 30071);
+  assert(numsys16(a, 16) == "3039");
+  assert(binpow(static_cast<double>(a), 2) == 152399025.0);
+  return 0;
 }
