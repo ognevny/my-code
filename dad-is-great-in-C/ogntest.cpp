@@ -12,7 +12,7 @@ int main() {
   assert(numsum(a) == 15);
   assert(numsys(a, 8) == 30071);
   assert(numsys16(a, 16) == "3039");
-  assert(static_cast<long long>(binpow(static_cast<double>(a), 2)) ==
+  assert(static_cast<long long>(binpow(static_cast<long double>(a), 2)) ==
          152399025);
   return 0;
 }
