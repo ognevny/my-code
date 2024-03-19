@@ -1,8 +1,8 @@
 // a test to check that ognfunc works fine
 
 #include "ognfunc.hpp"
-#include <iostream>
 #include <cassert>
+#include <iostream>
 #include <string>
 
 int main() {
@@ -12,6 +12,7 @@ int main() {
   assert(numsum(a) == 15);
   assert(numsys(a, 8) == 30071);
   assert(numsys16(a, 16) == "3039");
-  assert(binpow(static_cast<double>(a), 2) == 152399025.0);
+  assert(static_cast<long long>(binpow(static_cast<double>(a), 2)) ==
+         152399025);
   return 0;
 }
