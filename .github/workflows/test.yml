@@ -1,0 +1,28 @@
+name: test code
+
+on:
+  workflow_dispatch:
+  push:
+    paths: ['**.rs', '**.toml', '**.lock', '**.yml', 'Makefile', '**.c*', '**.py', '**.h*']
+  pull_request:
+    paths: ['**.rs', '**.toml', '**.lock', '**.yml', 'Makefile', '**.c*', '**.py', '**.h*']
+
+env:
+  CARGO_TERM_COLOR: always
+  RUSTFLAGS: '-C target-cpu=native -Zmacro-backtrace -Zthreads=3'
+
+jobs:
+  test:
+    name: test all the code
+    runs-on: macos-14
+    strategy:
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v4
+      - name: default to nightly rust and download deps
+        run: |
+          rustup update nightly
+          rustup default nightly
+          brew install sfml mold
+      - name: test
+        run: make test MOLD=1
