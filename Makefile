@@ -54,7 +54,8 @@ else
 endif
 
 py:
-	(cd pie && pip install -r requirements.txt && python -m compileall $(OPT_OPTS) .)
+	(cd pie && python3 -m pip install -r requirements.txt \
+	&& python3 -m compileall $(OPT_OPTS) .)
 
 clean:
 	(rm -rf pie/__pycache__)
