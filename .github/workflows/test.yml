@@ -25,7 +25,4 @@ jobs:
           rustup default nightly
           brew install sfml mold meson
       - name: test
-        run: |
-          export CFLAGS+=" -Wno-poison-system-directories"
-          export CXXFLAGS+=" -Wno-poison-system-directories"
-          make test MOLD=1
+        run: make test MOLD=1
