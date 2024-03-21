@@ -1,7 +1,8 @@
 //! the first code with tasks from EGE examW
 
-use {ansi_term::Colour, std::fs};
+use std::fs;
 
+#[allow(dead_code)]
 fn ex1() -> Result<usize, Box<dyn std::error::Error>> {
     let text = fs::read_to_string("11.txt")?;
     let newtext = text.replace("INFINITY", "@");
@@ -18,9 +19,17 @@ fn ex1() -> Result<usize, Box<dyn std::error::Error>> {
     Ok(mx)
 }
 
-fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let ex1 = ex1()?;
-    assert_eq!(ex1, 36747);
-    println!("{}", Colour::Green.bold().paint(ex1.to_string()));
-    Ok(())
+fn main() {
+    println!("ege1: run `cargo test` instead");
+}
+
+#[cfg(test)]
+mod tests {
+    use crate::*;
+
+    #[test]
+    fn test_all() {
+        let ex1 = ex1().unwrap();
+        assert_eq!(ex1, 36747);
+    }
 }

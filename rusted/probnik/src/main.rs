@@ -1,6 +1,7 @@
 use itertools::Itertools;
 
-fn main() {
+#[allow(dead_code)]
+fn probnik() -> usize {
     let mut k = 0;
     for word in "ПРОБНИК".chars().permutations(7) {
         let len = word.len();
@@ -20,5 +21,19 @@ fn main() {
             }
         }
     }
-    println!("{k}");
+    k
+}
+
+fn main() {
+    println!("probnik: run `cargo test` instead");
+}
+
+#[cfg(test)]
+mod tests {
+    use crate::*;
+
+    #[test]
+    fn test_all() {
+        assert_eq!(probnik(), 1440);
+    }
 }
