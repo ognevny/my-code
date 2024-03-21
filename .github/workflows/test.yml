@@ -10,6 +10,8 @@ on:
 env:
   CARGO_TERM_COLOR: always
   RUSTFLAGS: '-C target-cpu=native -Zmacro-backtrace -Zthreads=3'
+  SFML_INCLUDE_DIR: '/usr/local/include'
+  SFML_LIBS_DIR: '/usr/local/lib'
 
 jobs:
   test:
