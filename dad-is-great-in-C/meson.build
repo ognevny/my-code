@@ -21,8 +21,8 @@ project(
 )
 
 if build_machine.system() == 'darwin'
-  add_global_arguments('-Wno-poison-system-directories', language : c)
-  add_global_arguments('-Wno-poison-system-directories', language : cpp)
+  add_global_arguments('-Wno-poison-system-directories', language : 'c')
+  add_global_arguments('-Wno-poison-system-directories', language : 'cpp')
 endif
 
 executable('b_sort', 'b_sort.cpp')
