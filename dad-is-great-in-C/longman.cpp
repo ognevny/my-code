@@ -1,7 +1,7 @@
 /* task: print the longest word in input and its length
 reference to "Long, long, maaaaaaaan" (Japanese ad) */
 
-#ifdef __clang__
+#if defined(__clang__) && !defined(__APPLE__)
 #include <__fwd/sstream.h>
 #endif
 
