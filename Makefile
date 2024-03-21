@@ -65,7 +65,7 @@ clean:
 clean-all: clean
 	(rm -rf dad-is-great-in-C/$(BUILDDIR))
 
-test: c rust-with-sfml py
+test: c rust py
 	(cd rusted && cargo test || @echo "check the error!")
 	(./dad-is-great-in-C/builddir/ogntest || @echo "check the error!")
 	(cd pie && python3 mcko.py || @echo "check the error!")

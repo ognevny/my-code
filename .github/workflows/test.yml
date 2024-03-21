@@ -23,6 +23,6 @@ jobs:
         run: |
           rustup update nightly
           rustup default nightly
-          brew install sfml meson cmake libvorbis libogg freetype flac
+          brew install meson
       - name: test
-        run: make test SFML_SOURCE=1
+        run: make test
