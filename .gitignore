@@ -12,3 +12,5 @@ for_lesson*
 # IDEs and editors
 .vscode
 .idea
+# meson builddir
+build*
