@@ -10,15 +10,14 @@ project(
     'cpp_std=gnu++11,c++11',
     'c_std=gnu11,c11',
     'c_args=-fdiagnostics-color=always -Wp,-D_FORTIFY_SOURCE=2 -fstack-protector-strong -pipe',
-    '''cpp_args=
-      -fdiagnostics-color=always
-      -Wp,-D_FORTIFY_SOURCE=2
-      -fstack-protector-strong
-      -pipe
-      -Wno-c++98-compat-pedantic
-      -Wno-unsafe-buffer-usage'''
+    'cpp_args=-fdiagnostics-color=always -Wp,-D_FORTIFY_SOURCE=2 -fstack-protector-strong -pipe'
   ]
 )
+
+cc = meson.get_compiler('cpp').get_id()
+if cc == 'clang'
+  add_global_arguments('-Wno-c++98-compat-pedantic', '-Wno-unsafe-buffer-usage', language : 'cpp')
+endif
 
 if build_machine.system() == 'darwin'
   add_global_arguments('-Wno-poison-system-directories', language : 'c')
