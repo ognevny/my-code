@@ -20,21 +20,26 @@ if cc == 'clang'
 endif
 
 if build_machine.system() == 'darwin'
-  add_global_arguments('-Wno-poison-system-directories', language : 'c')
-  add_global_arguments('-Wno-poison-system-directories', language : 'cpp')
+  add_global_arguments('-Wno-poison-system-directories', language : ['c', 'cpp'])
 endif
 
-executable('b_sort', 'b_sort.cpp')
-executable('firstword', 'firstword.cpp')
-executable('hords', 'hords.cpp')
-executable('i_sort', 'i_sort.cpp')
-executable('lastword', 'lastword.cpp')
-executable('longman', 'longman.cpp')
-executable('m_sort', 'm_sort.cpp')
-executable('middles', 'middles.cpp')
-executable('resheto', 'resheto.cpp')
-executable('s_sort', 's_sort.cpp')
+src_files=[
+    'b_sort',
+    'firstword',
+    'hords',
+    'i_sort'
+    'lastword'
+    'longman'
+    'm_sort'
+    'middles'
+    'resheto'
+    's_sort'
+    'tumba-umba'
+]
+foreach file : src_files
+    executable(file, file + '.cpp')
+endforeach
+
 executable('speedometer_cpp', 'speedometer.cpp')
 executable('speedometer_c', 'speedometer.c')
-executable('tumba-umba', 'tumba-umba.cpp')
 executable('ogntest', 'ognfunc.cpp', 'ogntest.cpp')
