@@ -23,17 +23,17 @@ if build_machine.system() == 'darwin'
   add_global_arguments('-Wno-poison-system-directories', language : ['c', 'cpp'])
 endif
 
-src_files=[
+src_files = [
     'b_sort',
     'firstword',
     'hords',
-    'i_sort'
-    'lastword'
-    'longman'
-    'm_sort'
-    'middles'
-    'resheto'
-    's_sort'
+    'i_sort',
+    'lastword',
+    'longman',
+    'm_sort',
+    'middles',
+    'resheto',
+    's_sort',
     'tumba-umba'
 ]
 foreach file : src_files
