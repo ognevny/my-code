@@ -69,4 +69,4 @@ clean-all: clean
 test: c rust py
 	(cargo test $(CARGOPACKS) --manifest-path rusted/Cargo.toml || echo "check the error!")
 	(./dad-is-great-in-C/builddir/ogntest || echo "check the error!")
-	(python3 pie/mcko.py || echo "check the error!")
+	(cd pie && python3 mcko.py || echo "check the error!")
