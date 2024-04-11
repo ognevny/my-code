@@ -55,5 +55,5 @@ foreach file : src_cpp
   executable(file, file + '.cpp')
 endforeach
 
-executable('speedometer_c', 'speedometer.c')
+executable('speedometer', 'speedometer.c')
 executable('ogntest', 'ognfunc.cpp', 'ogntest.cpp')

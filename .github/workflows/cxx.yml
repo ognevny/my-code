@@ -42,8 +42,8 @@ jobs:
           done
       - name: run speedometers
         run: |
-          time ./dad-is-great-in-C/builddir/speedometer_c
-          time ./dad-is-great-in-C/builddir/speedometer_cpp
+          time ./dad-is-great-in-C/builddir/speedometer
+          time ./dad-is-great-in-C/builddir/speedometer++
       - name: check format
         if: ${{ matrix.sys == 'clang64' }}
         run: |
