@@ -12,10 +12,12 @@ mcko -p pop -p probnik -p resheto -p speedometer -p tumba-umba
 
 all: rust-with-sfml c py
 
+MANIFEST := --manifest-path rusted/Cargo.toml
+
 ifdef MOLD
-CARGO := mold -run cargo b -v --profile $(PROFILE) --manifest-path rusted/Cargo.toml
+CARGO := mold -run cargo b -v --profile $(PROFILE) $(MANIFEST)
 else
-CARGO := cargo b -v --profile $(PROFILE) --manifest-path rusted/Cargo.toml
+CARGO := cargo b -v --profile $(PROFILE) $(MANIFEST)
 endif
 
 ifdef PY_OPT
@@ -67,6 +69,6 @@ clean-all: clean
 	(rm -rf dad-is-great-in-C/$(BUILDDIR))
 
 test: c rust py
-	(cargo test $(CARGOPACKS) --manifest-path rusted/Cargo.toml || echo "check the error!")
-	(./dad-is-great-in-C/builddir/ogntest || echo "check the error!")
-	(cd pie && python3 mcko.py || echo "check the error!")
+	(cargo test $(CARGOPACKS) $(MANIFEST) || echo "\x1b[1;31mcheck the error!\x1b[0m")
+	(./dad-is-great-in-C/builddir/ogntest || echo "\x1b[1;31mcheck the error!\x1b[0m")
+	(cd pie && python3 mcko.py || echo "\x1b[1;31mcheck the error!\x1b[0m")
