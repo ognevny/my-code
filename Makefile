@@ -67,6 +67,6 @@ clean-all: clean
 	(rm -rf dad-is-great-in-C/$(BUILDDIR))
 
 test: c rust py
-	(cd rusted && cargo test $(CARGOPACKS) || echo "check the error!")
+	(cargo test $(CARGOPACKS) --manifest-path rusted/Cargo.toml || echo "check the error!")
 	(./dad-is-great-in-C/builddir/ogntest || echo "check the error!")
-	(cd pie && python3 mcko.py || echo "check the error!")
+	(python3 pie/mcko.py || echo "check the error!")
