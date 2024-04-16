@@ -27,8 +27,7 @@ jobs:
           rustup component add rustfmt clippy
           brew install meson sfml
       - name: build rust files
-        run: |
-          meson setup -Dbuild_rust_all=true build && meson compile -C build
+        run: cargo build -v
       - name: clippy and fmt check
         if: ${{ matrix.toolchain == 'nightly' }}
         run: cargo fmt -- --check && cargo clippy -- -D warnings
