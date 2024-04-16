@@ -27,7 +27,7 @@ jobs:
         run: |
           rustup update nightly
           rustup default nightly
-          brew install meson
+          brew install meson pkg-config
           cd pie && pip install -r requirements.txt
       - name: test
         run: |
