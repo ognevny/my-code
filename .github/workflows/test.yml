@@ -27,7 +27,7 @@ jobs:
           update: true
           msystem: CLANG64
           pacboy: >-
-            cc:p
+            gcc:p
             meson:p
             rust:p
             sfml:p
