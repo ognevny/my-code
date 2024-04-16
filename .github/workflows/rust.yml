@@ -3,9 +3,9 @@ name: CI-rust
 on:
   workflow_dispatch:
   push:
-    paths: ['**.rs', '**.toml', '**.lock', '**/rust.yml', 'Makefile']
+    paths: ['**.rs', '**.toml', '**.lock', '**/rust.yml', 'meson.build', 'rusted/meson.build']
   pull_request:
-    paths: ['**.rs', '**.toml', '**.lock', '**/rust.yml', 'Makefile']
+    paths: ['**.rs', '**.toml', '**.lock', '**/rust.yml', 'meson.build', 'rusted/meson.build']
 
 env:
   CARGO_TERM_COLOR: always
@@ -14,44 +14,21 @@ env:
 jobs:
   build:
     name: check with latest rust
-    runs-on: ubuntu-latest
+    runs-on: macos-14
     strategy:
       fail-fast: false
       matrix:
         toolchain: [stable, beta, nightly]
     steps:
       - uses: actions/checkout@v4
-      - name: update to ${{ matrix.toolchain }} rust
+      - name: update to ${{ matrix.toolchain }} rust and install deps
         run: |
           rustup update ${{ matrix.toolchain }} && rustup default ${{ matrix.toolchain }}
           rustup component add rustfmt clippy
-      - name: build workspace (nightly)
+          brew install meson sfml
+      - name: build rust files
+        run: |
+          meson setup -Dbuild_rust_all=true build && meson compile -C build
+      - name: clippy and fmt check
         if: ${{ matrix.toolchain == 'nightly' }}
-        run: |
-          sudo apt-get update
-          sudo apt-get install \
-              libxrandr-dev \
-              libxcursor-dev \
-              libudev-dev \
-              libfreetype-dev \
-              libopenal-dev \
-              libflac-dev \
-              libvorbis-dev \
-              libgl1-mesa-dev \
-              libegl1-mesa-dev \
-              cmake \
-              mold
-          make rust-with-sfml MOLD=1 SFML_SOURCE=1
-      - name: build workspace
-        if: ${{ matrix.toolchain != 'nightly' }}
-        run: |
-          sudo apt-get update
-          sudo apt-get install mold
-          make rust MOLD=1
-      - name: fmt and clippy check
-        if: ${{ matrix.toolchain == 'nightly' }}
-        run: cd rusted && cargo fmt -- --check && mold -run cargo clippy --locked -- -D warnings
-      - name: run speedometer
-        run: |
-          make rust-speedometer PROFILE=speedometer
-          time ./rusted/target/speedometer/speedometer
+        run: cargo fmt -- --check && cargo clippy -- -D warnings

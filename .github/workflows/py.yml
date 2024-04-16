@@ -3,9 +3,9 @@ name: CI-py
 on:
   workflow_dispatch:
   push:
-    paths: ['**.py', '**/py.yml', 'Makefile']
+    paths: ['**.py', '**/py.yml', 'meson.build', 'pie/meson.build']
   pull_request:
-    paths: ['**.rs', '**/py.yml', 'Makefile']
+    paths: ['**.py', '**/py.yml', 'meson.build', 'pie/meson.build']
 
 jobs:
   build:
@@ -15,15 +15,14 @@ jobs:
       fail-fast: false
     steps:
       - uses: actions/checkout@v4
-      - name: setup python
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
           cache: 'pip'
       - name: compile all files
         run: |
           pip install pipx
-          make py
+          cd pie && python -m compileall .
       - uses: chartboost/ruff-action@v1
         with:
           src: "./pie"

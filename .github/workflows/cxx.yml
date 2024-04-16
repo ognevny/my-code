@@ -3,9 +3,9 @@ name: CI-CXX
 on:
   workflow_dispatch:
   push:
-    paths: ['**.cpp', '**.c', '**/cxx.yml', '**/meson.build', 'Makefile']
+    paths: ['**.c*', '**.h*', '**/cxx.yml', 'meson.build', 'dad-is-great-in-C/meson.build']
   pull_request:
-    paths: ['**.cpp', '**.c', '**/cxx.yml', '**/meson.build', 'Makefile']
+    paths: ['**.c*', '**.h*', '**/cxx.yml', 'meson.build', 'dad-is-great-in-C/meson.build']
 
 jobs:
   build:
@@ -30,9 +30,8 @@ jobs:
             cc:p
             meson:p
             include-what-you-use:p
-            make
       - name: compile files
-        run: make c
+        run: meson setup -Dbuild_c_cpp=true build && meson compile -C build
       - name: include diagnostics
         if: ${{ matrix.sys == 'clang64' }}
         run: |
@@ -42,8 +41,8 @@ jobs:
           done
       - name: run speedometers
         run: |
-          time ./dad-is-great-in-C/builddir/speedometer
-          time ./dad-is-great-in-C/builddir/speedometer++
+          time ./build/dad-is-great-in-C/speedometer
+          time ./build/dad-is-great-in-C/speedometer++
       - name: check format
         if: ${{ matrix.sys == 'clang64' }}
         run: |

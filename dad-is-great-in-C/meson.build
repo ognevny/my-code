@@ -1,17 +1,3 @@
-project(
-  'dad-is-great-in-C',
-  'c',
-  'cpp',
-  version: '0.0.0',
-  meson_version: '>= 1.3.0',
-  default_options: [
-    'warning_level=everything',
-    'werror=true',
-    'cpp_std=gnu++11,c++11',
-    'c_std=gnu11,c11',
-  ],
-)
-
 cc = meson.get_compiler('cpp').get_id()
 if cc == 'clang'
   add_project_arguments(

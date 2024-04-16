@@ -1,0 +1,27 @@
+option(
+    'build_c_cpp',
+    type: 'boolean',
+    value: false,
+    description: 'Build C and C++ files (dad-is-great-in-C directory)',
+)
+
+option(
+    'build_rust',
+    type: 'boolean',
+    value: false,
+    description: 'Build Rust files (rusted directory)',
+)
+
+option(
+    'build_py',
+    type: 'boolean',
+    value: false,
+    description: 'Build Python files (pie directory)',
+)
+
+option(
+    'build_all',
+    type: 'boolean',
+    value: false,
+    description: 'Build all files',
+)

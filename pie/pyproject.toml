@@ -1,0 +1,19 @@
+[build-system]
+build-backend = 'mesonpy'
+requires = [
+    'meson-python',
+]
+
+[project]
+name = 'pie'
+version = '0.0.0'
+description = "some python code I wrote for school"
+authors = [
+    { name = 'Maksim Bondarenkov', email = 'maksapple2306@gmail.com' },
+]
+dependencies = [
+    'numba>=0.59.0',
+]
+license = { file = "../LICENSE" }
+readme = "README.md"
+requires-python = ">=3.12"
