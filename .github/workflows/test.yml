@@ -27,13 +27,13 @@ jobs:
         run: |
           rustup update nightly
           rustup default nightly
-          brew install meson pkgconf
+          brew install meson
           cd pie && pip install -r requirements.txt
       - name: test
         run: |
           cd pie && python3 mcko.py && cd ..
-          SFML_INCLUDE_DIR=$(pkgconf --cflags-only-I sfml-window | sed 's/-I//g') \
-          SFML_LIBS_DIR=$(pkgconf --libs-only-L sfml-window | sed 's/-L//g') \
+          SFML_INCLUDE_DIR=$(pkg-config --cflags-only-I sfml-window | sed 's/-I//g') \
+          SFML_LIBS_DIR=$(pkg-config --libs-only-L sfml-window | sed 's/-L//g') \
           cargo test --locked --manifest-path rusted/Cargo.toml
           meson setup -Dbuild_c_cpp=true build && meson compile -C build
           ./build/dad-is-great-in-C/ogntest
