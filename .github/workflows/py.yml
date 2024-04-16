@@ -21,8 +21,8 @@ jobs:
           cache: 'pip'
       - name: compile all files
         run: |
-          pip install pipx
-          cd pie && python -m compileall .
+          cd pie && pip install -r requirements.txt
+          python -m compileall .
       - uses: chartboost/ruff-action@v1
         with:
           src: "./pie"
