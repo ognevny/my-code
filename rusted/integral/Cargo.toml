@@ -4,5 +4,5 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-scan_fmt = "0.2.6"
-meval = { git = "https://github.com/Titaniumtown/meval-rs" } # this version has more modern code
+meval = { workspace = true }
+scan_fmt = { workspace = true }
