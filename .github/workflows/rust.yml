@@ -25,7 +25,7 @@ jobs:
       - uses: msys2/setup-msys2@v2
         with:
           update: true
-          msystem: ucrt64
+          msystem: clang64
           pacboy: >-
             rust:p
             sfml:p
