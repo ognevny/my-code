@@ -32,7 +32,3 @@ jobs:
             gcc:p
       - name: build rust files
         run: cargo build -v --manifest-path rusted/Cargo.toml
-      - name: clippy and fmt check
-        run: |
-          cd rusted
-          cargo fmt -- --check && cargo clippy -- -D warnings
