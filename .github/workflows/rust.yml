@@ -29,6 +29,7 @@ jobs:
           pacboy: >-
             rust:p
             sfml:p
+            gcc:p
       - name: build rust files
         run: cargo build -v --manifest-path rusted/Cargo.toml
       - name: clippy and fmt check
