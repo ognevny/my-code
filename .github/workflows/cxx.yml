@@ -31,7 +31,9 @@ jobs:
             meson:p
             include-what-you-use:p
       - name: compile files
-        run: meson setup -Dbuild_c_cpp=true build && meson compile -C build
+        run: |
+          meson setup -Dbuild_c_cpp=true -Dwarning_level=everything build
+          meson compile -C build
       - name: include diagnostics
         if: ${{ matrix.sys == 'clang64' }}
         run: |

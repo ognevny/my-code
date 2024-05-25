@@ -3,7 +3,7 @@ project(
     version: '0.0.0',
     meson_version: '>= 1.3.0',
     default_options: [
-        # 'warning_level=everything',
+        'warning_level=3',
         'werror=true',
         'cpp_std=gnu++11,c++11',
         'c_std=gnu11,c11',
