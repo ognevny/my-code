@@ -17,12 +17,12 @@ build_rust = get_option('build_rust')
 build_all = get_option('build_all')
 
 if build_c or build_all
-    add_languages(['c', 'cpp'], native: false, required: true)
+    add_languages(['c', 'cpp'], native: false)
     subdir('dad-is-great-in-C')
 endif
 
 if build_rust or build_all
-    add_languages('rust', native: false, required: true)
+    add_languages('rust', native: false)
     subdir('rusted')
 endif
 

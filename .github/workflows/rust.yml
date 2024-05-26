@@ -25,10 +25,13 @@ jobs:
       - uses: msys2/setup-msys2@v2
         with:
           update: true
-          msystem: clang64
+          msystem: ucrt64
           pacboy: >-
+            cc:p
+            meson:p
             rust:p
             sfml:p
-            gcc:p
       - name: build rust files
-        run: cargo build -v --manifest-path rusted/Cargo.toml
+        run: |
+          meson setup -Dbuild_rust=true build
+          meson compile -C build

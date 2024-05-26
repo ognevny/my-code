@@ -25,15 +25,16 @@ jobs:
       - uses: msys2/setup-msys2@v2
         with:
           update: true
-          msystem: CLANG64
+          msystem: ucrt64
           pacboy: >-
-            gcc:p
+            cc:p
             meson:p
             rust:p
             sfml:p
       - name: test
         run: |
           cd pie && python3 mcko.py && cd ..
+          meson setup -Dbuild_c_cpp=true -Dbuild_rust=true build
+          meson compile -C build
           cargo test --locked --manifest-path rusted/Cargo.toml
-          meson setup -Dbuild_c_cpp=true build && meson compile -C build
           ./build/dad-is-great-in-C/ogntest
