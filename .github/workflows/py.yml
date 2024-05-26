@@ -21,6 +21,7 @@ jobs:
           cache: 'pip'
       - name: compile all files
         run: |
+          brew install meson
           pip install -r pie/requirements.txt
           meson setup -Dbuild_py=true build
           meson install -C build --destdir=build/dummy
