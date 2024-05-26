@@ -21,8 +21,9 @@ jobs:
           cache: 'pip'
       - name: compile all files
         run: |
-          cd pie && pip install -r requirements.txt
-          python -m compileall .
+          pip install -r pie/requirements.txt
+          meson setup -Dbuild_py=true build
+          meson install -C build --destdir=build/dummy
       - uses: chartboost/ruff-action@v1
         with:
           src: "./pie"
