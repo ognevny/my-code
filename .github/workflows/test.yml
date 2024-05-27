@@ -31,6 +31,7 @@ jobs:
             meson:p
             rust:p
             sfml:p
+            python-numba:p
       - name: test
         run: |
           cd pie && python3 mcko.py && cd ..
