@@ -15,6 +15,7 @@ build_c = get_option('build_c_cpp')
 build_py = get_option('build_py')
 build_rust = get_option('build_rust')
 build_all = get_option('build_all')
+tests = get_option('tests')
 
 if build_c or build_all
     add_languages(['c', 'cpp'], native: false)

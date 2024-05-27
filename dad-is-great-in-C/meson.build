@@ -1,14 +1,13 @@
-cc = meson.get_compiler('cpp').get_id()
-if cc == 'clang'
+cc_id = meson.get_compiler('cpp').get_id()
+
+if cc_id == 'clang'
+  add_project_arguments('-fdiagnostics-color=always', '-pipe', language: ['c', 'cpp'])
   add_project_arguments(
     '-Wno-c++98-compat-pedantic',
     '-Wno-unsafe-buffer-usage',
-    '-fdiagnostics-color=always',
-    '-pipe',
     language: 'cpp',
   )
-  add_project_arguments('-fdiagnostics-color=always', '-pipe', language: 'c')
-elif cc != 'msvc'
+elif cc_id != 'msvc'
   add_project_arguments(
     '-fdiagnostics-color=always',
     '-pipe',
@@ -42,4 +41,8 @@ foreach file : src_cpp
 endforeach
 
 executable('speedometer', 'speedometer.c')
-executable('ogntest', 'ognfunc.cpp', 'ogntest.cpp')
+
+if tests
+    ogntest = executable('ogntest', 'ognfunc.cpp', 'ogntest.cpp')
+    test('run ogntest', ogntest)
+endif

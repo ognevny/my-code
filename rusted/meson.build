@@ -13,5 +13,16 @@ cargo_build = custom_target(
     build_always_stale: true,
     output: 'rusted',
     console: true,
-    command: [cargo_bin, 'build', cargo_opt]
+    command: [cargo_bin, 'build', cargo_opt],
 )
+
+if tests
+    cargo_test = custom_target(
+        'cargo-test',
+        build_by_default: true,
+        build_always_stale: true,
+        output: 'rusted-tests',
+        console: true,
+        command: [cargo_bin, 'test', cargo_opt],
+    )
+endif

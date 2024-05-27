@@ -25,3 +25,10 @@ option(
     value: false,
     description: 'Build all files',
 )
+
+option(
+    'tests',
+    type: 'boolean',
+    value: false,
+    description: 'Build tests'
+)

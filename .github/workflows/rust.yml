@@ -3,9 +3,9 @@ name: CI-rust
 on:
   workflow_dispatch:
   push:
-    paths: ['**.rs', '**.toml', '**.lock', '**/rust.yml', 'meson.build', 'rusted/meson.build']
+    paths: ['**.rs', '**.toml', '**.lock', '**/rust.yml', 'meson.build', '**/meson.build']
   pull_request:
-    paths: ['**.rs', '**.toml', '**.lock', '**/rust.yml', 'meson.build', 'rusted/meson.build']
+    paths: ['**.rs', '**.toml', '**.lock', '**/rust.yml', 'meson.build', '**/meson.build']
 
 env:
   CARGO_TERM_COLOR: always

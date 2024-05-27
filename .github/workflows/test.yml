@@ -3,9 +3,9 @@ name: test code
 on:
   workflow_dispatch:
   push:
-    paths: ['**.rs', '**.toml', '**.lock', '**.yml', '**.c*', '**.py', '**.h*', '**/meson.build']
+    paths: ['**.rs', '**.toml', '**.lock', '**.yml', '**.c*', '**.py', '**.h*', '**.build']
   pull_request:
-    paths: ['**.rs', '**.toml', '**.lock', '**.yml', '**.c*', '**.py', '**.h*', '**/meson.build']
+    paths: ['**.rs', '**.toml', '**.lock', '**.yml', '**.c*', '**.py', '**.h*', '**.build']
 
 env:
   CARGO_TERM_COLOR: always
@@ -34,7 +34,6 @@ jobs:
       - name: test
         run: |
           cd pie && python3 mcko.py && cd ..
-          meson setup -Dbuild_c_cpp=true -Dbuild_rust=true build
+          meson setup -Dbuild_all=true build
           meson compile -C build
-          cargo test --locked --manifest-path rusted/Cargo.toml
-          ./build/dad-is-great-in-C/ogntest
+          meson test -C build
