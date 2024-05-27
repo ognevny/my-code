@@ -11,6 +11,9 @@ jobs:
   build:
     name: check python files
     runs-on: windows-latest
+    defaults:
+      run:
+        shell: msys2 {0}
     strategy:
       fail-fast: false
     steps:
