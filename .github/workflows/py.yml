@@ -10,19 +10,20 @@ on:
 jobs:
   build:
     name: check python files
-    runs-on: macos-14
+    runs-on: windows-latest
     strategy:
       fail-fast: false
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: msys2/setup-msys2@v2
         with:
-          python-version: '3.12'
-          cache: 'pip'
+          update: true
+          msystem: ucrt64
+          pacboy: >-
+            meson:p
+            python-numba:p
       - name: compile all files
         run: |
-          brew install meson
-          pip install -r pie/requirements.txt
           meson setup -Dbuild_py=true build
           meson install -C build --destdir=build/dummy
       - uses: chartboost/ruff-action@v1
