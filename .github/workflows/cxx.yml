@@ -3,9 +3,9 @@ name: CI-CXX
 on:
   workflow_dispatch:
   push:
-    paths: ['**.c*', '**.h*', '**/cxx.yml', 'meson.build', 'dad-is-great-in-C/meson.build']
+    paths: ["**.c*", "**.h*", "**/cxx.yml", "meson.build", "dad-is-great-in-C/meson.build"]
   pull_request:
-    paths: ['**.c*', '**.h*', '**/cxx.yml', 'meson.build', 'dad-is-great-in-C/meson.build']
+    paths: ["**.c*", "**.h*", "**/cxx.yml", "meson.build", "dad-is-great-in-C/meson.build"]
 
 jobs:
   build:
@@ -32,7 +32,7 @@ jobs:
             include-what-you-use:p
       - name: compile files
         run: |
-          meson setup -Dbuild_c_cpp=true -Dwarning_level=everything build
+          meson setup -Dbuild_c_cpp=true build
           meson compile -C build
       - name: include diagnostics
         if: ${{ matrix.sys == 'clang64' }}

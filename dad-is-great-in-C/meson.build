@@ -22,25 +22,24 @@ if build_machine.system() == 'darwin'
   )
 endif
 
-src_cpp = [
-  'b_sort',
-  'firstword',
-  'hords',
-  'i_sort',
-  'lastword',
-  'longman',
-  'm_sort',
-  'middles',
-  'resheto',
-  's_sort',
-  'speedometer++',
-  'tumba-umba',
+src_c = [
+  'b_sort.cpp',
+  'firstword.cpp',
+  'hords.cpp',
+  'i_sort.cpp',
+  'lastword.cpp',
+  'longman.cpp',
+  'm_sort.cpp',
+  'middles.cpp',
+  'resheto.cpp',
+  's_sort.cpp',
+  'speedometer++.cpp',
+  'speedometer.c',
+  'tumba-umba.cpp',
 ]
-foreach file : src_cpp
-  executable(file, file + '.cpp')
+foreach file : src_c
+  executable(file.split('.')[0], file)
 endforeach
-
-executable('speedometer', 'speedometer.c')
 
 if tests
     ogntest = executable('ogntest', 'ognfunc.cpp', 'ogntest.cpp')
