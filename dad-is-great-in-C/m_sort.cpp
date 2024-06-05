@@ -6,11 +6,11 @@
 #include <ratio>
 #include <vector>
 
-static void merge(std::vector<unsigned int> arr, unsigned long long left,
+static void merge(std::vector<unsigned long int> arr, unsigned long long left,
                   unsigned long long mid, unsigned long long right) {
   auto rt = mid - left + 1, lt = right - mid;
-  auto *left_arr = new unsigned int[rt],
-       *right_arr = new unsigned int[lt]; // создаём два новых массива
+  auto *left_arr = new unsigned long int[rt],
+       *right_arr = new unsigned long int[lt]; // создаём два новых массива
 
   for (auto i = 0ULL; i < rt; i++)
     left_arr[i] = arr[left + i]; // заполняем их
@@ -47,7 +47,7 @@ static void merge(std::vector<unsigned int> arr, unsigned long long left,
   delete[] right_arr;
 }
 
-static void merge_sort(std::vector<unsigned int> arr, unsigned long long begin,
+static void merge_sort(std::vector<unsigned long int> arr, unsigned long long begin,
                        unsigned long long end) {
   if (begin >= end)
     return; // раздел до единичных
@@ -63,7 +63,7 @@ int main() {
   std::cin >> n;
   auto st = std::chrono::system_clock::now();
 
-  std::vector<unsigned int> a(n);
+  std::vector<unsigned long int> a(n);
   std::random_device rd;
   std::mt19937 gen(rd());
   std::uniform_int_distribution<std::mt19937::result_type> dist(1, 1000000);

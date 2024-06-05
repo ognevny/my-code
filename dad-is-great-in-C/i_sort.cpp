@@ -13,7 +13,7 @@ int main() {
   unsigned long long n;
   std::cin >> n;
   auto st = std::chrono::system_clock::now();
-  std::vector<unsigned int> a(n);
+  std::vector<unsigned long int> a(n);
 
   std::random_device rd;
   std::mt19937 gen(rd());
@@ -22,7 +22,7 @@ int main() {
     a[i] = dist(gen);
 
   for (auto i = 1ULL; i < n; i++) {
-    unsigned int key = a[i];
+    auto key = a[i];
     auto j = i;
     auto pos = static_cast<unsigned long long>(std::distance(
         a.begin(), std::lower_bound(

@@ -7,7 +7,7 @@
 #include <utility>
 #include <vector>
 
-static void bubble(std::vector<unsigned int> arr, unsigned long long n) {
+static void bubble(std::vector<unsigned long int> arr, unsigned long long n) {
   for (auto i = n - 1; i > 0; i--) {
     int count = 0;
     for (auto j = 0ULL; j < i; j++) {
@@ -25,7 +25,7 @@ int main() {
   unsigned long long n;
   std::cin >> n;
   auto st = std::chrono::system_clock::now();
-  std::vector<unsigned int> a(n);
+  std::vector<unsigned long int> a(n);
 
   std::random_device rd;
   std::mt19937 gen(rd());

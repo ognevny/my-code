@@ -3,9 +3,9 @@ name: CI-py
 on:
   workflow_dispatch:
   push:
-    paths: ['**.py', '**/py.yml', 'meson.build', 'pie/meson.build']
+    paths: ["**.py", "**/py.yml", "meson.build", "pie/meson.build"]
   pull_request:
-    paths: ['**.py', '**/py.yml', 'meson.build', 'pie/meson.build']
+    paths: ["**.py", "**/py.yml", "meson.build", "pie/meson.build"]
 
 jobs:
   build:
@@ -27,7 +27,7 @@ jobs:
             python-numba:p
       - name: compile all files
         run: |
-          meson setup -Dbuild_py=true build
+          meson setup -Dbuild_py=true -Dpython.bytecompile=1 build
           meson install -C build --destdir=build/dummy
       - uses: chartboost/ruff-action@v1
         with:
