@@ -1,8 +1,11 @@
+[workspace.package]
+version = "0.0.0"
+readme = "../README.md"
+license = "WTFPL"
+rust-version = "1.66.1"
+
 [workspace]
-exclude = [
-    "for_lesson",
-    "mytest",
-]
+exclude = ["for_lesson", "mytest"]
 members = [
     "ege1",
     "first_word",
