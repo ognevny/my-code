@@ -5,9 +5,10 @@
 #include <random>
 #include <ratio>
 #include <vector>
+#define ull unsigned long long
 
-static void merge(std::vector<unsigned long int> arr, unsigned long long left,
-                  unsigned long long mid, unsigned long long right) {
+static void merge(std::vector<unsigned long int> arr, ull left, ull mid,
+                  ull right) {
   auto rt = mid - left + 1, lt = right - mid;
   auto *left_arr = new unsigned long int[rt],
        *right_arr = new unsigned long int[lt]; // создаём два новых массива
@@ -47,8 +48,7 @@ static void merge(std::vector<unsigned long int> arr, unsigned long long left,
   delete[] right_arr;
 }
 
-static void merge_sort(std::vector<unsigned long int> arr, unsigned long long begin,
-                       unsigned long long end) {
+static void merge_sort(std::vector<unsigned long int> arr, ull begin, ull end) {
   if (begin >= end)
     return; // раздел до единичных
 
@@ -59,7 +59,7 @@ static void merge_sort(std::vector<unsigned long int> arr, unsigned long long be
 }
 
 int main() {
-  unsigned long long n;
+  ull n;
   std::cin >> n;
   auto st = std::chrono::system_clock::now();
 
