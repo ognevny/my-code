@@ -17,12 +17,13 @@ cargo_build = custom_target(
 )
 
 if tests
-    cargo_test = custom_target(
+    custom_target(
         'cargo-test',
         build_by_default: true,
         build_always_stale: true,
         output: 'rusted-tests',
         console: true,
         command: [cargo_bin, 'test', cargo_opt],
+        depends: cargo_build
     )
 endif
