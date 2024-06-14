@@ -1,26 +1,21 @@
-cc_id = meson.get_compiler('cpp').get_id()
+cc = meson.get_compiler('c')
+cxx = meson.get_compiler('cpp')
 
-if cc_id == 'clang'
-  add_project_arguments('-fdiagnostics-color=always', '-pipe', language: ['c', 'cpp'])
-  add_project_arguments(
+add_project_arguments(
+  cc.get_supported_arguments('-fdiagnostics-color=always', '-pipe'),
+  language: 'c',
+)
+
+add_project_arguments(
+  cxx.get_supported_arguments(
     '-Wno-c++98-compat-pedantic',
     '-Wno-unsafe-buffer-usage',
-    language: 'cpp',
-  )
-elif cc_id != 'msvc'
-  add_project_arguments(
-    '-fdiagnostics-color=always',
-    '-pipe',
-    language: ['cpp', 'c'],
-  )
-endif
-
-if build_machine.system() == 'darwin'
-  add_project_arguments(
     '-Wno-poison-system-directories',
-    language: ['c', 'cpp'],
-  )
-endif
+    '-fdiagnostics-color=always',
+    '-pipe'
+  ),
+  language: 'cpp',
+)
 
 src_c = [
   'b_sort.cpp',
