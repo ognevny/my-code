@@ -6,3 +6,7 @@ edition = "2021"
 [dependencies]
 meval = { git = "https://github.com/Titaniumtown/meval-rs" }
 scan_fmt = "0"
+
+[[bin]]
+name = "integral"
+path = "src/main.rs"
