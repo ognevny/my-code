@@ -23,7 +23,21 @@ if build_c or build_all
 endif
 
 if build_rust or build_all
-  subproject('rusted')
+  add_languages(['rust'], native: false)
+  subproject('ege1')
+  subproject('first_word')
+  subproject('integral')
+  subproject('last_word')
+  subproject('longman')
+  subproject('longman2')
+  subproject('mask1')
+  subproject('mcko')
+  subproject('pop')
+  subproject('probnik')
+  subproject('resheto')
+  subproject('sfml_example')
+  subproject('speedometer')
+  subproject('tumba-umba')
 endif
 
 if build_py or build_all

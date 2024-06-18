@@ -1,8 +1,0 @@
-[package]
-name = "integral"
-version = "0.1.0"
-edition = "2021"
-
-[dependencies]
-meval = { workspace = true }
-scan_fmt = { workspace = true }
