@@ -1,0 +1,12 @@
+/aho-corasick*
+/crossbeam*
+/either*
+/fnv*
+/itertools*
+/memchr*
+/meval*
+/minimal-lexical*
+/nom*
+/packagecache
+/rayon*
+/regex*
