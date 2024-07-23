@@ -1,0 +1,23 @@
+[package]
+name = "rusted"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+itertools = "0.13"
+rayon = "1.10"
+regex = "1.10"
+# FIXME: see comment on top of 'sfml_example' module
+# sfml = "0.21"
+meval = "0.2"
+
+[patch.crates-io]
+meval = { git = "https://github.com/Titaniumtown/meval-rs" }
+
+[lib]
+name = "rusted"
+path = "src/lib.rs"
+test = true
+doc = true
+proc-macro = false
+edition = "2021"

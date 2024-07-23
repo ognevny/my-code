@@ -3,13 +3,13 @@ name: CI-rust
 on:
   workflow_dispatch:
   push:
-    paths: ['**.rs', '**.toml', '**.lock', '**/rust.yml', 'meson.build', 'rusted/meson.build']
+    paths: ["**.rs", "**.toml", "**.lock", "**/rust.yml", "meson.build", "rusted/meson.build"]
   pull_request:
-    paths: ['**.rs', '**.toml', '**.lock', '**/rust.yml', 'meson.build', 'rusted/meson.build']
+    paths: ["**.rs", "**.toml", "**.lock", "**/rust.yml", "meson.build", "rusted/meson.build"]
 
 env:
   CARGO_TERM_COLOR: always
-  RUSTFLAGS: '-C target-cpu=native'
+  RUSTFLAGS: "-C target-cpu=native"
 
 jobs:
   build:
@@ -26,11 +26,10 @@ jobs:
         with:
           update: true
           msystem: clang64
-          pacboy: >-
-            gcc:p
-            meson:p
-            rust:p
-            sfml:p
+          install: >-
+            mingw-w64-clang-x86_64-meson
+            mingw-w64-clang-x86_64-rust
+            git
       - name: build rust files
         run: |
           meson setup -Dbuild_rust=true build
