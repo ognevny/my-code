@@ -2,6 +2,7 @@
 name = "rusted"
 version = "0.1.0"
 edition = "2021"
+rust-version = "1.65.0"
 
 [dependencies]
 itertools = "0.13"
@@ -18,6 +19,5 @@ meval = { git = "https://github.com/Titaniumtown/meval-rs" }
 name = "rusted"
 path = "src/lib.rs"
 test = true
+doctest = false
 doc = true
-proc-macro = false
-edition = "2021"

@@ -4,8 +4,8 @@ pub mod ege1 {
     use std::fs;
 
     /// the first code with tasks from EGE exam
-    pub fn ex1() -> Result<usize, Box<dyn std::error::Error>> {
-        let text = fs::read_to_string("11.txt")?;
+    pub fn ex1() -> usize {
+        let text = fs::read_to_string("11.txt").unwrap();
         let newtext = text.replace("INFINITY", "@");
         let mut pos = Vec::new();
         for (i, char) in newtext.chars().enumerate() {
@@ -17,16 +17,16 @@ pub mod ege1 {
         for i in 0..(pos.len() - 1001) {
             mx = mx.max(pos[i + 1001] - pos[i] - 1 + 7000 + 14);
         }
-        Ok(mx)
+        mx
     }
 
     #[cfg(test)]
     mod tests {
-        use crate::*;
+        use super::ex1;
 
         #[test]
         fn test_all() {
-            let ex1 = ex1().unwrap();
+            let ex1 = ex1();
             assert_eq!(ex1, 36747);
         }
     }
@@ -38,6 +38,18 @@ pub mod first_word {
             .find(' ')
             .map_or_else(|| input.trim(), |n| input[..n].trim())
             .to_owned()
+    }
+
+    #[cfg(test)]
+    mod tests {
+        use super::first_word;
+
+        #[test]
+        fn test_all() {
+            assert_eq!(first_word("hello world  "), "hello");
+            assert_eq!(first_word("    no"), "");
+            assert_eq!(first_word("coffee of tea"), "coffee");
+        }
     }
 }
 
@@ -163,6 +175,18 @@ pub mod last_word {
                 input[n + 1..].trim().to_owned()
             })
     }
+
+    #[cfg(test)]
+    mod tests {
+        use super::last_word;
+
+        #[test]
+        fn test_all() {
+            assert_eq!(last_word("hello world  "), "world");
+            assert_eq!(last_word("    no"), "no");
+            assert_eq!(last_word("coffee of tea"), "tea");
+        }
+    }
 }
 
 pub mod longman {
@@ -184,6 +208,7 @@ pub mod longman2 {
 
     /// find a maximum HEX number in string
     pub fn longman2(data: &str) -> String {
+        assert!(data.is_ascii(), "non-ASCII characters are not allowed");
         let nums: Vec<String> = data
             .chars()
             .fold((String::new(), vec![]), |(mut word, mut nums), char| {
@@ -204,6 +229,16 @@ pub mod longman2 {
             .max_by_key(|num| usize::from_str_radix(num, 16).unwrap())
             .unwrap()
     }
+
+    #[cfg(test)]
+    mod tests {
+        use super::longman2;
+
+        #[test]
+        fn test_all() {
+            assert_eq!(longman2("af5Y3d"), "af5");
+        }
+    }
 }
 
 pub mod mask1 {
@@ -219,7 +254,7 @@ pub mod mask1 {
 
     #[cfg(test)]
     mod tests {
-        use crate::*;
+        use super::fn_match;
 
         #[test]
         fn test_all() {
@@ -370,7 +405,7 @@ pub mod mcko {
 
     #[cfg(test)]
     mod tests {
-        use crate::*;
+        use super::*;
 
         #[test]
         fn test_all() {
@@ -432,7 +467,7 @@ pub mod probnik {
 
     #[cfg(test)]
     mod tests {
-        use crate::*;
+        use super::probnik;
 
         #[test]
         fn test_all() {
@@ -550,7 +585,7 @@ pub mod speedometer {
 
     #[inline]
     #[allow(dead_code)]
-    const fn s() -> u32 {
+    pub const fn s() -> u32 {
         let mut n = 1;
         while n < 1_000_000_000 {
             n += 1;
@@ -560,6 +595,8 @@ pub mod speedometer {
 
     #[cfg(test)]
     mod tests {
+        use super::s;
+
         #[test]
         fn print() {
             print!("{}", s())
