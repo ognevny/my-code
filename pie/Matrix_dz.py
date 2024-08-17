@@ -84,15 +84,11 @@ class Matrix:
     def kill(self, r, c, rr):  # r,c - опорный элемент,rr - строка, с которой работаем
         if rr != r:
             lol = -1 * self.matr[rr][c] / self.matr[r][c] + 1
-            self.matr[rr] = list(
-                map(lambda x, y: x + lol * y, self.matr[rr], self.matr[r])
-            )
+            self.matr[rr] = list(map(lambda x, y: x + lol * y, self.matr[rr], self.matr[r]))
 
         for i in range(rr + 1, self.rows):
             lol = -1 * self.matr[i][c] / self.matr[rr][c]
-            self.matr[i] = list(
-                map(lambda x, y: x + lol * y, self.matr[i], self.matr[rr])
-            )
+            self.matr[i] = list(map(lambda x, y: x + lol * y, self.matr[i], self.matr[rr]))
 
     def Triangular(self):
         count = 0
@@ -200,8 +196,10 @@ for i in range(10):
 matrix_array2 = []  # массив радиус-векторов уже тех точек, которые мы найдем
 
 reflection = Matrix(
-    2, 2, [[0, 1], [1, 0]]
-)  # задаем матрицу отражения относительно нашей оси (ось под наклоном 45 градусов к оси Ох)
+    2,
+    2,
+    [[0, 1], [1, 0]],
+)  # задаем матрицу отражения относительно нашей оси (ось под наклоном 45 градусов к оси Ox)
 
 # получение нужных точек и их отображение на графике
 for i in range(10):

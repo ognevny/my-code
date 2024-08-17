@@ -1,7 +1,7 @@
 # a list of useful functions, like it did in dad-is-great-in-C
 
 
-def rev(n):
+def rev(n: int) -> int:
     rev = 0
     while n:
         rev = rev * 10 + (n % 10)
@@ -9,7 +9,7 @@ def rev(n):
     return rev
 
 
-def numsys(n, k):
+def numsys(n: int, k: int) -> int:
     ns = ""
     while n:
         ns += str(n % k)
@@ -17,7 +17,7 @@ def numsys(n, k):
     return int(ns[::-1])
 
 
-def numsys16(n, k):
+def numsys16(n: int, k: int) -> str:
     nums = {
         0: "0",
         1: "1",

@@ -1,12 +1,14 @@
 # merge sort (using mlp)
 
+from __future__ import annotations
+
 import copy
 import multiprocessing as mlp
 from random import randint
 from time import perf_counter
 
 
-def merge(left, right):
+def merge(left: list[int], right: list[int]) -> list[int]:
     res = []
     i = 0
     j = 0
@@ -25,20 +27,20 @@ def merge(left, right):
     return res
 
 
-def merge_sort(arr):
-    if len(arr) == 1:
+def merge_sort(arr: list[int]) -> list[int]:
+    if len(arr) <= 1:
         return arr
-    elif len(arr) > 1:
-        mid = len(arr) // 2
-        Left = arr[:mid]
-        Right = arr[mid:]
-        Left = merge_sort(Left)
-        Right = merge_sort(Right)
 
-        return merge(Left, Right)
+    mid = len(arr) // 2
+    left = arr[:mid]
+    right = arr[mid:]
+    left = merge_sort(left)
+    right = merge_sort(right)
+
+    return merge(left, right)
 
 
-def generation(length):
+def generation(length: int) -> list[int]:
     return [randint(10, 10000) for _ in range(length)]
 
 
