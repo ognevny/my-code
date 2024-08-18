@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import copy
 import multiprocessing as mlp
-from random import randint
+from secrets import randbelow
 from time import perf_counter
 
 
@@ -41,11 +41,11 @@ def merge_sort(arr: list[int]) -> list[int]:
 
 
 def generation(length: int) -> list[int]:
-    return [randint(10, 10000) for _ in range(length)]
+    return [randbelow(10000) for _ in range(length)]
 
 
 if __name__ == "__main__":
-    data1 = map(generation, [randint(100, 100000) for _ in range(100)])
+    data1 = map(generation, [randbelow(100000) for _ in range(100)])
     data2 = copy.deepcopy(data1)
     start = perf_counter()
     with mlp.Pool(processes=mlp.cpu_count()) as pool:

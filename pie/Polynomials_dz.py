@@ -1,46 +1,46 @@
+from __future__ import annotations
+
 from math import pow
 
 
 class Polynomials:
-    def __init__(self, plnm):
+    def __init__(self, plnm: list) -> None:
         self.plnm = plnm
 
-    def __add__(self, m):
+    def __add__(self, m: float | Polynomials) -> Polynomials:
         if isinstance(m, Polynomials):
             res = Polynomials(list(map(lambda x, y: x + y, self.plnm, m.plnm)))
             res.plnm.extend(
                 self.plnm[len(m.plnm) :]
                 if len(self.plnm) > len(m.plnm)
-                else m.plnm[len(self.plnm) :]
+                else m.plnm[len(self.plnm) :],
             )
             return res
-        else:
-            self.plnm[0] += m
-            return Polynomials(self.plnm)
 
-    def __mul__(self, arg):
-        if isinstance(arg, int) or isinstance(arg, float):
-            return Polynomials(list(map(lambda x: x * arg, self.plnm)))
+        self.plnm[0] += m
+        return Polynomials(self.plnm)
 
-        else:
+    def __mul__(self, arg: float | Polynomials) -> Polynomials:
+        if isinstance(arg, Polynomials):
             res = Polynomials([0 for i in range(len(self.plnm) + len(arg.plnm) - 1)])
             for i in range(len(self.plnm)):
                 for j in range(len(arg.plnm)):
                     res.plnm[i + j] += self.plnm[i] * arg.plnm[j]
             return res
 
-    def __rmul__(self, arg):
-        if isinstance(arg, int) or isinstance(arg, float):
-            return Polynomials(list(map(lambda x: x * arg, self.plnm)))
+        return Polynomials([x * arg for x in self.plnm])
 
-    def simplify(self):
+    def __rmul__(self, arg: float) -> Polynomials:
+        return Polynomials([x * arg for x in self.plnm])
+
+    def simplify(self) -> None:
         while self.plnm[-1] == 0 and len(self.plnm) > 1:
             self.plnm = self.plnm[:-1]
 
-    def __sub__(self, m):
+    def __sub__(self, m: float | Polynomials) -> Polynomials:
         return self + (-1) * m
 
-    def __floordiv__(self, arg):
+    def __floordiv__(self, arg: Polynomials) -> Polynomials:
         if len(self.plnm) < len(arg.plnm):
             return Polynomials([0])
 
@@ -58,19 +58,18 @@ class Polynomials:
         res.simplify()
         return res
 
-    def prived(self):
-        return Polynomials(list(map(lambda x: x / self.plnm[-1], self.plnm)))
+    def prived(self) -> Polynomials:
+        return Polynomials([x / self.plnm[-1] for x in self.plnm])
 
-    def __mod__(self, arg):
+    def __mod__(self, arg: Polynomials) -> Polynomials:
         if len(self.plnm) < len(arg.plnm):
             return self
 
-        else:
-            res = self - arg * (self // arg)
-            res.simplify()
-            return res
+        res = self - arg * (self // arg)
+        res.simplify()
+        return res
 
-    def derivative(self):
+    def derivative(self) -> Polynomials:
         res = Polynomials([0 for i in range(len(self.plnm) - 1)])
 
         for i in range(len(self.plnm) - 1):
@@ -78,33 +77,31 @@ class Polynomials:
 
         return res
 
-    def gcd(self, m):
+    def gcd(self, m: Polynomials) -> Polynomials:
+        ret = self
         while self.plnm != [0] and m.plnm != [0]:
             if len(self.plnm) >= len(m.plnm):
-                self %= m
-                self.simplify()
+                ret %= m
+                ret.simplify()
             else:
                 m %= self
                 m.simplify()
-        return self + m
+        return ret + m
 
-    def FindValue(self, point):
+    def find_value(self, point: int) -> int:
         result = 0
         for i in range(len(self.plnm)):
             result += self.plnm[i] * (point**i)
 
         return result
 
-    def standard(self):
-        standard_plnm = []
-        for i in range(len(self.plnm) - 1, -1, -1):
-            standard_plnm.append(self.plnm[i])
-        return Polynomials(standard_plnm)
+    def standard(self) -> Polynomials:
+        return Polynomials([self.plnm[i] for i in range(len(self.plnm) - 1, -1, -1)])
 
-    def UpperBorder(self):
+    def upper_border(self) -> int:
         self.prived()
         self.standard()
-        m, B = 0, 0
+        m, b = 0, 0
         for i in range(len(self.plnm)):
             if self.plnm[i] < 0:
                 m += i
@@ -112,22 +109,22 @@ class Polynomials:
                 pass
         if m == 0:
             return 0
-        else:
-            minuses = []
-            for i in range(len(self.plnm)):
-                if self.plnm[i] < 0:
-                    minuses.append(self.plnm[i])
-                else:
-                    pass
-            B += abs(min(minuses))
-            return 1 + pow(B, (1 / m))
 
-    def LowerBorder(self):
+        minuses = []
+        for i in range(len(self.plnm)):
+            if self.plnm[i] < 0:
+                minuses.append(self.plnm[i])
+            else:
+                pass
+        b += abs(min(minuses))
+        return 1 + pow(b, (1 / m))
+
+    def lower_border(self) -> int:
         for i in range(len(0, self.plnm, 2)):
             self.plnm[i + 1] = -self.plnm[i + 1]
-        return self.UpperBorder()
+        return self.upper_border()
 
-    def __str__(self):
+    def __str__(self) -> str:
         res = ""
         for i in range(len(self.plnm) - 1, 1, -1):
             res += str(self.plnm[i]) + "x^" + str(i) + " + "
@@ -135,49 +132,49 @@ class Polynomials:
         return res
 
 
-def FindSturm(polynom):
-    SturmSys = []
+def find_sturm(polynom: list) -> list:
+    sturm_sys = []
 
-    SturmSys.append(polynom)
-    SturmSys.append(polynom.derivative())
+    sturm_sys.append(polynom)
+    sturm_sys.append(polynom.derivative())
 
     while True:
-        k = -1 * (SturmSys[-2] % SturmSys[-1])
+        k = -1 * (sturm_sys[-2] % sturm_sys[-1])
 
-        SturmSys.append(k)
+        sturm_sys.append(k)
 
         if len(k.coefs) == 1:
             break
 
-    return SturmSys
+    return sturm_sys
 
 
-def RootCount(SturmSys, left, right):
-    SignLeft = []
-    SignRight = []
-    ChangeLeft = 0
-    ChangeRight = 0
+def root_count(sturm_sys: list, left: int, right: int) -> int:
+    sign_left = []
+    sign_right = []
+    change_left = 0
+    change_right = 0
 
-    for i in SturmSys:
-        ValLeft = i.FindValue(left)
-        ValRight = i.FindValue(right)
+    for i in sturm_sys:
+        val_left = i.find_value(left)
+        val_right = i.find_value(right)
 
-        if ValLeft > 0:
-            SignLeft.append(1)
-        elif ValLeft < 0:
-            SignLeft.append(-1)
+        if val_left > 0:
+            sign_left.append(1)
+        elif val_left < 0:
+            sign_left.append(-1)
 
-        if ValRight > 0:
-            SignRight.append(1)
-        elif ValRight < 0:
-            SignRight.append(-1)
+        if val_right > 0:
+            sign_right.append(1)
+        elif val_right < 0:
+            sign_right.append(-1)
 
-    for i in range(1, len(SignLeft)):
-        if SignLeft[i - 1] != SignLeft[i]:
-            ChangeLeft += 1
+    for i in range(1, len(sign_left)):
+        if sign_left[i - 1] != sign_left[i]:
+            change_left += 1
 
-    for i in range(1, len(SignRight)):
-        if SignRight[i - 1] != SignRight[i]:
-            ChangeRight += 1
+    for i in range(1, len(sign_right)):
+        if sign_right[i - 1] != sign_right[i]:
+            change_right += 1
 
-    return ChangeLeft - ChangeRight
+    return change_left - change_right

@@ -1,4 +1,4 @@
-py = import('python').find_installation(pure: false, modules: 'numba')
+py = import('python').find_installation(pure: false, modules: ['matplotlib', 'numba'])
 
 src_py = [
     'complex_dz.py',

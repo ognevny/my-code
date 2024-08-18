@@ -3,8 +3,8 @@ from __future__ import annotations
 from math import atan, cos, pi, sin, sqrt
 
 
-class C_numb:
-    def __init__(self, real: float = 1.0, im: float = 0.0):
+class CNumb:
+    def __init__(self, real: float = 1.0, im: float = 0.0) -> None:
         self.real = real
         self.im = im
         self.mod: float = sqrt(real**2 + im**2)
@@ -25,55 +25,55 @@ class C_numb:
             elif im > 0:
                 self.arg: float = pi * 0
 
-    def __add__(self, a: float | C_numb) -> C_numb:
-        if isinstance(a, C_numb):
-            return C_numb(self.real + a.real, self.im + a.im)
+    def __add__(self, a: float | CNumb) -> CNumb:
+        if isinstance(a, CNumb):
+            return CNumb(self.real + a.real, self.im + a.im)
 
-        return C_numb(self.real + a, self.im)
+        return CNumb(self.real + a, self.im)
 
-    def __radd__(self, a: float | C_numb) -> C_numb:
-        if isinstance(a, C_numb):
-            return C_numb(self.real + a.real, self.im + a.im)
+    def __radd__(self, a: float | CNumb) -> CNumb:
+        if isinstance(a, CNumb):
+            return CNumb(self.real + a.real, self.im + a.im)
 
-        return C_numb(self.real + a, self.im)
+        return CNumb(self.real + a, self.im)
 
-    def __mul__(self, a: float | C_numb) -> C_numb:
-        if isinstance(a, C_numb):
-            return C_numb(self.real * a.real - self.im * a.im, self.real * a.im + self.im * a.real)
+    def __mul__(self, a: float | CNumb) -> CNumb:
+        if isinstance(a, CNumb):
+            return CNumb(self.real * a.real - self.im * a.im, self.real * a.im + self.im * a.real)
 
-        return C_numb(self.real * a, self.im * a)
+        return CNumb(self.real * a, self.im * a)
 
-    def __rmul__(self, a: float | C_numb) -> C_numb:
-        if isinstance(a, C_numb):
-            return C_numb(self.real * a.real - self.im * a.im, self.real * a.im + self.im * a.real)
+    def __rmul__(self, a: float | CNumb) -> CNumb:
+        if isinstance(a, CNumb):
+            return CNumb(self.real * a.real - self.im * a.im, self.real * a.im + self.im * a.real)
 
-        return C_numb(self.real * a, self.im * a)
+        return CNumb(self.real * a, self.im * a)
 
-    def con(self) -> C_numb:
-        return C_numb(self.real, -1 * self.im)
+    def con(self) -> CNumb:
+        return CNumb(self.real, -1 * self.im)
 
-    def __truediv__(self, a: float | C_numb) -> C_numb:
-        if isinstance(a, C_numb):
+    def __truediv__(self, a: float | CNumb) -> CNumb:
+        if isinstance(a, CNumb):
             num = self * a.con()
             denom = (a * a.con()).real
             return num * (denom ** (-1))
 
         return self * (a ** (-1))
 
-    def __sub__(self, a: float | C_numb) -> C_numb:
-        if isinstance(a, C_numb):
-            return C_numb(self.real - a.real, self.im - a.im)
+    def __sub__(self, a: float | CNumb) -> CNumb:
+        if isinstance(a, CNumb):
+            return CNumb(self.real - a.real, self.im - a.im)
 
-        return C_numb(self.real - a, self.im)
+        return CNumb(self.real - a, self.im)
 
-    def __rsub__(self, a: float | C_numb) -> C_numb:
-        if isinstance(a, C_numb):
-            return C_numb(self.real - a.real, self.im - a.im)
+    def __rsub__(self, a: float | CNumb) -> CNumb:
+        if isinstance(a, CNumb):
+            return CNumb(self.real - a.real, self.im - a.im)
 
-        return C_numb(self.real - a, self.im)
+        return CNumb(self.real - a, self.im)
 
-    def __pow__(self, a: float) -> C_numb:
-        return C_numb(
+    def __pow__(self, a: float) -> CNumb:
+        return CNumb(
             (self.mod**a) * (cos(atan(a * self.arg))),
             (self.mod**a) * (sin(atan(a * self.arg))),
         )
@@ -93,8 +93,8 @@ class C_numb:
         return str(self.real) + "+" + str(self.im) + "i"
 
 
-n = C_numb(1, 2)
-m = C_numb(1, 1)
+n = CNumb(1, 2)
+m = CNumb(1, 1)
 print(n + m)
 print(n * m)
 print(n - m)

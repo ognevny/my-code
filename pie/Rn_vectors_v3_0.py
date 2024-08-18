@@ -1,45 +1,49 @@
+from __future__ import annotations
+
 from math import acos, sqrt
 
 
 class Rn:
-    def __init__(self, body):
+    def __init__(self, body: list) -> None:
         self.body = body.copy()
-        self.dlina = len(body)
 
-    def __add__(self, vec):
-        if self.dlina == vec.dlina:
+    def len(self) -> int:
+        return len(self.body)
+
+    def __add__(self, vec: Rn) -> Rn | None:
+        if self.len() == vec.len():
             return Rn(list(map(lambda x, y: x + y, self.body, vec.body)))
-        else:
-            return "ошибка размерности"
 
-    def __mul__(self, vec):
+        return None
+
+    def __mul__(self, vec: Rn | int) -> int | Rn | None:
         if isinstance(vec, Rn):
-            if self.dlina == vec.dlina:
-                return sum(list(map(lambda x: x[0] * x[1], zip(self.body, vec.body))))
-            else:
-                return "ошибка размерности"
-        else:
-            return Rn(list(map(lambda x: x * vec, self.body)))
+            if self.len() == vec.len():
+                return sum([x[0] * x[1] for x in zip(self.body, vec.body)])
 
-    def __rmul__(self, vec):
+            return None
+
+        return Rn([x * vec for x in self.body])
+
+    def __rmul__(self, vec: Rn | int) -> int | Rn | None:
         if isinstance(vec, Rn):
-            if self.dlina == vec.dlina:
-                return sum(list(map(lambda x: x[0] * x[1], zip(self.body, vec.body))))
-            else:
-                return "ошибка размерности"
-        else:
-            return Rn(list(map(lambda x: x * vec, self.body)))
+            if self.len() == vec.len():
+                return sum([x[0] * x[1] for x in zip(self.body, vec.body)])
 
-    def __sub__(self, vec):
+            return None
+
+        return Rn([x * vec for x in self.body])
+
+    def __sub__(self, vec: Rn) -> Rn:
         return self + vec * (-1)
 
-    def norm(self):
+    def norm(self) -> float:
         return sqrt(self * self)
 
-    def angle(self, vec):
+    def angle(self, vec: Rn) -> float:
         return acos((self * vec) / (self.norm() * vec.norm()))
 
-    def __str__(self):
+    def __str__(self) -> str:
         return str(self.body)
 
 

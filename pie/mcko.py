@@ -17,8 +17,7 @@ def n2(n: int) -> int:
     число N запишите в десятичной системе.
     """
     m = str(bin(n)[2:])
-    m = f"{m}10" if n % 2 == 0 else f"1{m}00"
-    m = int(m, 2)
+    m = int(f"{m}10" if n % 2 == 0 else f"1{m}00", 2)
     if m > 107:
         return n
 
@@ -108,7 +107,20 @@ def n12() -> tuple:
     return count, max_
 
 
-assert n2(1) == 11
-assert n10() == "333333"
-assert n11() == 4340
-assert n12() == (157, 176024)
+if __name__ == "__main__":
+    msg = ""
+    res_2 = n2(1)
+    res_10 = n10()
+    res_11 = n11()
+    res_12 = n12()
+    if res_2 != 11:
+        msg += f"n2: expected 11, got {res_2}"
+    if res_10 != "333333":
+        msg += f"n10: expected '333333', got '{res_10}'"
+    if res_11 != 4340:
+        msg += f"n11: expected 4340, got {res_11}"
+    if res_12 != (157, 176024):
+        msg += f"n12: expected (157, 176024), got {res_12}"
+
+    if msg != "":
+        raise ValueError(msg)

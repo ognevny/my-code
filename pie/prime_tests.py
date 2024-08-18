@@ -4,7 +4,7 @@ from math import ceil, factorial, log2, sqrt
 from random import sample
 
 
-def Miller_Rabin(number: int) -> str:
+def miller_rabin(number: int) -> str:
     if number < 2:
         return "ERROR"
 
@@ -52,7 +52,7 @@ def sqrtest(number: int) -> str:
     return "NO"
 
 
-def Wilson(number: int) -> str:
+def wilson(number: int) -> str:
     if number < 2:
         return "ERROR"
 
@@ -63,4 +63,4 @@ def Wilson(number: int) -> str:
 
 
 n = int(input())
-print(Miller_Rabin(n), sqrtest(n), Wilson(n))
+print(miller_rabin(n), sqrtest(n), wilson(n))
