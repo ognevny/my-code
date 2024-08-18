@@ -1,4 +1,7 @@
-py = import('python').find_installation(pure: false, modules: ['matplotlib', 'numba'])
+py = import('python').find_installation(
+    pure: false,
+    modules: ['matplotlib', 'numba'],
+)
 
 src_py = [
     'complex_dz.py',
@@ -14,3 +17,12 @@ src_py = [
 ]
 
 py.install_sources(src_py, subdir: 'ognevny-pie')
+
+if tests
+    mcko_test = run_command(
+        meson.project_source_root() / 'pie' / 'mcko.py',
+        capture: true,
+        check: true,
+    )
+    message(mcko_test.stdout())
+endif

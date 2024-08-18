@@ -34,7 +34,6 @@ jobs:
             git:
       - name: test
         run: |
-          cd pie && python3 mcko.py && cd ..
           meson setup -Dbuild_all=true -Dtests=true build
           meson compile -C build
           meson test -C build

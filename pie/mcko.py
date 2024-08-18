@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 # Решения нескольких задач из следующего комплекта:
 # https://mcko.ru/uploads/documents/informatika_-10-klass_komplekt_1-91f3befffaba6eed.zip
 
