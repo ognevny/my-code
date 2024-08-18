@@ -30,6 +30,7 @@ jobs:
             meson
             rust
             python-numba
+            python-matplotlib
             git:
       - name: test
         run: |
