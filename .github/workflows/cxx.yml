@@ -27,9 +27,9 @@ jobs:
           update: true
           msystem: ${{ matrix.sys }}
           pacboy: >-
-            cc:p
-            meson:p
-            include-what-you-use:p
+            cc
+            meson
+            include-what-you-use
       - name: compile files
         run: |
           meson setup -Dbuild_c_cpp=true build

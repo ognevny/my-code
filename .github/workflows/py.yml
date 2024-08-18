@@ -23,8 +23,9 @@ jobs:
           update: true
           msystem: ucrt64
           pacboy: >-
-            meson:p
-            python-numba:p
+            meson
+            python-numba
+            python-matplotlib
       - name: compile all files
         run: |
           meson setup -Dbuild_py=true -Dpython.bytecompile=1 build
