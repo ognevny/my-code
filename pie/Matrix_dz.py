@@ -79,7 +79,7 @@ class Matrix:
         return res
 
     @staticmethod
-    def findpivot(matr: list, r: int, c: int) -> tuple:  # нахождение "опорного элемента"
+    def findpivot(matr: list, r: int, c: int) -> tuple | None:  # нахождение "опорного элемента"
         for i in range(c, len(matr[0])):
             for j in range(r, len(matr)):
                 if matr[j][i] != 0:
@@ -170,7 +170,7 @@ class Matrix:
     def __str__(self) -> str:
         res = ""
         for i in range(self.rows):
-            res += str(self.matr[i]) + "\n"
+            res += f"{self.matr[i]}\n"
         return res
 
 
@@ -179,13 +179,13 @@ matrix_array = []  # массив радиус-векторов точек
 
 # генерация наших точек, для удобства ограничиваем область, в которой можно получить эти точки
 for i in range(10):
-    x = secrets.randbelow(0, 30) / 10
-    y = secrets.randbelow(0, 30) / 10
+    x = secrets.randbelow(30) / 10
+    y = secrets.randbelow(30) / 10
 
     while True:
         if x / sqrt(x**2 + y**2) < cos(pi / 4):
-            x = secrets.randbelow(0, 30) / 10
-            y = secrets.randbelow(0, 30) / 10
+            x = secrets.randbelow(30) / 10
+            y = secrets.randbelow(30) / 10
         else:
             break
     matrix_array.append(Matrix(2, 1, [[x], [y]]))

@@ -7,23 +7,27 @@ class CNumb:
     def __init__(self, real: float = 1.0, im: float = 0.0) -> None:
         self.real = real
         self.im = im
-        self.mod: float = sqrt(real**2 + im**2)
 
-        if real > 0 and im >= 0:
-            self.arg: float = atan(im / real)
+    def mod(self) -> float:
+        return sqrt(self.real**2 + self.im**2)
 
-        elif real > 0 and im < 0:
-            self.arg: float = atan(im / real) + 2 * pi
+    def arg(self) -> float:
+        if self.real > 0 and self.im >= 0:
+            return atan(self.im / self.real)
 
-        elif real < 0:
-            self.arg: float = atan(im / real) + pi
+        if self.real > 0 and self.im < 0:
+            return atan(self.im / self.real) + 2 * pi
 
-        elif real == 0:
-            if im < 0:
-                self.arg: float = 2 * pi - 0
+        if self.real < 0:
+            return atan(self.im / self.real) + pi
 
-            elif im > 0:
-                self.arg: float = pi * 0
+        if self.im < 0:
+            return 1.5 * pi
+
+        if self.im > 0:
+            return pi * 0.5
+
+        return 0.0
 
     def __add__(self, a: float | CNumb) -> CNumb:
         if isinstance(a, CNumb):
@@ -74,23 +78,21 @@ class CNumb:
 
     def __pow__(self, a: float) -> CNumb:
         return CNumb(
-            (self.mod**a) * (cos(atan(a * self.arg))),
-            (self.mod**a) * (sin(atan(a * self.arg))),
+            (self.mod() ** a) * (cos(atan(a * self.arg()))),
+            (self.mod() ** a) * (sin(atan(a * self.arg()))),
         )
 
     def rad(self, a: int) -> list[str]:
-        resultc = []
-        for j in range(a):
-            resultc += [
-                str((self.mod ** (1 / a)) * (cos(atan((self.arg + 2 * pi * j) / a))))
-                + "+"
-                + str((self.mod ** (1 / a)) * (sin(atan((self.arg + 2 * pi * j) / a))))
-                + "i",
-            ]
-        return resultc
+        return [
+            str((self.mod() ** (1 / a)) * (cos(atan((self.arg() + 2 * pi * j) / a))))
+            + "+"
+            + str((self.mod() ** (1 / a)) * (sin(atan((self.arg() + 2 * pi * j) / a))))
+            + "i"
+            for j in range(a)
+        ]
 
     def __str__(self) -> str:
-        return str(self.real) + "+" + str(self.im) + "i"
+        return f"{self.real}+{self.im}i"
 
 
 n = CNumb(1, 2)

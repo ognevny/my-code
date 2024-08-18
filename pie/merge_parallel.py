@@ -41,11 +41,11 @@ def merge_sort(arr: list[int]) -> list[int]:
 
 
 def generation(length: int) -> list[int]:
-    return [randbelow(10000) for _ in range(length)]
+    return [(randbelow(1000) + 1) * 10 for _ in range(length)]
 
 
 if __name__ == "__main__":
-    data1 = map(generation, [randbelow(100000) for _ in range(100)])
+    data1 = map(generation, [(randbelow(10000) + 1) * 10 for _ in range(100)])
     data2 = copy.deepcopy(data1)
     start = perf_counter()
     with mlp.Pool(processes=mlp.cpu_count()) as pool:
