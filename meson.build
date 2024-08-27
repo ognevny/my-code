@@ -38,7 +38,7 @@ if build_rust or build_all
                 find_program('cargo'),
                 'test',
                 '--manifest-path',
-                meson.project_source_root() / 'subprojects/rusted/Cargo.toml',
+                meson.project_source_root() / 'subprojects' / 'rusted' / 'Cargo.toml',
             ],
         )
     endif

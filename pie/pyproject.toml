@@ -1,8 +1,6 @@
 [build-system]
 build-backend = 'mesonpy'
-requires = [
-    'meson-python',
-]
+requires = ['meson-python']
 
 [project]
 name = 'pie'
