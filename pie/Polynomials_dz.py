@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from math import pow
+import math
 
 
 class Polynomials:
@@ -117,7 +117,7 @@ class Polynomials:
             else:
                 pass
         b += abs(min(minuses))
-        return 1 + pow(b, (1 / m))
+        return 1 + math.pow(b, (1 / m))
 
     def lower_border(self) -> int:
         for i in range(len(0, self.plnm, 2)):
