@@ -5,7 +5,7 @@ edition = "2021"
 rust-version = "1.65.0"
 
 [dependencies]
-itertools = "0.13"
+itertools = "0.14"
 rayon = "1.10"
 regex = "1.10"
 # FIXME: see comment on top of 'sfml_example' module
