@@ -13,5 +13,6 @@ for_lesson*
 .vscode
 .idea
 clangd
-# meson builddir
+# meson files
 build*
+.wraplock
