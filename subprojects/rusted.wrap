@@ -1,5 +1,0 @@
-[wrap-file]
-method=cargo
-
-[provide]
-dependency_names=rusted-0.1-rs
