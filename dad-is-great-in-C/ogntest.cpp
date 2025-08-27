@@ -1,8 +1,11 @@
 // a test to check that ognfunc works fine
 
-#include "ognfunc.hpp"
+#if defined(__clang__) && defined(_LIBCPP_VERSION)
+#include <bits/cow_string.h>
+#endif
 #include <cassert>
 #include <string>
+#include "ognfunc.hpp"
 
 int main() {
   auto a = 12345ULL;

@@ -1,4 +1,12 @@
 cargo = find_program('cargo')
+cargo_opts = [
+    '--manifest-path',
+     meson.project_source_root() / 'rusted' / 'Cargo.toml',
+]
+
+if get_option('ci_env')
+    cargo_opts += ['--config', 'net.git-fetch-with-cli=true']
+endif
 
 cargo_build = custom_target(
     'cargo-build',
@@ -9,8 +17,7 @@ cargo_build = custom_target(
     command: [
         cargo,
         'build',
-        '--manifest-path',
-        meson.project_source_root() / 'rusted' / 'Cargo.toml',
+        cargo_opts,
     ],
 )
 
@@ -25,8 +32,7 @@ if tests
         command: [
             cargo,
             'test',
-            '--manifest-path',
-            meson.project_source_root() / 'rusted' / 'Cargo.toml',
+            cargo_opts,
         ],
     )
 endif

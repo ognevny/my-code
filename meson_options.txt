@@ -32,3 +32,10 @@ option(
     value: false,
     description: 'Build tests'
 )
+
+option(
+    'ci_env',
+    type: 'boolean',
+    value: false,
+    description: 'Whether we are in CI environment'
+)

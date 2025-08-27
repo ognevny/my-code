@@ -1,7 +1,15 @@
 // a list of useful functions written by me
 
 #include "ognfunc.hpp"
+#if defined(__clang__) && defined(_LIBCPP_VERSION)
+#include <bits/cow_string.h>
+#include <ext/type_traits.h>
+#endif
+#include <iterator>
+#include <memory>
+#include <new>
 #include <string>
+#include <utility>
 
 unsigned long long numsum(unsigned long long n) { // sum of number digits
   auto res = 0ULL;

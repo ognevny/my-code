@@ -1,3 +1,5 @@
+#pragma GCC diagnostic ignored "-Wmacro-redefined"
+
 #ifdef __GNUC__
 #define _GLIBCXX_USE_CXX11_ABI 0
 #endif

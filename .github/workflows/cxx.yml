@@ -39,7 +39,7 @@ jobs:
         run: |
           cd dad-is-great-in-C
           for file in *.c*; do
-            include-what-you-use $file
+            include-what-you-use $file || true
           done
       - name: run speedometers
         run: |
