@@ -7,8 +7,6 @@ project(
         'cpp_std=gnu++11,c++11',
         'c_std=gnu11,c11',
         'rust_std=2021',
-        'crossbeam-utils-0.8-rs:feature-default=true',
-        'aho-corasick-1-rs:feature-perf-literal=true',
     ],
     license: 'WTFPL',
 )
@@ -26,22 +24,7 @@ endif
 
 if build_rust or build_all
     add_languages(['rust'], native: false)
-    subproject('rusted')
-    if tests
-        custom_target(
-            'cargo-test',
-            build_by_default: true,
-            build_always_stale: true,
-            console: true,
-            output: 'rusted-tests',
-            command: [
-                find_program('cargo'),
-                'test',
-                '--manifest-path',
-                meson.project_source_root() / 'subprojects' / 'rusted' / 'Cargo.toml',
-            ],
-        )
-    endif
+    subdir('rusted')
 endif
 
 if build_py or build_all

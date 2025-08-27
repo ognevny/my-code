@@ -1,13 +1,15 @@
 //! collection of my code in rust
 
-pub mod ege1 {
-    use std::fs;
+#![no_std]
 
+#[macro_use] extern crate alloc;
+
+pub mod ege1 {
     /// the first code with tasks from EGE exam
     pub fn ex1() -> usize {
-        let text = fs::read_to_string("11.txt").unwrap();
+        let text = include_str!("11.txt");
         let newtext = text.replace("INFINITY", "@");
-        let mut pos = Vec::new();
+        let mut pos = alloc::vec::Vec::new();
         for (i, char) in newtext.chars().enumerate() {
             if char == '@' {
                 pos.push(i);
@@ -33,11 +35,10 @@ pub mod ege1 {
 }
 
 pub mod first_word {
-    pub fn first_word(input: &str) -> String {
-        input
-            .find(' ')
-            .map_or_else(|| input.trim(), |n| input[..n].trim())
-            .to_owned()
+    use alloc::borrow::ToOwned;
+
+    pub fn first_word(input: &str) -> alloc::string::String {
+        input.find(' ').map_or_else(|| input.trim(), |n| input[..n].trim()).to_owned()
     }
 
     #[cfg(test)]
@@ -54,9 +55,14 @@ pub mod first_word {
 }
 
 pub mod integral {
+    extern crate std;
+
     use {
         meval::{eval_str_with_context, Context},
         std::{
+            boxed::Box,
+            format,
+            string::String,
             sync::{
                 mpsc::{self, SendError},
                 Arc,
@@ -98,19 +104,13 @@ pub mod integral {
     fn trapezoid(a: f64, b: f64, n: f64, expr: &str) -> f64 {
         let mut s: f64 = 0.0;
         for i in 0..=(n - 1.0) as u64 {
-            s += (f(a + i as f64 * (b - a) / n, expr) + f(a + (i + 1) as f64 * (b - a) / n, expr))
-                / 2.0;
+            s += (f(a + i as f64 * (b - a) / n, expr) + f(a + (i + 1) as f64 * (b - a) / n, expr)) / 2.0;
         }
         s * ((b - a) / n)
     }
 
     /// oint algorithms
-    pub fn integral(
-        a: f64,
-        b: f64,
-        eps: f64,
-        expr: &'static str,
-    ) -> Result<String, Box<dyn std::error::Error>> {
+    pub fn integral(a: f64, b: f64, eps: f64, expr: &'static str) -> Result<String, Box<dyn std::error::Error>> {
         let (txl, rx) = mpsc::channel();
         let (txr, txm, txt) = (txl.clone(), txl.clone(), txl.clone());
 
@@ -166,14 +166,11 @@ pub mod integral {
 }
 
 pub mod last_word {
+    use alloc::borrow::ToOwned;
+
     /// same as lastword.cpp, but with Rust syntax
-    pub fn last_word(input: &str) -> String {
-        input
-            .trim()
-            .rfind(' ')
-            .map_or(input.trim().to_owned(), |n| {
-                input[n + 1..].trim().to_owned()
-            })
+    pub fn last_word(input: &str) -> alloc::string::String {
+        input.trim().rfind(' ').map_or(input.trim().to_owned(), |n| input[n + 1..].trim().to_owned())
     }
 
     #[cfg(test)]
@@ -190,21 +187,23 @@ pub mod last_word {
 }
 
 pub mod longman {
-    pub fn longman(input: &str) -> String {
+    use alloc::borrow::ToOwned;
+
+    pub fn longman(input: &str) -> alloc::string::String {
         let mut maxstr = "";
         for word in input.split_whitespace() {
-            maxstr = if word.len() > maxstr.len() {
-                word
-            } else {
-                maxstr
-            };
+            maxstr = if word.len() > maxstr.len() { word } else { maxstr };
         }
         maxstr.to_owned()
     }
 }
 
 pub mod longman2 {
-    use rayon::prelude::*;
+    extern crate std;
+    use {
+        rayon::prelude::*,
+        std::{string::String, vec::Vec},
+    };
 
     /// find a maximum HEX number in string
     pub fn longman2(data: &str) -> String {
@@ -212,9 +211,7 @@ pub mod longman2 {
         let nums: Vec<String> = data
             .chars()
             .fold((String::new(), vec![]), |(mut word, mut nums), char| {
-                if char.is_ascii_digit()
-                    || ['a', 'b', 'c', 'd', 'e', 'f'].contains(&char.to_ascii_lowercase())
-                {
+                if char.is_ascii_digit() || ['a', 'b', 'c', 'd', 'e', 'f'].contains(&char.to_ascii_lowercase()) {
                     word.push(char);
                 } else {
                     if !word.is_empty() {
@@ -225,9 +222,7 @@ pub mod longman2 {
                 (word, nums)
             })
             .1;
-        nums.into_par_iter()
-            .max_by_key(|num| usize::from_str_radix(num, 16).unwrap())
-            .unwrap()
+        nums.into_par_iter().max_by_key(|num| usize::from_str_radix(num, 16).unwrap()).unwrap()
     }
 
     #[cfg(test)]
@@ -242,9 +237,10 @@ pub mod longman2 {
 }
 
 pub mod mask1 {
-    use {rayon::prelude::*, regex::Regex};
+    extern crate std;
+    use {rayon::prelude::*, regex::Regex, std::string::ToString};
 
-    pub fn fn_match() -> Result<Vec<usize>, Box<dyn std::error::Error>> {
+    pub fn fn_match() -> Result<std::vec::Vec<usize>, std::boxed::Box<dyn std::error::Error>> {
         let mask = Regex::new("^123.*567.?$")?;
         Ok((169..1_000_000_000usize)
             .into_par_iter()
@@ -259,13 +255,10 @@ pub mod mask1 {
         #[test]
         fn test_all() {
             let mask = fn_match().unwrap();
-            assert_eq!(
-                mask,
-                [
-                    12325677, 12385672, 123157567, 123165679, 123225674, 123326567, 123495567,
-                    123515678, 123575673, 123664567, 123833567, 123865677, 123925672
-                ]
-            )
+            assert_eq!(mask, [
+                12325677, 12385672, 123157567, 123165679, 123225674, 123326567, 123495567, 123515678, 123575673,
+                123664567, 123833567, 123865677, 123925672
+            ])
         }
     }
 }
@@ -278,32 +271,26 @@ pub mod mcko {
     //! Здесь приведены решения лишь 4 номеров, так как остальные либо вообще не решаются
     //! программированием, либо гораздо быстрее решаются руками.
 
+    extern crate std;
+
     use {
         rayon::prelude::*,
-        std::{error::Error, fs::read_to_string},
+        std::{error::Error, format},
     };
 
     /// Номер 2
     /// Автомат обрабатывает натуральное число N по следующему алгоритму:
     /// 1) Строится двоичная запись числа N.
-    /// 2) К полученной записи дописываются разряды по следующему принципу: если число чётное, то справа
-    /// дописывается 10, если нечётное – слева дописывается 1 и справа 00.
-    /// 3) Результат переводится в десятичную систему и выводится на экран. В результате работы автомата
-    /// на экране появилось число, большее 107. Для какого наименьшего N данная ситуация возможна? В
-    /// ответе найденное число N запишите в десятичной системе.
+    /// 2) К полученной записи дописываются разряды по следующему принципу: если число чётное, то справа дописывается
+    ///    10, если нечётное – слева дописывается 1 и справа 00.
+    /// 3) Результат переводится в десятичную систему и выводится на экран. В результате работы автомата на экране
+    ///    появилось число, большее 107. Для какого наименьшего N данная ситуация возможна? В ответе найденное число N
+    ///    запишите в десятичной системе.
     ///
     /// Ответ: 11
     pub fn n2(mut n: u16) -> u16 {
         loop {
-            let m = u32::from_str_radix(
-                &if n % 2 == 0 {
-                    format!("{n:b}10")
-                } else {
-                    format!("1{n:b}00")
-                },
-                2,
-            )
-            .unwrap();
+            let m = u32::from_str_radix(&if n % 2 == 0 { format!("{n:b}10") } else { format!("1{n:b}00") }, 2).unwrap();
             if m > 107 {
                 return n;
             }
@@ -334,8 +321,8 @@ pub mod mcko {
     /// (6 троек и 75 четвёрок)? В ответе запишите полученную строку.
     ///
     /// Ответ: 333333
-    pub fn n10() -> String {
-        let mut input = String::from(
+    pub fn n10() -> std::string::String {
+        let mut input = std::string::String::from(
             "333333444444444444444444444444444444444444444444444444444444444444444444444444444",
         );
         while ["35", "355", "3444"].iter().any(|&s| input.contains(s)) {
@@ -382,25 +369,17 @@ pub mod mcko {
     /// последовательности.
     ///
     /// Ответ: (157, 176024)
-    pub fn n12() -> Result<(i32, i32), Box<dyn Error>> {
-        let data: Vec<i32> = read_to_string("12.txt")?
-            .par_lines()
-            .map(|line| line.trim().parse().unwrap())
-            .collect();
+    pub fn n12() -> Result<(i32, i32), std::boxed::Box<dyn Error>> {
+        let data: std::vec::Vec<i32> =
+            include_str!("12.txt").par_lines().map(|line| line.trim().parse().unwrap()).collect();
 
         let min = *data.par_iter().filter(|&&x| x % 15 != 0).min().unwrap();
 
         Ok(data
             .par_windows(2)
             .filter(|t| t[0] % min == 0 && t[1] % min == 0)
-            .fold(
-                || (0, 0),
-                |(count, max), t| (count + 1, max.max(t[0] + t[1])),
-            )
-            .reduce(
-                || (0, 0),
-                |(count1, max1), (count2, max2)| (count1 + count2, max1.max(max2)),
-            ))
+            .fold(|| (0, 0), |(count, max), t| (count + 1, max.max(t[0] + t[1])))
+            .reduce(|| (0, 0), |(count1, max1), (count2, max2)| (count1 + count2, max1.max(max2))))
     }
 
     #[cfg(test)]
@@ -418,7 +397,8 @@ pub mod mcko {
 }
 
 pub mod pop {
-    use std::{thread::sleep, time::Duration};
+    extern crate std;
+    use std::{println, thread::sleep, time::Duration};
 
     /// Russian poem
     #[allow(unconditional_recursion)]
@@ -451,7 +431,7 @@ pub mod probnik {
                 for i in 0..len - 1 {
                     if ["ОИ", "ИО"]
                         .into_iter()
-                        .any(|s| s.contains(&word[i..i + 2].iter().collect::<String>()))
+                        .any(|s| s.contains(&word[i..i + 2].iter().collect::<alloc::string::String>()))
                     {
                         f = false;
                         break;
@@ -477,6 +457,12 @@ pub mod probnik {
 }
 
 pub mod resheto {
+    extern crate std;
+    use std::{
+        format,
+        string::{String, ToString},
+    };
+
     pub fn resheto(mut n: u64) -> String {
         let mut ret = String::new();
         let mut printed = false;
@@ -489,11 +475,11 @@ pub mod resheto {
             1 => {
                 ret.push('2');
                 printed = true;
-            }
+            },
             2.. => {
                 ret.push_str(&format!("2^{count}"));
                 printed = true;
-            }
+            },
             _ => (),
         }
         for i in (3..).step_by(2).take_while(|i| i * i <= m) {
@@ -503,22 +489,20 @@ pub mod resheto {
                 count += 1;
             }
             match count {
-                1 => {
+                1 =>
                     if printed {
                         ret.push_str(&format!("*{i}"));
                     } else {
                         ret.push_str(&i.to_string());
                         printed = true;
-                    }
-                }
-                2.. => {
+                    },
+                2.. =>
                     if printed {
                         ret.push_str(&format!("*{i}^{count}"));
                     } else {
                         ret.push_str(&format!("{i}^{count}"));
                         printed = true;
-                    }
-                }
+                    },
                 _ => (),
             }
         }
@@ -533,52 +517,63 @@ pub mod resheto {
     }
 }
 
-// FIXME: when meson loads sfml, it also loads link-cplusplus, which had features with '+' in its name
-// mod sfml_example {
-//     use sfml::{
-//         graphics::{
-//             CircleShape, Color, FloatRect, RenderTarget, RenderWindow, Shape, Transformable, View,
-//         },
-//         system::Vector2f,
-//         window::{Event, Key, Style},
-//     };
+pub mod sfml_example {
+    extern crate std;
+    use {
+        sfml::{
+            graphics::{CircleShape, Color, FloatRect, RenderTarget, RenderWindow, Shape, Transformable, View},
+            system::Vector2f,
+            window::{Event, Key, Style},
+        },
+        std::boxed::Box,
+    };
 
-//     pub fn window() {
-//         let mut window = RenderWindow::new(
-//             (200, 200),
-//             "blazingly fast, memory-safe sfml window",
-//             Style::RESIZE | Style::CLOSE,
-//             &Default::default(),
-//         );
-//         let mut shape = CircleShape::new(100., 30);
-//         shape.set_fill_color(Color::GREEN);
+    pub fn window() -> Result<(), Box<dyn std::error::Error>> {
+        let mut window = RenderWindow::new(
+            (200, 200),
+            "blazingly fast, memory-safe sfml window",
+            Style::RESIZE | Style::CLOSE,
+            &Default::default(),
+        )?;
+        let mut shape = CircleShape::new(100., 30);
+        shape.set_fill_color(Color::GREEN);
 
-//         while window.is_open() {
-//             while let Some(event) = window.poll_event() {
-//                 match event {
-//                     Event::Closed
-//                     | Event::KeyPressed {
-//                         code: Key::Escape, ..
-//                     } => window.close(),
-//                     Event::Resized { width, height } => {
-//                         let view =
-//                             View::from_rect(FloatRect::new(0., 0., width as f32, height as f32));
-//                         let radius = width.min(height) as f32 / 2.;
-//                         shape.set_radius(radius);
-//                         shape.set_origin(Vector2f::new(radius, radius));
-//                         shape.set_scale(Vector2f::new(width as f32 / height as f32, 1.));
-//                         shape.set_position(Vector2f::new(width as f32 / 2., height as f32 / 2.));
-//                         window.set_view(&view);
-//                     }
-//                     _ => (),
-//                 }
-//             }
-//             window.clear(Color::rgb(0, 0, 0));
-//             window.draw(&shape);
-//             window.display();
-//         }
-//     }
-// }
+        while window.is_open() {
+            while let Some(event) = window.poll_event() {
+                match event {
+                    Event::Closed | Event::KeyPressed { code: Key::Escape, .. } => window.close(),
+                    Event::Resized { width, height } => {
+                        let view = View::from_rect(FloatRect::new(0., 0., width as f32, height as f32))?;
+                        let radius = width.min(height) as f32 / 2.;
+                        shape.set_radius(radius);
+                        shape.set_origin(Vector2f::new(radius, radius));
+                        shape.set_scale(Vector2f::new(width as f32 / height as f32, 1.));
+                        shape.set_position(Vector2f::new(width as f32 / 2., height as f32 / 2.));
+                        window.set_view(&view);
+                    },
+                    _ => (),
+                }
+            }
+            window.clear(Color::rgb(0, 0, 0));
+            window.draw(&shape);
+            window.display();
+        }
+
+        Ok(())
+    }
+
+    // it laucnhes window, which is obviously hard to test in CI
+    // #[cfg(test)]
+    // mod tests {
+    //     extern crate std;
+    //     use std::boxed::Box;
+    //     use super::window;
+    //     #[test]
+    //     fn launch_window() -> Result<(), Box<dyn std::error::Error>> {
+    //         window()
+    //     }
+    // }
+}
 
 pub mod speedometer {
     //! a programm to test speed of each language (Rust implementation)
@@ -595,16 +590,20 @@ pub mod speedometer {
 
     #[cfg(test)]
     mod tests {
-        use super::s;
+        extern crate std;
+        use {super::s, std::print};
 
         #[test]
-        fn print() {
-            print!("{}", s())
-        }
+        fn print() { print!("{}", s()) }
     }
 }
 
 pub mod tumba_umba {
+    use alloc::{
+        string::{String, ToString},
+        vec::Vec,
+    };
+
     /// same as tumba-umba.cpp, but for only the first task
     pub fn tumba_umba(alpha: &[char], k: usize) -> String {
         let mut ret = String::new();
