@@ -1,8 +1,5 @@
 // a test to check that ognfunc works fine
 
-#if defined(__clang__) && defined(_LIBCPP_VERSION)
-#include <bits/cow_string.h>
-#endif
 #include <cassert>
 #include <string>
 #include "ognfunc.hpp"
