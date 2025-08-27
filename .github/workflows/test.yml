@@ -29,6 +29,8 @@ jobs:
           pacboy: >-
             meson
             rust
+            sfml
+            cmake
             python-numba
             python-matplotlib
             git:

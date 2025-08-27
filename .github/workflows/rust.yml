@@ -29,6 +29,8 @@ jobs:
           pacboy: >-
             meson
             rust
+            sfml
+            cmake
             git:
       - name: build rust files
         run: |
