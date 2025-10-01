@@ -27,13 +27,16 @@ jobs:
           update: true
           msystem: clang64
           pacboy: >-
-            meson
             rust
-            sfml
+            cc
+            meson
             cmake
+            ninja
+            sfml
             python-numba
             python-matplotlib
             git:
+            make:
       - name: test
         run: |
           meson setup -Dbuild_all=true -Dtests=true -Dci_env=true build

@@ -27,11 +27,14 @@ jobs:
           update: true
           msystem: clang64
           pacboy: >-
-            meson
             rust
-            sfml
+            cc
+            meson
             cmake
+            ninja
+            sfml
             git:
+            make:
       - name: build rust files
         run: |
           meson setup -Dbuild_rust=true -Dci_env=true build

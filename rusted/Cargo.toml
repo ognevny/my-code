@@ -10,7 +10,7 @@ itertools = { version = "0.14", default-features = false, features = [
 ] }
 rayon = "1.10"
 regex = "1.10"
-sfml = "0.24"
+sfml = "0.25"
 meval = "0.2"
 
 [lints.clippy]
