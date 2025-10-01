@@ -31,13 +31,15 @@ jobs:
             cc
             meson
             cmake
+            ninja
             freetype
             libvorbis
             python-numba
             python-matplotlib
             git:
-            make:
       - name: test
+        env:
+          CMAKE_GENERATOR: "Ninja"
         run: |
           meson setup -Dbuild_all=true -Dtests=true -Dci_env=true build
           meson compile -C build

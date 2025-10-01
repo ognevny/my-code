@@ -31,11 +31,13 @@ jobs:
             cc
             meson
             cmake
+            ninja
             freetype
             libvorbis
             git:
-            make:
       - name: build rust files
+        env:
+          CMAKE_GENERATOR: "Ninja"
         run: |
           meson setup -Dbuild_rust=true -Dci_env=true build
           meson compile -C build
