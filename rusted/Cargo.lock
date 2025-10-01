@@ -95,22 +95,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "libc"
-version = "0.2.176"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "58f929b4d672ea937a23a1ab494143d968337a5f47e56d0815df1e0890ddf174"
-
-[[package]]
-name = "libflac-sys"
-version = "0.3.3"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "01b01d08e4f670c184ffe3c3e5efbf0bd6e88c8cca796c278c86bbf49583545c"
-dependencies = [
- "cmake",
- "libc",
-]
-
-[[package]]
 name = "link-cplusplus"
 version = "1.0.12"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -234,7 +218,6 @@ dependencies = [
  "bitflags",
  "cc",
  "cmake",
- "libflac-sys",
  "link-cplusplus",
  "num-traits",
  "pkg-config",

@@ -31,8 +31,8 @@ jobs:
             cc
             meson
             cmake
-            ninja
-            sfml
+            freetype
+            libvorbis
             git:
             make:
       - name: build rust files
