@@ -29,18 +29,10 @@ jobs:
           pacboy: >-
             cc
             meson
-            include-what-you-use
       - name: compile files
         run: |
           meson setup -Dbuild_c_cpp=true build
           meson compile -C build
-      - name: include diagnostics
-        if: ${{ matrix.sys == 'clang64' }}
-        run: |
-          cd dad-is-great-in-C
-          for file in *.c*; do
-            include-what-you-use $file || true
-          done
       - name: run speedometers
         run: |
           time ./build/dad-is-great-in-C/speedometer

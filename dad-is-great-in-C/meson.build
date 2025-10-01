@@ -10,7 +10,6 @@ add_project_arguments(
     cxx.get_supported_arguments(
         '-Wno-c++98-compat-pedantic',
         '-Wno-unsafe-buffer-usage',
-        '-Wno-poison-system-directories',
         '-fdiagnostics-color=always',
         '-pipe',
     ),

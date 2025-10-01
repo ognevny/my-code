@@ -2,10 +2,7 @@
 
 #include "ognfunc.hpp"
 #include <iterator>
-#include <memory>
-#include <new>
 #include <string>
-#include <utility>
 
 unsigned long long numsum(unsigned long long n) { // sum of number digits
   auto res = 0ULL;

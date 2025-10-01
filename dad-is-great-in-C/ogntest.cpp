@@ -2,7 +2,6 @@
 
 #include "ognfunc.hpp"
 #include <cassert>
-#include <string>
 
 int main() {
   auto a = 12345ULL;

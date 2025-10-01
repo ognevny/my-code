@@ -3,7 +3,6 @@
 #include <chrono>
 #include <iostream>
 #include <random>
-#include <ratio>
 #include <vector>
 #define ull unsigned long long
 
