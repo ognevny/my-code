@@ -1,6 +1,0 @@
-[wrap-git]
-url = https://github.com/ognevny/my-code-rusted.git
-revision = HEAD
-
-[provide]
-dependency_names = rusted-0-rs

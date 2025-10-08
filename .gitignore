@@ -14,5 +14,7 @@ for_lesson*
 .idea
 clangd
 # meson files
-build*
 .wraplock
+subprojects/*-*
+subprojects/packagecache
+subprojects/meval
