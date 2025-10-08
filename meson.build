@@ -1,12 +1,12 @@
 project(
     'ognevny-my-code',
     version: '0.0.0',
-    meson_version: '>= 1.5.0',
+    meson_version: '>= 1.7.0',
     default_options: [
         'warning_level=everything',
         'cpp_std=gnu++11,c++11',
         'c_std=gnu11,c11',
-        'rust_std=2021',
+        'rust_std=2024',
     ],
     license: 'WTFPL',
 )
