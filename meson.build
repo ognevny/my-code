@@ -24,7 +24,7 @@ endif
 
 if build_rust or build_all
     add_languages(['rust'], native: false)
-    subdir('rusted')
+    subproject('rusted')
 endif
 
 if build_py or build_all
