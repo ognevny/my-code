@@ -6,7 +6,7 @@ rayon = dependency('rayon-1-rs')
 regex = dependency('regex-1-rs')
 sfml = dependency('sfml-0.25-rs')
 
-lib = library(
+lib = static_library(
     'rusted',
     'src' / 'lib.rs',
     dependencies: [meval, rayon, regex, itertools, sfml],
