@@ -608,7 +608,7 @@ pub mod tumba_umba {
     pub fn tumba_umba(alpha: &[char], k: usize) -> String {
         let mut ret = String::new();
         let mut words: Vec<String> = Vec::new();
-        let count = gen(alpha, &mut vec![' '; k], 0, &mut words);
+        let count = r#gen(alpha, &mut vec![' '; k], 0, &mut words);
         words.sort();
         for word in words {
             ret.push_str(&word);
@@ -628,7 +628,7 @@ pub mod tumba_umba {
         let mut count = 0;
         for j in 0..alpha.len() {
             current[i] = alpha[j];
-            count += gen(alpha, current, i + 1, words);
+            count += r#gen(alpha, current, i + 1, words);
         }
         count
     }
