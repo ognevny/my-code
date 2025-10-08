@@ -1,4 +1,4 @@
-project('rusted', version: '0.0.0')
+project('rusted', version: '0.0.0', meson_version: '>= 1.7.0')
 
 itertools = dependency('itertools-0.14-rs')
 meval = dependency('meval-0.2-rs')
