@@ -58,14 +58,14 @@ pub mod integral {
     extern crate std;
 
     use {
-        meval::{eval_str_with_context, Context},
+        meval::{Context, eval_str_with_context},
         std::{
             boxed::Box,
             format,
             string::String,
             sync::{
-                mpsc::{self, SendError},
                 Arc,
+                mpsc::{self, SendError},
             },
             thread,
         },
@@ -351,11 +351,7 @@ pub mod mcko {
             .find_map(|i| {
                 let sum = u32::from_str_radix(&format!("154{i:X}3"), 12).unwrap()
                     + u32::from_str_radix(&format!("1{i:X}365"), 12).unwrap();
-                if sum % 13 == 0 {
-                    Some(sum / 13)
-                } else {
-                    None
-                }
+                if sum % 13 == 0 { Some(sum / 13) } else { None }
             })
             .unwrap()
     }

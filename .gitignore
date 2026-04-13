@@ -17,4 +17,4 @@ clangd
 .wraplock
 subprojects/*-*
 subprojects/packagecache
-subprojects/meval
+subprojects/meval-rs

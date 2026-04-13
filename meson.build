@@ -1,7 +1,7 @@
 project(
     'ognevny-my-code',
     version: '0.0.0',
-    meson_version: '>= 1.7.0',
+    meson_version: '>= 1.11.0',
     default_options: [
         'warning_level=everything',
         'cpp_std=gnu++11,c++11',
