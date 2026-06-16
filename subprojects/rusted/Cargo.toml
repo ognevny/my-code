@@ -5,7 +5,7 @@ edition = "2024"
 rust-version = "1.86.0"
 
 [dependencies]
-itertools = { version = "0.14.0", default-features = false, features = [
+itertools = { version = "0.15.0", default-features = false, features = [
     "use_alloc",
 ] }
 meval = "0.2.0"
